@@ -1,0 +1,86 @@
+.features {
+  padding: 120px 0;
+  // background: #f9f9f9;
+  background: rgba(0, 0, 0, 0.1);
+  .container {
+    text-align: center;
+    margin-bottom: 180px;
+    width: 866px;
+    margin: 0 auto;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    .item {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 100%;
+      margin-bottom: 80px;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      &:nth-of-type(even) {
+        .item_explain {
+          order: 1;
+          margin-right: 0;
+          margin-left: 32px;
+          transform: rotateZ(180deg);
+          dl {
+            transform: rotateZ(-180deg);
+          }
+        }
+      }
+
+      &_explain {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-weight: 600;
+        font-size: 24px;
+        width: 464px;
+        height: 464px;
+        margin-right: 32px;
+        background: url("../../../../../assets/images/features_explain_bg.svg");
+        background-size: cover;
+        background-repeat: no-repeat;
+
+        dl {
+          height: 464px;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          dt {
+            color: #8bd5da;
+            margin-bottom: 16px;
+            span {
+              font-size: 14px;
+            }
+          }
+          dd {
+            font-size: 14px;
+            font-weight: 400;
+            width: calc(100% - 128px);
+            margin: 0 auto;
+          }
+        }
+      }
+
+      &_image {
+        width: 464px;
+        height: 464px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        img {
+          max-width: 100%;
+          max-height: 100%;
+        }
+      }
+    }
+  }
+}

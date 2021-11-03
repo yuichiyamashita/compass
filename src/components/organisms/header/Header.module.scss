@@ -1,0 +1,80 @@
+@import "./Setting.module.scss";
+
+.header {
+  height: 90px;
+  width: 100vw;
+  background: #fff;
+  font-weight: 600;
+  color: #666;
+  box-shadow: 0 1px 2px #555;
+
+  .wrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    width: 968px;
+    margin: 0 auto;
+
+    @include mq("tab") {
+      width: calc(100% - 40px);
+    }
+
+    .logo {
+      font-size: 24px;
+      text-transform: uppercase;
+
+      &::first-letter {
+        color: #8bd5da;
+      }
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+
+      @include mq("tab") {
+        display: none;
+      }
+
+      a {
+        margin-right: 24px;
+        transition: all 0.3s;
+        cursor: pointer;
+        text-transform: uppercase;
+
+        &:last-child {
+          margin-right: 0;
+        }
+
+        &:hover {
+          opacity: 0.6;
+        }
+      }
+    }
+
+    .pc_btn_container {
+      display: flex;
+
+      @include mq("tab") {
+        display: none;
+      }
+
+      * {
+        margin-right: 8px;
+
+        &:last-child {
+          margin: 0;
+        }
+      }
+    }
+
+    .hamburger_menu_btn {
+      display: none;
+
+      @include mq("tab") {
+        display: block;
+      }
+    }
+  }
+}
