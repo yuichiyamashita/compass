@@ -1,11 +1,11 @@
 import React from "react";
 import styles from "./Communitiy.module.scss";
-import { BorderSubTitle } from "../../../../atoms/text";
+import { BorderSubTitle } from "../../../../atoms/typography";
 
 const Community = () => {
   return (
     <div className={styles.community}>
-      <BorderSubTitle title="Community" />
+      <BorderSubTitle title="Community" fontSize="12px" />
       <div>
         <dl>
           <dt>人気のお題を確認できる</dt>

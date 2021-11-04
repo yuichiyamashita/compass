@@ -6,7 +6,7 @@ const Main: React.FC = () => {
   return (
     <main className={styles.main}>
       <FirstView />
-      <Features />
+      {/* <Features /> */}
       {/* <div className={styles.image_box}>ここにアプリの画像を入れる</div> */}
       {/* <Community /> */}
     </main>

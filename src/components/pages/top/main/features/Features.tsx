@@ -2,15 +2,24 @@ import * as React from "react";
 import styles from "./Features.module.scss";
 import selfDebateImage from "../../../../../assets/images/self_debate.svg";
 import deepenThinkImage from "../../../../../assets/images/deepen_think.svg";
-import { BorderSubTitle } from "../../../../atoms/text";
+import { BorderSubTitle } from "../../../../atoms/typography";
+import { Container } from "../../../../molecules/container";
 
 const Features: React.FC = () => {
   return (
     <div className={styles.features}>
-      <div className={styles.container}>
-        <BorderSubTitle title="Features" />
+      <Container>
+        <BorderSubTitle
+          title="FEATURES"
+          fontSize="24px"
+          fontWeight={600}
+          letterSpacing="3px"
+          borderWidth="50px"
+          borderHeight="2px"
+          borderColor="#555"
+        />
         <div className={styles.item}>
-          <div className={styles.item_explain}>
+          <div className={styles.item_text}>
             <dl>
               <dt>
                 SELF DEBATE
@@ -45,7 +54,7 @@ const Features: React.FC = () => {
             <img src={deepenThinkImage} alt="deepen-think" />
           </div>
         </div>
-      </div>
+      </Container>
     </div>
   );
 };

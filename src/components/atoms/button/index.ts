@@ -1,3 +1,3 @@
-export { default as HoverAnimationButton } from "./hover/HoverAnimationButton";
-export { default as OutlineLinkButton } from "./outline-link/OutlineLinkButton";
-export { default as ContainButton } from "./contain/ContainButton";
+// buttons
+export { default as HoverAnimationButton } from "./HoverAnimationButton";
+export { default as PrimaryButton } from "./PrimaryButton";
