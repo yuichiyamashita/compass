@@ -56,11 +56,12 @@ const FirstView: FC = () => {
                 <HoverAnimationButton
                   href=".signup"
                   text="さっそく始める"
-                  color="#555"
-                  border="1px solid black"
-                  background="linear-gradient(to right, rgba(255, 152, 0, 0.7), 20%,
-                                                    rgba(255, 172, 51, 0.6),80%,
-                                                    rgba(255, 152, 0, 0.7));"
+                  color="#ff9800"
+                  border="1px solid #ff9800"
+                  // background="linear-gradient(to right, rgba(255, 152, 0, 0.7), 20%,
+                  //                                   rgba(255, 172, 51, 0.6),80%,
+                  //                                   rgba(255, 152, 0, 0.7));"
+                  // background="#ff9800"
                 />
               </StyledPCButtonWrap>
               <StyledButtonWrap>

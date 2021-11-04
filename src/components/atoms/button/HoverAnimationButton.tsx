@@ -93,14 +93,14 @@ const StyledButton = styled.a<Props>`
     transform: translate(0, -50%) rotate(45deg);
   }
   &::before {
-    border-bottom: 1px solid #262626;
-    border-left: 1px solid #262626;
+    border-bottom: ${(props) => props.border};
+    border-left: ${(props) => props.border};
     top: 50%;
     left: -8px;
   }
   &::after {
-    border-top: 1px solid #262626;
-    border-right: 1px solid #262626;
+    border-top: ${(props) => props.border};
+    border-right: ${(props) => props.border};
     top: 50%;
     right: -8px;
   }
