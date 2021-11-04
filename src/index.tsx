@@ -1,10 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./assets/styles/destyle.css";
 import App from "./App";
 import { store } from "./app/store";
 import { Provider } from "react-redux";
 import * as serviceWorker from "./serviceWorker";
+
+import "./assets/styles/destyle.css";
 
 ReactDOM.render(
   <React.StrictMode>

@@ -1,0 +1,13 @@
+// mixinを定義
+@mixin mq($breakpoint) {
+  @media #{map-get($breakpoints, $breakpoint)} {
+    @content;
+  }
+}
+
+// breakpointを定義（PCファーストの設定)
+$breakpoints: (
+  sp-s: "screen and (max-width: 320px)",
+  sp: "screen and (max-width:420px)",
+  tab: "screen and (max-width: 768px)",
+);

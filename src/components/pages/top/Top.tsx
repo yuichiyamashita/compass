@@ -1,5 +1,6 @@
 import type { FC } from "react";
-import { Header, Footer } from "../../organisms";
+import { Footer } from "../../organisms/footer";
+import { Header } from "../../organisms/header";
 import Main from "./main/Main";
 
 const Top: FC = () => {
