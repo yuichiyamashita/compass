@@ -72,8 +72,11 @@ const Features: FC = () => {
 export default Features;
 
 const StyledFeatures = styled.div`
-  padding: 48px 0;
+  padding: 64px 0;
   background: #f9f9f9;
+  @media screen and (min-width: 600px) {
+    padding: 128px 0;
+  }
 `;
 
 const StyledTypographyBox = styled.dl`
