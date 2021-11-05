@@ -49,7 +49,15 @@ const FirstView: FC = () => {
               <StyledCopyWriteBox>
                 <StyledCopyWriteTitle>超・論理的思考力</StyledCopyWriteTitle>
                 <StyledCopyWriteText>
-                  ここに補足文章が入ります。ここに補足文章が入ります。ここに補足文章が入ります。ここに補足文章が入ります。ここに補足文章が入ります。ここに補足文章が入ります。ここに補足文章が入ります。ここに補足文章が入ります。ここに補足文章が入ります。ここに補足文章が入ります。
+                  自分の意見に自信がない。
+                  <br />
+                  より良い選択ができるようになりたい。
+                  <br />
+                  問題解決力を上げたい。
+                  <br />
+                  自分の主張にもっと説得力を持たせたい。
+                  <br />
+                  そんなあなたのためのアプリがここにあります。
                 </StyledCopyWriteText>
               </StyledCopyWriteBox>
               <StyledPCButtonWrap>

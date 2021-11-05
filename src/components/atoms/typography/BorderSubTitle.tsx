@@ -11,10 +11,11 @@ type Props = {
   borderHeight?: string;
   borderWidth?: string;
   borderColor?: string;
+  margin?: string;
 };
 
 const BorderSubTitle: FC<Props> = (props) => {
-  const { title, color, fontSize, fontWeight, letterSpacing, borderColor, borderHeight, borderWidth } = props;
+  const { title, color, fontSize, fontWeight, letterSpacing, margin, borderColor, borderHeight, borderWidth } = props;
 
   return (
     <BorderTitle
@@ -25,6 +26,7 @@ const BorderSubTitle: FC<Props> = (props) => {
       borderColor={borderColor}
       borderHeight={borderHeight}
       borderWidth={borderWidth}
+      margin={margin}
     >
       {title}
     </BorderTitle>
@@ -40,6 +42,7 @@ const BorderTitle = styled.h2<Props>`
   font-size: ${(props) => props.fontSize};
   font-weight: ${(props) => props.fontWeight};
   letter-spacing: ${(props) => props.letterSpacing};
+  margin: ${(props) => props.margin};
 
   &::before,
   &::after {
