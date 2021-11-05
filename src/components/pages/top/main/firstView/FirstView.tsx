@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import styled, { keyframes } from "styled-components";
 import { makeStyles } from "@mui/styles";
-import Grid from "@mui/material/Grid";
+import { Grid as MuiGrid } from "@mui/material";
 
 import FirstViewImage from "../../../../../assets/images/creative_woman_bl.svg";
 import { HoverAnimationButton, PrimaryButton } from "../../../../atoms/button";
@@ -9,28 +9,36 @@ import { Container } from "../../../../molecules/container";
 import { Flexbox } from "../../../../molecules/layout";
 
 const useStyles = makeStyles(() => ({
-  container: {
-    "@media (max-width: 420px)": {
-      position: "relative",
-      height: "100%",
+  gridContainer: {
+    position: "relative",
+    height: "100%",
+  },
+  gridItemLeft: {
+    position: "absolute",
+    left: "-60%",
+    "@media (min-width: 600px)": {
+      left: "calc(-33% + 32px)",
+    },
+    "@media (min-width: 900px)": {
+      position: "initial",
+      left: 0,
     },
   },
-  itemLeft: {
-    "@media (max-width: 420px)": {
-      position: "absolute",
-      minWidth: "150%",
-      left: "-58%",
-      top: "50%",
-      transform: "translateY(-50%)",
+  gridItemRight: {
+    position: "absolute",
+    top: "50%",
+    right: 0,
+    transform: "translateY(-50%)",
+    width: "200px",
+    "@media (min-width: 600px)": {
+      width: "250px",
+      right: "32px",
     },
-  },
-  itemRight: {
-    "@media (max-width: 420px)": {
-      position: "absolute",
-      minWidth: "calc(100% / 1.618 + 16px)",
-      right: 0,
-      top: "50%",
-      transform: "translateY(-50%)",
+    "@media (min-width: 900px)": {
+      position: "initial",
+      top: 0,
+      margin: 0,
+      transform: "translateY(0)",
     },
   },
 }));
@@ -40,11 +48,11 @@ const FirstView: FC = () => {
   return (
     <StyledFirstView>
       <Container>
-        <Grid container className={classes.container}>
-          <Grid item xs={8} className={classes.itemLeft}>
+        <MuiGrid container className={classes.gridContainer}>
+          <MuiGrid item md={6} className={classes.gridItemLeft}>
             <StyledImage src={FirstViewImage} alt="frist-view" />
-          </Grid>
-          <Grid item xs={4} className={classes.itemRight}>
+          </MuiGrid>
+          <MuiGrid item md={6} className={classes.gridItemRight}>
             <Flexbox justify="center" align="center" direction="column">
               <StyledCopyWriteBox>
                 <StyledCopyWriteTitle>超・論理的思考力</StyledCopyWriteTitle>
@@ -73,8 +81,8 @@ const FirstView: FC = () => {
                 />
               </StyledButtonWrap>
             </Flexbox>
-          </Grid>
-        </Grid>
+          </MuiGrid>
+        </MuiGrid>
       </Container>
     </StyledFirstView>
   );
@@ -99,43 +107,64 @@ const slideUpAnimation = keyframes`
 
 // コンポーネントの定義
 const StyledFirstView = styled.div`
-  height: 600px;
+  height: 550px;
   animation: ${slideUpAnimation} 1.2s ease-in-out;
-  @media screen and (max-width: 768px) {
-    height: 500px;
+
+  @media screen and (max-width: 320px) {
+    height: 450px;
+  }
+
+  @media screen and (min-width: 600px) {
+    height: 600px;
   }
 `;
 const StyledImage = styled.img`
-  height: 600px;
-  width: 100%;
-  @media screen and (max-width: 768px) {
-    height: 500px;
+  height: 550px;
+  width: 550px;
+  opacity: 0.8;
+
+  @media screen and (max-width: 320px) {
+    width: 100%;
+    height: 450px;
+  }
+
+  @media screen and (min-width: 600px) {
+    width: calc(100% - 64px);
+    height: 600px;
+  }
+
+  @media screen and (min-width: 900px) {
+    width: 600px;
   }
 `;
 const StyledCopyWriteBox = styled.dl`
-  margin-bottom: 48px;
-  @media screen and (max-width: 420px) {
-    margin-bottom: 32px;
-  }
+  color: #555;
+  text-align: left;
+  margin-bottom: 32px;
 `;
-const StyledCopyWriteTitle = styled.h2`
+const StyledCopyWriteTitle = styled.dt`
+  text-shadow: 1px 1px 24px #fff;
   font-size: 24px;
   margin-bottom: 16px;
 `;
-const StyledCopyWriteText = styled.p`
+const StyledCopyWriteText = styled.dd`
+  text-shadow: 1px 1px 15px #fff;
+  font-size: 15px;
   line-height: 1.5;
-  @media screen and (max-width: 420px) {
-    font-size: 14px;
+
+  @media screen and (min-width: 900px) {
+    margin-bottom: 16px;
   }
 `;
 const StyledPCButtonWrap = styled.div`
-  @media screen and (max-width: 420px) {
-    display: none;
+  display: none;
+
+  @media screen and (min-width: 900px) {
+    display: block;
   }
 `;
 const StyledButtonWrap = styled.div`
-  display: none;
-  @media screen and (max-width: 420px) {
-    display: block;
+  @media screen and (min-width: 900px) {
+    display: none;
   }
 `;

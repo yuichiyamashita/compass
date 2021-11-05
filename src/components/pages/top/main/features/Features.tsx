@@ -49,7 +49,7 @@ const Features: FC = () => {
               <StyledTitle>
                 DEEPEN THINK
                 <br />
-                <span>1つを深く考える</span>
+                <span>1つのことを深く考える</span>
               </StyledTitle>
               <StyledText>
                 Lorem ipsum dolor sit, amet consectetur adipisicing elit. Veniam ab asperiores doloribus, voluptatem
