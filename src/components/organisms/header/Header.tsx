@@ -40,12 +40,6 @@ const Header: FC = () => {
 export default Header;
 
 const StyledHeader = styled.header`
-  // height: 90px;
-  // width: 100vw;
-  // background: #fff;
-  // box-shadow: 0 1px 2px #666;
-  // color: #666;
-  // text-transform: uppercase;
   height: 90px;
   box-shadow: 0 1px 2px #555;
   color: #555;
@@ -54,6 +48,10 @@ const StyledHeader = styled.header`
 const StyledLogo = styled.h1`
   font-size: 24px;
   font-weight: 600;
+  margin-left: 8px;
+  @media screen and (min-width: 900px) {
+    margin-left: 0;
+  }
   &::first-letter {
     color: #8bd5da;
   }
@@ -90,6 +88,7 @@ const StyledPCButtonWrap = styled.div`
   }
 `;
 const StyledButtonWrap = styled.div`
+  margin-right: 8px;
   @media screen and (min-width: 900px) {
     display: none;
   }
