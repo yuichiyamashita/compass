@@ -115,7 +115,7 @@ const StyledFirstView = styled.div`
   }
 
   @media screen and (min-width: 600px) {
-    height: 600px;
+    height: 700px;
   }
 `;
 const StyledImage = styled.img`
@@ -130,11 +130,11 @@ const StyledImage = styled.img`
 
   @media screen and (min-width: 600px) {
     width: calc(100% - 64px);
-    height: 600px;
+    height: 700px;
   }
 
   @media screen and (min-width: 900px) {
-    width: 600px;
+    width: 700px;
   }
 `;
 const StyledCopyWriteBox = styled.dl`
