@@ -6,58 +6,6 @@ import { Flexbox } from "../../molecules/layout";
 import { HamburgerMenu } from "../hamburgerMenu";
 
 const Header: FC = () => {
-  const StyledHeader = styled.header`
-    height: 90px;
-    width: 100vw;
-    background: #fff;
-    box-shadow: 0 1px 2px #666;
-    color: #666;
-    text-transform: uppercase;
-  `;
-  const StyledLogo = styled.h1`
-    font-size: 24px;
-    font-weight: 600;
-    &::first-letter {
-      color: #8bd5da;
-    }
-  `;
-  const StyledNavigation = styled.nav`
-    display: flex;
-    justify-content: space-between;
-    @media screen and (max-width: 768px) {
-      display: none;
-    }
-    a {
-      margin-right: 24px;
-      transition: all 0.3s;
-      &:last-child {
-        margin-right: 0px;
-      }
-      &:hover {
-        opacity: 0.7;
-        transform: translateY(-1px);
-      }
-    }
-  `;
-  const StyledPCButtonWrap = styled.div`
-    display: flex;
-    @media screen and (max-width: 768px) {
-      display: none;
-    }
-    * {
-      margin-right: 8px;
-      &:last-child {
-        margin-right: 0;
-      }
-    }
-  `;
-  const StyledButtonWrap = styled.div`
-    display: none;
-    @media screen and (max-width: 768px) {
-      display: block;
-    }
-  `;
-
   return (
     <StyledHeader>
       <Container>
@@ -90,3 +38,59 @@ const Header: FC = () => {
 };
 
 export default Header;
+
+const StyledHeader = styled.header`
+  // height: 90px;
+  // width: 100vw;
+  // background: #fff;
+  // box-shadow: 0 1px 2px #666;
+  // color: #666;
+  // text-transform: uppercase;
+  height: 90px;
+  box-shadow: 0 1px 2px #555;
+  color: #555;
+  text-transform: uppercase;
+`;
+const StyledLogo = styled.h1`
+  font-size: 24px;
+  font-weight: 600;
+  &::first-letter {
+    color: #8bd5da;
+  }
+`;
+const StyledNavigation = styled.nav`
+  display: none;
+  @media screen and (min-width: 900px) {
+    display: flex;
+    a {
+      margin-right: 24px;
+      transition: all 0.3s;
+
+      &:hover {
+        opacity: 0.7;
+        transform: translateY(-1px);
+      }
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+`;
+const StyledPCButtonWrap = styled.div`
+  display: none;
+  @media screen and (min-width: 900px) {
+    display: block;
+    a {
+      margin-right: 8px;
+      &:last-child {
+        margin: 0;
+      }
+    }
+  }
+`;
+const StyledButtonWrap = styled.div`
+  @media screen and (min-width: 900px) {
+    display: none;
+  }
+`;

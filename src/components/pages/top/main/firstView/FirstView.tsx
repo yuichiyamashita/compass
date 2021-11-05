@@ -49,20 +49,19 @@ const FirstView: FC = () => {
               <StyledCopyWriteBox>
                 <StyledCopyWriteTitle>超・論理的思考力</StyledCopyWriteTitle>
                 <StyledCopyWriteText>
-                  ここに補足文章が入ります。ここに補足文章が入ります。ここに補足文章が入ります。ここに補足文章が入ります。ここに補足文章が入ります。ここに補足文章が入ります。ここに補足文章が入ります。ここに補足文章が入ります。ここに補足文章が入ります。ここに補足文章が入ります。
+                  自分の意見に自信がない。
+                  <br />
+                  より良い選択ができるようになりたい。
+                  <br />
+                  問題解決力を上げたい。
+                  <br />
+                  自分の主張にもっと説得力を持たせたい。
+                  <br />
+                  そんなあなたのためのアプリがここにあります。
                 </StyledCopyWriteText>
               </StyledCopyWriteBox>
               <StyledPCButtonWrap>
-                <HoverAnimationButton
-                  href=".signup"
-                  text="さっそく始める"
-                  color="#ff9800"
-                  border="1px solid #ff9800"
-                  // background="linear-gradient(to right, rgba(255, 152, 0, 0.7), 20%,
-                  //                                   rgba(255, 172, 51, 0.6),80%,
-                  //                                   rgba(255, 152, 0, 0.7));"
-                  // background="#ff9800"
-                />
+                <HoverAnimationButton href=".signup" text="さっそく始める" color="#ff9800" border="1px solid #ff9800" />
               </StyledPCButtonWrap>
               <StyledButtonWrap>
                 <PrimaryButton

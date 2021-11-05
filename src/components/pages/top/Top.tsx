@@ -8,7 +8,7 @@ const Top: FC = () => {
     <>
       <Header />
       <Main />
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 };

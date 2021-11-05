@@ -8,14 +8,14 @@ const Container: FC = (props) => {
 export default Container;
 
 const StyledContainer = styled.div`
-  position: relative;
-  width: 1000px;
+  width: calc(100vw - 16px);
   height: 100%;
   margin: 0 auto;
-  @media screen and (max-width: 768px) {
-    width: calc(100% - 32px);
+  text-align: center;
+  @media screen and (min-width: 600px) {
+    width: calc(100vw - 32px);
   }
-  @media screen and (max-width: 420px) {
-    width: calc(100% - 16px);
+  @media screen and (min-width: 1200px) {
+    width: 1000px;
   }
 `;

@@ -1,0 +1,16 @@
+/********** Module Spacer **********/
+.h-module-spacer--xs {
+  height: 8px;
+}
+.h-module-spacer--sm {
+  height: 16px;
+}
+.h-module-spacer--md {
+  height: 24px;
+}
+.h-module-spacer--lg {
+  height: 32px;
+}
+.h-module-spacer--xl {
+  height: 64px;
+}
