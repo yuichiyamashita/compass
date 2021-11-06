@@ -9,7 +9,9 @@ const Footer: FC = () => {
     <StyledFooter>
       <Container>
         <Flexbox justify="space-around" align="center">
-          <StyledCopyRight>&copy;COMPASSS</StyledCopyRight>
+          <a href="/">
+            <StyledCopyRight>&copy;COMPASSS-2021</StyledCopyRight>
+          </a>
           <StyledNav>
             <a href="./terms">利用規約</a>
             <a href="./privacy">プライバシーポリシー</a>

@@ -1,17 +1,28 @@
 import React, { FC } from "react";
 import styled from "styled-components";
 
-const Container: FC = (props) => {
-  return <StyledContainer>{props.children}</StyledContainer>;
+type Props = {
+  padding?: string;
+  align?: "left" | "center" | "right";
+};
+
+const Container: FC<Props> = (props) => {
+  const { children, padding, align } = props;
+  return (
+    <StyledContainer padding={padding} align={align}>
+      {children}
+    </StyledContainer>
+  );
 };
 
 export default Container;
 
-const StyledContainer = styled.div`
+const StyledContainer = styled.div<Props>`
   width: calc(100vw - 16px);
   height: 100%;
   margin: 0 auto;
-  text-align: center;
+  padding: ${(props) => props.padding};
+  text-align: ${(props) => (props.align ? props.align : "center")};
   @media screen and (min-width: 600px) {
     width: calc(100vw - 32px);
   }
