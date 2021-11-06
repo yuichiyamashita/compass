@@ -3,10 +3,10 @@ import styled, { keyframes } from "styled-components";
 import { makeStyles } from "@mui/styles";
 import { Grid as MuiGrid } from "@mui/material";
 
-import FirstViewImage from "../../../../../assets/images/creative_woman_bl.svg";
-import { HoverAnimationButton, PrimaryButton } from "../../../../atoms/button";
-import { Container } from "../../../../molecules/container";
-import { Flexbox } from "../../../../molecules/layout";
+import FirstViewImage from "../../../assets/images/first_view_image.svg";
+import { HoverAnimationButton, PrimaryButton } from "../../atoms/button";
+import { Container } from "../../molecules/container";
+import { Flexbox } from "../../molecules/layout";
 
 const useStyles = makeStyles(() => ({
   gridContainer: {
