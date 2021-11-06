@@ -2,7 +2,7 @@ import React, { FC } from "react";
 import styled from "styled-components";
 
 type Props = {
-  justify?: "center" | "space-between" | "space-around";
+  justify?: "center" | "space-between" | "space-around" | "flex-start" | "flex-end";
   align?: "center" | "flex-start" | "flex-end";
   direction?: "column" | "column-reverse" | "row" | "row-reverse";
   margin?: string;
