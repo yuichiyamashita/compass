@@ -2,10 +2,10 @@ import React, { FC } from "react";
 import styled from "styled-components";
 import { Grid as MuiGrid } from "@mui/material";
 
-import selfDebateImage from "../../../../../assets/images/self_debate.svg";
-import deepenThinkImage from "../../../../../assets/images/deepen_think.svg";
-import { BorderSubTitle } from "../../../../atoms/typography";
-import { Container } from "../../../../molecules/container";
+import selfDebateImage from "../../../assets/images/self_debate.svg";
+import deepenThinkImage from "../../../assets/images/deepen_think.svg";
+import { BorderSubTitle } from "../../atoms/typography";
+import { Container } from "../../molecules/container";
 
 const Features: FC = () => {
   return (

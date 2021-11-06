@@ -1,14 +1,16 @@
 import type { FC } from "react";
 import { Footer } from "../../organisms/footer";
 import { Header } from "../../organisms/header";
-import Main from "./main/Main";
+import { FirstView } from "../../organisms/firstView";
+import { Features } from "../../organisms/features";
 
 const Top: FC = () => {
   return (
     <>
       <Header />
-      <Main />
-      {/* <Footer /> */}
+      <FirstView />
+      <Features />
+      <Footer />
     </>
   );
 };
