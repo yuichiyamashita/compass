@@ -55,18 +55,12 @@ const FirstView: FC = () => {
           <MuiGrid item md={6} className={classes.gridItemRight}>
             <Flexbox justify="center" align="center" direction="column">
               <StyledCopyWriteBox>
-                <StyledCopyWriteTitle>超・論理的思考力</StyledCopyWriteTitle>
-                <StyledCopyWriteText>
-                  自分の意見に自信がない。
-                  <br />
-                  より良い選択ができるようになりたい。
-                  <br />
-                  問題解決力を上げたい。
-                  <br />
-                  自分の主張にもっと説得力を持たせたい。
-                  <br />
-                  そんなあなたのためのアプリがここにあります。
-                </StyledCopyWriteText>
+                <StyledTitle>超・論理的思考力</StyledTitle>
+                <StyledText>・自分の意見に自信を持ちたい</StyledText>
+                <StyledText>・良い選択ができるようになりたい</StyledText>
+                <StyledText>・問題解決力を上げたい</StyledText>
+                <StyledText>・説得力のある発言がしたい</StyledText>
+                <StyledText>その願いを叶えるアプリです。</StyledText>
               </StyledCopyWriteBox>
               <StyledPCButtonWrap>
                 <HoverAnimationButton href=".signup" text="さっそく始める" color="#ff9800" border="1px solid #ff9800" />
@@ -142,29 +136,31 @@ const StyledCopyWriteBox = styled.dl`
   text-align: left;
   margin-bottom: 32px;
 `;
-const StyledCopyWriteTitle = styled.dt`
-  text-shadow: 1px 1px 24px #fff;
+const StyledTitle = styled.dt`
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 4px;
   font-size: 24px;
   margin-bottom: 16px;
 `;
-const StyledCopyWriteText = styled.dd`
-  text-shadow: 1px 1px 15px #fff;
-  font-size: 15px;
-  line-height: 1.5;
+const StyledText = styled.dd`
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 4px;
+  margin-bottom: 12px;
 
   @media screen and (min-width: 900px) {
+    font-size: 18px;
     margin-bottom: 16px;
   }
 `;
 const StyledPCButtonWrap = styled.div`
   display: none;
 
-  @media screen and (min-width: 900px) {
+  @media screen and (min-width: 1200px) {
     display: block;
   }
 `;
 const StyledButtonWrap = styled.div`
-  @media screen and (min-width: 900px) {
+  @media screen and (min-width: 1200px) {
     display: none;
   }
 `;

@@ -39,6 +39,9 @@ const StyledNav = styled.nav`
   a {
     display: block;
     margin-bottom: 8px;
+    &:last-child {
+      margin-bottom: 0;
+    }
   }
 `;
 const StyledCopyRight = styled.small`
