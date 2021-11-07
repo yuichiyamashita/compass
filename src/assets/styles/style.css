@@ -14,3 +14,19 @@
 .h-module-spacer--xl {
   height: 64px;
 }
+
+.w-module-spacer--xs {
+  width: 8px;
+}
+.w-module-spacer--sm {
+  width: 16px;
+}
+.w-module-spacer--md {
+  width: 24px;
+}
+.w-module-spacer--lg {
+  width: 32px;
+}
+.w-module-spacer--xl {
+  width: 64px;
+}

@@ -26,13 +26,13 @@ const Footer: FC = () => {
 export default Footer;
 
 const StyledFooter = styled.footer`
-  background: #f9f9f9;
+  background: #333;
   height: 120px;
-  color: #999;
+  color: #fff;
 `;
 const StyledNav = styled.nav`
   text-align: left;
-  font-size: 12px;
+  font-size: 10px;
   @media screen and (min-width: 600px) {
     font-size: 14px;
   }
@@ -42,7 +42,7 @@ const StyledNav = styled.nav`
   }
 `;
 const StyledCopyRight = styled.small`
-  font-size: 12px;
+  font-size: 10px;
   @media screen and (min-width: 600px) {
     font-size: 14px;
   }
