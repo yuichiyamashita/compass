@@ -13,9 +13,10 @@ const Footer: FC = () => {
             <StyledCopyRight>&copy;COMPASSS-2021</StyledCopyRight>
           </a>
           <StyledNav>
+            <a href="./about">About</a>
+            <a href="./contact">お問い合わせ</a>
             <a href="./terms">利用規約</a>
             <a href="./privacy">プライバシーポリシー</a>
-            <a href="./contact">お問い合わせ</a>
           </StyledNav>
         </Flexbox>
       </Container>

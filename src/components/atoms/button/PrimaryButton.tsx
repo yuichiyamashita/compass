@@ -2,7 +2,7 @@ import React, { FC } from "react";
 import styled from "styled-components";
 
 type Props = {
-  href: string;
+  href?: string;
   text?: string;
   // スタイルの型定義
   background?: string;
@@ -11,6 +11,7 @@ type Props = {
   color: string;
   fontSize?: string;
   fontWeight?: 400 | 600;
+  // width?:
 };
 
 const PrimaryButton: FC<Props> = (props) => {
@@ -18,7 +19,6 @@ const PrimaryButton: FC<Props> = (props) => {
 
   return (
     <StyledPrimaryButton
-      href={href}
       background={background}
       border={border}
       boxShadowColor={boxShadowColor}
@@ -26,14 +26,14 @@ const PrimaryButton: FC<Props> = (props) => {
       fontSize={fontSize}
       fontWeight={fontWeight}
     >
-      {text}
+      <a href={href}>{text}</a>
     </StyledPrimaryButton>
   );
 };
 
 export default PrimaryButton;
 
-const StyledPrimaryButton = styled.a<Props>`
+const StyledPrimaryButton = styled.div<Props>`
   background: ${(props) => props.background};
   border: ${(props) => props.border};
   border-radius: 9px;
@@ -44,6 +44,7 @@ const StyledPrimaryButton = styled.a<Props>`
   font-weight: ${(props) => (props.fontWeight ? props.fontWeight : 400)};
   padding: 8px 18px;
   transition: all 0.3s;
+  width: 100%;
   &:hover {
     opacity: 0.7;
   }
