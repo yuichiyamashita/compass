@@ -4,14 +4,14 @@ import { Grid as MuiGrid } from "@mui/material";
 
 import selfDebateImage from "../../../assets/images/self_debate.svg";
 import deepenThinkImage from "../../../assets/images/deepen_think.svg";
-import { BorderSubTitle } from "../../atoms/typography";
+import { BorderH2Title } from "../../atoms/typography";
 import { Container } from "../../molecules/container";
 
 const Features: FC = () => {
   return (
     <StyledFeatures>
       <Container>
-        <BorderSubTitle
+        <BorderH2Title
           title="FEATURES"
           fontSize="24px"
           fontWeight={600}

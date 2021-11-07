@@ -23,8 +23,9 @@ const Header: FC = () => {
 
           {/* pc */}
           <StyledPCButtonWrap>
-            <PrimaryButton text="ログイン" href="./login" border="1px solid #555" color="#555" />
-            <PrimaryButton text="会員登録" href="./signup" border="1px solid #8bd5da" color="#8bd5da" />
+            <PrimaryButton text="ログイン" href="./login" border="1px solid #8bd5da" color="#8bd5da" />
+            <div className="w-module-spacer--sm" />
+            <PrimaryButton text="会員登録" href="./signup" background="#8bd5da" color="#fff" />
           </StyledPCButtonWrap>
 
           {/* tab & sp */}
@@ -78,13 +79,7 @@ const StyledNavigation = styled.nav`
 const StyledPCButtonWrap = styled.div`
   display: none;
   @media screen and (min-width: 900px) {
-    display: block;
-    a {
-      margin-right: 8px;
-      &:last-child {
-        margin: 0;
-      }
-    }
+    display: flex;
   }
 `;
 const StyledButtonWrap = styled.div`
