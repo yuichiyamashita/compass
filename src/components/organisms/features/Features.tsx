@@ -42,7 +42,7 @@ const Features: FC = () => {
             </StyledImage>
           </MuiGrid>
         </MuiGrid>
-        <div className="h-module-spacer--xl" />
+        <div className="h-module-spacer--xxl" />
         <MuiGrid container>
           <MuiGrid item xs sm={6}>
             <StyledTypographyBox>
@@ -86,7 +86,7 @@ const StyledTypographyBox = styled.dl`
   width: 304px;
   height: 304px;
   border: 1px solid #8bd5da;
-  border-radius: 100%;
+  border-radius: 50%;
   color: #8bd5da;
   margin: 0 auto;
   @media screen and (min-width: 600px) {

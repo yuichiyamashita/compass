@@ -91,7 +91,7 @@ const Login: FC = () => {
             <MuiLink variant="button" href="./signup" underline="none">
               初めての登録ですか？新規登録
             </MuiLink>
-            <MuiLink variant="button" href="./signup" underline="none">
+            <MuiLink variant="button" href="./reset-password" underline="none">
               パスワードを忘れた場合
             </MuiLink>
           </StyledNavWrap>

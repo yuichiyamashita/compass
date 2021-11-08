@@ -74,7 +74,7 @@ const Signup: FC = () => {
           <div className="h-module-spacer--md" />
           <StyledNavWrap>
             <MuiLink variant="button" href="./login" underline="none">
-              ログインはこちら
+              既にアカウントをお持ちの場合はこちら
             </MuiLink>
           </StyledNavWrap>
         </MuiPaper>
@@ -114,7 +114,7 @@ const Signup: FC = () => {
           <div className="h-module-spacer--md" />
           <StyledNavWrap>
             <MuiLink variant="button" href="./login" underline="none">
-              ログインはこちら
+              既にアカウントを持ちの場合はこちら
             </MuiLink>
           </StyledNavWrap>
         </div>
