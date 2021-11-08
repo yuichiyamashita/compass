@@ -7,6 +7,7 @@ import FirstViewImage from "../../../assets/images/first_view_image.svg";
 import { HoverAnimationButton, PrimaryButton } from "../../atoms/button";
 import { Container } from "../../molecules/container";
 import { Flexbox } from "../../molecules/layout";
+import { MuiTheme } from "../../../assets/material-ui";
 
 const useStyles = makeStyles(() => ({
   gridContainer: {
@@ -16,10 +17,10 @@ const useStyles = makeStyles(() => ({
   gridItemLeft: {
     position: "absolute",
     left: "-60%",
-    "@media (min-width: 600px)": {
+    [MuiTheme.breakpoints.up("sm")]: {
       left: "calc(-33% + 32px)",
     },
-    "@media (min-width: 900px)": {
+    [MuiTheme.breakpoints.up("md")]: {
       position: "initial",
       left: 0,
     },
@@ -30,11 +31,11 @@ const useStyles = makeStyles(() => ({
     right: 0,
     transform: "translateY(-50%)",
     width: "200px",
-    "@media (min-width: 600px)": {
+    [MuiTheme.breakpoints.up("sm")]: {
       width: "250px",
       right: "32px",
     },
-    "@media (min-width: 900px)": {
+    [MuiTheme.breakpoints.up("md")]: {
       position: "initial",
       top: 0,
       margin: 0,

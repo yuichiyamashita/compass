@@ -8,9 +8,8 @@ import {
   Link as MuiLink,
   InputAdornment as MuiInputAdornment,
 } from "@mui/material";
-import { LockOpenOutlined as MuiLockOpenOutlined } from "@mui/icons-material";
 import MuiEmailIcon from "@mui/icons-material/Email";
-import MuiLockIcon from "@mui/icons-material/Lock";
+import MuiAccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { makeStyles } from "@mui/styles";
 
 import { OnlyLogoHeader } from "../../organisms/header";
@@ -35,7 +34,7 @@ const useStyles = makeStyles({
   },
 });
 
-const Login: FC = () => {
+const Signup: FC = () => {
   const classes = useStyles();
 
   return (
@@ -45,13 +44,14 @@ const Login: FC = () => {
         {/* pc, tab */}
         <MuiPaper className={classes.pcLoginForm} elevation={8}>
           <H1TitleWithIcon
-            text="LOGIN"
+            text="SIGN UP"
             color="#555"
             fontSize="32px"
-            icon={MuiLockOpenOutlined}
+            icon={MuiAccountCircleIcon}
             iconColor="primary"
-            iconSize="32px"
+            iconSize="36px"
           />
+          <StyledText>アカウントに使用するメールアドレスを入力してください</StyledText>
           <form>
             <MuiTextField
               placeholder="メールアドレス"
@@ -68,31 +68,13 @@ const Login: FC = () => {
                 ),
               }}
             />
-            <MuiTextField
-              placeholder="パスワード"
-              type="password"
-              variant="outlined"
-              fullWidth
-              margin="normal"
-              autoComplete="current-password"
-              InputProps={{
-                startAdornment: (
-                  <MuiInputAdornment position="start">
-                    <MuiLockIcon />
-                  </MuiInputAdornment>
-                ),
-              }}
-            />
-            <div className="h-module-spacer--sm" />
-            <PrimaryButton text="ログイン" color="#fff" background="#8bd5da" />
           </form>
+          <div className="h-module-spacer--sm" />
+          <PrimaryButton text="認証メールを送信" color="#fff" background="#8bd5da" />
           <div className="h-module-spacer--md" />
           <StyledNavWrap>
-            <MuiLink variant="button" href="./signup" underline="none">
-              初めての登録ですか？新規登録
-            </MuiLink>
-            <MuiLink variant="button" href="./signup" underline="none">
-              パスワードを忘れた場合
+            <MuiLink variant="button" href="./login" underline="none">
+              ログインはこちら
             </MuiLink>
           </StyledNavWrap>
         </MuiPaper>
@@ -100,13 +82,15 @@ const Login: FC = () => {
         {/* sp */}
         <div className={classes.loginForm}>
           <H1TitleWithIcon
-            text="LOGIN"
-            color="#555"
+            text="SIGN UP"
             fontSize="32px"
-            icon={MuiLockOpenOutlined}
+            icon={MuiAccountCircleIcon}
+            iconSize="36px"
+            color="#555"
             iconColor="primary"
-            iconSize="32px"
           />
+          <StyledText>アカウントに使用するメールアドレスを入力してください</StyledText>
+          <div className="h-module-spacer--xs" />
           <form>
             <MuiTextField
               placeholder="メールアドレス"
@@ -114,6 +98,7 @@ const Login: FC = () => {
               variant="outlined"
               fullWidth
               margin="normal"
+              size="small"
               autoComplete="email"
               InputProps={{
                 startAdornment: (
@@ -123,31 +108,13 @@ const Login: FC = () => {
                 ),
               }}
             />
-            <MuiTextField
-              placeholder="パスワード"
-              type="password"
-              variant="outlined"
-              fullWidth
-              margin="normal"
-              autoComplete="current-password"
-              InputProps={{
-                startAdornment: (
-                  <MuiInputAdornment position="start">
-                    <MuiLockIcon />
-                  </MuiInputAdornment>
-                ),
-              }}
-            />
-            <div className="h-module-spacer--sm" />
-            <PrimaryButton text="ログイン" color="#fff" background="#8bd5da" />
           </form>
           <div className="h-module-spacer--sm" />
+          <PrimaryButton text="認証メールを送信" color="#fff" background="#8bd5da" />
+          <div className="h-module-spacer--md" />
           <StyledNavWrap>
-            <MuiLink variant="button" href="./signup" underline="none">
-              初めての登録ですか？新規登録
-            </MuiLink>
-            <MuiLink variant="button" href="./signup" underline="none">
-              パスワードを忘れた場合
+            <MuiLink variant="button" href="./login" underline="none">
+              ログインはこちら
             </MuiLink>
           </StyledNavWrap>
         </div>
@@ -156,10 +123,13 @@ const Login: FC = () => {
   );
 };
 
-export default Login;
+export default Signup;
 
 const StyledNavWrap = styled.div`
   display: flex;
-  flex-direction: column;
-  align-items: flex-end;
+  justify-content: flex-end;
+`;
+const StyledText = styled.p`
+  text-align: center;
+  color: #555;
 `;

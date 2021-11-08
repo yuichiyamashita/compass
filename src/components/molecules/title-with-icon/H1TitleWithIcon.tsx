@@ -7,19 +7,22 @@ import { Flexbox } from "../layout";
 type Props = {
   text: string;
   color?: string;
+  fontSize?: string;
   icon: React.ElementType;
-  iconSize?: "small" | "medium" | "large";
+  iconSize?: string;
   iconColor?: "inherit" | "disabled" | "action" | "primary" | "secondary" | "error" | "info" | "success" | "warning";
 };
 
 const H1TitleWithIcon: FC<Props> = (props) => {
-  const { text, color, icon, iconSize, iconColor } = props;
+  const { text, color, fontSize, icon, iconSize, iconColor } = props;
 
   return (
     <Flexbox justify="center">
-      <MuiIcon component={icon} fontSize={iconSize} iconColor={iconColor} />
+      <MuiIcon component={icon} color={iconColor} sx={{ fontSize: iconSize }} />
       <div className="w-module-spacer--xs" />
-      <H1Title color={color}>{text}</H1Title>
+      <H1Title color={color} fontSize={fontSize}>
+        {text}
+      </H1Title>
     </Flexbox>
   );
 };
