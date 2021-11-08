@@ -10,7 +10,7 @@ import { Container } from "../../molecules/container";
 const Features: FC = () => {
   return (
     <StyledFeatures>
-      <Container>
+      <Container align="center">
         <BorderH2Title
           title="FEATURES"
           fontSize="24px"

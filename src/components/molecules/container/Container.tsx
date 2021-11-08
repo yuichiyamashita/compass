@@ -22,7 +22,7 @@ const StyledContainer = styled.div<Props>`
   height: 100%;
   margin: 0 auto;
   padding: ${(props) => props.padding};
-  text-align: ${(props) => (props.align ? props.align : "center")};
+  text-align: ${(props) => props.align};
   @media screen and (min-width: 600px) {
     width: calc(100vw - 32px);
   }

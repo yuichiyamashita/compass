@@ -5,6 +5,7 @@ import { Terms } from "./components/pages/terms";
 import { PrivacyPolicy } from "./components/pages/privacy";
 import { About } from "./components/pages/about";
 import { Login } from "./components/pages/login";
+import { Signup } from "./components/pages/signup";
 
 const App: FC = () => {
   return (
@@ -15,6 +16,7 @@ const App: FC = () => {
         <Route exact path="/privacy" component={PrivacyPolicy} />
         <Route exact path="/about" component={About} />
         <Route exact path="/login" component={Login} />
+        <Route exact path="/signup" component={Signup} />
       </Switch>
     </BrowserRouter>
   );

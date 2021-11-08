@@ -11,11 +11,12 @@ type Props = {
   color: string;
   fontSize?: string;
   fontWeight?: 400 | 600;
-  // width?:
+  margin?: string;
+  width?: string;
 };
 
 const PrimaryButton: FC<Props> = (props) => {
-  const { href, text, background, border, boxShadowColor, color, fontSize, fontWeight } = props;
+  const { href, text, background, border, boxShadowColor, color, fontSize, fontWeight, margin, width } = props;
 
   return (
     <StyledPrimaryButton
@@ -25,6 +26,8 @@ const PrimaryButton: FC<Props> = (props) => {
       color={color}
       fontSize={fontSize}
       fontWeight={fontWeight}
+      margin={margin}
+      width={width}
     >
       <a href={href}>{text}</a>
     </StyledPrimaryButton>
@@ -43,8 +46,10 @@ const StyledPrimaryButton = styled.div<Props>`
   font-size: ${(props) => props.fontSize};
   font-weight: ${(props) => (props.fontWeight ? props.fontWeight : 400)};
   padding: 8px 18px;
+  margin: ${(props) => props.margin};
+  width: ${(props) => props.width};
+  text-align: center;
   transition: all 0.3s;
-  width: 100%;
   &:hover {
     opacity: 0.7;
   }
