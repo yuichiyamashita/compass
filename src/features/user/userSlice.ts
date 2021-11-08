@@ -23,3 +23,9 @@ const initialState: UserState = {
     isSignedIn: false,
   },
 };
+
+export const userSlice = createSlice({
+  name: "user",
+  initialState,
+  reducers: {},
+});
