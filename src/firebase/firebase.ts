@@ -1,9 +1,10 @@
-import firebase from 'firebase/app';
-import 'firebase/auth';
-import 'firebase/firestore';
+import { initializeApp } from "firebase/app";
+import { Auth, getAuth } from "firebase/auth";
+import { Firestore, getFirestore } from "firebase/firestore";
+import { firebaseConfig } from "./config";
 
-const firebaseConfig = {
+initializeApp(firebaseConfig);
 
-}
-
-firebase.initializeApp(firebaseConfig);
+// web v9
+export const firebaseGetAuth = (): Auth => getAuth();
+export const FirebaseGetDb = (): Firestore => getFirestore();

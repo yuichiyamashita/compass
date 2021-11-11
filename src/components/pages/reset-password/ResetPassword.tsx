@@ -68,9 +68,9 @@ const ResetPassword: FC = () => {
                 ),
               }}
             />
+            <div className="h-module-spacer--sm" />
+            <PrimaryButton text="再設定のメールを送信" color="#fff" background="#8bd5da" fullWidth />
           </form>
-          <div className="h-module-spacer--sm" />
-          <PrimaryButton text="再設定のメールを送信" color="#fff" background="#8bd5da" />
           <div className="h-module-spacer--md" />
           <StyledNavWrap>
             <MuiLink variant="button" href="./login" underline="none">
@@ -108,9 +108,9 @@ const ResetPassword: FC = () => {
                 ),
               }}
             />
+            <div className="h-module-spacer--sm" />
+            <PrimaryButton text="再設定のメールを送信" color="#fff" background="#8bd5da" fullWidth />
           </form>
-          <div className="h-module-spacer--sm" />
-          <PrimaryButton text="再設定のメールを送信" color="#fff" background="#8bd5da" />
           <div className="h-module-spacer--md" />
           <StyledNavWrap>
             <MuiLink variant="button" href="./login" underline="none">

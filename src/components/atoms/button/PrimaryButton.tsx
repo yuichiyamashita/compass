@@ -13,10 +13,11 @@ type Props = {
   fontWeight?: 400 | 600;
   margin?: string;
   width?: string;
+  fullWidth?: boolean;
 };
 
 const PrimaryButton: FC<Props> = (props) => {
-  const { href, text, background, border, boxShadowColor, color, fontSize, fontWeight, margin, width } = props;
+  const { href, text, background, border, boxShadowColor, color, fontSize, fontWeight, margin, fullWidth } = props;
 
   return (
     <StyledPrimaryButton
@@ -27,7 +28,7 @@ const PrimaryButton: FC<Props> = (props) => {
       fontSize={fontSize}
       fontWeight={fontWeight}
       margin={margin}
-      width={width}
+      fullWidth={fullWidth}
     >
       <a href={href}>{text}</a>
     </StyledPrimaryButton>
@@ -36,7 +37,7 @@ const PrimaryButton: FC<Props> = (props) => {
 
 export default PrimaryButton;
 
-const StyledPrimaryButton = styled.div<Props>`
+const StyledPrimaryButton = styled.button<Props>`
   background: ${(props) => props.background};
   border: ${(props) => props.border};
   border-radius: 9px;
@@ -47,7 +48,7 @@ const StyledPrimaryButton = styled.div<Props>`
   font-weight: ${(props) => (props.fontWeight ? props.fontWeight : 400)};
   padding: 8px 18px;
   margin: ${(props) => props.margin};
-  width: ${(props) => props.width};
+  width: ${(props) => props.fullWidth && "100%"};
   text-align: center;
   transition: all 0.3s;
   &:hover {

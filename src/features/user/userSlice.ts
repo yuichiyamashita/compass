@@ -27,5 +27,10 @@ const initialState: UserState = {
 export const userSlice = createSlice({
   name: "user",
   initialState,
-  reducers: {},
+  reducers: {
+    signInAction: (state, action) => {
+      state.user.isSignedIn = true;
+      state.user.uid = action.payload.uid;
+    },
+  },
 });
