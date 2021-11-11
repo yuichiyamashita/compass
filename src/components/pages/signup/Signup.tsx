@@ -1,7 +1,6 @@
-import React, { FC } from "react";
+import React, { FC, useState, useCallback } from "react";
 import styled from "styled-components";
 
-// Material-UI
 import {
   TextField as MuiTextField,
   Paper as MuiPaper,
@@ -11,21 +10,25 @@ import {
 import MuiEmailIcon from "@mui/icons-material/Email";
 import MuiAccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { makeStyles } from "@mui/styles";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../../app/store";
 
+import { sendSignInLink } from "../../../operation/userAuth";
 import { OnlyLogoHeader } from "../../organisms/header";
 import { Container } from "../../molecules/container";
 import { PrimaryButton } from "../../atoms/button";
 import { H1TitleWithIcon } from "../../molecules/title-with-icon";
+import { MuiTheme } from "../../../assets/material-ui";
 
 const useStyles = makeStyles({
   loginForm: {
-    "@media (min-width: 600px)": {
+    [MuiTheme.breakpoints.up("sm")]: {
       display: "none",
     },
   },
   pcLoginForm: {
     display: "none",
-    "@media (min-width:600px)": {
+    [MuiTheme.breakpoints.up("sm")]: {
       display: "block",
       padding: "64px",
       width: "80%",
@@ -36,12 +39,34 @@ const useStyles = makeStyles({
 
 const Signup: FC = () => {
   const classes = useStyles();
+  const dispatch: AppDispatch = useDispatch();
+
+  const [inputEmail, setInputEmail] = useState<string>("");
+
+  const handleChangeEmail = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      setInputEmail(e.target.value);
+    },
+    [setInputEmail]
+  );
+
+  const handleSubmit = useCallback(
+    (e: React.FormEvent<HTMLFormElement>): void => {
+      e.preventDefault();
+      console.log("送信");
+
+      if (!inputEmail) return;
+      // SignUp関数
+      sendSignInLink(inputEmail);
+    },
+    [inputEmail]
+  );
 
   return (
     <>
       <OnlyLogoHeader />
       <Container padding="64px 8px">
-        {/* pc, tab */}
+        {/****** PC, タブレット *******/}
         <MuiPaper className={classes.pcLoginForm} elevation={8}>
           <H1TitleWithIcon
             text="SIGN UP"
@@ -52,7 +77,7 @@ const Signup: FC = () => {
             iconSize="36px"
           />
           <StyledText>アカウントに使用するメールアドレスを入力してください</StyledText>
-          <form>
+          <form onSubmit={handleSubmit}>
             <MuiTextField
               placeholder="メールアドレス"
               type="email"
@@ -67,10 +92,11 @@ const Signup: FC = () => {
                   </MuiInputAdornment>
                 ),
               }}
+              onChange={handleChangeEmail}
             />
+            <div className="h-module-spacer--sm" />
+            <PrimaryButton text="認証メールを送信" color="#fff" background="#8bd5da" fullWidth />
           </form>
-          <div className="h-module-spacer--sm" />
-          <PrimaryButton text="認証メールを送信" color="#fff" background="#8bd5da" />
           <div className="h-module-spacer--md" />
           <StyledNavWrap>
             <MuiLink variant="button" href="./login" underline="none">
@@ -79,7 +105,7 @@ const Signup: FC = () => {
           </StyledNavWrap>
         </MuiPaper>
 
-        {/* sp */}
+        {/****** スマホ ******/}
         <div className={classes.loginForm}>
           <H1TitleWithIcon
             text="SIGN UP"
@@ -91,7 +117,7 @@ const Signup: FC = () => {
           />
           <StyledText>アカウントに使用するメールアドレスを入力してください</StyledText>
           <div className="h-module-spacer--xs" />
-          <form>
+          <form onSubmit={handleSubmit}>
             <MuiTextField
               placeholder="メールアドレス"
               type="email"
@@ -107,10 +133,11 @@ const Signup: FC = () => {
                   </MuiInputAdornment>
                 ),
               }}
+              onChange={handleChangeEmail}
             />
           </form>
           <div className="h-module-spacer--sm" />
-          <PrimaryButton text="認証メールを送信" color="#fff" background="#8bd5da" />
+          <PrimaryButton text="認証メールを送信" color="#fff" background="#8bd5da" fullWidth />
           <div className="h-module-spacer--md" />
           <StyledNavWrap>
             <MuiLink variant="button" href="./login" underline="none">
