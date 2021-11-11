@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useEffect } from "react";
 import styled from "styled-components";
 
 // Material-UI
@@ -12,7 +12,10 @@ import { LockOpenOutlined as MuiLockOpenOutlined } from "@mui/icons-material";
 import MuiEmailIcon from "@mui/icons-material/Email";
 import MuiLockIcon from "@mui/icons-material/Lock";
 import { makeStyles } from "@mui/styles";
+import { useDispatch } from "react-redux";
 
+import { AppDispatch } from "../../../app/store";
+import { firebaseSignInWithEmailLink } from "../../../operation/userAuth";
 import { OnlyLogoHeader } from "../../organisms/header";
 import { Container } from "../../molecules/container";
 import { PrimaryButton } from "../../atoms/button";
@@ -37,6 +40,13 @@ const useStyles = makeStyles({
 
 const Login: FC = () => {
   const classes = useStyles();
+
+  const dispatch: AppDispatch = useDispatch();
+
+  useEffect(() => {
+    // dispatch(firebaseSignInWithEmailLink);
+    firebaseSignInWithEmailLink();
+  }, [dispatch]);
 
   return (
     <>
