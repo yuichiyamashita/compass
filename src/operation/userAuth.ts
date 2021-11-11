@@ -1,38 +1,37 @@
-import { firebaseGetAuth } from "../firebase/firebase";
-import { sendSignInLinkToEmail, isSignInWithEmailLink, signInWithEmailLink } from "firebase/auth";
+import {
+  //   fetchSignInMethodsForEmail,
+  sendSignInLinkToEmail,
+  //   signInWithEmailLink,
+  //   isSignInWithEmailLink,
+} from "@firebase/auth";
+// import { doc, getDoc, collection } from "@firebase/firestore";
 
-const actionCodeSettings = {
-  url: "http://localhost:3000/signup",
-  handleCodeInApp: true,
-};
+import { firebaseGetAuth } from "../firebase/firebase";
 const auth = firebaseGetAuth();
 
-// 認証メールの送信
-export const sendSignInLink = (email: string): void => {
+// 登録状況確認処理
+
+// 認証メール送信処理
+const callbackUrl = "https://compass-441d8.web.app/login";
+const actionCodeSettings = {
+  url: callbackUrl,
+  handleCodeInApp: true,
+};
+export const firebaseSendSignInLinkToEmail = (email: string) =>
   sendSignInLinkToEmail(auth, email, actionCodeSettings)
     .then(() => {
+      // 送信成功の処理
       window.localStorage.setItem("emailForSignIn", email);
-      console.log("Success!");
+      alert("認証メールの送信に成功しました。");
     })
     .catch((error) => {
-      console.log(error);
+      // 送信失敗の処理
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      console.log("code: ", errorCode);
+      console.log("message: ", errorMessage);
     });
-};
 
 // ログイン完了の処理
-export const isSignedInWithEmailLink = (): void => {
-  if (isSignInWithEmailLink(auth, window.location.href)) {
-    let email = window.localStorage.getItem("emailForSignIn");
-    if (!email) {
-      email = window.prompt("Please provide your email for confirmation");
-    }
-    signInWithEmailLink(auth, email, window.location.href)
-      .then((result) => {
-        window.localStorage.removeItem("emailForSignIn");
-        console.log(result);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }
-};
+
+// ユーザー情報取得の処理

@@ -10,10 +10,10 @@ import {
 import MuiEmailIcon from "@mui/icons-material/Email";
 import MuiAccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { makeStyles } from "@mui/styles";
-import { useDispatch } from "react-redux";
-import { AppDispatch } from "../../../app/store";
+// import { useDispatch } from "react-redux";
+// import { AppDispatch } from "../../../app/store";
 
-import { sendSignInLink } from "../../../operation/userAuth";
+import { firebaseSendSignInLinkToEmail } from "../../../operation/userAuth";
 import { OnlyLogoHeader } from "../../organisms/header";
 import { Container } from "../../molecules/container";
 import { PrimaryButton } from "../../atoms/button";
@@ -39,7 +39,7 @@ const useStyles = makeStyles({
 
 const Signup: FC = () => {
   const classes = useStyles();
-  const dispatch: AppDispatch = useDispatch();
+  // const dispatch: AppDispatch = useDispatch();
 
   const [inputEmail, setInputEmail] = useState<string>("");
 
@@ -56,8 +56,8 @@ const Signup: FC = () => {
       console.log("送信");
 
       if (!inputEmail) return;
-      // SignUp関数
-      sendSignInLink(inputEmail);
+      // 認証メールの送信処理
+      firebaseSendSignInLinkToEmail(inputEmail);
     },
     [inputEmail]
   );
