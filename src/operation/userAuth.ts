@@ -73,8 +73,8 @@ export const firebaseCreateUser = (email: string, password: string) => {
           uid: uid,
           email: email,
           role: "user",
-          created_at: Timestamp,
-          updated_at: Timestamp,
+          //   created_at: Timestamp,
+          //   updated_at: Timestamp,
         });
         alert("アカウントが作成されました！");
       }
