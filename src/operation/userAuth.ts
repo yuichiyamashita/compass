@@ -1,21 +1,23 @@
 import {
-  //   fetchSignInMethodsForEmail,
   sendSignInLinkToEmail,
   signInWithEmailLink,
   isSignInWithEmailLink,
+  createUserWithEmailAndPassword,
 } from "@firebase/auth";
-import { AppDispatch } from "../app/store";
-// import { doc, getDoc, collection } from "@firebase/firestore";
+import { doc, setDoc, collection, addDoc, Timestamp } from "firebase/firestore";
+import { firebaseGetAuth, firebaseGetDb } from "../firebase/firebase";
 
-import { firebaseGetAuth } from "../firebase/firebase";
 const auth = firebaseGetAuth();
+const db = firebaseGetDb();
 
 // 登録状況確認処理
+// const listenAuthState
 
+// ========================================
 // 認証メール送信処理
-const callbackUrl = "http://localhost:3000/login";
+const url = "http://localhost:3000/signup"; // 認証メールのリンク先URL
 const actionCodeSettings = {
-  url: callbackUrl,
+  url: url,
   handleCodeInApp: true,
 };
 export const firebaseSendSignInLinkToEmail = (email: string) =>
@@ -24,6 +26,8 @@ export const firebaseSendSignInLinkToEmail = (email: string) =>
       // 送信成功の処理
       window.localStorage.setItem("emailForSignIn", email);
       alert("認証メールの送信に成功しました。");
+      // 認証メール送信後の画面に遷移させる
+      // window.location.href = '送信後のページurl'
     })
     .catch((error) => {
       // 送信失敗の処理
@@ -33,7 +37,8 @@ export const firebaseSendSignInLinkToEmail = (email: string) =>
       console.log("message: ", errorMessage);
     });
 
-//　認証完了の処理
+// ========================================
+// 認証完了の処理
 export const firebaseSignInWithEmailLink = () => {
   if (isSignInWithEmailLink(auth, window.location.href)) {
     let email = window.localStorage.getItem("emailForSignIn");
@@ -55,6 +60,38 @@ export const firebaseSignInWithEmailLink = () => {
   }
 };
 
-// ユーザー情報取得の処理
+// ====================================================
+// Firestoreにユーザー情報を登録
+export const firebaseCreateUser = (email: string, password: string) => {
+  createUserWithEmailAndPassword(auth, email, password)
+    .then(async (userCredential) => {
+      // Firestoreにユーザー情報を登録
+      const user = userCredential.user;
+      if (user) {
+        const uid = user.uid;
+        await addDoc(collection(db, "users"), {
+          uid: uid,
+          email: email,
+          role: "user",
+          created_at: Timestamp,
+          updated_at: Timestamp,
+        });
+        alert("アカウントが作成されました！");
+      }
+    })
+    .catch((error) => {
+      // ユーザーの作成に失敗
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      console.log("code: ", errorCode);
+      console.log("message: ", errorMessage);
+    });
+};
 
 // パスワード設定の処理
+
+// 認証メール送信
+// 認証完了
+// パスワードの設定
+// ログインの処理
+// ログイン完了=>ホームページに遷移

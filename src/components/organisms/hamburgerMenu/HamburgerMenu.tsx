@@ -42,7 +42,7 @@ export default function TemporaryDrawer() {
           <ListItemIcon>
             <PersonAddAlt1Icon />
           </ListItemIcon>
-          <Link href="./signup" underline="none" style={{ color: "#555" }}>
+          <Link href="./email-authentication" underline="none" style={{ color: "#555" }}>
             会員登録
           </Link>
         </ListItem>

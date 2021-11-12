@@ -5,7 +5,7 @@ import { Terms } from "./components/pages/terms";
 import { PrivacyPolicy } from "./components/pages/privacy";
 import { About } from "./components/pages/about";
 import { Login } from "./components/pages/login";
-import { Signup } from "./components/pages/signup";
+import { Signup, EmailAuth } from "./components/pages/signup";
 import { ResetPassword } from "./components/pages/reset-password";
 
 const App: FC = () => {
@@ -18,6 +18,7 @@ const App: FC = () => {
         <Route exact path="/about" component={About} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/signup" component={Signup} />
+        <Route exact path="/email-authentication" component={EmailAuth} />
         <Route exact path="/reset-password" component={ResetPassword} />
       </Switch>
     </BrowserRouter>

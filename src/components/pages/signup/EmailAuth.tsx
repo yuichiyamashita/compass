@@ -1,32 +1,32 @@
-import React, { FC } from "react";
+import React, { FC, useState, useCallback } from "react";
 import styled from "styled-components";
 
-// Material-UI
 import {
   TextField as MuiTextField,
   Paper as MuiPaper,
   Link as MuiLink,
   InputAdornment as MuiInputAdornment,
 } from "@mui/material";
-import { LockOpenOutlined as MuiLockOpenOutlined } from "@mui/icons-material";
 import MuiEmailIcon from "@mui/icons-material/Email";
-import MuiLockIcon from "@mui/icons-material/Lock";
+import MuiAccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { makeStyles } from "@mui/styles";
 
+import { firebaseSendSignInLinkToEmail } from "../../../operation/userAuth";
 import { OnlyLogoHeader } from "../../organisms/header";
 import { Container } from "../../molecules/container";
 import { PrimaryButton } from "../../atoms/button";
 import { H1TitleWithIcon } from "../../molecules/title-with-icon";
+import { MuiTheme } from "../../../assets/material-ui";
 
 const useStyles = makeStyles({
   loginForm: {
-    "@media (min-width: 600px)": {
+    [MuiTheme.breakpoints.up("sm")]: {
       display: "none",
     },
   },
   pcLoginForm: {
     display: "none",
-    "@media (min-width:600px)": {
+    [MuiTheme.breakpoints.up("sm")]: {
       display: "block",
       padding: "64px",
       width: "80%",
@@ -35,24 +35,45 @@ const useStyles = makeStyles({
   },
 });
 
-const Login: FC = () => {
+const EmailAuth: FC = () => {
   const classes = useStyles();
+  const [inputEmail, setInputEmail] = useState<string>("");
+
+  const handleChangeEmail = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      setInputEmail(e.target.value);
+    },
+    [setInputEmail]
+  );
+
+  const handleSubmit = useCallback(
+    (e: React.FormEvent<HTMLFormElement>): void => {
+      e.preventDefault();
+      console.log("送信");
+
+      if (!inputEmail) return;
+      // 認証メールの送信処理
+      firebaseSendSignInLinkToEmail(inputEmail);
+    },
+    [inputEmail]
+  );
 
   return (
     <>
       <OnlyLogoHeader />
       <Container padding="64px 8px">
-        {/* pc, tab */}
+        {/****** PC, タブレット *******/}
         <MuiPaper className={classes.pcLoginForm} elevation={8}>
           <H1TitleWithIcon
-            text="LOGIN"
+            text="SIGN UP"
             color="#555"
             fontSize="32px"
-            icon={MuiLockOpenOutlined}
+            icon={MuiAccountCircleIcon}
             iconColor="primary"
-            iconSize="32px"
+            iconSize="36px"
           />
-          <form>
+          <StyledText>アカウントに使用するメールアドレスを入力してください</StyledText>
+          <form onSubmit={handleSubmit}>
             <MuiTextField
               placeholder="メールアドレス"
               type="email"
@@ -67,53 +88,39 @@ const Login: FC = () => {
                   </MuiInputAdornment>
                 ),
               }}
-            />
-            <MuiTextField
-              placeholder="パスワード"
-              type="password"
-              variant="outlined"
-              fullWidth
-              margin="normal"
-              autoComplete="current-password"
-              InputProps={{
-                startAdornment: (
-                  <MuiInputAdornment position="start">
-                    <MuiLockIcon />
-                  </MuiInputAdornment>
-                ),
-              }}
+              onChange={handleChangeEmail}
             />
             <div className="h-module-spacer--sm" />
-            <PrimaryButton text="ログイン" color="#fff" background="#8bd5da" fullWidth />
+            <PrimaryButton text="認証メールを送信" color="#fff" background="#8bd5da" fullWidth />
           </form>
           <div className="h-module-spacer--md" />
           <StyledNavWrap>
-            <MuiLink variant="button" href="./email-authentication" underline="none">
-              初めての登録ですか？新規登録
-            </MuiLink>
-            <MuiLink variant="button" href="./reset-password" underline="none">
-              パスワードを忘れた場合
+            <MuiLink variant="button" href="./login" underline="none">
+              既にアカウントをお持ちの場合はこちら
             </MuiLink>
           </StyledNavWrap>
         </MuiPaper>
 
-        {/* sp */}
+        {/****** スマホ ******/}
         <div className={classes.loginForm}>
           <H1TitleWithIcon
-            text="LOGIN"
-            color="#555"
+            text="SIGN UP"
             fontSize="32px"
-            icon={MuiLockOpenOutlined}
+            icon={MuiAccountCircleIcon}
+            iconSize="36px"
+            color="#555"
             iconColor="primary"
-            iconSize="32px"
           />
-          <form>
+          <StyledText>アカウントに使用するメールアドレスを入力してください</StyledText>
+          <div className="h-module-spacer--xs" />
+          <form onSubmit={handleSubmit}>
             <MuiTextField
               placeholder="メールアドレス"
               type="email"
               variant="outlined"
               fullWidth
               margin="normal"
+              size="small"
               autoComplete="email"
               InputProps={{
                 startAdornment: (
@@ -122,32 +129,15 @@ const Login: FC = () => {
                   </MuiInputAdornment>
                 ),
               }}
+              onChange={handleChangeEmail}
             />
-            <MuiTextField
-              placeholder="パスワード"
-              type="password"
-              variant="outlined"
-              fullWidth
-              margin="normal"
-              autoComplete="current-password"
-              InputProps={{
-                startAdornment: (
-                  <MuiInputAdornment position="start">
-                    <MuiLockIcon />
-                  </MuiInputAdornment>
-                ),
-              }}
-            />
-            <div className="h-module-spacer--sm" />
-            <PrimaryButton text="ログイン" color="#fff" background="#8bd5da" fullWidth />
           </form>
           <div className="h-module-spacer--sm" />
+          <PrimaryButton text="認証メールを送信" color="#fff" background="#8bd5da" fullWidth />
+          <div className="h-module-spacer--md" />
           <StyledNavWrap>
-            <MuiLink variant="button" href="./signup" underline="none">
-              初めての登録ですか？新規登録
-            </MuiLink>
-            <MuiLink variant="button" href="./reset-password" underline="none">
-              パスワードを忘れた場合
+            <MuiLink variant="button" href="./login" underline="none">
+              既にアカウントを持ちの場合はこちら
             </MuiLink>
           </StyledNavWrap>
         </div>
@@ -156,10 +146,13 @@ const Login: FC = () => {
   );
 };
 
-export default Login;
+export default EmailAuth;
 
 const StyledNavWrap = styled.div`
   display: flex;
-  flex-direction: column;
-  align-items: flex-end;
+  justify-content: flex-end;
+`;
+const StyledText = styled.p`
+  text-align: center;
+  color: #555;
 `;
