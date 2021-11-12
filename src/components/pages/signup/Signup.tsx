@@ -1,6 +1,5 @@
-import React, { FC, useState, useCallback } from "react";
+import React, { FC, useState, useCallback, useEffect } from "react";
 import styled from "styled-components";
-
 import {
   TextField as MuiTextField,
   Paper as MuiPaper,
@@ -9,16 +8,20 @@ import {
 } from "@mui/material";
 import MuiEmailIcon from "@mui/icons-material/Email";
 import MuiAccountCircleIcon from "@mui/icons-material/AccountCircle";
+import IconButton from "@mui/material/IconButton";
+import OutlinedInput from "@mui/material/OutlinedInput";
+import InputAdornment from "@mui/material/InputAdornment";
+import FormControl from "@mui/material/FormControl";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { makeStyles } from "@mui/styles";
-// import { useDispatch } from "react-redux";
-// import { AppDispatch } from "../../../app/store";
 
-import { firebaseSendSignInLinkToEmail } from "../../../operation/userAuth";
 import { OnlyLogoHeader } from "../../organisms/header";
 import { Container } from "../../molecules/container";
 import { PrimaryButton } from "../../atoms/button";
 import { H1TitleWithIcon } from "../../molecules/title-with-icon";
 import { MuiTheme } from "../../../assets/material-ui";
+import { firebaseCreateUser } from "../../../operation/userAuth";
 
 const useStyles = makeStyles({
   loginForm: {
@@ -37,30 +40,55 @@ const useStyles = makeStyles({
   },
 });
 
+type UserInput = {
+  email: string;
+  password: string;
+  showPassword: boolean;
+};
+
 const Signup: FC = () => {
   const classes = useStyles();
-  // const dispatch: AppDispatch = useDispatch();
 
-  const [inputEmail, setInputEmail] = useState<string>("");
+  const [values, setValues] = useState<UserInput>({
+    email: "",
+    password: "",
+    showPassword: false,
+  });
 
-  const handleChangeEmail = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      setInputEmail(e.target.value);
+  // ユーザーの入力情報をstateに保存
+  const handleChange = useCallback(
+    (props: keyof UserInput) => (e: React.ChangeEvent<HTMLInputElement>) => {
+      setValues({ ...values, [props]: e.target.value });
     },
-    [setInputEmail]
+    [values]
   );
 
+  // パスワード表示のon/offの切り替え処理
+  const toggleShowPassword = useCallback(() => {
+    setValues({ ...values, showPassword: !values.showPassword });
+  }, [values]);
+
+  // firebaseAuthとfirestoreにユーザー情報を登録
   const handleSubmit = useCallback(
-    (e: React.FormEvent<HTMLFormElement>): void => {
+    (e: React.MouseEvent<HTMLFormElement>) => {
       e.preventDefault();
-      console.log("送信");
-
-      if (!inputEmail) return;
-      // 認証メールの送信処理
-      firebaseSendSignInLinkToEmail(inputEmail);
+      // signup関数を呼び出す処理
+      firebaseCreateUser(values.email, values.password);
     },
-    [inputEmail]
+    [values]
   );
+
+  // 認証済みのメールアドレスを取得し、stateに保存
+  const getLocalStorageEmail = useCallback(() => {
+    const getEmail = window.localStorage.getItem("emailForSignIn");
+    if (getEmail !== null) {
+      setValues({ ...values, email: getEmail });
+    }
+  }, [values]);
+
+  useEffect(() => {
+    getLocalStorageEmail();
+  }, []);
 
   return (
     <>
@@ -76,26 +104,34 @@ const Signup: FC = () => {
             iconColor="primary"
             iconSize="36px"
           />
-          <StyledText>アカウントに使用するメールアドレスを入力してください</StyledText>
+          <div className="h-module-spacer--md" />
+          <StyledText>アカウントに使用するパスワードを入力してください</StyledText>
+          <div className="h-module-spacer--md" />
           <form onSubmit={handleSubmit}>
-            <MuiTextField
-              placeholder="メールアドレス"
-              type="email"
-              variant="outlined"
-              fullWidth
-              margin="normal"
-              autoComplete="email"
-              InputProps={{
-                startAdornment: (
-                  <MuiInputAdornment position="start">
-                    <MuiEmailIcon />
-                  </MuiInputAdornment>
-                ),
-              }}
-              onChange={handleChangeEmail}
-            />
-            <div className="h-module-spacer--sm" />
-            <PrimaryButton text="認証メールを送信" color="#fff" background="#8bd5da" fullWidth />
+            <StyledDl>
+              <StyledDt>メールアドレス:</StyledDt>
+              <StyledDd>{values.email}</StyledDd>
+            </StyledDl>
+            <div className="h-module-spacer--md" />
+            <FormControl variant="outlined" fullWidth={true}>
+              <OutlinedInput
+                placeholder="ここにパスワードを入力"
+                id="pc-outlined-adornment-password"
+                type={values.showPassword ? "text" : "password"}
+                value={values.password}
+                onChange={handleChange("password")}
+                endAdornment={
+                  <InputAdornment position="end">
+                    <IconButton aria-label="toggle password visibility" edge="end" onClick={toggleShowPassword}>
+                      {values.showPassword ? <Visibility /> : <VisibilityOff />}
+                    </IconButton>
+                  </InputAdornment>
+                }
+                autoComplete="new-password"
+              />
+            </FormControl>
+            <div className="h-module-spacer--lg" />
+            <PrimaryButton text="アカウント作成" color="#fff" background="#8bd5da" fullWidth />
           </form>
           <div className="h-module-spacer--md" />
           <StyledNavWrap>
@@ -115,29 +151,34 @@ const Signup: FC = () => {
             color="#555"
             iconColor="primary"
           />
-          <StyledText>アカウントに使用するメールアドレスを入力してください</StyledText>
+          <StyledText>アカウントに使用するパスワードを入力してください</StyledText>
           <div className="h-module-spacer--xs" />
           <form onSubmit={handleSubmit}>
-            <MuiTextField
-              placeholder="メールアドレス"
-              type="email"
-              variant="outlined"
-              fullWidth
-              margin="normal"
-              size="small"
-              autoComplete="email"
-              InputProps={{
-                startAdornment: (
-                  <MuiInputAdornment position="start">
-                    <MuiEmailIcon />
-                  </MuiInputAdornment>
-                ),
-              }}
-              onChange={handleChangeEmail}
-            />
+            <StyledDl>
+              <StyledDt>メールアドレス:</StyledDt>
+              <StyledDd>{values.email}</StyledDd>
+            </StyledDl>
+            <div className="h-module-spacer--md" />
+            <FormControl variant="outlined" size="small" fullWidth={true}>
+              <OutlinedInput
+                placeholder="ここにパスワードを入力"
+                id="outlined-adornment-password"
+                type={values.showPassword ? "text" : "password"}
+                value={values.password}
+                onChange={handleChange("password")}
+                endAdornment={
+                  <InputAdornment position="end">
+                    <IconButton aria-label="toggle password visibility" edge="end" onClick={toggleShowPassword}>
+                      {values.showPassword ? <Visibility /> : <VisibilityOff />}
+                    </IconButton>
+                  </InputAdornment>
+                }
+                autoComplete="new-password"
+              />
+            </FormControl>
+            <div className="h-module-spacer--lg" />
+            <PrimaryButton text="アカウント作成" color="#fff" background="#8bd5da" fullWidth />
           </form>
-          <div className="h-module-spacer--sm" />
-          <PrimaryButton text="認証メールを送信" color="#fff" background="#8bd5da" fullWidth />
           <div className="h-module-spacer--md" />
           <StyledNavWrap>
             <MuiLink variant="button" href="./login" underline="none">
@@ -159,4 +200,22 @@ const StyledNavWrap = styled.div`
 const StyledText = styled.p`
   text-align: center;
   color: #555;
+`;
+const StyledDl = styled.dl`
+  @media screen and (min-width: 900px) {
+    display: flex;
+    align-items: center;
+  }
+`;
+const StyledDt = styled.dt`
+  @media screen and (min-width: 900px) {
+    margin-right: 16px;
+  }
+`;
+const StyledDd = styled.dd`
+  overflow-wrap: break-word;
+  @media screen and (min-width: 900px) {
+    font-size: 20px;
+    font-weight: 600;
+  }
 `;

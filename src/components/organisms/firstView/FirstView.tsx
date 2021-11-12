@@ -68,7 +68,7 @@ const FirstView: FC = () => {
               </StyledPCButtonWrap>
               <StyledButtonWrap>
                 <PrimaryButton
-                  href="./signup"
+                  href="./email-authentication"
                   text="さっそく始める"
                   color="#fff"
                   background="#ff9800"
