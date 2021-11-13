@@ -54,7 +54,7 @@ const SendAuthEmail: FC = () => {
       e.preventDefault();
 
       if (!values.email) {
-        setValues({ ...values, errorMessage: !values.errorMessage });
+        setValues({ ...values, errorMessage: true });
       } else {
         // 認証メールの送信処理
         firebaseSendSignInLinkToEmail(values.email);
@@ -83,7 +83,7 @@ const SendAuthEmail: FC = () => {
           {values.errorMessage && (
             <>
               <div className="h-module-spacer--sm" />
-              <StyledErrorMessage>メールアドレスが正しく入力されていません。</StyledErrorMessage>
+              <StyledErrorMessage>※メールアドレスが正しく入力されていません。</StyledErrorMessage>
             </>
           )}
 
@@ -175,7 +175,6 @@ const StyledSpContainer = styled.div`
     display: none;
   }
 `;
-
 const StyledNavWrap = styled.div`
   display: flex;
   justify-content: flex-end;
@@ -186,5 +185,5 @@ const StyledText = styled.p`
 `;
 const StyledErrorMessage = styled.p`
   text-align: center;
-  color: red;
+  color: #b2102f;
 `;
