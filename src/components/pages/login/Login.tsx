@@ -143,7 +143,7 @@ const Login: FC = () => {
           </form>
           <div className="h-module-spacer--sm" />
           <StyledNavWrap>
-            <MuiLink variant="button" href="./signup" underline="none">
+            <MuiLink variant="button" href="./email-authentication" underline="none">
               初めての登録ですか？新規登録
             </MuiLink>
             <MuiLink variant="button" href="./reset-password" underline="none">

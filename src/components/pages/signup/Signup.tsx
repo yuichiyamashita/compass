@@ -1,12 +1,6 @@
 import React, { FC, useState, useCallback, useEffect } from "react";
 import styled from "styled-components";
-import {
-  TextField as MuiTextField,
-  Paper as MuiPaper,
-  Link as MuiLink,
-  InputAdornment as MuiInputAdornment,
-} from "@mui/material";
-import MuiEmailIcon from "@mui/icons-material/Email";
+import { Paper as MuiPaper, Link as MuiLink } from "@mui/material";
 import MuiAccountCircleIcon from "@mui/icons-material/AccountCircle";
 import IconButton from "@mui/material/IconButton";
 import OutlinedInput from "@mui/material/OutlinedInput";
