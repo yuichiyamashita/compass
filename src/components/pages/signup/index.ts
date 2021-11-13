@@ -1,2 +1,3 @@
 export { default as Signup } from "./Signup";
-export { default as EmailAuth } from "./EmailAuth";
+export { default as SendAuthEmail } from "./SendAuthEmail";
+export { default as CompleteSendAuthEmail } from "./CompleteSendAuthEmail";

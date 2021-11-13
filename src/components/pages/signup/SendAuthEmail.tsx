@@ -19,11 +19,6 @@ import { H1TitleWithIcon } from "../../molecules/title-with-icon";
 import { MuiTheme } from "../../../assets/material-ui";
 
 const useStyles = makeStyles({
-  loginForm: {
-    [MuiTheme.breakpoints.up("sm")]: {
-      display: "none",
-    },
-  },
   pcLoginForm: {
     display: "none",
     [MuiTheme.breakpoints.up("sm")]: {
@@ -35,27 +30,37 @@ const useStyles = makeStyles({
   },
 });
 
-const EmailAuth: FC = () => {
+type initialState = {
+  email: string;
+  errorMessage: boolean;
+};
+
+const SendAuthEmail: FC = () => {
   const classes = useStyles();
-  const [inputEmail, setInputEmail] = useState<string>("");
+  const [values, setValues] = useState<initialState>({
+    email: "",
+    errorMessage: false,
+  });
 
   const handleChangeEmail = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
-      setInputEmail(e.target.value);
+      setValues({ ...values, email: e.target.value });
     },
-    [setInputEmail]
+    [values]
   );
 
   const handleSubmit = useCallback(
     (e: React.FormEvent<HTMLFormElement>): void => {
       e.preventDefault();
-      console.log("送信");
 
-      if (!inputEmail) return;
-      // 認証メールの送信処理
-      firebaseSendSignInLinkToEmail(inputEmail);
+      if (!values.email) {
+        setValues({ ...values, errorMessage: !values.errorMessage });
+      } else {
+        // 認証メールの送信処理
+        firebaseSendSignInLinkToEmail(values.email);
+      }
     },
-    [inputEmail]
+    [values]
   );
 
   return (
@@ -73,6 +78,15 @@ const EmailAuth: FC = () => {
             iconSize="36px"
           />
           <StyledText>アカウントに使用するメールアドレスを入力してください</StyledText>
+
+          {/* エラーメッセージ */}
+          {values.errorMessage && (
+            <>
+              <div className="h-module-spacer--sm" />
+              <StyledErrorMessage>メールアドレスが正しく入力されていません。</StyledErrorMessage>
+            </>
+          )}
+
           <form onSubmit={handleSubmit}>
             <MuiTextField
               placeholder="メールアドレス"
@@ -102,7 +116,7 @@ const EmailAuth: FC = () => {
         </MuiPaper>
 
         {/****** スマホ ******/}
-        <div className={classes.loginForm}>
+        <StyledSpContainer>
           <H1TitleWithIcon
             text="SIGN UP"
             fontSize="32px"
@@ -112,6 +126,14 @@ const EmailAuth: FC = () => {
             iconColor="primary"
           />
           <StyledText>アカウントに使用するメールアドレスを入力してください</StyledText>
+          {/* エラーメッセージ */}
+          {values.errorMessage && (
+            <>
+              <div className="h-module-spacer--sm" />
+              <StyledErrorMessage>※メールアドレスが正しく入力されていません。</StyledErrorMessage>
+            </>
+          )}
+
           <div className="h-module-spacer--xs" />
           <form onSubmit={handleSubmit}>
             <MuiTextField
@@ -131,22 +153,28 @@ const EmailAuth: FC = () => {
               }}
               onChange={handleChangeEmail}
             />
+            <div className="h-module-spacer--sm" />
+            <PrimaryButton text="認証メールを送信" color="#fff" background="#8bd5da" fullWidth />
           </form>
-          <div className="h-module-spacer--sm" />
-          <PrimaryButton text="認証メールを送信" color="#fff" background="#8bd5da" fullWidth />
           <div className="h-module-spacer--md" />
           <StyledNavWrap>
             <MuiLink variant="button" href="./login" underline="none">
               既にアカウントを持ちの場合はこちら
             </MuiLink>
           </StyledNavWrap>
-        </div>
+        </StyledSpContainer>
       </Container>
     </>
   );
 };
 
-export default EmailAuth;
+export default SendAuthEmail;
+
+const StyledSpContainer = styled.div`
+  @media screen and (min-width: 600px) {
+    display: none;
+  }
+`;
 
 const StyledNavWrap = styled.div`
   display: flex;
@@ -155,4 +183,8 @@ const StyledNavWrap = styled.div`
 const StyledText = styled.p`
   text-align: center;
   color: #555;
+`;
+const StyledErrorMessage = styled.p`
+  text-align: center;
+  color: red;
 `;

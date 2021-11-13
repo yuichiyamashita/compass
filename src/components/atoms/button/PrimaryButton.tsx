@@ -14,10 +14,12 @@ type Props = {
   margin?: string;
   width?: string;
   fullWidth?: boolean;
+  onClick?: any;
 };
 
 const PrimaryButton: FC<Props> = (props) => {
-  const { href, text, background, border, boxShadowColor, color, fontSize, fontWeight, margin, fullWidth } = props;
+  const { onClick, href, text, background, border, boxShadowColor, color, fontSize, fontWeight, margin, fullWidth } =
+    props;
 
   return (
     <StyledPrimaryButton
@@ -29,6 +31,7 @@ const PrimaryButton: FC<Props> = (props) => {
       fontWeight={fontWeight}
       margin={margin}
       fullWidth={fullWidth}
+      onClick={onClick}
     >
       <a href={href}>{text}</a>
     </StyledPrimaryButton>
