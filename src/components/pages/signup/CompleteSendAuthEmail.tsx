@@ -168,9 +168,6 @@ const CompleteSendEmailAuth: FC = () => {
                 <MuiLink variant="button" href="./login" underline="none">
                   ログイン画面へ
                 </MuiLink>
-                <MuiLink variant="button" href="./email-authentication" underline="none">
-                  認証メール送信画面へ
-                </MuiLink>
               </StyledNavWrap>
             </>
           )}
