@@ -1,4 +1,4 @@
-import React, { FC, useState, useCallback, useEffect } from "react";
+import React, { FC, useState, useEffect } from "react";
 import styled from "styled-components";
 
 import { Paper as MuiPaper, Link as MuiLink } from "@mui/material";
@@ -36,20 +36,20 @@ const CompleteSendEmailAuth: FC = () => {
     errorMessage: false,
   });
 
-  // 認証メールの再送信
-  const handleSubmit = useCallback(
-    (props: keyof UserState) =>
-      (e: React.FormEvent<HTMLFormElement>): void => {
-        e.preventDefault();
-        if (!values.email) {
-          setValues({ ...values, [props]: !values.errorMessage });
-        } else {
-          firebaseSendSignInLinkToEmail(values.email);
-        }
-      },
-    [values, setValues]
-  );
+  // 認証メールの再送信の処理
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
+    e.preventDefault();
 
+    if (values.email) {
+      // 認証メールを送信
+      firebaseSendSignInLinkToEmail(values.email);
+    } else {
+      // エラーメッセージを表示
+      setValues({ ...values, errorMessage: true });
+    }
+  };
+
+  // ローカルストレージからメールアドレスを取得し、stateに保存する
   useEffect(() => {
     const email = window.localStorage.getItem("emailForSignIn");
     if (email) {
@@ -105,7 +105,7 @@ const CompleteSendEmailAuth: FC = () => {
                 color="#fff"
                 background="#8bd5da"
                 fullWidth
-                onClick={handleSubmit("email")}
+                onClick={handleSubmit}
               />
               <div className="h-module-spacer--md" />
               <StyledNavWrap>
@@ -161,7 +161,7 @@ const CompleteSendEmailAuth: FC = () => {
                 color="#fff"
                 background="#8bd5da"
                 fullWidth
-                onClick={handleSubmit("email")}
+                onClick={handleSubmit}
               />
               <div className="h-module-spacer--md" />
               <StyledNavWrap>

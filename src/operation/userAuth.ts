@@ -1,5 +1,6 @@
-import { sendSignInLinkToEmail, createUserWithEmailAndPassword } from "@firebase/auth";
-import { collection, addDoc } from "firebase/firestore";
+import { sendSignInLinkToEmail, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "@firebase/auth";
+import { collection, addDoc, Timestamp, updateDoc, getDoc, doc, setDoc } from "firebase/firestore";
+import { AppDispatch } from "../app/store";
 import { firebaseGetAuth, firebaseGetDb } from "../firebase/firebase";
 
 const auth = firebaseGetAuth();
@@ -18,9 +19,6 @@ export const firebaseSendSignInLinkToEmail = (email: string): boolean | void => 
     .then(() => {
       // 送信成功の処理
       window.localStorage.setItem("emailForSignIn", email);
-      alert("認証メールを送信しました。");
-      // 認証メール送信後の画面に遷移させる
-      // window.location.href = '送信後のページurl'
       window.location.href = "./complete-send-auth-email";
     })
     .catch((error) => {
@@ -43,12 +41,12 @@ export const firebaseCreateUser = (email: string, password: string) => {
       if (user) {
         const uid = user.uid;
         // Firestoreにユーザー情報を追加
-        await addDoc(collection(db, "users"), {
+        await setDoc(doc(db, "users", uid), {
           uid: uid,
           email: email,
           role: "user",
-          //   created_at: Timestamp,
-          //   updated_at: Timestamp,
+          created_at: Timestamp.now(),
+          updated_at: Timestamp.now(),
         });
         alert("アカウントが作成されました！");
         window.localStorage.removeItem("emailForSignIn");
@@ -63,4 +61,40 @@ export const firebaseCreateUser = (email: string, password: string) => {
       console.log("message: ", errorMessage);
       alert("アカウントの作成に失敗しました。お手数ですが、時間を置いて再度お試しください。");
     });
+};
+
+// ====================================================
+// ログイン
+export const login = (email: string, password: string): void => {
+  // Loding開始
+  // Validation
+  // firebaseからユーザーデータを取得
+  signInWithEmailAndPassword(auth, email, password)
+    .then(async (userCredential) => {
+      const user = userCredential.user;
+      // Storeにユーザーデータを保存する処理
+      if (user) {
+        const uid = user.uid;
+        const docRef = doc(db, "users", uid);
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+          // ログイン時間の更新処理
+          const updateLoginTime = Timestamp.now();
+          await updateDoc(docRef, {
+            updated_at: updateLoginTime,
+          });
+          alert("更新！");
+        } else {
+          alert("ユーザーデータが存在しません。");
+        }
+      }
+      // Mainに遷移させる処理
+      // Loding終了
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      // Loding終了
+    });
+  // storeにユーザー情報を保存
 };

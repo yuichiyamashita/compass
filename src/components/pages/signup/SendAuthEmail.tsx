@@ -1,4 +1,4 @@
-import React, { FC, useState, useCallback } from "react";
+import React, { FC, useState } from "react";
 import styled from "styled-components";
 
 import {
@@ -18,7 +18,7 @@ import { PrimaryButton } from "../../atoms/button";
 import { H1TitleWithIcon } from "../../molecules/title-with-icon";
 import { MuiTheme } from "../../../assets/material-ui";
 
-import { isValidEmailFormat } from "../../../functions/validations";
+import { validateEmailFormat } from "../../../functions/validations";
 
 const useStyles = makeStyles({
   pcLoginForm: {
@@ -44,30 +44,21 @@ const SendAuthEmail: FC = () => {
     errorMessage: false,
   });
 
-  const handleChangeEmail = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      setValues({ ...values, email: e.target.value });
-    },
-    [values]
-  );
+  const handleChangeEmail = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    setValues({ ...values, email: e.target.value });
+  };
 
-  const handleSubmit = useCallback(
-    (e: React.FormEvent<HTMLFormElement>): void => {
-      e.preventDefault();
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
+    e.preventDefault();
 
-      // Validation
-      const validator = isValidEmailFormat(values.email);
-      console.log("validator:", validator);
-
-      if (!validator) {
-        setValues({ ...values, errorMessage: true });
-      } else {
-        // 認証メールの送信処理
-        firebaseSendSignInLinkToEmail(values.email);
-      }
-    },
-    [values]
-  );
+    // Validation
+    const result = validateEmailFormat(values.email);
+    if (!result) {
+      setValues({ ...values, errorMessage: true });
+    } else {
+      firebaseSendSignInLinkToEmail(values.email);
+    }
+  };
 
   return (
     <>

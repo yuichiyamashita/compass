@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import styled from "styled-components";
 
 // Material-UI
@@ -13,10 +13,12 @@ import MuiEmailIcon from "@mui/icons-material/Email";
 import MuiLockIcon from "@mui/icons-material/Lock";
 import { makeStyles } from "@mui/styles";
 
-import { OnlyLogoHeader } from "../../organisms/header";
-import { Container } from "../../molecules/container";
 import { PrimaryButton } from "../../atoms/button";
 import { H1TitleWithIcon } from "../../molecules/title-with-icon";
+import { Container } from "../../molecules/container";
+import { OnlyLogoHeader } from "../../organisms/header";
+
+import { login } from "../../../operation/userAuth";
 
 const useStyles = makeStyles({
   loginForm: {
@@ -35,8 +37,29 @@ const useStyles = makeStyles({
   },
 });
 
+type UserInput = {
+  email: string;
+  password: string;
+};
+
 const Login: FC = () => {
   const classes = useStyles();
+
+  const [values, setValues] = useState({
+    email: "",
+    password: "",
+  });
+
+  const handleChange =
+    (props: keyof UserInput) =>
+    (e: React.ChangeEvent<HTMLInputElement>): void => {
+      setValues({ ...values, [props]: e.target.value });
+    };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    login(values.email, values.password);
+  };
 
   return (
     <>
@@ -52,7 +75,7 @@ const Login: FC = () => {
             iconColor="primary"
             iconSize="32px"
           />
-          <form>
+          <form onSubmit={handleSubmit}>
             <MuiTextField
               placeholder="メールアドレス"
               type="email"
@@ -60,6 +83,8 @@ const Login: FC = () => {
               fullWidth
               margin="normal"
               autoComplete="email"
+              onChange={handleChange("email")}
+              value={values.email}
               InputProps={{
                 startAdornment: (
                   <MuiInputAdornment position="start">
@@ -75,6 +100,8 @@ const Login: FC = () => {
               fullWidth
               margin="normal"
               autoComplete="current-password"
+              onChange={handleChange("password")}
+              value={values.password}
               InputProps={{
                 startAdornment: (
                   <MuiInputAdornment position="start">
