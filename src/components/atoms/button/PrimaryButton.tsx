@@ -32,15 +32,17 @@ const PrimaryButton: FC<Props> = (props) => {
       margin={margin}
       fullWidth={fullWidth}
       onClick={onClick}
+      href={href}
     >
-      <a href={href}>{text}</a>
+      {text}
     </StyledPrimaryButton>
   );
 };
 
 export default PrimaryButton;
 
-const StyledPrimaryButton = styled.button<Props>`
+const StyledPrimaryButton = styled.a<Props>`
+  display: block;
   background: ${(props) => props.background};
   border: ${(props) => props.border};
   border-radius: 9px;

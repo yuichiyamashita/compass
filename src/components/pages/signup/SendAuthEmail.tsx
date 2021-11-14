@@ -18,6 +18,8 @@ import { PrimaryButton } from "../../atoms/button";
 import { H1TitleWithIcon } from "../../molecules/title-with-icon";
 import { MuiTheme } from "../../../assets/material-ui";
 
+import { isValidEmailFormat } from "../../../functions/validations";
+
 const useStyles = makeStyles({
   pcLoginForm: {
     display: "none",
@@ -53,7 +55,11 @@ const SendAuthEmail: FC = () => {
     (e: React.FormEvent<HTMLFormElement>): void => {
       e.preventDefault();
 
-      if (!values.email) {
+      // Validation
+      const validator = isValidEmailFormat(values.email);
+      console.log("validator:", validator);
+
+      if (!validator) {
         setValues({ ...values, errorMessage: true });
       } else {
         // 認証メールの送信処理
@@ -83,7 +89,7 @@ const SendAuthEmail: FC = () => {
           {values.errorMessage && (
             <>
               <div className="h-module-spacer--sm" />
-              <StyledErrorMessage>※メールアドレスが正しく入力されていません。</StyledErrorMessage>
+              <StyledErrorMessage>※正しいメールアドレスを入力してください。</StyledErrorMessage>
             </>
           )}
 
@@ -105,7 +111,7 @@ const SendAuthEmail: FC = () => {
               onChange={handleChangeEmail}
             />
             <div className="h-module-spacer--sm" />
-            <PrimaryButton text="認証メールを送信" color="#fff" background="#8bd5da" fullWidth />
+            <PrimaryButton text="認証メールを送信" color="#fff" background="#8bd5da" fullWidth onClick={handleSubmit} />
           </form>
           <div className="h-module-spacer--md" />
           <StyledNavWrap>
@@ -130,7 +136,7 @@ const SendAuthEmail: FC = () => {
           {values.errorMessage && (
             <>
               <div className="h-module-spacer--sm" />
-              <StyledErrorMessage>※メールアドレスが正しく入力されていません。</StyledErrorMessage>
+              <StyledErrorMessage>※正しいメールアドレスを入力してください。</StyledErrorMessage>
             </>
           )}
 
