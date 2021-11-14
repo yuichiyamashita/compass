@@ -1,4 +1,4 @@
-import React, { FC, useState, useCallback, useEffect } from "react";
+import React, { FC, useState, useEffect } from "react";
 import styled from "styled-components";
 import { Paper as MuiPaper, Link as MuiLink } from "@mui/material";
 import MuiAccountCircleIcon from "@mui/icons-material/AccountCircle";
@@ -16,6 +16,7 @@ import { PrimaryButton } from "../../atoms/button";
 import { H1TitleWithIcon } from "../../molecules/title-with-icon";
 import { MuiTheme } from "../../../assets/material-ui";
 import { firebaseCreateUser } from "../../../operation/userAuth";
+import { validateInputPassWord } from "../../../functions/validations";
 
 const useStyles = makeStyles({
   loginForm: {
@@ -38,6 +39,7 @@ type UserInput = {
   email: string;
   password: string;
   showPassword: boolean;
+  errorMessage: boolean;
 };
 
 const Signup: FC = () => {
@@ -47,41 +49,42 @@ const Signup: FC = () => {
     email: "",
     password: "",
     showPassword: false,
+    errorMessage: false,
   });
 
   // ユーザーの入力情報をstateに保存
-  const handleChange = useCallback(
-    (props: keyof UserInput) => (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange =
+    (props: keyof UserInput) =>
+    (e: React.ChangeEvent<HTMLInputElement>): void => {
       setValues({ ...values, [props]: e.target.value });
-    },
-    [values]
-  );
+    };
 
   // パスワード表示のon/offの切り替え処理
-  const toggleShowPassword = useCallback(() => {
+  const toggleShowPassword = (): void => {
     setValues({ ...values, showPassword: !values.showPassword });
-  }, [values]);
+  };
 
-  // firebaseAuthとfirestoreにユーザー情報を登録
-  const handleSubmit = useCallback(
-    (e: React.MouseEvent<HTMLFormElement>) => {
-      e.preventDefault();
-      // signup関数を呼び出す処理
+  // firebaseにユーザー情報を登録
+  const handleSubmitCreateUser = (e: React.MouseEvent<HTMLFormElement>): void => {
+    e.preventDefault();
+
+    // Validation
+    const result = validateInputPassWord(values.password);
+    if (result) {
       firebaseCreateUser(values.email, values.password);
-    },
-    [values]
-  );
+    } else {
+      setValues({ ...values, errorMessage: true });
+    }
+  };
 
   // 認証済みのメールアドレスを取得し、stateに保存
-  const getLocalStorageEmail = useCallback(() => {
-    const getEmail = window.localStorage.getItem("emailForSignIn");
-    if (getEmail !== null) {
-      setValues({ ...values, email: getEmail });
-    }
-  }, [values]);
-
   useEffect(() => {
-    getLocalStorageEmail();
+    const email = window.localStorage.getItem("emailForSignIn");
+    if (email) {
+      setValues({ ...values, email: email });
+    } else {
+      setValues({ ...values, email: "エラー：メールアドレスが確認できません" });
+    }
   }, []);
 
   return (
@@ -98,10 +101,17 @@ const Signup: FC = () => {
             iconColor="primary"
             iconSize="36px"
           />
+          <StyledText>ログインに使用するパスワードを入力してください</StyledText>
           <div className="h-module-spacer--md" />
-          <StyledText>アカウントに使用するパスワードを入力してください</StyledText>
-          <div className="h-module-spacer--md" />
-          <form onSubmit={handleSubmit}>
+
+          {values.errorMessage && (
+            <>
+              <StyledErrorMessage>※パスワードは8文字以上の半角英数字で入力してください</StyledErrorMessage>
+              <div className="h-module-spacer--xs" />
+            </>
+          )}
+
+          <form onSubmit={handleSubmitCreateUser}>
             <StyledDl>
               <StyledDt>メールアドレス:</StyledDt>
               <StyledDd>{values.email}</StyledDd>
@@ -109,7 +119,7 @@ const Signup: FC = () => {
             <div className="h-module-spacer--md" />
             <FormControl variant="outlined" fullWidth={true}>
               <OutlinedInput
-                placeholder="ここにパスワードを入力"
+                placeholder="8文字以上の半角英数字"
                 id="pc-outlined-adornment-password"
                 type={values.showPassword ? "text" : "password"}
                 value={values.password}
@@ -127,6 +137,7 @@ const Signup: FC = () => {
             <div className="h-module-spacer--lg" />
             <PrimaryButton text="アカウント作成" color="#fff" background="#8bd5da" fullWidth />
           </form>
+
           <div className="h-module-spacer--md" />
           <StyledNavWrap>
             <MuiLink variant="button" href="./login" underline="none">
@@ -145,17 +156,26 @@ const Signup: FC = () => {
             color="#555"
             iconColor="primary"
           />
-          <StyledText>アカウントに使用するパスワードを入力してください</StyledText>
+          <StyledText>ログインに使用するパスワードを入力してください</StyledText>
           <div className="h-module-spacer--xs" />
-          <form onSubmit={handleSubmit}>
+
+          {values.errorMessage && (
+            <>
+              <div className="h-module-spacer--md" />
+              <StyledErrorMessage>※パスワードは8文字以上の半角英数字で入力してください</StyledErrorMessage>
+              <div className="h-module-spacer--sm" />
+            </>
+          )}
+
+          <form onSubmit={handleSubmitCreateUser}>
             <StyledDl>
               <StyledDt>メールアドレス:</StyledDt>
               <StyledDd>{values.email}</StyledDd>
             </StyledDl>
-            <div className="h-module-spacer--md" />
+            <div className="h-module-spacer--sm" />
             <FormControl variant="outlined" size="small" fullWidth={true}>
               <OutlinedInput
-                placeholder="ここにパスワードを入力"
+                placeholder="8文字以上の半角英数字"
                 id="outlined-adornment-password"
                 type={values.showPassword ? "text" : "password"}
                 value={values.password}
@@ -173,6 +193,7 @@ const Signup: FC = () => {
             <div className="h-module-spacer--lg" />
             <PrimaryButton text="アカウント作成" color="#fff" background="#8bd5da" fullWidth />
           </form>
+
           <div className="h-module-spacer--md" />
           <StyledNavWrap>
             <MuiLink variant="button" href="./login" underline="none">
@@ -202,6 +223,7 @@ const StyledDl = styled.dl`
   }
 `;
 const StyledDt = styled.dt`
+  font-weight: 400;
   @media screen and (min-width: 900px) {
     margin-right: 16px;
   }
@@ -210,6 +232,10 @@ const StyledDd = styled.dd`
   overflow-wrap: break-word;
   @media screen and (min-width: 900px) {
     font-size: 20px;
-    font-weight: 600;
   }
+`;
+const StyledErrorMessage = styled.p`
+  color: #b2102f;
+  font-weight: 600;
+  text-align: center;
 `;

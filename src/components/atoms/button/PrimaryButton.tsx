@@ -17,9 +17,14 @@ type Props = {
   onClick?: any;
 };
 
-const PrimaryButton: FC<Props> = (props) => {
-  const { onClick, href, text, background, border, boxShadowColor, color, fontSize, fontWeight, margin, fullWidth } =
-    props;
+const PrimaryButton: FC<Props> = React.memo((props) => {
+  const { href, text, background, border, boxShadowColor, color, fontSize, fontWeight, margin, fullWidth } = props;
+
+  const handleClick = () => {
+    if (href) {
+      window.location.href = href;
+    }
+  };
 
   return (
     <StyledPrimaryButton
@@ -31,26 +36,22 @@ const PrimaryButton: FC<Props> = (props) => {
       fontWeight={fontWeight}
       margin={margin}
       fullWidth={fullWidth}
-      onClick={onClick}
-      href={href}
+      onClick={handleClick}
     >
       {text}
     </StyledPrimaryButton>
   );
-};
+});
 
 export default PrimaryButton;
 
-const StyledPrimaryButton = styled.a<Props>`
-  display: block;
+const StyledPrimaryButton = styled.button<Props>`
   background: ${(props) => props.background};
   border: ${(props) => props.border};
   border-radius: 9px;
   box-shadow: ${(props) => props.boxShadowColor && `1px 1px 2px ${props.boxShadowColor}`};
   color: ${(props) => props.color};
   cursor: pointer;
-  font-size: ${(props) => props.fontSize};
-  font-weight: ${(props) => (props.fontWeight ? props.fontWeight : 400)};
   padding: 8px 18px;
   margin: ${(props) => props.margin};
   width: ${(props) => props.fullWidth && "100%"};
