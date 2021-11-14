@@ -12,7 +12,8 @@ const actionCodeSettings = {
   url: url,
   handleCodeInApp: true,
 };
-export const firebaseSendSignInLinkToEmail = (email: string) => {
+export const firebaseSendSignInLinkToEmail = (email: string): boolean | void => {
+  // 認証メールの送信処理
   sendSignInLinkToEmail(auth, email, actionCodeSettings)
     .then(() => {
       // 送信成功の処理
