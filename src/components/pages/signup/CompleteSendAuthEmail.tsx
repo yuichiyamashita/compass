@@ -1,5 +1,7 @@
 import React, { FC, useState, useEffect } from "react";
 import styled from "styled-components";
+import { AppDispatch } from "../../../app/store";
+import { useDispatch } from "react-redux";
 
 import { Paper as MuiPaper, Link as MuiLink } from "@mui/material";
 import MuiEmailIcon from "@mui/icons-material/Email";
@@ -31,18 +33,20 @@ type UserState = {
 
 const CompleteSendEmailAuth: FC = () => {
   const classes = useStyles();
+  const dispatch: AppDispatch = useDispatch();
   const [values, setValues] = useState<UserState>({
     email: "",
     errorMessage: false,
   });
 
   // 認証メールの再送信の処理
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
 
     if (values.email) {
       // 認証メールを送信
-      firebaseSendSignInLinkToEmail(values.email);
+      await dispatch(firebaseSendSignInLinkToEmail(values.email));
+      setValues({ ...values, errorMessage: false });
     } else {
       // エラーメッセージを表示
       setValues({ ...values, errorMessage: true });
