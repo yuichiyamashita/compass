@@ -1,6 +1,8 @@
 import React, { FC, useState, useEffect } from "react";
 import styled from "styled-components";
 import { useHistory } from "react-router";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../../app/store";
 import { Paper as MuiPaper, Link as MuiLink } from "@mui/material";
 import MuiAccountCircleIcon from "@mui/icons-material/AccountCircle";
 import IconButton from "@mui/material/IconButton";
@@ -45,6 +47,7 @@ type UserInput = {
 
 const Signup: FC = () => {
   const classes = useStyles();
+  const dispatch: AppDispatch = useDispatch();
   const history = useHistory();
 
   const [values, setValues] = useState<UserInput>({
@@ -75,7 +78,7 @@ const Signup: FC = () => {
     if (!password) {
       setValues({ ...values, errorMessage: true });
     } else {
-      const result = await firebaseCreateUser(values.email, values.password);
+      const result = await dispatch(firebaseCreateUser(values.email, values.password));
       if (!result) {
         setValues({ ...values, errorMessage: true });
       } else {

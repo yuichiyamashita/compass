@@ -4,6 +4,7 @@ import { firebaseGetAuth, firebaseGetDb } from "../firebase/firebase";
 import { toast } from "react-toastify";
 
 import { loginAction } from "../features/user/userSlice";
+import { showLoadingAction, hideLoadingAction } from "../features/notification/notificationSlice";
 import { AppDispatch } from "../app/store";
 const auth = firebaseGetAuth();
 const db = firebaseGetDb();
@@ -15,65 +16,35 @@ const actionCodeSettings = {
   url: url,
   handleCodeInApp: true,
 };
-export const firebaseSendSignInLinkToEmail = async (email: string): Promise<boolean | void> => {
-  // 認証メールの送信処理
-  const result = await sendSignInLinkToEmail(auth, email, actionCodeSettings)
-    .then(() => {
-      // 送信成功の処理
-      toast.success("認証メールを送信しました", {
-        position: "top-center",
-        autoClose: 1500,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: false,
-        progress: undefined,
-        theme: "colored",
-      });
-      window.localStorage.setItem("emailForSignIn", email);
-      return true;
-    })
-    .catch((error) => {
-      // 送信失敗の処理
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      console.log("code: ", errorCode);
-      console.log("message: ", errorMessage);
-      toast.error("認証メールの送信に失敗しました。恐れ入りますが、時間を置いてから再度お試しください。", {
-        position: "top-center",
-        autoClose: false,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: false,
-        progress: undefined,
-        theme: "colored",
-      });
-      return false;
-    });
-  return result;
-};
-
-// ====================================================
-// アカウント作成
-export const firebaseCreateUser = async (email: string, password: string): Promise<boolean | void> => {
-  // Authenticationにユーザー登録
-  const result = await createUserWithEmailAndPassword(auth, email, password)
-    .then(async (userCredential) => {
-      const user = userCredential.user;
-      if (user) {
-        const uid = user.uid;
-        // Firestoreにユーザー情報を追加
-        await setDoc(doc(db, "users", uid), {
-          uid: uid,
-          email: email,
-          role: "user",
-          created_at: Timestamp.now(),
-          latest_login_time: Timestamp.now(),
-        });
-        toast.success("アカウントが作成されました", {
+export const firebaseSendSignInLinkToEmail = (email: string) => {
+  return async (dispatch: AppDispatch): Promise<boolean | void> => {
+    dispatch(showLoadingAction("Loading..."));
+    const result = await sendSignInLinkToEmail(auth, email, actionCodeSettings)
+      .then(() => {
+        // 送信成功の処理
+        toast.success("認証メールを送信しました", {
           position: "top-center",
           autoClose: 1500,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: false,
+          progress: undefined,
+          theme: "colored",
+        });
+        window.localStorage.setItem("emailForSignIn", email);
+        dispatch(hideLoadingAction());
+        return true;
+      })
+      .catch((error) => {
+        // 送信失敗の処理
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log("code: ", errorCode);
+        console.log("message: ", errorMessage);
+        toast.error("認証メールの送信に失敗しました。恐れ入りますが、時間を置いてから再度お試しください。", {
+          position: "top-center",
+          autoClose: false,
           hideProgressBar: true,
           closeOnClick: true,
           pauseOnHover: true,
@@ -81,29 +52,68 @@ export const firebaseCreateUser = async (email: string, password: string): Promi
           progress: undefined,
           theme: "colored",
         });
-        window.localStorage.removeItem("emailForSignIn");
-        return true;
-      }
-    })
-    .catch((error) => {
-      // ユーザーの作成に失敗
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      console.log("code: ", errorCode);
-      console.log("message: ", errorMessage);
-      toast.error("アカウントの作成に失敗しました。恐れ入りますが、時間を置いてから再度お試しください。", {
-        position: "top-center",
-        autoClose: false,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: false,
-        progress: undefined,
-        theme: "colored",
+        dispatch(hideLoadingAction());
+        return false;
       });
-      return false;
-    });
-  return result;
+    return result;
+  };
+};
+
+// ====================================================
+// アカウント作成
+export const firebaseCreateUser = (email: string, password: string) => {
+  return async (dispatch: AppDispatch): Promise<boolean | void> => {
+    dispatch(showLoadingAction("Loading..."));
+    // Authenticationにユーザー登録
+    const result = await createUserWithEmailAndPassword(auth, email, password)
+      .then(async (userCredential) => {
+        const user = userCredential.user;
+        if (user) {
+          const uid = user.uid;
+          // Firestoreにユーザー情報を追加
+          await setDoc(doc(db, "users", uid), {
+            uid: uid,
+            email: email,
+            role: "user",
+            created_at: Timestamp.now(),
+            latest_login_time: Timestamp.now(),
+          });
+          toast.success("アカウントが作成されました", {
+            position: "top-center",
+            autoClose: 1500,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: false,
+            progress: undefined,
+            theme: "colored",
+          });
+          window.localStorage.removeItem("emailForSignIn");
+          dispatch(hideLoadingAction());
+          return true;
+        }
+      })
+      .catch((error) => {
+        // ユーザーの作成に失敗
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log("code: ", errorCode);
+        console.log("message: ", errorMessage);
+        toast.error("アカウントの作成に失敗しました。恐れ入りますが、時間を置いてから再度お試しください。", {
+          position: "top-center",
+          autoClose: false,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: false,
+          progress: undefined,
+          theme: "colored",
+        });
+        dispatch(hideLoadingAction());
+        return false;
+      });
+    return result;
+  };
 };
 
 // ====================================================
@@ -111,6 +121,7 @@ export const firebaseCreateUser = async (email: string, password: string): Promi
 export const login = (email: string, password: string) => {
   return async (dispatch: AppDispatch): Promise<boolean | void> => {
     // Loding開始
+    dispatch(showLoadingAction("Loading..."));
     // ログイン処理が全て成功したか判定するために結果を格納
     const result = await signInWithEmailAndPassword(auth, email, password)
       .then(async (userCredential) => {
@@ -150,9 +161,11 @@ export const login = (email: string, password: string) => {
             });
 
             // Loding終了
+            dispatch(hideLoadingAction());
             return true;
           } else {
             alert("予期せぬエラーが発生しました。恐れ入りますが、時間を置いて再度ログインをお試しください。");
+            dispatch(hideLoadingAction());
             return false;
           }
         }
@@ -161,6 +174,7 @@ export const login = (email: string, password: string) => {
         const errorCode = error.code;
         const errorMessage = error.message;
         console.log(errorCode, errorMessage);
+        dispatch(hideLoadingAction());
         return false;
         // Loding終了
       });

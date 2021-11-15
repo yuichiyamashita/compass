@@ -1,5 +1,7 @@
 import React, { FC, useState } from "react";
 import styled from "styled-components";
+import { AppDispatch } from "../../../app/store";
+import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 import {
   TextField as MuiTextField,
@@ -31,15 +33,11 @@ const useStyles = makeStyles({
   },
 });
 
-type initialState = {
-  email: string;
-  errorMessage: boolean;
-};
-
 const SendAuthEmail: FC = () => {
   const classes = useStyles();
+  const dispatch: AppDispatch = useDispatch();
   const history = useHistory();
-  const [values, setValues] = useState<initialState>({
+  const [values, setValues] = useState({
     email: "",
     errorMessage: false,
   });
@@ -56,7 +54,7 @@ const SendAuthEmail: FC = () => {
     if (!email) {
       setValues({ ...values, errorMessage: true });
     } else {
-      const result = await firebaseSendSignInLinkToEmail(values.email);
+      const result = await dispatch(firebaseSendSignInLinkToEmail(values.email));
       if (!result) {
         setValues({ ...values, errorMessage: true });
       } else {
@@ -86,7 +84,7 @@ const SendAuthEmail: FC = () => {
           {values.errorMessage && (
             <>
               <div className="h-module-spacer--sm" />
-              <StyledErrorMessage>※正しいメールアドレスを入力してください。</StyledErrorMessage>
+              <StyledErrorMessage>※正しいメールアドレスを入力してください</StyledErrorMessage>
             </>
           )}
 
@@ -132,7 +130,7 @@ const SendAuthEmail: FC = () => {
           {values.errorMessage && (
             <>
               <div className="h-module-spacer--sm" />
-              <StyledErrorMessage>※正しいメールアドレスを入力してください。</StyledErrorMessage>
+              <StyledErrorMessage>※正しいメールアドレスを入力してください</StyledErrorMessage>
             </>
           )}
 
@@ -187,4 +185,5 @@ const StyledText = styled.p`
 const StyledErrorMessage = styled.p`
   text-align: center;
   color: #b2102f;
+  font-weight: 600;
 `;

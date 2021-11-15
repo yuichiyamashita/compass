@@ -72,11 +72,11 @@ const Login: FC = () => {
     if (email && password) {
       // ログイン結果を格納
       const result = await dispatch(login(values.email, values.password));
-      if (result) {
+      if (!result) {
+        setValues({ ...values, errorMessage: true });
+      } else {
         setValues({ ...values, errorMessage: false });
         history.push("/main");
-      } else {
-        setValues({ ...values, errorMessage: true });
       }
     } else {
       setValues({ ...values, errorMessage: true });
@@ -100,7 +100,7 @@ const Login: FC = () => {
 
           {values.errorMessage && (
             <>
-              <StyledErrorMessage>※メールアドレスまたはパスワードに誤りがあります。</StyledErrorMessage>
+              <StyledErrorMessage>※メールアドレスまたはパスワードに誤りがあります</StyledErrorMessage>
               <div className="h-module-spacer--xs" />
             </>
           )}
@@ -167,7 +167,7 @@ const Login: FC = () => {
 
           {values.errorMessage && (
             <>
-              <StyledErrorMessage>※メールアドレスまたはパスワードに誤りがあります。</StyledErrorMessage>
+              <StyledErrorMessage>※メールアドレスまたはパスワードに誤りがあります</StyledErrorMessage>
               <div className="h-module-spacer--xs" />
             </>
           )}

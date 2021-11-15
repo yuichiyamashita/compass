@@ -7,7 +7,7 @@ import * as serviceWorker from "./serviceWorker";
 import { ThemeProvider } from "@mui/material/styles";
 import { MuiTheme } from "./assets/material-ui";
 
-import { Notification } from "./components/atoms/notification";
+import { Notification, Loading } from "./components/atoms/notification";
 import "./assets/styles/destyle.css";
 import "./assets/styles/style.css";
 
@@ -16,7 +16,9 @@ ReactDOM.render(
     <Provider store={store}>
       <Notification />
       <ThemeProvider theme={MuiTheme}>
-        <App />
+        <Loading>
+          <App />
+        </Loading>
       </ThemeProvider>
     </Provider>
   </React.StrictMode>,
