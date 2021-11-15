@@ -1,5 +1,6 @@
 import React, { FC, useState, useEffect } from "react";
 import styled from "styled-components";
+import { useHistory } from "react-router";
 import { Paper as MuiPaper, Link as MuiLink } from "@mui/material";
 import MuiAccountCircleIcon from "@mui/icons-material/AccountCircle";
 import IconButton from "@mui/material/IconButton";
@@ -44,6 +45,7 @@ type UserInput = {
 
 const Signup: FC = () => {
   const classes = useStyles();
+  const history = useHistory();
 
   const [values, setValues] = useState<UserInput>({
     email: "",
@@ -65,15 +67,21 @@ const Signup: FC = () => {
   };
 
   // firebaseにユーザー情報を登録
-  const handleSubmitCreateUser = (e: React.MouseEvent<HTMLFormElement>): void => {
+  const handleSubmitCreateUser = async (e: React.MouseEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
 
     // Validation
-    const result = validateInputPassWord(values.password);
-    if (result) {
-      firebaseCreateUser(values.email, values.password);
-    } else {
+    const password = validateInputPassWord(values.password);
+    if (!password) {
       setValues({ ...values, errorMessage: true });
+    } else {
+      const result = await firebaseCreateUser(values.email, values.password);
+      if (!result) {
+        setValues({ ...values, errorMessage: true });
+      } else {
+        setValues({ ...values, errorMessage: false });
+        history.push("/login");
+      }
     }
   };
 

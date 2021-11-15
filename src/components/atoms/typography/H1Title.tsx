@@ -4,12 +4,13 @@ import styled from "styled-components";
 type Props = {
   color?: string;
   fontSize?: string;
+  spacing?: string;
 };
 
 const H1Title: FC<Props> = (props) => {
-  const { children, color, fontSize } = props;
+  const { children, color, fontSize, spacing } = props;
   return (
-    <StyledTitle color={color} fontSize={fontSize}>
+    <StyledTitle color={color} fontSize={fontSize} spacing={spacing}>
       {children}
     </StyledTitle>
   );
@@ -23,4 +24,5 @@ const StyledTitle = styled.h1<Props>`
   color: ${(props) => props.color};
   margin-bottom: 24px;
   line-height: 32px;
+  letter-spacing: ${(props) => props.spacing};
 `;

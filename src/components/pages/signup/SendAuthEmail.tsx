@@ -1,6 +1,6 @@
 import React, { FC, useState } from "react";
 import styled from "styled-components";
-
+import { useHistory } from "react-router";
 import {
   TextField as MuiTextField,
   Paper as MuiPaper,
@@ -12,13 +12,12 @@ import MuiAccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { makeStyles } from "@mui/styles";
 
 import { firebaseSendSignInLinkToEmail } from "../../../operation/userAuth";
-import { OnlyLogoHeader } from "../../organisms/header";
-import { Container } from "../../molecules/container";
-import { PrimaryButton } from "../../atoms/button";
-import { H1TitleWithIcon } from "../../molecules/title-with-icon";
-import { MuiTheme } from "../../../assets/material-ui";
-
 import { validateEmailFormat } from "../../../functions/validations";
+import { MuiTheme } from "../../../assets/material-ui";
+import { PrimaryButton } from "../../atoms/button";
+import { Container } from "../../molecules/container";
+import { H1TitleWithIcon } from "../../molecules/title-with-icon";
+import { OnlyLogoHeader } from "../../organisms/header";
 
 const useStyles = makeStyles({
   pcLoginForm: {
@@ -39,6 +38,7 @@ type initialState = {
 
 const SendAuthEmail: FC = () => {
   const classes = useStyles();
+  const history = useHistory();
   const [values, setValues] = useState<initialState>({
     email: "",
     errorMessage: false,
@@ -48,15 +48,21 @@ const SendAuthEmail: FC = () => {
     setValues({ ...values, email: e.target.value });
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
 
     // Validation
-    const result = validateEmailFormat(values.email);
-    if (!result) {
+    const email = validateEmailFormat(values.email);
+    if (!email) {
       setValues({ ...values, errorMessage: true });
     } else {
-      firebaseSendSignInLinkToEmail(values.email);
+      const result = await firebaseSendSignInLinkToEmail(values.email);
+      if (!result) {
+        setValues({ ...values, errorMessage: true });
+      } else {
+        setValues({ ...values, errorMessage: false });
+        history.push("./complete-send-auth-email");
+      }
     }
   };
 
@@ -87,7 +93,6 @@ const SendAuthEmail: FC = () => {
           <form onSubmit={handleSubmit}>
             <MuiTextField
               placeholder="メールアドレス"
-              type="email"
               variant="outlined"
               fullWidth
               margin="normal"
@@ -135,7 +140,6 @@ const SendAuthEmail: FC = () => {
           <form onSubmit={handleSubmit}>
             <MuiTextField
               placeholder="メールアドレス"
-              type="email"
               variant="outlined"
               fullWidth
               margin="normal"
