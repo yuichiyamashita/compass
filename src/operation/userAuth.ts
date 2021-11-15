@@ -1,8 +1,9 @@
 import { sendSignInLinkToEmail, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "@firebase/auth";
-import { collection, addDoc, Timestamp, updateDoc, getDoc, doc, setDoc } from "firebase/firestore";
-import { AppDispatch } from "../app/store";
+import { Timestamp, updateDoc, getDoc, doc, setDoc } from "firebase/firestore";
 import { firebaseGetAuth, firebaseGetDb } from "../firebase/firebase";
 
+import { loginAction } from "../features/user/userSlice";
+import { AppDispatch } from "../app/store";
 const auth = firebaseGetAuth();
 const db = firebaseGetDb();
 
@@ -46,7 +47,7 @@ export const firebaseCreateUser = (email: string, password: string) => {
           email: email,
           role: "user",
           created_at: Timestamp.now(),
-          updated_at: Timestamp.now(),
+          latest_login_time: Timestamp.now(),
         });
         alert("アカウントが作成されました");
         window.localStorage.removeItem("emailForSignIn");
@@ -65,42 +66,52 @@ export const firebaseCreateUser = (email: string, password: string) => {
 
 // ====================================================
 // ログイン
-export const login = async (email: string, password: string): Promise<boolean | void> => {
-  // Loding開始
+export const login = (email: string, password: string) => {
+  return async (dispatch: AppDispatch): Promise<boolean | void> => {
+    // Loding開始
+    // ログイン処理が全て成功したか判定するために結果を格納
+    const result = await signInWithEmailAndPassword(auth, email, password)
+      .then(async (userCredential) => {
+        const user = userCredential.user;
+        if (user) {
+          const uid = user.uid;
+          const docRef = doc(db, "users", uid);
+          const docSnap = await getDoc(docRef);
+          if (docSnap.exists()) {
+            // Firestoreのログイン時間を更新する処理
+            const updateLoginTime = Timestamp.now();
+            await updateDoc(docRef, {
+              latest_login_time: updateLoginTime,
+            });
 
-  // ログイン結果をresultに格納
-  const result = await signInWithEmailAndPassword(auth, email, password)
-    // firebaseからユーザーデータを取得
-    .then(async (userCredential) => {
-      const user = userCredential.user;
-      // Storeにユーザーデータを保存する処理
-      if (user) {
-        const uid = user.uid;
-        const docRef = doc(db, "users", uid);
-        const docSnap = await getDoc(docRef);
-        if (docSnap.exists()) {
-          // ログイン時間の更新処理
-          const updateLoginTime = Timestamp.now();
-          await updateDoc(docRef, {
-            updated_at: updateLoginTime,
-          });
-          // toastify
-          // Loding終了
-          return true;
-        } else {
-          alert("ユーザーデータが存在しません。");
-          return false;
+            // Storeにユーザー情報を保存する処理
+            const data = docSnap.data();
+            const { uid, email, role, created_at, latest_login_time } = data;
+            const loginUserData = {
+              isSignedIn: true,
+              uid: uid,
+              email: email,
+              role: role,
+              created_at: created_at.toDate().toString(),
+              latest_login_time: latest_login_time.toDate().toString(),
+            };
+            dispatch(loginAction(loginUserData));
+            // toastify
+            // Loding終了
+            return true;
+          } else {
+            alert("予期せぬエラーが発生しました。恐れ入りますが、時間を置いて再度ログインをお試しください。");
+            return false;
+          }
         }
-      }
-    })
-    .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      console.log(errorCode, errorMessage);
-      console.log("era-");
-      return false;
-      // Loding終了
-    });
-  // storeにユーザー情報を保存
-  return result;
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorCode, errorMessage);
+        return false;
+        // Loding終了
+      });
+    return result;
+  };
 };

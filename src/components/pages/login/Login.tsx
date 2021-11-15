@@ -1,5 +1,6 @@
 import React, { FC, useState } from "react";
 import styled from "styled-components";
+import { useDispatch } from "react-redux";
 // Material-UI
 import {
   TextField as MuiTextField,
@@ -19,6 +20,7 @@ import { OnlyLogoHeader } from "../../organisms/header";
 
 import { login } from "../../../operation/userAuth";
 import { validateEmailFormat, validateInputPassWord } from "../../../functions/validations";
+import { AppDispatch } from "../../../app/store";
 
 const useStyles = makeStyles({
   loginForm: {
@@ -45,6 +47,7 @@ type UserInput = {
 
 const Login: FC = () => {
   const classes = useStyles();
+  const dispatch: AppDispatch = useDispatch();
 
   const [values, setValues] = useState({
     email: "",
@@ -66,18 +69,14 @@ const Login: FC = () => {
     const password = validateInputPassWord(values.password);
     if (email && password) {
       // ログイン結果を格納
-      const result = await login(values.email, values.password);
+      const result = await dispatch(login(values.email, values.password));
       if (result) {
-        // エラーメッセージを非表示
         setValues({ ...values, errorMessage: false });
-        // メインページに遷移させる
-        window.location.href = "./main";
+        // window.location.href = "./main";
       } else {
-        // エラーメッセージを表示
         setValues({ ...values, errorMessage: true });
       }
     } else {
-      // エラーメッセージを表示
       setValues({ ...values, errorMessage: true });
     }
   };

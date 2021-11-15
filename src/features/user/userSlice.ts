@@ -1,22 +1,20 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 type UserState = {
   uid: string;
-  username: string;
   role: string;
   email: string;
   created_at: string;
-  updated_at: string;
+  latest_login_time: string;
   isSignedIn: boolean;
 };
 
 const initialState: UserState = {
   uid: "",
-  username: "",
   role: "",
   email: "",
   created_at: "",
-  updated_at: "",
+  latest_login_time: "",
   isSignedIn: false,
 };
 
@@ -29,6 +27,14 @@ export const userSlice = createSlice({
       state.uid = action.payload.uid;
       state.email = action.payload.email;
       state.role = action.payload.role;
+      state.created_at = action.payload.created_at;
+      state.latest_login_time = action.payload.latest_login_time;
+    },
+    logoutAction: () => {
+      return { ...initialState };
     },
   },
 });
+
+export const { loginAction } = userSlice.actions;
+export default userSlice.reducer;
