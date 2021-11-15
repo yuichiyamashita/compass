@@ -48,7 +48,7 @@ export const firebaseCreateUser = (email: string, password: string) => {
           created_at: Timestamp.now(),
           updated_at: Timestamp.now(),
         });
-        alert("アカウントが作成されました！");
+        alert("アカウントが作成されました");
         window.localStorage.removeItem("emailForSignIn");
         window.location.href = "/login";
       }
@@ -65,11 +65,12 @@ export const firebaseCreateUser = (email: string, password: string) => {
 
 // ====================================================
 // ログイン
-export const login = (email: string, password: string): void => {
+export const login = async (email: string, password: string): Promise<boolean | void> => {
   // Loding開始
-  // Validation
-  // firebaseからユーザーデータを取得
-  signInWithEmailAndPassword(auth, email, password)
+
+  // ログイン結果をresultに格納
+  const result = await signInWithEmailAndPassword(auth, email, password)
+    // firebaseからユーザーデータを取得
     .then(async (userCredential) => {
       const user = userCredential.user;
       // Storeにユーザーデータを保存する処理
@@ -83,18 +84,23 @@ export const login = (email: string, password: string): void => {
           await updateDoc(docRef, {
             updated_at: updateLoginTime,
           });
-          alert("更新！");
+          // toastify
+          // Loding終了
+          return true;
         } else {
           alert("ユーザーデータが存在しません。");
+          return false;
         }
       }
-      // Mainに遷移させる処理
-      // Loding終了
     })
     .catch((error) => {
       const errorCode = error.code;
       const errorMessage = error.message;
+      console.log(errorCode, errorMessage);
+      console.log("era-");
+      return false;
       // Loding終了
     });
   // storeにユーザー情報を保存
+  return result;
 };

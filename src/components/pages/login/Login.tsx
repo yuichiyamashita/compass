@@ -1,6 +1,5 @@
 import React, { FC, useState } from "react";
 import styled from "styled-components";
-
 // Material-UI
 import {
   TextField as MuiTextField,
@@ -19,6 +18,7 @@ import { Container } from "../../molecules/container";
 import { OnlyLogoHeader } from "../../organisms/header";
 
 import { login } from "../../../operation/userAuth";
+import { validateEmailFormat, validateInputPassWord } from "../../../functions/validations";
 
 const useStyles = makeStyles({
   loginForm: {
@@ -40,6 +40,7 @@ const useStyles = makeStyles({
 type UserInput = {
   email: string;
   password: string;
+  errorMessages: boolean;
 };
 
 const Login: FC = () => {
@@ -48,6 +49,7 @@ const Login: FC = () => {
   const [values, setValues] = useState({
     email: "",
     password: "",
+    errorMessage: false,
   });
 
   const handleChange =
@@ -56,9 +58,28 @@ const Login: FC = () => {
       setValues({ ...values, [props]: e.target.value });
     };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
-    login(values.email, values.password);
+
+    // Validation
+    const email = validateEmailFormat(values.email);
+    const password = validateInputPassWord(values.password);
+    if (email && password) {
+      // ログイン結果を格納
+      const result = await login(values.email, values.password);
+      if (result) {
+        // エラーメッセージを非表示
+        setValues({ ...values, errorMessage: false });
+        // メインページに遷移させる
+        window.location.href = "./main";
+      } else {
+        // エラーメッセージを表示
+        setValues({ ...values, errorMessage: true });
+      }
+    } else {
+      // エラーメッセージを表示
+      setValues({ ...values, errorMessage: true });
+    }
   };
 
   return (
@@ -75,6 +96,14 @@ const Login: FC = () => {
             iconColor="primary"
             iconSize="32px"
           />
+
+          {values.errorMessage && (
+            <>
+              <StyledErrorMessage>※メールアドレスまたはパスワードに誤りがあります。</StyledErrorMessage>
+              <div className="h-module-spacer--xs" />
+            </>
+          )}
+
           <form onSubmit={handleSubmit}>
             <MuiTextField
               placeholder="メールアドレス"
@@ -134,7 +163,15 @@ const Login: FC = () => {
             iconColor="primary"
             iconSize="32px"
           />
-          <form>
+
+          {values.errorMessage && (
+            <>
+              <StyledErrorMessage>※メールアドレスまたはパスワードに誤りがあります。</StyledErrorMessage>
+              <div className="h-module-spacer--xs" />
+            </>
+          )}
+
+          <form onSubmit={handleSubmit}>
             <MuiTextField
               placeholder="メールアドレス"
               type="email"
@@ -142,6 +179,7 @@ const Login: FC = () => {
               fullWidth
               margin="normal"
               autoComplete="email"
+              onChange={handleChange("email")}
               InputProps={{
                 startAdornment: (
                   <MuiInputAdornment position="start">
@@ -157,6 +195,7 @@ const Login: FC = () => {
               fullWidth
               margin="normal"
               autoComplete="current-password"
+              onChange={handleChange("password")}
               InputProps={{
                 startAdornment: (
                   <MuiInputAdornment position="start">
@@ -189,4 +228,9 @@ const StyledNavWrap = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+`;
+const StyledErrorMessage = styled.p`
+  color: #b2102f;
+  font-weight: 600;
+  text-align: center;
 `;
