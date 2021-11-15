@@ -1,6 +1,7 @@
 import { sendSignInLinkToEmail, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "@firebase/auth";
 import { Timestamp, updateDoc, getDoc, doc, setDoc } from "firebase/firestore";
 import { firebaseGetAuth, firebaseGetDb } from "../firebase/firebase";
+import { toast } from "react-toastify";
 
 import { loginAction } from "../features/user/userSlice";
 import { AppDispatch } from "../app/store";
@@ -14,13 +15,23 @@ const actionCodeSettings = {
   url: url,
   handleCodeInApp: true,
 };
-export const firebaseSendSignInLinkToEmail = (email: string): boolean | void => {
+export const firebaseSendSignInLinkToEmail = async (email: string): Promise<boolean | void> => {
   // 認証メールの送信処理
-  sendSignInLinkToEmail(auth, email, actionCodeSettings)
+  const result = await sendSignInLinkToEmail(auth, email, actionCodeSettings)
     .then(() => {
       // 送信成功の処理
+      toast.success("認証メールを送信しました", {
+        position: "top-center",
+        autoClose: 1500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: false,
+        progress: undefined,
+        theme: "colored",
+      });
       window.localStorage.setItem("emailForSignIn", email);
-      window.location.href = "./complete-send-auth-email";
+      return true;
     })
     .catch((error) => {
       // 送信失敗の処理
@@ -28,15 +39,26 @@ export const firebaseSendSignInLinkToEmail = (email: string): boolean | void => 
       const errorMessage = error.message;
       console.log("code: ", errorCode);
       console.log("message: ", errorMessage);
-      alert("認証メールの送信に失敗しました。お手数ですが、時間を置いて再度お試しください。");
+      toast.error("認証メールの送信に失敗しました。恐れ入りますが、時間を置いてから再度お試しください。", {
+        position: "top-center",
+        autoClose: false,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: false,
+        progress: undefined,
+        theme: "colored",
+      });
+      return false;
     });
+  return result;
 };
 
 // ====================================================
 // アカウント作成
-export const firebaseCreateUser = (email: string, password: string) => {
+export const firebaseCreateUser = async (email: string, password: string): Promise<boolean | void> => {
   // Authenticationにユーザー登録
-  createUserWithEmailAndPassword(auth, email, password)
+  const result = await createUserWithEmailAndPassword(auth, email, password)
     .then(async (userCredential) => {
       const user = userCredential.user;
       if (user) {
@@ -49,9 +71,18 @@ export const firebaseCreateUser = (email: string, password: string) => {
           created_at: Timestamp.now(),
           latest_login_time: Timestamp.now(),
         });
-        alert("アカウントが作成されました");
+        toast.success("アカウントが作成されました", {
+          position: "top-center",
+          autoClose: 1500,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: false,
+          progress: undefined,
+          theme: "colored",
+        });
         window.localStorage.removeItem("emailForSignIn");
-        window.location.href = "/login";
+        return true;
       }
     })
     .catch((error) => {
@@ -60,8 +91,19 @@ export const firebaseCreateUser = (email: string, password: string) => {
       const errorMessage = error.message;
       console.log("code: ", errorCode);
       console.log("message: ", errorMessage);
-      alert("アカウントの作成に失敗しました。お手数ですが、時間を置いて再度お試しください。");
+      toast.error("アカウントの作成に失敗しました。恐れ入りますが、時間を置いてから再度お試しください。", {
+        position: "top-center",
+        autoClose: false,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: false,
+        progress: undefined,
+        theme: "colored",
+      });
+      return false;
     });
+  return result;
 };
 
 // ====================================================
@@ -95,8 +137,18 @@ export const login = (email: string, password: string) => {
               created_at: created_at.toDate().toString(),
               latest_login_time: latest_login_time.toDate().toString(),
             };
-            dispatch(loginAction(loginUserData));
-            // toastify
+            dispatch(loginAction(loginUserData)); // Storeに値をセット
+            toast.success("ログインしました", {
+              position: "top-center",
+              autoClose: 1500,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: false,
+              progress: undefined,
+              theme: "colored",
+            });
+
             // Loding終了
             return true;
           } else {

@@ -2,7 +2,7 @@ import React, { FC, useState, useEffect } from "react";
 import styled from "styled-components";
 
 import { Paper as MuiPaper, Link as MuiLink } from "@mui/material";
-import MuiAccountCircleIcon from "@mui/icons-material/AccountCircle";
+import MuiEmailIcon from "@mui/icons-material/Email";
 import { makeStyles } from "@mui/styles";
 
 import { firebaseSendSignInLinkToEmail } from "../../../operation/userAuth";
@@ -69,7 +69,7 @@ const CompleteSendEmailAuth: FC = () => {
                 text="再送信エラー"
                 color="#555"
                 fontSize="32px"
-                icon={MuiAccountCircleIcon}
+                icon={MuiEmailIcon}
                 iconColor="primary"
                 iconSize="36px"
               />
@@ -90,23 +90,19 @@ const CompleteSendEmailAuth: FC = () => {
                 text="送信完了"
                 color="#555"
                 fontSize="32px"
-                icon={MuiAccountCircleIcon}
+                icon={MuiEmailIcon}
                 iconColor="primary"
                 iconSize="36px"
               />
-              <StyledText>{values.email}に認証メールを送信しました。</StyledText>
+              <StyledText>{values.email} に認証メールを送信しました。</StyledText>
               <StyledText>お手数ですが、メール記載のリンクよりアカウントの作成をお願い致します。</StyledText>
               <StyledText>
-                メールが届いていない場合は、迷惑メールなどをご確認の上、以下より再送信をお試しください。
+                メールが届いていない場合は、迷惑メールなどをご確認の上、以下のボタンより再送信をお試しください。
               </StyledText>
               <div className="h-module-spacer--md" />
-              <PrimaryButton
-                text="認証メールを再送信"
-                color="#fff"
-                background="#8bd5da"
-                fullWidth
-                onClick={handleSubmit}
-              />
+              <form onSubmit={handleSubmit}>
+                <PrimaryButton text="認証メールを再送信" color="#fff" background="#8bd5da" fullWidth />
+              </form>
               <div className="h-module-spacer--md" />
               <StyledNavWrap>
                 <MuiLink variant="button" href="./login" underline="none">
@@ -125,7 +121,7 @@ const CompleteSendEmailAuth: FC = () => {
                 text="再送信エラー"
                 color="#555"
                 fontSize="32px"
-                icon={MuiAccountCircleIcon}
+                icon={MuiEmailIcon}
                 iconColor="primary"
                 iconSize="36px"
               />
@@ -146,23 +142,20 @@ const CompleteSendEmailAuth: FC = () => {
                 text="送信完了"
                 color="#555"
                 fontSize="32px"
-                icon={MuiAccountCircleIcon}
+                icon={MuiEmailIcon}
                 iconColor="primary"
                 iconSize="36px"
+                spacing="3px"
               />
-              <StyledText>{values.email}に認証メールを送信しました。</StyledText>
+              <StyledText>{values.email} に認証メールを送信しました。</StyledText>
               <StyledText>お手数ですが、メール記載のリンクよりアカウントの作成をお願い致します。</StyledText>
               <StyledText>
-                メールが届いていない場合は、迷惑メールなどをご確認の上、以下より再送信をお試しください。
+                メールが届いていない場合は、迷惑メールなどをご確認の上、以下のボタンより再送信をお試しください。
               </StyledText>
               <div className="h-module-spacer--md" />
-              <PrimaryButton
-                text="認証メールを再送信"
-                color="#fff"
-                background="#8bd5da"
-                fullWidth
-                onClick={handleSubmit}
-              />
+              <form onSubmit={handleSubmit}>
+                <PrimaryButton text="認証メールを再送信" color="#fff" background="#8bd5da" fullWidth />
+              </form>
               <div className="h-module-spacer--md" />
               <StyledNavWrap>
                 <MuiLink variant="button" href="./login" underline="none">
@@ -184,14 +177,16 @@ const StyledSpContainer = styled.div`
     display: none;
   }
 `;
-
 const StyledNavWrap = styled.div`
   display: flex;
   align-items: flex-end;
   flex-direction: column;
 `;
 const StyledText = styled.p`
-  text-align: center;
   color: #555;
   line-height: 1.5;
+  font-size: 16px;
+  overflow-wrap: break-word;
+  margin-bottom: 8px;
+  text-align: center;
 `;

@@ -1,6 +1,7 @@
 import React, { FC, useState } from "react";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
+import { useHistory } from "react-router";
 // Material-UI
 import {
   TextField as MuiTextField,
@@ -48,6 +49,7 @@ type UserInput = {
 const Login: FC = () => {
   const classes = useStyles();
   const dispatch: AppDispatch = useDispatch();
+  const history = useHistory();
 
   const [values, setValues] = useState({
     email: "",
@@ -72,7 +74,7 @@ const Login: FC = () => {
       const result = await dispatch(login(values.email, values.password));
       if (result) {
         setValues({ ...values, errorMessage: false });
-        // window.location.href = "./main";
+        history.push("/main");
       } else {
         setValues({ ...values, errorMessage: true });
       }

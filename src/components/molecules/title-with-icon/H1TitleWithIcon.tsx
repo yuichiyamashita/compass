@@ -11,16 +11,17 @@ type Props = {
   icon: React.ElementType;
   iconSize?: string;
   iconColor?: "inherit" | "disabled" | "action" | "primary" | "secondary" | "error" | "info" | "success" | "warning";
+  spacing?: string;
 };
 
 const H1TitleWithIcon: FC<Props> = (props) => {
-  const { text, color, fontSize, icon, iconSize, iconColor } = props;
+  const { text, color, fontSize, icon, iconSize, iconColor, spacing } = props;
 
   return (
     <Flexbox justify="center">
       <MuiIcon component={icon} color={iconColor} sx={{ fontSize: iconSize }} />
       <div className="w-module-spacer--xs" />
-      <H1Title color={color} fontSize={fontSize}>
+      <H1Title color={color} fontSize={fontSize} spacing={spacing}>
         {text}
       </H1Title>
     </Flexbox>
