@@ -38,35 +38,24 @@ const useStyles = makeStyles({
   },
 });
 
-type UserInput = {
-  email: string;
-  password: string;
-  showPassword: boolean;
-  errorMessage: boolean;
-};
-
 const Signup: FC = () => {
   const classes = useStyles();
   const dispatch: AppDispatch = useDispatch();
   const history = useHistory();
 
-  const [values, setValues] = useState<UserInput>({
-    email: "",
-    password: "",
-    showPassword: false,
-    errorMessage: false,
-  });
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(false);
 
   // ユーザーの入力情報をstateに保存
-  const handleChange =
-    (props: keyof UserInput) =>
-    (e: React.ChangeEvent<HTMLInputElement>): void => {
-      setValues({ ...values, [props]: e.target.value });
-    };
+  const handleChangePassword = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    setPassword(e.target.value);
+  };
 
   // パスワード表示のon/offの切り替え処理
   const toggleShowPassword = (): void => {
-    setValues({ ...values, showPassword: !values.showPassword });
+    setShowPassword(!showPassword);
   };
 
   // firebaseにユーザー情報を登録
@@ -74,27 +63,26 @@ const Signup: FC = () => {
     e.preventDefault();
 
     // Validation
-    const password = validateInputPassWord(values.password);
-    if (!password) {
-      setValues({ ...values, errorMessage: true });
+    const validator = validateInputPassWord(password);
+    if (!validator) {
+      setErrorMessage(true);
     } else {
-      const result = await dispatch(firebaseCreateUser(values.email, values.password));
+      if (!email) return;
+      const result = await dispatch(firebaseCreateUser(email, password));
       if (!result) {
-        setValues({ ...values, errorMessage: true });
+        setErrorMessage(true);
       } else {
-        setValues({ ...values, errorMessage: false });
+        setErrorMessage(false);
         history.push("/login");
       }
     }
   };
 
-  // 認証済みのメールアドレスを取得し、stateに保存
+  // ローカルストレージからメールアドレスを取得し、stateに保存する
   useEffect(() => {
-    const email = window.localStorage.getItem("emailForSignIn");
-    if (email) {
-      setValues({ ...values, email: email });
-    } else {
-      setValues({ ...values, email: "エラー：メールアドレスが確認できません" });
+    const localStorageEmail = window.localStorage.getItem("emailForSignIn");
+    if (localStorageEmail) {
+      setEmail(localStorageEmail);
     }
   }, []);
 
@@ -115,7 +103,7 @@ const Signup: FC = () => {
           <StyledText>ログインに使用するパスワードを入力してください</StyledText>
           <div className="h-module-spacer--md" />
 
-          {values.errorMessage && (
+          {errorMessage && (
             <>
               <StyledErrorMessage>※パスワードは8文字以上の半角英数字で入力してください</StyledErrorMessage>
               <div className="h-module-spacer--xs" />
@@ -125,24 +113,24 @@ const Signup: FC = () => {
           <form onSubmit={handleSubmitCreateUser}>
             <StyledDl>
               <StyledDt>メールアドレス:</StyledDt>
-              <StyledDd>{values.email}</StyledDd>
+              <StyledDd>{email}</StyledDd>
             </StyledDl>
             <div className="h-module-spacer--md" />
             <FormControl variant="outlined" fullWidth={true}>
               <OutlinedInput
                 placeholder="8文字以上の半角英数字"
                 id="pc-outlined-adornment-password"
-                type={values.showPassword ? "text" : "password"}
-                value={values.password}
-                onChange={handleChange("password")}
+                type={showPassword ? "text" : "password"}
+                value={password}
+                onChange={handleChangePassword}
                 endAdornment={
                   <InputAdornment position="end">
                     <IconButton aria-label="toggle password visibility" edge="end" onClick={toggleShowPassword}>
-                      {values.showPassword ? <Visibility /> : <VisibilityOff />}
+                      {showPassword ? <Visibility /> : <VisibilityOff />}
                     </IconButton>
                   </InputAdornment>
                 }
-                autoComplete="new-password"
+                autoComplete="new-password username"
               />
             </FormControl>
             <div className="h-module-spacer--lg" />
@@ -170,7 +158,7 @@ const Signup: FC = () => {
           <StyledText>ログインに使用するパスワードを入力してください</StyledText>
           <div className="h-module-spacer--xs" />
 
-          {values.errorMessage && (
+          {errorMessage && (
             <>
               <div className="h-module-spacer--md" />
               <StyledErrorMessage>※パスワードは8文字以上の半角英数字で入力してください</StyledErrorMessage>
@@ -181,24 +169,24 @@ const Signup: FC = () => {
           <form onSubmit={handleSubmitCreateUser}>
             <StyledDl>
               <StyledDt>メールアドレス:</StyledDt>
-              <StyledDd>{values.email}</StyledDd>
+              <StyledDd>{email}</StyledDd>
             </StyledDl>
             <div className="h-module-spacer--sm" />
             <FormControl variant="outlined" size="small" fullWidth={true}>
               <OutlinedInput
                 placeholder="8文字以上の半角英数字"
                 id="outlined-adornment-password"
-                type={values.showPassword ? "text" : "password"}
-                value={values.password}
-                onChange={handleChange("password")}
+                type={showPassword ? "text" : "password"}
+                value={password}
+                onChange={handleChangePassword}
                 endAdornment={
                   <InputAdornment position="end">
                     <IconButton aria-label="toggle password visibility" edge="end" onClick={toggleShowPassword}>
-                      {values.showPassword ? <Visibility /> : <VisibilityOff />}
+                      {showPassword ? <Visibility /> : <VisibilityOff />}
                     </IconButton>
                   </InputAdornment>
                 }
-                autoComplete="new-password"
+                autoComplete="new-password username"
               />
             </FormControl>
             <div className="h-module-spacer--lg" />

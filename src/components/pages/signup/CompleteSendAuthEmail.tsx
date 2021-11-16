@@ -26,38 +26,31 @@ const useStyles = makeStyles({
   },
 });
 
-type UserState = {
-  email: string;
-  errorMessage: boolean;
-};
-
 const CompleteSendEmailAuth: FC = () => {
   const classes = useStyles();
   const dispatch: AppDispatch = useDispatch();
-  const [values, setValues] = useState<UserState>({
-    email: "",
-    errorMessage: false,
-  });
+  const [email, setEmail] = useState("");
+  const [errorMessage, setErrorMessage] = useState(false);
 
   // 認証メールの再送信の処理
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
 
-    if (values.email) {
+    if (email) {
       // 認証メールを送信
-      await dispatch(firebaseSendSignInLinkToEmail(values.email));
-      setValues({ ...values, errorMessage: false });
+      await dispatch(firebaseSendSignInLinkToEmail(email));
+      setErrorMessage(false);
     } else {
       // エラーメッセージを表示
-      setValues({ ...values, errorMessage: true });
+      setErrorMessage(true);
     }
   };
 
   // ローカルストレージからメールアドレスを取得し、stateに保存する
   useEffect(() => {
-    const email = window.localStorage.getItem("emailForSignIn");
-    if (email) {
-      setValues({ ...values, email: email });
+    const localStorageEmail = window.localStorage.getItem("emailForSignIn");
+    if (localStorageEmail) {
+      setEmail(localStorageEmail);
     }
   }, []);
 
@@ -67,7 +60,7 @@ const CompleteSendEmailAuth: FC = () => {
       <Container padding="64px 8px">
         {/****** PC, タブレット *******/}
         <MuiPaper className={classes.pcLoginForm} elevation={8}>
-          {values.errorMessage ? (
+          {errorMessage ? (
             <>
               <H1TitleWithIcon
                 text="再送信エラー"
@@ -98,7 +91,7 @@ const CompleteSendEmailAuth: FC = () => {
                 iconColor="primary"
                 iconSize="36px"
               />
-              <StyledText>{values.email} に認証メールを送信しました。</StyledText>
+              <StyledText>{email} に認証メールを送信しました。</StyledText>
               <StyledText>お手数ですが、メール記載のリンクよりアカウントの作成をお願い致します。</StyledText>
               <StyledText>
                 メールが届いていない場合は、迷惑メールなどをご確認の上、以下のボタンより再送信をお試しください。
@@ -119,7 +112,7 @@ const CompleteSendEmailAuth: FC = () => {
 
         {/****** スマホ ******/}
         <StyledSpContainer>
-          {values.errorMessage ? (
+          {errorMessage ? (
             <>
               <H1TitleWithIcon
                 text="再送信エラー"
@@ -151,7 +144,7 @@ const CompleteSendEmailAuth: FC = () => {
                 iconSize="36px"
                 spacing="3px"
               />
-              <StyledText>{values.email} に認証メールを送信しました。</StyledText>
+              <StyledText>{email} に認証メールを送信しました。</StyledText>
               <StyledText>お手数ですが、メール記載のリンクよりアカウントの作成をお願い致します。</StyledText>
               <StyledText>
                 メールが届いていない場合は、迷惑メールなどをご確認の上、以下のボタンより再送信をお試しください。
