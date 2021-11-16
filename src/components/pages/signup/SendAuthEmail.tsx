@@ -86,7 +86,16 @@ const SendAuthEmail: FC = () => {
           {values.errorMessage && (
             <>
               <div className="h-module-spacer--sm" />
-              <StyledErrorMessage>※正しいメールアドレスを入力してください</StyledErrorMessage>
+              <StyledErrorMessage>
+                {values.formatErrorMessage && "※正しいメールアドレスを入力してください"}
+                {values.sendErrorMessage && (
+                  <span>
+                    <span>※認証メールの送信に失敗しました。</span>
+                    <br />
+                    <span>恐れ入りますが、時間を置いてから再度送信をお願いいたします。</span>
+                  </span>
+                )}
+              </StyledErrorMessage>
             </>
           )}
 
@@ -132,10 +141,18 @@ const SendAuthEmail: FC = () => {
           {values.errorMessage && (
             <>
               <div className="h-module-spacer--sm" />
-              <StyledErrorMessage>※正しいメールアドレスを入力してください</StyledErrorMessage>
+              <StyledErrorMessage>
+                {values.formatErrorMessage && "※正しいメールアドレスを入力してください"}
+                {values.sendErrorMessage && (
+                  <span>
+                    <span>※認証メールの送信に失敗しました。</span>
+                    <br />
+                    <span>恐れ入りますが、時間を置いてから再度送信をお願いいたします。</span>
+                  </span>
+                )}
+              </StyledErrorMessage>
             </>
           )}
-
           <div className="h-module-spacer--xs" />
           <form onSubmit={handleSubmit}>
             <MuiTextField

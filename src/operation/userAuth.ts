@@ -38,8 +38,8 @@ export const fetchAuthState = () => {
               uid: uid,
               email: email,
               role: role,
-              created_at: created_at,
-              latest_login_time: latest_login_time,
+              created_at: created_at.toDate().toString(),
+              latest_login_time: latest_login_time.toDate().toString(),
             };
             // 作成したデータをStoreに保存
             dispatch(loginAction(loginActionState));
@@ -88,17 +88,6 @@ export const firebaseSendSignInLinkToEmail = (email: string) => {
         return true;
       })
       .catch(() => {
-        const errorMessage = "認証メールの送信に失敗しました。恐れ入りますが、時間を置いてから再度お試しください";
-        toast.error(errorMessage, {
-          position: "top-center",
-          autoClose: false,
-          hideProgressBar: true,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: false,
-          progress: undefined,
-          theme: "colored",
-        });
         dispatch(hideLoadingAction());
         return false;
       });
