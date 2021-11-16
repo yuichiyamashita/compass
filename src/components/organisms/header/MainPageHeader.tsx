@@ -15,10 +15,8 @@ const MainPageHeader: FC = () => {
           </StyledLogo>
 
           <StyledNavigation>
-            <a href="./features">Features</a>
-            <a href="./tutorial">Tutorial</a>
-            <a href="./faq">FAQ</a>
-            <a href="./news">News</a>
+            <a href="./features">SelfDebate</a>
+            <a href="./tutorial">DeepenThink</a>
           </StyledNavigation>
 
           {/* pc */}

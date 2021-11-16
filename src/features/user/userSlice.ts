@@ -1,13 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-
-type UserState = {
-  uid: string;
-  role: string;
-  email: string;
-  created_at: string;
-  latest_login_time: string;
-  isSignedIn: boolean;
-};
+import { UserState } from "../../types/userState";
 
 const initialState: UserState = {
   uid: "",
