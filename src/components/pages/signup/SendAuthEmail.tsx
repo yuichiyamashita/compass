@@ -40,6 +40,8 @@ const SendAuthEmail: FC = () => {
   const [values, setValues] = useState({
     email: "",
     errorMessage: false,
+    formatErrorMessage: false,
+    sendErrorMessage: false,
   });
 
   const handleChangeEmail = (e: React.ChangeEvent<HTMLInputElement>): void => {
@@ -52,13 +54,13 @@ const SendAuthEmail: FC = () => {
     // Validation
     const email = validateEmailFormat(values.email);
     if (!email) {
-      setValues({ ...values, errorMessage: true });
+      setValues({ ...values, errorMessage: true, formatErrorMessage: true });
     } else {
       const result = await dispatch(firebaseSendSignInLinkToEmail(values.email));
       if (!result) {
-        setValues({ ...values, errorMessage: true });
+        setValues({ ...values, errorMessage: true, sendErrorMessage: true });
       } else {
-        setValues({ ...values, errorMessage: false });
+        setValues({ ...values });
         history.push("./complete-send-auth-email");
       }
     }
