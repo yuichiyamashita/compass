@@ -1,35 +1,42 @@
 import React, { FC } from "react";
 import styled from "styled-components";
-
 import { Grid as MuiGrid } from "@mui/material";
+
+import { PieGraph } from "../../atoms/graph";
+import { BasicTabs } from "../../organisms/tabs";
 
 type Props = {
   title: string;
-  graph: any;
-  contents: { id: string; text: string }[];
+  graphData: {
+    labels: string[];
+    dataset: number[];
+  };
+  contents: {
+    id: string;
+    text: string;
+  }[];
 };
 
 const MainFeaturesBox: FC<Props> = (props) => {
-  const { title, graph, contents } = props;
+  const { title, graphData } = props;
 
   return (
-    <MuiGrid container>
-      <MuiGrid item xs={12}>
-        <StyledTitle>{title}</StyledTitle>
+    <>
+      <MuiGrid container spacing={4}>
+        <MuiGrid item xs={12}>
+          <StyledTitle>{title}</StyledTitle>
+        </MuiGrid>
+        <MuiGrid xs={12} sm={6} item>
+          <StyledItemBox>
+            <PieGraph graphData={graphData} />
+          </StyledItemBox>
+        </MuiGrid>
+        <MuiGrid xs={12} sm={6} item>
+          <BasicTabs />
+        </MuiGrid>
       </MuiGrid>
-      <MuiGrid xs={12} sm={6} item>
-        <StyledItemBox>{graph}</StyledItemBox>
-      </MuiGrid>
-      <MuiGrid xs={12} sm={6} item>
-        <StyledItemBox>
-          <ul>
-            {contents.map((content) => (
-              <li key={content.id}>{content.text}</li>
-            ))}
-          </ul>
-        </StyledItemBox>
-      </MuiGrid>
-    </MuiGrid>
+      <div className="h-module-spacer--xl" />
+    </>
   );
 };
 
@@ -40,10 +47,14 @@ const StyledTitle = styled.h2`
   font-weight: 600;
   text-align: center;
   margin: 16px 0;
+  color: #555;
+  letter-spacing: 2px;
 `;
 const StyledItemBox = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  height: 320px;
 `;
