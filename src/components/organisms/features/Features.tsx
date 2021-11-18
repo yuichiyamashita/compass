@@ -14,18 +14,17 @@ const Features: FC = () => {
         <BorderH2Title
           title="FEATURES"
           fontSize="24px"
-          fontWeight={600}
           letterSpacing="3px"
           borderWidth="50px"
           borderHeight="2px"
-          borderColor="#555"
           margin="0 0 48px 0"
+          color="#555"
         />
         <MuiGrid container>
           <MuiGrid item xs sm={6}>
             <StyledTypographyBox>
               <StyledTitle>
-                SELF DEBATE
+                Self Debate
                 <br />
                 <span>1人で答えを導き出す</span>
               </StyledTitle>
@@ -47,9 +46,9 @@ const Features: FC = () => {
           <MuiGrid item xs sm={6}>
             <StyledTypographyBox>
               <StyledTitle>
-                DEEPEN THINK
+                Fast Thinking
                 <br />
-                <span>1つのことを深く考える</span>
+                <span>高速思考</span>
               </StyledTitle>
               <StyledText>
                 Lorem ipsum dolor sit, amet consectetur adipisicing elit. Veniam ab asperiores doloribus, voluptatem
@@ -96,7 +95,7 @@ const StyledTypographyBox = styled.dl`
 `;
 
 const StyledTitle = styled.dt`
-  font-size: 20px;
+  font-size: 24px;
   span {
     font-size: 14px;
   }

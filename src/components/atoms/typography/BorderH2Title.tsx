@@ -5,28 +5,26 @@ type Props = {
   title?: string;
   // スタイルの型定義
   color?: string;
-  fontSize: string | number;
-  fontWeight?: number;
+  fontSize: string;
   letterSpacing?: string;
   borderHeight?: string;
   borderWidth?: string;
-  borderColor?: string;
   margin?: string;
+  align?: "center" | "left" | "right";
 };
 
 const BorderSubTitle: FC<Props> = (props) => {
-  const { title, color, fontSize, fontWeight, letterSpacing, margin, borderColor, borderHeight, borderWidth } = props;
+  const { title, color, fontSize, letterSpacing, margin, borderHeight, borderWidth, align } = props;
 
   return (
     <BorderTitle
       color={color}
       fontSize={fontSize}
-      fontWeight={fontWeight}
       letterSpacing={letterSpacing}
-      borderColor={borderColor}
       borderHeight={borderHeight}
       borderWidth={borderWidth}
       margin={margin}
+      align={align}
     >
       {title}
     </BorderTitle>
@@ -40,9 +38,10 @@ const BorderTitle = styled.h2<Props>`
   display: inline-block;
   color: ${(props) => props.color};
   font-size: ${(props) => props.fontSize};
-  font-weight: ${(props) => props.fontWeight};
+  font-weight: 600;
   letter-spacing: ${(props) => props.letterSpacing};
   margin: ${(props) => props.margin};
+  text-align: center;
 
   &::before,
   &::after {
@@ -51,7 +50,7 @@ const BorderTitle = styled.h2<Props>`
     top: 50%;
     height: ${(props) => props.borderHeight};
     width: ${(props) => props.borderWidth};
-    background: ${(props) => props.borderColor};
+    background: ${(props) => props.color};
     transform: translateY(-50%);
   }
   &::before {

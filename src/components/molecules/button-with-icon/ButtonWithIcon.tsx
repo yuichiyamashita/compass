@@ -8,7 +8,7 @@ type Props = {
   background?: string;
   border?: string;
   boxShadowColor?: string;
-  color: string;
+  color?: string;
   fontSize?: string;
   fontWeight?: 400 | 600;
   iconSize?: "small" | "medium" | "large";
@@ -17,7 +17,7 @@ type Props = {
 type ButtonWrap = {
   background?: string;
   border?: string;
-  color: string;
+  color?: string;
 };
 
 const ButtonWithIcon: FC<Props> = (props) => {
