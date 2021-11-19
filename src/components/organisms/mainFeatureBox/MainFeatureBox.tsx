@@ -18,11 +18,11 @@ type Props = {
 };
 
 const MainFeaturesBox: FC<Props> = (props) => {
-  const { title, graphData } = props;
+  const { title, graphData, contents } = props;
 
   return (
     <>
-      <MuiGrid container spacing={4}>
+      <MuiGrid container spacing={5}>
         <MuiGrid item xs={12}>
           <StyledTitle>{title}</StyledTitle>
         </MuiGrid>
@@ -32,10 +32,10 @@ const MainFeaturesBox: FC<Props> = (props) => {
           </StyledItemBox>
         </MuiGrid>
         <MuiGrid xs={12} sm={6} item>
-          <BasicTabs />
+          <BasicTabs contents={contents} />
         </MuiGrid>
       </MuiGrid>
-      <div className="h-module-spacer--xl" />
+      <div className="h-module-spacer--xxl" />
     </>
   );
 };
@@ -43,10 +43,10 @@ const MainFeaturesBox: FC<Props> = (props) => {
 export default MainFeaturesBox;
 
 const StyledTitle = styled.h2`
-  font-size: 24px;
+  font-size: 32px;
   font-weight: 600;
   text-align: center;
-  margin: 16px 0;
+  // margin: 8px 0;
   color: #555;
   letter-spacing: 2px;
 `;
@@ -56,5 +56,5 @@ const StyledItemBox = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 320px;
+  height: 360px;
 `;

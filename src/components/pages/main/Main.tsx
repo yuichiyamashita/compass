@@ -17,12 +17,12 @@ const data = [
       dataset: [25, 10, 15, 35, 40, 50],
     },
     contents: [
-      { id: "123", text: "あいうえお" },
-      { id: "456", text: "かきくけこ" },
-      { id: "789", text: "さしすせそ" },
-      { id: "987", text: "たちつてと" },
-      { id: "654", text: "なにぬねの" },
-      { id: "321", text: "はひふへほ" },
+      { id: "123", text: "リモートワークは生産性を向上するか" },
+      { id: "456", text: "人工知能は人類を超えるか" },
+      { id: "789", text: "救急車を利用するのにお金を支払うべきか" },
+      { id: "987", text: "バスや電車の優先席の使用をやめるべきか" },
+      { id: "654", text: "高等教育の費用は政府が負担するべきか" },
+      { id: "321", text: "日本は再生可能エネルギーをいっそう推進するべきか" },
     ],
   },
   {
@@ -45,7 +45,8 @@ const Main: FC = () => {
   return (
     <>
       <MainPageHeader />
-      <Container padding="64px 0px 32px">
+      <Container>
+        <div className="h-module-spacer--xxl" />
         {data ? (
           data.map((d) => <MainFeatureBox key={d.id} title={d.title} graphData={d.graphData} contents={d.contents} />)
         ) : (
@@ -57,7 +58,7 @@ const Main: FC = () => {
         <Container>
           <MuiGrid container>
             <MuiGrid item xs={12}>
-              <StyledH2>話題のお題</StyledH2>
+              <StyledH2>話題のテーマ</StyledH2>
             </MuiGrid>
             <MuiGrid xs={12} sm={6} item>
               <StyledItemBox>
