@@ -69,6 +69,7 @@ const actionCodeSettings = {
 export const firebaseSendSignInLinkToEmail = (email: string) => {
   return async (dispatch: AppDispatch): Promise<boolean | void> => {
     dispatch(showLoadingAction("Loading..."));
+
     // 認証メールの送信
     //（成功・失敗判定をコンポーネントに渡すために結果をresultに格納）
     const result = await sendSignInLinkToEmail(auth, email, actionCodeSettings)

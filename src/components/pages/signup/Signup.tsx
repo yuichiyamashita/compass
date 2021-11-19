@@ -46,7 +46,11 @@ const Signup: FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [errorMessage, setErrorMessage] = useState(false);
+  const [errorMessages, setErrorMessages] = useState({
+    status: false,
+    validate: false,
+    alreadyUse: false,
+  });
 
   // ユーザーの入力情報をstateに保存
   const handleChangePassword = (e: React.ChangeEvent<HTMLInputElement>): void => {
@@ -65,14 +69,14 @@ const Signup: FC = () => {
     // Validation
     const validator = validateInputPassWord(password);
     if (!validator) {
-      setErrorMessage(true);
+      setErrorMessages({ ...errorMessages, status: true, validate: true, alreadyUse: false });
     } else {
       if (!email) return;
       const result = await dispatch(firebaseCreateUser(email, password));
       if (!result) {
-        setErrorMessage(true);
+        setErrorMessages({ ...errorMessages, status: true, validate: false, alreadyUse: true });
       } else {
-        setErrorMessage(false);
+        setErrorMessages({ ...errorMessages });
         history.push("/login");
       }
     }
@@ -83,6 +87,9 @@ const Signup: FC = () => {
     const localStorageEmail = window.localStorage.getItem("emailForSignIn");
     if (localStorageEmail) {
       setEmail(localStorageEmail);
+    } else {
+      alert("認証済みのメールアドレスが存在しません");
+      window.location.href = "/email-authentication";
     }
   }, []);
 
@@ -103,9 +110,14 @@ const Signup: FC = () => {
           <StyledText>ログインに使用するパスワードを入力してください</StyledText>
           <div className="h-module-spacer--md" />
 
-          {errorMessage && (
+          {errorMessages.status && (
             <>
-              <StyledErrorMessage>※パスワードは8文字以上の半角英数字で入力してください</StyledErrorMessage>
+              {errorMessages.validate && (
+                <StyledErrorMessage>※パスワードは8文字以上の半角英数字で入力してください</StyledErrorMessage>
+              )}
+              {errorMessages.alreadyUse && (
+                <StyledErrorMessage>※既に使用されているメールアドレスです。</StyledErrorMessage>
+              )}
               <div className="h-module-spacer--xs" />
             </>
           )}
@@ -115,26 +127,30 @@ const Signup: FC = () => {
               <StyledDt>メールアドレス:</StyledDt>
               <StyledDd>{email}</StyledDd>
             </StyledDl>
-            <div className="h-module-spacer--md" />
-            <FormControl variant="outlined" fullWidth={true}>
-              <OutlinedInput
-                placeholder="8文字以上の半角英数字"
-                id="pc-outlined-adornment-password"
-                type={showPassword ? "text" : "password"}
-                value={password}
-                onChange={handleChangePassword}
-                endAdornment={
-                  <InputAdornment position="end">
-                    <IconButton aria-label="toggle password visibility" edge="end" onClick={toggleShowPassword}>
-                      {showPassword ? <Visibility /> : <VisibilityOff />}
-                    </IconButton>
-                  </InputAdornment>
-                }
-                autoComplete="new-password username"
-              />
-            </FormControl>
-            <div className="h-module-spacer--lg" />
-            <PrimaryButton text="アカウント作成" color="#fff" background="#8bd5da" fullWidth />
+            {email && (
+              <>
+                <div className="h-module-spacer--md" />
+                <FormControl variant="outlined" fullWidth={true}>
+                  <OutlinedInput
+                    placeholder="8文字以上の半角英数字"
+                    id="pc-outlined-adornment-password"
+                    type={showPassword ? "text" : "password"}
+                    value={password}
+                    onChange={handleChangePassword}
+                    endAdornment={
+                      <InputAdornment position="end">
+                        <IconButton aria-label="toggle password visibility" edge="end" onClick={toggleShowPassword}>
+                          {showPassword ? <Visibility /> : <VisibilityOff />}
+                        </IconButton>
+                      </InputAdornment>
+                    }
+                    autoComplete="new-password username"
+                  />
+                </FormControl>
+                <div className="h-module-spacer--lg" />
+                <PrimaryButton text="アカウント作成" color="#fff" background="#8bd5da" fullWidth />
+              </>
+            )}
           </form>
 
           <div className="h-module-spacer--md" />
@@ -158,10 +174,15 @@ const Signup: FC = () => {
           <StyledText>ログインに使用するパスワードを入力してください</StyledText>
           <div className="h-module-spacer--xs" />
 
-          {errorMessage && (
+          {errorMessages.status && (
             <>
               <div className="h-module-spacer--md" />
-              <StyledErrorMessage>※パスワードは8文字以上の半角英数字で入力してください</StyledErrorMessage>
+              {errorMessages.validate && (
+                <StyledErrorMessage>※パスワードは8文字以上の半角英数字で入力してください</StyledErrorMessage>
+              )}
+              {errorMessages.alreadyUse && (
+                <StyledErrorMessage>※既に使用されているメールアドレスです。</StyledErrorMessage>
+              )}
               <div className="h-module-spacer--sm" />
             </>
           )}
@@ -171,26 +192,30 @@ const Signup: FC = () => {
               <StyledDt>メールアドレス:</StyledDt>
               <StyledDd>{email}</StyledDd>
             </StyledDl>
-            <div className="h-module-spacer--sm" />
-            <FormControl variant="outlined" size="small" fullWidth={true}>
-              <OutlinedInput
-                placeholder="8文字以上の半角英数字"
-                id="outlined-adornment-password"
-                type={showPassword ? "text" : "password"}
-                value={password}
-                onChange={handleChangePassword}
-                endAdornment={
-                  <InputAdornment position="end">
-                    <IconButton aria-label="toggle password visibility" edge="end" onClick={toggleShowPassword}>
-                      {showPassword ? <Visibility /> : <VisibilityOff />}
-                    </IconButton>
-                  </InputAdornment>
-                }
-                autoComplete="new-password username"
-              />
-            </FormControl>
-            <div className="h-module-spacer--lg" />
-            <PrimaryButton text="アカウント作成" color="#fff" background="#8bd5da" fullWidth />
+            {email && (
+              <>
+                <div className="h-module-spacer--sm" />
+                <FormControl variant="outlined" size="small" fullWidth={true}>
+                  <OutlinedInput
+                    placeholder="8文字以上の半角英数字"
+                    id="outlined-adornment-password"
+                    type={showPassword ? "text" : "password"}
+                    value={password}
+                    onChange={handleChangePassword}
+                    endAdornment={
+                      <InputAdornment position="end">
+                        <IconButton aria-label="toggle password visibility" edge="end" onClick={toggleShowPassword}>
+                          {showPassword ? <Visibility /> : <VisibilityOff />}
+                        </IconButton>
+                      </InputAdornment>
+                    }
+                    autoComplete="new-password username"
+                  />
+                </FormControl>
+                <div className="h-module-spacer--lg" />
+                <PrimaryButton text="アカウント作成" color="#fff" background="#8bd5da" fullWidth />
+              </>
+            )}
           </form>
 
           <div className="h-module-spacer--md" />
