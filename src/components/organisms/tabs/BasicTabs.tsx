@@ -1,4 +1,5 @@
 import React, { FC } from "react";
+import styled from "styled-components";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
@@ -11,6 +12,13 @@ interface TabPanelProps {
   index: number;
   value: number;
 }
+
+type Props = {
+  contents: {
+    id: string;
+    text: string;
+  }[];
+};
 
 function TabPanel(props: TabPanelProps) {
   const { children, value, index, ...other } = props;
@@ -39,7 +47,8 @@ function a11yProps(index: number) {
   };
 }
 
-const BasicTabs: FC = () => {
+const BasicTabs: FC<Props> = (props) => {
+  const { contents } = props;
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
@@ -47,24 +56,50 @@ const BasicTabs: FC = () => {
   };
 
   return (
-    <Box sx={{ width: "100%", height: "320px" }}>
-      <Box sx={{ borderBottom: 1 }}>
+    <Box
+      sx={{
+        width: "100%",
+        height: "360px",
+        border: "1px solid #8bd5da",
+        borderRadius: "6px",
+        color: "#666",
+      }}
+    >
+      <Box sx={{ borderBottom: "1px solid #8bd5da" }}>
         <Tabs value={value} onChange={handleChange} aria-label="basic tabs example" centered>
           <Tab icon={<NoteIcon />} label="最近作成したテーマ" {...a11yProps(0)} />
           <Tab icon={<BookmarkIcon />} label="お気に入り" {...a11yProps(1)} />
         </Tabs>
       </Box>
-      <TabPanel value={value} index={0}></TabPanel>
-      <TabPanel value={value} index={1}>
-        <li>aiueo</li>
-        <li>aiueo</li>
-        <li>aiueo</li>
-        <li>aiueo</li>
-        <li>aiueo</li>
-        <li>aiueo</li>
-        <li>aiueo</li>
-      </TabPanel>
+      <Box sx={{ height: "280px", overflow: "scroll" }}>
+        {/* 最近のテーマ */}
+        <TabPanel value={value} index={0}>
+          {/* firestoreからデータを取得 */}
+          {contents.map((content) => (
+            <StyledList key={content.id}>
+              <a href="dammy">{content.text}</a>
+            </StyledList>
+          ))}
+        </TabPanel>
+        {/* お気に入りのテーマ */}
+        <TabPanel value={value} index={1}>
+          {/* firestoreからデータを取得 */}
+          {contents.map((content) => (
+            <StyledList key={content.id}>
+              <a href="dammy">{content.text}</a>
+            </StyledList>
+          ))}
+        </TabPanel>
+      </Box>
     </Box>
   );
 };
 export default BasicTabs;
+
+const StyledList = styled.li`
+  border-bottom: 1px solid #ccc;
+  padding: 8px 0;
+  &:last-child {
+    border-bottom: none;
+  }
+`;
