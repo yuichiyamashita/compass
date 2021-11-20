@@ -60,8 +60,8 @@ const BasicTabs: FC<Props> = (props) => {
       sx={{
         width: "100%",
         height: "360px",
-        border: "1px solid #8bd5da",
-        borderRadius: "6px",
+        // border: "1px solid #8bd5da",
+        // borderRadius: "6px",
         color: "#666",
       }}
     >
