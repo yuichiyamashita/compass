@@ -1,9 +1,11 @@
 import React, { FC } from "react";
 import styled from "styled-components";
-import { Grid as MuiGrid } from "@mui/material";
+import { Grid as MuiGrid, Paper as MuiPaper } from "@mui/material";
+import { makeStyles } from "@mui/styles";
 
-import { PieGraph } from "../../atoms/graph";
+import { BarGraph } from "../../atoms/graph";
 import { BasicTabs } from "../../organisms/tabs";
+import { MuiTheme } from "../../../assets/material-ui";
 
 type Props = {
   title: string;
@@ -17,26 +19,35 @@ type Props = {
   }[];
 };
 
+const useStyles = makeStyles({
+  root: {
+    padding: "32px 8px",
+    [MuiTheme.breakpoints.up("md")]: {
+      padding: "32px",
+    },
+  },
+});
+
 const MainFeaturesBox: FC<Props> = (props) => {
+  const classes = useStyles();
   const { title, graphData, contents } = props;
 
   return (
-    <>
+    <MuiPaper className={classes.root} elevation={4}>
       <MuiGrid container spacing={5}>
         <MuiGrid item xs={12}>
           <StyledTitle>{title}</StyledTitle>
         </MuiGrid>
         <MuiGrid xs={12} sm={6} item>
           <StyledItemBox>
-            <PieGraph graphData={graphData} />
+            <BarGraph graphData={graphData} />
           </StyledItemBox>
         </MuiGrid>
         <MuiGrid xs={12} sm={6} item>
           <BasicTabs contents={contents} />
         </MuiGrid>
       </MuiGrid>
-      <div className="h-module-spacer--xxl" />
-    </>
+    </MuiPaper>
   );
 };
 

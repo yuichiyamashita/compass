@@ -18,7 +18,7 @@ const PieGraph: FC<Props> = (props) => {
     plugins: {
       title: {
         display: true,
-        text: "作成数",
+        text: "作成したテーマ数",
       },
     },
   };

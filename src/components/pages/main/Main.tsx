@@ -14,7 +14,7 @@ const data = [
     title: "Self Debate",
     graphData: {
       labels: ["ビジネス", "プログラミング", "英語", "健康", "お金", "その他"],
-      dataset: [25, 10, 15, 35, 40, 50],
+      dataset: [25, 10, 15, 35, 40, 53],
     },
     contents: [
       { id: "123", text: "リモートワークは生産性を向上するか" },
@@ -46,9 +46,14 @@ const Main: FC = () => {
     <>
       <MainPageHeader />
       <Container>
-        <div className="h-module-spacer--xxl" />
+        <div className="h-module-spacer--xl" />
         {data ? (
-          data.map((d) => <MainFeatureBox key={d.id} title={d.title} graphData={d.graphData} contents={d.contents} />)
+          data.map((d) => (
+            <>
+              <MainFeatureBox key={d.id} title={d.title} graphData={d.graphData} contents={d.contents} />
+              <div className="h-module-spacer--xl" />
+            </>
+          ))
         ) : (
           <StyledH3>まだデータがありません</StyledH3>
         )}
