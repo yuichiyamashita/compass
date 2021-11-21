@@ -2,16 +2,13 @@ import React, { FC } from "react";
 import { Bar } from "react-chartjs-2";
 
 type Props = {
-  graphData: {
-    labels: string[];
-    dataset: number[];
-  };
+  graphData: { label: string; data: number }[];
 };
 
 const PieGraph: FC<Props> = (props) => {
   const { graphData } = props;
-  const labels = graphData.labels;
-  const dataset = graphData.dataset;
+  const labels = graphData.map((obj) => obj.label);
+  const dataset = graphData.map((obj) => obj.data);
 
   const options = {
     maintainAspectRatio: false,

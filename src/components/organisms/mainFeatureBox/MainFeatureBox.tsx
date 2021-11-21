@@ -1,7 +1,9 @@
 import React, { FC } from "react";
 import styled from "styled-components";
-import { Grid as MuiGrid, Paper as MuiPaper } from "@mui/material";
+import { Grid as MuiGrid, Paper as MuiPaper, Icon as MuiIcon } from "@mui/material";
 import { makeStyles } from "@mui/styles";
+import MuiQuestionAnswerIcon from "@mui/icons-material/QuestionAnswer";
+import MuiQuickreplyIcon from "@mui/icons-material/Quickreply";
 
 import { BarGraph } from "../../atoms/graph";
 import { BasicTabs } from "../../organisms/tabs";
@@ -10,9 +12,9 @@ import { MuiTheme } from "../../../assets/material-ui";
 type Props = {
   title: string;
   graphData: {
-    labels: string[];
-    dataset: number[];
-  };
+    label: string;
+    data: number;
+  }[];
   contents: {
     id: string;
     text: string;
@@ -36,7 +38,12 @@ const MainFeaturesBox: FC<Props> = (props) => {
     <MuiPaper className={classes.root} elevation={4}>
       <MuiGrid container spacing={5}>
         <MuiGrid item xs={12}>
-          <StyledTitle>{title}</StyledTitle>
+          <StyledTitle>
+            {title === "Self Debate" && <MuiIcon component={MuiQuestionAnswerIcon} fontSize="large" />}
+            {title === "Fast Thinking" && <MuiIcon component={MuiQuickreplyIcon} fontSize="large" />}
+            <span className="w-module-spacer--xs" />
+            {title}
+          </StyledTitle>
         </MuiGrid>
         <MuiGrid xs={12} sm={6} item>
           <StyledItemBox>
@@ -57,9 +64,11 @@ const StyledTitle = styled.h2`
   font-size: 32px;
   font-weight: 600;
   text-align: center;
-  // margin: 8px 0;
   color: #555;
   letter-spacing: 2px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
 `;
 const StyledItemBox = styled.div`
   position: relative;

@@ -8,14 +8,20 @@ import { MainPageHeader } from "../../organisms/header";
 import { MainFeatureBox } from "../../organisms/mainFeatureBox";
 
 // テストデータ
+// labelはmax8文字と6個までの登録の制限をかける
+// ラベルの付いていないデータはその他にまとめる
 const data = [
   {
     id: "1",
     title: "Self Debate",
-    graphData: {
-      labels: ["ビジネス", "プログラミング", "英語", "健康", "お金", "その他"],
-      dataset: [25, 10, 15, 35, 40, 53],
-    },
+    graphData: [
+      { label: "ビジネス", data: 25 },
+      { label: "プログラミング", data: 10 },
+      { label: "英語", data: 15 },
+      { label: "健康", data: 35 },
+      { label: "お金", data: 40 },
+      { label: "その他", data: 53 },
+    ],
     contents: [
       { id: "123", text: "リモートワークは生産性を向上するか" },
       { id: "456", text: "人工知能は人類を超えるか" },
@@ -28,10 +34,15 @@ const data = [
   {
     id: "2",
     title: "Fast Thinking",
-    graphData: {
-      labels: ["React", "TypeScript", "HTML/CSS(Sass)", "Python", "PHP", "Firebase", "シュタインズゲート"],
-      dataset: [55, 10, 70, 20, 20, 70, 143],
-    },
+    graphData: [
+      { label: "メイドラゴン", data: 25 },
+      { label: "異世界食堂", data: 10 },
+      { label: "ホロライブ", data: 15 },
+      { label: "月が導く異世界道中", data: 35 },
+      { label: "魔女の旅々", data: 40 },
+      { label: "オーバーロード", data: 53 },
+      { label: "その他", data: 81 },
+    ],
     contents: [
       { id: "123", text: "abcdefg" },
       { id: "456", text: "hijklmn" },
@@ -61,18 +72,27 @@ const Main: FC = () => {
 
       <StyledPopularTheme>
         <Container>
-          <MuiGrid container>
+          <div className="h-module-spacer--xl" />
+          <MuiGrid container spacing={8}>
             <MuiGrid item xs={12}>
-              <StyledH2>話題のテーマ</StyledH2>
+              <StyledH2>コミュニティー</StyledH2>
             </MuiGrid>
             <MuiGrid xs={12} sm={6} item>
               <StyledItemBox>
-                <StyledH3>Self Debate</StyledH3>
+                <StyledH3>人気のテーマ</StyledH3>
+                <ul>
+                  <li>裁判員制度は廃止されるべきか</li>
+                  <li>定年退職制度は廃止されるべきか</li>
+                  <li>高等教育を義務教育化するべきか</li>
+                  <li>日本は核兵器を持つべきか</li>
+                  <li>コロナが終息してもマスクはつけ続けるべきか</li>
+                  <li>日本は外国人労働者をもっと受け入れるべきか</li>
+                </ul>
               </StyledItemBox>
             </MuiGrid>
             <MuiGrid xs={12} sm={6} item>
               <StyledItemBox>
-                <StyledH3>Fast Thinking</StyledH3>
+                <StyledH3>閲覧数が多い</StyledH3>
               </StyledItemBox>
             </MuiGrid>
           </MuiGrid>
@@ -85,7 +105,7 @@ const Main: FC = () => {
 export default Main;
 
 const StyledH2 = styled.h2`
-  font-size: 24px;
+  font-size: 32px;
   font-weight: 600;
   text-align: center;
 `;
@@ -101,5 +121,6 @@ const StyledItemBox = styled.div`
   justify-content: center;
 `;
 const StyledPopularTheme = styled.div`
-  background: #f3f3f3;
+  background: #f9f9f9;
+  color: #666;
 `;
