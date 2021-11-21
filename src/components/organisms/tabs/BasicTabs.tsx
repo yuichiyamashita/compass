@@ -68,7 +68,7 @@ const BasicTabs: FC<Props> = (props) => {
       <Box sx={{ borderBottom: "1px solid #8bd5da" }}>
         <Tabs value={value} onChange={handleChange} aria-label="basic tabs example" centered>
           <Tab icon={<NoteIcon />} label="最近作成したテーマ" {...a11yProps(0)} />
-          <Tab icon={<BookmarkIcon />} label="お気に入り" {...a11yProps(1)} />
+          <Tab icon={<BookmarkIcon />} label="ブックマーク" {...a11yProps(1)} />
         </Tabs>
       </Box>
       <Box sx={{ height: "280px", overflow: "scroll" }}>
@@ -81,7 +81,7 @@ const BasicTabs: FC<Props> = (props) => {
             </StyledList>
           ))}
         </TabPanel>
-        {/* お気に入りのテーマ */}
+        {/* ブックマーク */}
         <TabPanel value={value} index={1}>
           {/* firestoreからデータを取得 */}
           {contents.map((content) => (
