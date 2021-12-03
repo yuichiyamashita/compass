@@ -2,6 +2,7 @@ import type { FC } from "react";
 import { Footer } from "../../organisms/footer";
 import { Header } from "../../organisms/header";
 import { FirstView } from "../../organisms/firstView";
+import { Introduction } from "../../organisms/introduction";
 import { Features } from "../../organisms/features";
 
 const Top: FC = () => {
@@ -9,6 +10,7 @@ const Top: FC = () => {
     <>
       <Header />
       <FirstView />
+      <Introduction />
       <Features />
       <Footer />
     </>

@@ -4,12 +4,13 @@ import styled from "styled-components";
 type Props = {
   padding?: string;
   align?: "left" | "center" | "right";
+  position?: "relative";
 };
 
 const Container: FC<Props> = (props) => {
-  const { children, padding, align } = props;
+  const { children, padding, align, position } = props;
   return (
-    <StyledContainer padding={padding} align={align}>
+    <StyledContainer padding={padding} align={align} position={position}>
       {children}
     </StyledContainer>
   );
@@ -18,6 +19,7 @@ const Container: FC<Props> = (props) => {
 export default Container;
 
 const StyledContainer = styled.div<Props>`
+  position: ${(props) => props.position};
   width: calc(100vw - 16px);
   height: 100%;
   margin: 0 auto;
