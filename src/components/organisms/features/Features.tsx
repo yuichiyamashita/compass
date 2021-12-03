@@ -2,14 +2,24 @@ import React, { FC } from "react";
 import styled from "styled-components";
 import { Grid as MuiGrid } from "@mui/material";
 import { makeStyles } from "@mui/styles";
+import { MuiTheme } from "../../../assets/material-ui";
 
 import mobileImage from "../../../assets/images/mobile.jpg";
 import { BorderH2Title } from "../../atoms/typography";
 import { Container } from "../../molecules/container";
 import { PrimaryButton } from "../../atoms/button";
-import { MuiTheme } from "../../../assets/material-ui";
 
 const useStyles = makeStyles(() => ({
+  container: {
+    position: "relative",
+  },
+  image: {
+    boxShadow: "-16px 32px 32px rgba(0, 0, 0, 0.6)",
+
+    "& img": {
+      width: "100%",
+    },
+  },
   textWrap: {
     position: "relative",
     display: "flex",
@@ -17,13 +27,12 @@ const useStyles = makeStyles(() => ({
     justifyContent: "center",
     color: "#333",
   },
-  image: {
-    height: "100%",
-    background: "#000",
-    boxShadow: "-16px 32px 32px rgba(0, 0, 0, 0.6)",
-    overflow: "hidden",
-    [MuiTheme.breakpoints.down("sm")]: {
-      // display: "none",
+  rightImage: {
+    boxShadow: "16px 32px 32px rgba(0, 0, 0, 0.6)",
+    [MuiTheme.breakpoints.up("sm")]: {
+      position: "absolute",
+      right: 0,
+      height: "100%",
     },
     "& img": {
       width: "100%",
@@ -70,22 +79,26 @@ const Features: FC = () => {
 
         <div className="h-module-spacer--xxl" />
 
-        <StyledRightFeatureItemBox>
+        <StyledFeatureItemBox>
           <StyledRightFeatureItemBoxBg />
-          <StyledRightImage>
-            <img src={mobileImage} alt="self-debate" />
-          </StyledRightImage>
-          <StyledRightTypographyBox>
-            <StyledRightTitle>2. Fast thinking</StyledRightTitle>
-            <StyledRightTitleSub>速く深く考え、結論を導く</StyledRightTitleSub>
-            <StyledRightText>
-              あるテーマについて時間内に箇条書きで自分の考えを書き出し、さらにその書き出したものをテーマとして深ぼることを繰り返すことで、速く・深く考え抜かれた結論を導くトレーニングです。
-            </StyledRightText>
-            <StyledRightButton>
-              <PrimaryButton color="#fff" text="もっと詳しく" background="#8bd5da" />
-            </StyledRightButton>
-          </StyledRightTypographyBox>
-        </StyledRightFeatureItemBox>
+          <MuiGrid container className={classes.container}>
+            <MuiGrid item xs={12} sm={6} md={5} className={classes.rightImage}>
+              <img src={mobileImage} alt="self-debate" />
+            </MuiGrid>
+            <MuiGrid item xs={12} sm={6} md={7} className={classes.textWrap}>
+              <StyledRightTextWrap>
+                <StyledTitle>2. Fast thinking</StyledTitle>
+                <StyledTitleSub>速く深く考え、結論を導く</StyledTitleSub>
+                <StyledText>
+                  あるテーマについて時間内に箇条書きで自分の考えを書き出し、さらにその書き出したものをテーマとして深ぼることを繰り返すことで、速く・深く考え抜かれた結論を導くトレーニングです。
+                </StyledText>
+                <StyledRightButton>
+                  <PrimaryButton color="#fff" text="もっと詳しく" background="#8bd5da" />
+                </StyledRightButton>
+              </StyledRightTextWrap>
+            </MuiGrid>
+          </MuiGrid>
+        </StyledFeatureItemBox>
       </Container>
     </StyledFeatures>
   );
@@ -125,11 +138,11 @@ const StyledFeatureItemBox = styled.div`
   }
   // iPad mini, iPad(9.7)
   @media screen and (min-width: 768px) {
-    // height: 952px;
+    height: 662px;
   }
   // macbook13インチ
   @media screen and (min-width: 1366px) {
-    // height: 720px;
+    height: 720px;
   }
 `;
 
@@ -150,17 +163,22 @@ const StyledFeatureItemBoxBg = styled.div`
     height: 446px;
   }
 `;
-
-const StyledTypographyBox = styled.dl`
+const StyledRightFeatureItemBoxBg = styled.div`
+  z-index: -1;
   position: absolute;
-  width: 55%;
-  right: 0;
   top: 96px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  color: #333;
-  padding: 64px 32px;
+  left: 0;
+  width: 100vw;
+  background: #ececec;
+
+  // iPad mini, iPad(9.7)
+  @media screen and (min-width: 768px) {
+    height: 568px;
+  }
+  // iPad pro
+  @media screen and (min-width: 1024px) {
+    height: 446px;
+  }
 `;
 
 const StyledTextWrap = styled.div`
@@ -168,6 +186,15 @@ const StyledTextWrap = styled.div`
   @media screen and (min-width: 768px) {
     position: absolute;
     top: 96px;
+    padding: 64px 32px;
+  }
+`;
+const StyledRightTextWrap = styled.div`
+  // iPad mini, iPad(9.7)
+  @media screen and (min-width: 768px) {
+    position: absolute;
+    top: 96px;
+    left: 0;
     padding: 64px 32px;
   }
 `;
@@ -194,53 +221,11 @@ const StyledText = styled.dd`
   margin-bottom: 32px;
 `;
 
-const StyledImage = styled.div`
-  position: absolute;
-  height: 100%;
-  background: #000;
-  box-shadow: -16px 32px 32px rgba(0, 0, 0, 0.6);
-  overflow: hidden;
-  width: 45%;
-
-  img {
-    position: absolute;
-    bottom: -90px;
-    left: -45px;
-    width: 120%;
-    height: 120%;
-  }
-`;
-
 const StyledButton = styled.div`
   text-align: right;
 `;
-
-// 右寄せコンテンツのスタイル設定
-const StyledRightFeatureItemBox = styled.div`
-  position: relative;
-  height: 720px;
+const StyledRightButton = styled.div`
   text-align: left;
-`;
-
-const StyledRightFeatureItemBoxBg = styled.div`
-  position: absolute;
-  top: 96px;
-  left: 0;
-  width: 100vw;
-  height: 446px;
-  background: #ececec;
-`;
-
-const StyledRightTypographyBox = styled.dl`
-  position: absolute;
-  width: 55%;
-  top: 96px;
-  left: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  color: #333;
-  padding: 64px 0px 64px 32px;
 `;
 
 const StyledRightTitle = styled.dt`
@@ -283,10 +268,4 @@ const StyledRightImage = styled.div`
     height: 120%;
     transform: rotateZ(12deg);
   }
-`;
-
-const StyledRightButton = styled.div`
-  position: absolute;
-  left: 32px;
-  bottom: 0;
 `;
