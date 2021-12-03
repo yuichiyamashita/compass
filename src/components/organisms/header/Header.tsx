@@ -16,9 +16,14 @@ const Header: FC = () => {
 
           <StyledNavigation>
             <a href="./features">Features</a>
+            <a href="./tutorial">About</a>
             <a href="./tutorial">Tutorial</a>
-            <a href="./faq">FAQ</a>
             <a href="./news">News</a>
+            <a href="./contact">Contact</a>
+            {/* <a href="./features">機能紹介</a>
+            <a href="./tutorial">使い方</a>
+            <a href="./news">お知らせ</a>
+            <a href="./faq">問い合わせ</a> */}
           </StyledNavigation>
 
           {/* pc */}
@@ -41,8 +46,7 @@ const Header: FC = () => {
 export default Header;
 
 const StyledHeader = styled.header`
-  height: 90px;
-  box-shadow: 0 1px 2px #555;
+  height: 72px;
   color: #555;
   text-transform: uppercase;
 `;
@@ -59,6 +63,7 @@ const StyledLogo = styled.h1`
 `;
 const StyledNavigation = styled.nav`
   display: none;
+  font-weight: 600;
   @media screen and (min-width: 900px) {
     display: flex;
     a {
@@ -67,7 +72,6 @@ const StyledNavigation = styled.nav`
 
       &:hover {
         opacity: 0.7;
-        transform: translateY(-1px);
       }
 
       &:last-child {

@@ -52,6 +52,7 @@ const StyledPrimaryButton = styled.button<Props>`
   box-shadow: ${(props) => props.boxShadowColor && `1px 1px 2px ${props.boxShadowColor}`};
   color: ${(props) => props.color};
   cursor: pointer;
+  font-size: ${(props) => props.fontSize};
   padding: 8px 18px;
   margin: ${(props) => props.margin};
   width: ${(props) => props.fullWidth && "100%"};

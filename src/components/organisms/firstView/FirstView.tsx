@@ -3,44 +3,20 @@ import styled, { keyframes } from "styled-components";
 import { makeStyles } from "@mui/styles";
 import { Grid as MuiGrid } from "@mui/material";
 
-import FirstViewImage from "../../../assets/images/first_view_image.svg";
-import { HoverAnimationButton, PrimaryButton } from "../../atoms/button";
+import { SimpleScrollDown } from "../../atoms/scrolldown";
 import { Container } from "../../molecules/container";
-import { Flexbox } from "../../molecules/layout";
-import { MuiTheme } from "../../../assets/material-ui";
+import { PrimaryButton } from "../../atoms/button";
 
 const useStyles = makeStyles(() => ({
   gridContainer: {
-    position: "relative",
-    height: "100%",
-  },
-  gridItemLeft: {
-    position: "absolute",
-    left: "-60%",
-    [MuiTheme.breakpoints.up("sm")]: {
-      left: "calc(-33% + 32px)",
-    },
-    [MuiTheme.breakpoints.up("md")]: {
-      position: "initial",
-      left: 0,
-    },
-  },
-  gridItemRight: {
     position: "absolute",
     top: "50%",
-    right: 0,
-    transform: "translateY(-50%)",
-    width: "200px",
-    [MuiTheme.breakpoints.up("sm")]: {
-      width: "250px",
-      right: "32px",
-    },
-    [MuiTheme.breakpoints.up("md")]: {
-      position: "initial",
-      top: 0,
-      margin: 0,
-      transform: "translateY(0)",
-    },
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+  },
+  gridItem: {
+    marginBottom: "48px",
+    position: "relative",
   },
 }));
 
@@ -48,36 +24,25 @@ const FirstView: FC = () => {
   const classes = useStyles();
   return (
     <StyledFirstView>
-      <Container>
+      <Container position="relative">
         <MuiGrid container className={classes.gridContainer}>
-          <MuiGrid item md={6} className={classes.gridItemLeft}>
-            <StyledImage src={FirstViewImage} alt="frist-view" />
+          <MuiGrid item xs={12} className={classes.gridItem}>
+            <StyledTitle>まだエンジンのかかっていない脳に活を入れる。</StyledTitle>
           </MuiGrid>
-          <MuiGrid item md={6} className={classes.gridItemRight}>
-            <Flexbox justify="center" align="center" direction="column">
-              <StyledCopyWriteBox>
-                <StyledTitle>超・論理的思考力</StyledTitle>
-                <StyledText>・自分の意見に自信を持ちたい</StyledText>
-                <StyledText>・良い選択ができるようになりたい</StyledText>
-                <StyledText>・問題解決力を上げたい</StyledText>
-                <StyledText>・説得力のある発言がしたい</StyledText>
-                <StyledText>その願いを叶えるアプリです。</StyledText>
-              </StyledCopyWriteBox>
-              <StyledPCButtonWrap>
-                <HoverAnimationButton href=".signup" text="さっそく始める" color="#ff9800" border="1px solid #ff9800" />
-              </StyledPCButtonWrap>
-              <StyledButtonWrap>
-                <PrimaryButton
-                  href="./email-authentication"
-                  text="さっそく始める"
-                  color="#fff"
-                  background="#ff9800"
-                  boxShadowColor="#b26a00"
-                />
-              </StyledButtonWrap>
-            </Flexbox>
+          <MuiGrid item xs={12} className={classes.gridItem}>
+            <StyledList>
+              <li>問題解決力も</li>
+              <li>説得力も</li>
+              <li>判断力も</li>
+            </StyledList>
+            <StyledText>
+              COMPASSで
+              <br />
+              すべて身につく。
+            </StyledText>
           </MuiGrid>
         </MuiGrid>
+        <SimpleScrollDown />
       </Container>
     </StyledFirstView>
   );
@@ -85,7 +50,7 @@ const FirstView: FC = () => {
 
 export default FirstView;
 
-// アニメーションの設定
+// アニメーションの設定 ===============================================
 const slideUpAnimation = keyframes`
 0% {
   opacity: 0;
@@ -100,68 +65,126 @@ const slideUpAnimation = keyframes`
 }
 `;
 
-// コンポーネントの定義
+const slideAnimation = keyframes`
+0% {
+  top: 0;
+}
+100% {
+  top: -100%;
+}
+`;
+
+// コンポーネントの定義 ===============================================
 const StyledFirstView = styled.div`
-  height: 550px;
-  animation: ${slideUpAnimation} 1.2s ease-in-out;
-
-  @media screen and (max-width: 320px) {
-    height: 450px;
-  }
-
-  @media screen and (min-width: 600px) {
-    height: 700px;
-  }
-`;
-const StyledImage = styled.img`
-  height: 550px;
-  width: 550px;
-  opacity: 0.8;
-
-  @media screen and (max-width: 320px) {
-    width: 100%;
-    height: 450px;
-  }
-
-  @media screen and (min-width: 600px) {
-    width: calc(100% - 64px);
-    height: 700px;
-  }
-
-  @media screen and (min-width: 900px) {
-    width: 700px;
-  }
-`;
-const StyledCopyWriteBox = styled.dl`
-  color: #555;
+  position: relative;
+  background: rgba(0, 0, 0, 0.9);
+  font-weight: 600;
+  overflow: hidden;
+  padding-bottom: 16px;
   text-align: left;
-  margin-bottom: 32px;
-`;
-const StyledTitle = styled.dt`
-  background: rgba(255, 255, 255, 0.6);
-  border-radius: 4px;
-  font-size: 24px;
-  margin-bottom: 16px;
-`;
-const StyledText = styled.dd`
-  background: rgba(255, 255, 255, 0.6);
-  border-radius: 4px;
-  margin-bottom: 12px;
 
-  @media screen and (min-width: 900px) {
-    font-size: 18px;
-    margin-bottom: 16px;
+  // iPhoneSE
+  @media screen and (max-width: 320px) {
+    height: 496px;
   }
-`;
-const StyledPCButtonWrap = styled.div`
-  display: none;
+  // Xperia
+  @media screen and (min-width: 360px) {
+    height: 568px;
+  }
+  // iPhone6/7/8
+  @media screen and (min-width: 375px) {
+    height: 595px;
+  }
+  // iPhone6/7/8 Plus
+  @media screen and (min-width: 414px) {
+    height: 668px;
+  }
+  // iPad mini, iPad(9.7)
+  @media screen and (min-width: 768px) {
+    height: 952px;
+  }
+  // macbook13インチ
+  @media screen and (min-width: 1366px) {
+    height: 696px;
+  }
+  // desktop
+  @media screen and (min-width: 1920px) {
+    height: 1008px;
+  }
 
-  @media screen and (min-width: 1200px) {
+  &:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #fff;
     display: block;
+    animation: ${slideAnimation} 1s ease-in-out forwards;
   }
 `;
-const StyledButtonWrap = styled.div`
-  @media screen and (min-width: 1200px) {
-    display: none;
+const StyledTitle = styled.h1`
+  color: #fff;
+  font-size: 32px;
+  letter-spacing: 1.5px;
+  opacity: 0;
+  animation: ${slideUpAnimation} 1.2s ease-in-out 1s forwards;
+
+  @media screen and (min-width: 600px) {
+    font-size: 48px;
+    letter-spacing: 3px;
+    width: calc(100% - 224px);
+    margin: 0 auto 48px;
+  }
+  @media screen and (min-width: 900px) {
+    width: calc(100% - 388px);
+  }
+`;
+const StyledList = styled.ul`
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 24px;
+  letter-spacing: 1.5px;
+  margin-bottom: 48px;
+
+  @media screen and (min-width: 600px) {
+    font-size: 32px;
+    letter-spacing: 3px;
+    width: calc(100% - 224px);
+    margin: 0 auto 48px;
+  }
+  @media screen and (min-width: 900px) {
+    width: calc(100% - 388px);
+  }
+
+  li {
+    margin-bottom: 16px;
+    opacity: 0;
+  }
+  li:first-child {
+    animation: ${slideUpAnimation} 1.2s ease-in-out 1.8s forwards;
+  }
+  li:nth-child(2) {
+    animation: ${slideUpAnimation} 1.2s ease-in-out 2.6s forwards;
+  }
+  li:last-child {
+    animation: ${slideUpAnimation} 1.2s ease-in-out 3.4s forwards;
+  }
+`;
+const StyledText = styled.p`
+  color: #fff;
+  font-size: 24px;
+  letter-spacing: 1.5px;
+  opacity: 0;
+  animation: ${slideUpAnimation} 1.2s ease-in-out 4.2s forwards;
+
+  @media screen and (min-width: 600px) {
+    font-size: 32px;
+    letter-spacing: 3px;
+    width: calc(100% - 224px);
+    margin: 0 auto 48px;
+  }
+  @media screen and (min-width: 900px) {
+    width: calc(100% - 388px);
   }
 `;
