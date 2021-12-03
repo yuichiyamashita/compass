@@ -14,7 +14,7 @@ const arrowMoveAnimation = keyframes`
   opacity: 1;
 }
 50% {
-  bottom: 3%;
+  bottom: 2%;
 }
 100% {
   bottom: 0%;
@@ -25,7 +25,7 @@ const arrowMoveAnimation = keyframes`
 // components
 const StyledScrollDown = styled.div`
   position: absolute;
-  bottom: 0;
+  bottom: 32px;
   left: 50%;
   transform: translateX(-50%);
   color: #fff;
@@ -35,8 +35,8 @@ const StyledScrollDown = styled.div`
   &::before {
     content: "";
     position: absolute;
-    right: -12px;
-    width: 6px;
+    right: -13px;
+    width: 3px;
     height: 15px;
     background: #fff;
     transform: skewX(-60deg);
@@ -45,8 +45,8 @@ const StyledScrollDown = styled.div`
   &::after {
     content: "";
     position: absolute;
-    right: 12px;
-    width: 6px;
+    right: 13px;
+    width: 3px;
     height: 15px;
     background: #fff;
     transform: skewX(60deg);
