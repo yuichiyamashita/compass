@@ -1,224 +1,229 @@
 import React, { FC } from "react";
-import styled from "styled-components";
-import { Grid as MuiGrid } from "@mui/material";
-import { makeStyles } from "@mui/styles";
-import { MuiTheme } from "../../../assets/material-ui";
+import styled, { css, keyframes } from "styled-components";
 
 import mobileImage from "../../../assets/images/mobile.jpg";
-import { BorderH2Title } from "../../atoms/typography";
 import { Container } from "../../molecules/container";
 import { PrimaryButton } from "../../atoms/button";
 
-const useStyles = makeStyles(() => ({
-  container: {
-    position: "relative",
-  },
-  image: {
-    boxShadow: "-16px 32px 32px rgba(0, 0, 0, 0.6)",
-
-    "& img": {
-      width: "100%",
-    },
-  },
-  textWrap: {
-    position: "relative",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    color: "#333",
-  },
-  rightImage: {
-    boxShadow: "16px 32px 32px rgba(0, 0, 0, 0.6)",
-    [MuiTheme.breakpoints.up("sm")]: {
-      position: "absolute",
-      right: 0,
-      height: "100%",
-    },
-    "& img": {
-      width: "100%",
-    },
-  },
-}));
-
 const Features: FC = () => {
-  const classes = useStyles();
   return (
-    <StyledFeatures>
+    <StyledContainer>
       <Container align="center">
-        <BorderH2Title
-          title="FEATURES"
-          fontSize="32px"
-          letterSpacing="3px"
-          borderWidth="90px"
-          borderHeight="1px"
-          color="#333"
-        />
+        <StyledTitle>Features</StyledTitle>
 
-        <StyledFeatureItemBox>
-          <StyledFeatureItemBoxBg />
-          <MuiGrid container>
-            <MuiGrid item xs={12} sm={6} md={5} className={classes.image}>
-              <img src={mobileImage} alt="self-debate" />
-            </MuiGrid>
-            <MuiGrid item xs={12} sm={6} md={7} className={classes.textWrap}>
-              <StyledTextWrap>
-                <StyledTitle>1. Self debate</StyledTitle>
-                <StyledTitleSub>肯定と否定の両方の立場で考え、結論を導く</StyledTitleSub>
-                <StyledText>
-                  1つのテーマに対して、自分自身で肯定派と否定派の両方を考えて討論するトレーニングです。
-                  <br />
-                  人に自分の意見を伝えるときなど、「主張」する場合に役に立ちます。
-                </StyledText>
-                <StyledButton>
-                  <PrimaryButton color="#fff" text="もっと詳しく" background="#8bd5da" />
-                </StyledButton>
-              </StyledTextWrap>
-            </MuiGrid>
-          </MuiGrid>
-        </StyledFeatureItemBox>
+        <StyledFeatureBox>
+          <StyledLeftFeatureBoxBg />
+          <StyledLeftImageBox>
+            <img src={mobileImage} alt="self-debate" />
+          </StyledLeftImageBox>
+          <StyledLeftTextBox>
+            <StyledFeatureTitle>1. Self debate</StyledFeatureTitle>
+            <StyledFeatureSubTitle>ー 説得力のある意見を主張する ー</StyledFeatureSubTitle>
+            <StyledFeatureText>
+              ・セルフディベートとは？
+              <br />
+              自分自身で肯定と否定の両方を考え討論し、結論を出すことで、偏見や飛躍した考えを修正することができる方法です。
+              <br />
+              <br />
+              ・COMPASSでできること
+              <br />
+              セルフディベートの作成機能に加えて、ディベート内容を投稿(シェア)したり、他ユーザーの投稿内容を閲覧することができます。
+            </StyledFeatureText>
+            <StyledButton>
+              <PrimaryButton color="#fff" text="さっそく始める >" background="#8bd5da" href="./email-authentication" />
+            </StyledButton>
+          </StyledLeftTextBox>
+        </StyledFeatureBox>
 
-        <div className="h-module-spacer--xxl" />
-
-        <StyledFeatureItemBox>
-          <StyledRightFeatureItemBoxBg />
-          <MuiGrid container className={classes.container}>
-            <MuiGrid item xs={12} sm={6} md={5} className={classes.rightImage}>
-              <img src={mobileImage} alt="self-debate" />
-            </MuiGrid>
-            <MuiGrid item xs={12} sm={6} md={7} className={classes.textWrap}>
-              <StyledRightTextWrap>
-                <StyledTitle>2. Fast thinking</StyledTitle>
-                <StyledTitleSub>速く深く考え、結論を導く</StyledTitleSub>
-                <StyledText>
-                  あるテーマについて時間内に箇条書きで自分の考えを書き出し、さらにその書き出したものをテーマとして深ぼることを繰り返すことで、速く・深く考え抜かれた結論を導くトレーニングです。
-                </StyledText>
-                <StyledRightButton>
-                  <PrimaryButton color="#fff" text="もっと詳しく" background="#8bd5da" />
-                </StyledRightButton>
-              </StyledRightTextWrap>
-            </MuiGrid>
-          </MuiGrid>
-        </StyledFeatureItemBox>
+        <StyledFeatureBox>
+          <StyledRightFeatureBoxBg />
+          <StyledRightImageBox>
+            <img src={mobileImage} alt="self-debate" />
+          </StyledRightImageBox>
+          <StyledRightTextBox>
+            <StyledFeatureTitle>2. Fast thinking</StyledFeatureTitle>
+            <StyledFeatureSubTitle>ー 瞬時に最適解にたどりつく ー</StyledFeatureSubTitle>
+            <StyledFeatureText>
+              ・セルフディベートとは？
+              <br />
+              自分自身で肯定と否定の両方を考え討論し、結論を出すことで、偏見や飛躍した考えを修正することができる方法です。
+              <br />
+              <br />
+              ・COMPASSでできること
+              <br />
+              セルフディベートの作成機能に加えて、ディベート内容を投稿(シェア)したり、他ユーザーの投稿内容を閲覧することができます。
+            </StyledFeatureText>
+            <StyledRightButton>
+              <PrimaryButton color="#fff" text="さっそく始める >" background="#8bd5da" href="./email-authentication" />
+            </StyledRightButton>
+          </StyledRightTextBox>
+        </StyledFeatureBox>
       </Container>
-    </StyledFeatures>
+    </StyledContainer>
   );
 };
 
 export default Features;
 
-const StyledFeatures = styled.div`
-  padding: 64px 0;
-  overflow: hidden;
-  @media screen and (min-width: 600px) {
-    padding: 128px 0;
+// アニメーションの設定
+const moveImageAnimation = keyframes`
+0% {
+  transform: translateY(0%);
+}
+50% {
+  transform: translateY(4px);
+}
+100% {
+  transform: translateY(0%);
+}
+`;
+
+// コンポーネントのスタイルの設定
+const StyledContainer = styled.div`
+  padding-top: 160px;
+`;
+const StyledTitle = styled.h2`
+  border-bottom: 1px solid #333;
+  font-family: "Sriracha";
+  font-size: 64px;
+  letter-spacing: 6px;
+  margin-bottom: 128px;
+  display: inline-block;
+`;
+
+const StyledFeatureBox = styled.div`
+  position: relative;
+  @media screen and (min-width: 768px) {
+    height: 768px;
+  }
+  @media screen and (min-width: 1024px) {
+    height: 1024px;
+  }
+  @media screen and (min-width: 1366px) {
+    height: 768px;
+  }
+  @media screen and (min-width: 1920px) {
+    height: 1080px;
   }
 `;
 
-// 左寄せコンテンツのスタイル設定
-const StyledFeatureItemBox = styled.div`
-  position: relative;
-  margin-top: 64px;
-  text-align: left;
+export const StyledFeatureBoxBg = css`
+  z-index: -1;
+  position: absolute;
+  background: #ececec;
 
-  // iPhoneSE
-  @media screen and (max-width: 320px) {
-    // height: 496px;
+  // iPad mini, iPad(9.7)
+  @media screen and (min-width: 768px) {
+    top: 64px;
+    height: 560px;
+    width: calc(100vw - 16px);
   }
-  // Xperia
-  @media screen and (min-width: 360px) {
-    // height: 568px;
+  // width: 1024px ~
+  @media screen and (min-width: 1024px) {
+    top: 96px;
+    width: calc((100vw - 1000px) / 2 + 1000px);
   }
-  // iPhone6/7/8
-  @media screen and (min-width: 375px) {
-    // height: 595px;
-  }
-  // iPhone6/7/8 Plus
-  @media screen and (min-width: 414px) {
-    // height: 668px;
+`;
+const StyledLeftFeatureBoxBg = styled.div`
+  ${StyledFeatureBoxBg};
+  right: 0;
+`;
+const StyledRightFeatureBoxBg = styled.div`
+  ${StyledFeatureBoxBg};
+  left: 0;
+`;
+
+export const StyledImageBox = css`
+  position: absolute;
+  animation: ${moveImageAnimation} 1s ease-in-out infinite;
+
+  img {
+    width: 100%;
   }
   // iPad mini, iPad(9.7)
   @media screen and (min-width: 768px) {
-    height: 662px;
+    width: 45%;
   }
   // macbook13インチ
   @media screen and (min-width: 1366px) {
-    height: 720px;
+    width: 40%;
+  }
+  // desktop pc
+  @media screen and (min-width: 1920px) {
+    width: 45%;
   }
 `;
-
-const StyledFeatureItemBoxBg = styled.div`
-  z-index: -1;
-  position: absolute;
-  top: 96px;
-  right: 0;
-  width: 100vw;
-  background: #ececec;
-
-  // iPad mini, iPad(9.7)
-  @media screen and (min-width: 768px) {
-    height: 568px;
-  }
-  // iPad pro
-  @media screen and (min-width: 1024px) {
-    height: 446px;
-  }
-`;
-const StyledRightFeatureItemBoxBg = styled.div`
-  z-index: -1;
-  position: absolute;
-  top: 96px;
+const StyledLeftImageBox = styled.div`
+  ${StyledImageBox};
   left: 0;
-  width: 100vw;
-  background: #ececec;
+  img {
+    box-shadow: -32px 80px 32px rgba(0, 0, 0, 0.6);
+  }
+`;
+const StyledRightImageBox = styled.div`
+  ${StyledImageBox};
+  right: 0;
+  img {
+    box-shadow: 32px 80px 32px rgba(0, 0, 0, 0.6);
+  }
+`;
+
+export const StyledTextBox = css`
+  position: absolute;
+  text-align: left;
 
   // iPad mini, iPad(9.7)
   @media screen and (min-width: 768px) {
-    height: 568px;
+    top: 64px;
+    height: 560px;
+    width: 55%;
+    padding: 32px 16px;
   }
-  // iPad pro
+  // VWが1024px以上
   @media screen and (min-width: 1024px) {
-    height: 446px;
-  }
-`;
-
-const StyledTextWrap = styled.div`
-  // iPad mini, iPad(9.7)
-  @media screen and (min-width: 768px) {
-    position: absolute;
     top: 96px;
     padding: 64px 32px;
   }
 `;
-const StyledRightTextWrap = styled.div`
-  // iPad mini, iPad(9.7)
-  @media screen and (min-width: 768px) {
-    position: absolute;
-    top: 96px;
-    left: 0;
-    padding: 64px 32px;
-  }
+const StyledLeftTextBox = styled.div`
+  ${StyledTextBox};
+  right: 0;
+`;
+const StyledRightTextBox = styled.div`
+  ${StyledTextBox};
+  left: 0;
 `;
 
-const StyledTitle = styled.dt`
-  font-size: 64px;
+const StyledFeatureTitle = styled.dt`
   font-family: "Sriracha", cursive;
   letter-spacing: 3px;
   margin-bottom: 8px;
   border-bottom: 1px solid #333;
+
+  // iPad mini, iPad(9.7)
+  @media screen and (min-width: 768px) {
+    font-size: 42px;
+  }
+  // VWが1024px以上
+  @media screen and (min-width: 1024px) {
+    font-size: 56px;
+  }
 `;
 
-const StyledTitleSub = styled.dt`
+const StyledFeatureSubTitle = styled.dt`
   font-weight: 600;
   margin-bottom: 32px;
   letter-spacing: 3px;
+  text-align: center;
+  color: #555;
 `;
 
-const StyledText = styled.dd`
+const StyledFeatureText = styled.dd`
   font-size: 18px;
-  font-weight: 600;
   letter-spacing: 3px;
   line-height: 1.5;
   margin-bottom: 32px;
+  color: #555;
 `;
 
 const StyledButton = styled.div`
@@ -226,46 +231,4 @@ const StyledButton = styled.div`
 `;
 const StyledRightButton = styled.div`
   text-align: left;
-`;
-
-const StyledRightTitle = styled.dt`
-  font-size: 64px;
-  font-family: "Sriracha", cursive;
-  letter-spacing: 3px;
-  margin-bottom: 8px;
-  border-bottom: 1px solid #333;
-`;
-
-const StyledRightTitleSub = styled.dt`
-  font-size: 18px;
-  font-weight: 600;
-  margin-bottom: 32px;
-  letter-spacing: 3px;
-`;
-
-const StyledRightText = styled.dd`
-  font-size: 18px;
-  font-weight: 600;
-  letter-spacing: 3px;
-  line-height: 1.5;
-  margin-bottom: 32px;
-`;
-
-const StyledRightImage = styled.div`
-  position: absolute;
-  width: 45%;
-  right: 0;
-  height: 100%;
-  background: #000;
-  box-shadow: 32px 48px 32px rgba(0, 0, 0, 0.6);
-  overflow: hidden;
-
-  img {
-    position: absolute;
-    bottom: -90px;
-    right: -45px;
-    width: 120%;
-    height: 120%;
-    transform: rotateZ(12deg);
-  }
 `;

@@ -28,6 +28,7 @@ const StyledHeader = styled.header`
 const StyledLogo = styled.h1`
   font-size: 24px;
   font-weight: 600;
+  font-family: "Sriracha", cursive;
   margin-left: 8px;
   @media screen and (min-width: 900px) {
     margin-left: 0;

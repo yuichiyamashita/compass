@@ -20,10 +20,6 @@ const Header: FC = () => {
             <a href="./tutorial">Tutorial</a>
             <a href="./news">News</a>
             <a href="./contact">Contact</a>
-            {/* <a href="./features">機能紹介</a>
-            <a href="./tutorial">使い方</a>
-            <a href="./news">お知らせ</a>
-            <a href="./faq">問い合わせ</a> */}
           </StyledNavigation>
 
           {/* pc */}
@@ -47,12 +43,16 @@ export default Header;
 
 const StyledHeader = styled.header`
   height: 72px;
+  background: #fff;
+  box-shadow: 0px 2px 8px #999;
   color: #555;
   text-transform: uppercase;
+  width: 100%;
 `;
 const StyledLogo = styled.h1`
   font-size: 24px;
   font-weight: 600;
+  font-family: "Sriracha", cursive;
   margin-left: 8px;
   @media screen and (min-width: 900px) {
     margin-left: 0;

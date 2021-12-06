@@ -2,7 +2,7 @@ import React from "react";
 import styled, { keyframes } from "styled-components";
 
 const SimpleScrollDown = () => {
-  return <StyledScrollDown />;
+  return <StyledScrollDown>scroll</StyledScrollDown>;
 };
 
 export default SimpleScrollDown;
@@ -10,14 +10,14 @@ export default SimpleScrollDown;
 // animation
 const arrowMoveAnimation = keyframes`
 0% {
-  bottom: 0%;
+  bottom: 32px;
   opacity: 1;
 }
 50% {
-  bottom: 2%;
+  bottom: 40px;
 }
 100% {
-  bottom: 0%;
+  bottom: 32px;
   opacity: 1;
 }
 `;
@@ -25,31 +25,41 @@ const arrowMoveAnimation = keyframes`
 // components
 const StyledScrollDown = styled.div`
   position: absolute;
-  bottom: 32px;
-  left: 50%;
+  font-size: 16px;
+  right: 50%;
   transform: translateX(-50%);
+  writing-mode: vertical-rl;
   color: #fff;
+  letter-spacing: 4px;
   opacity: 0;
-  animation: ${arrowMoveAnimation} 1.2s ease-in-out infinite 5.8s;
+  animation: ${arrowMoveAnimation} 1.2s ease-in-out infinite 6.5s;
+
+  @media screen and (max-width: 320px) {
+    font-size: 12px;
+    right: 16px;
+  }
 
   &::before {
     content: "";
     position: absolute;
-    right: -13px;
-    width: 3px;
-    height: 15px;
+    bottom: 0;
+    right: -10px;
+    width: 1px;
+    height: 20px;
     background: #fff;
-    transform: skewX(-60deg);
-    animation: ${arrowMoveAnimation} 1.2s ease-in-out infinite 5.8s;
+    transform: skewX(-31deg);
   }
   &::after {
     content: "";
     position: absolute;
-    right: 13px;
-    width: 3px;
-    height: 15px;
+    bottom: 0;
+    right: -4px;
+    width: 1px;
+    height: 68px;
     background: #fff;
-    transform: skewX(60deg);
-    animation: ${arrowMoveAnimation} 1.2s ease-in-out infinite 5.8s;
+
+    @media screen and (max-width: 320px) {
+      height: 56px;
+    }
   }
 `;
