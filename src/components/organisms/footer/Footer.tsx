@@ -1,5 +1,6 @@
 import React, { FC } from "react";
 import styled from "styled-components";
+import { Parallax, ParallaxLayer } from "@react-spring/parallax";
 
 import { Container } from "../../molecules/container";
 import { Flexbox } from "../../molecules/layout";
@@ -27,6 +28,7 @@ const Footer: FC = () => {
 export default Footer;
 
 const StyledFooter = styled.footer`
+  z-index: 999;
   background: #333;
   height: 120px;
   color: #fff;
