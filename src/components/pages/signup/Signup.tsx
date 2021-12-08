@@ -148,14 +148,14 @@ const Signup: FC = () => {
                   />
                 </FormControl>
                 <div className="h-module-spacer--lg" />
-                <PrimaryButton text="アカウント作成" color="#fff" background="#8bd5da" fullWidth />
+                <PrimaryButton text="アカウント作成" color="#fff" background="#673ab7" fullWidth />
               </>
             )}
           </form>
 
           <div className="h-module-spacer--md" />
           <StyledNavWrap>
-            <MuiLink variant="button" href="./login" underline="none">
+            <MuiLink variant="button" href="./login" underline="none" color={[MuiTheme.palette.primary.dark]}>
               既にアカウントをお持ちの場合はこちら
             </MuiLink>
           </StyledNavWrap>
@@ -213,14 +213,14 @@ const Signup: FC = () => {
                   />
                 </FormControl>
                 <div className="h-module-spacer--lg" />
-                <PrimaryButton text="アカウント作成" color="#fff" background="#8bd5da" fullWidth />
+                <PrimaryButton text="アカウント作成" color="#fff" background="#673ab7" fullWidth />
               </>
             )}
           </form>
 
           <div className="h-module-spacer--md" />
           <StyledNavWrap>
-            <MuiLink variant="button" href="./login" underline="none">
+            <MuiLink variant="button" href="./login" underline="none" color={[MuiTheme.palette.primary.dark]}>
               既にアカウントを持ちの場合はこちら
             </MuiLink>
           </StyledNavWrap>

@@ -1,6 +1,5 @@
 import React, { FC } from "react";
 import styled from "styled-components";
-import { Parallax, ParallaxLayer } from "@react-spring/parallax";
 
 import { Container } from "../../molecules/container";
 import { Flexbox } from "../../molecules/layout";
@@ -9,16 +8,23 @@ const Footer: FC = () => {
   return (
     <StyledFooter>
       <Container>
-        <Flexbox justify="space-around" align="center">
+        <Flexbox justify="space-between" align="center">
           <a href="/">
             <StyledCopyRight>&copy;COMPASSS-2021</StyledCopyRight>
           </a>
-          <StyledNav>
-            <a href="./about">About</a>
-            <a href="./contact">お問い合わせ</a>
-            <a href="./terms">利用規約</a>
-            <a href="./privacy">プライバシーポリシー</a>
-          </StyledNav>
+          <div style={{ display: "flex" }}>
+            <StyledNav>
+              <a href="./about">About</a>
+              <a href="./contact">お問い合わせ</a>
+              <a href="./terms">利用規約</a>
+              <a href="./privacy">プライバシーポリシー</a>
+            </StyledNav>
+            <div className="w-module-spacer--xl" />
+            <StyledNav>
+              <a href="./contact">Twitter</a>
+              <a href="./terms">YouTube</a>
+            </StyledNav>
+          </div>
         </Flexbox>
       </Container>
     </StyledFooter>

@@ -16,6 +16,7 @@ import { OnlyLogoHeader } from "../../organisms/header";
 import { Container } from "../../molecules/container";
 import { PrimaryButton } from "../../atoms/button";
 import { H1TitleWithIcon } from "../../molecules/title-with-icon";
+import { MuiTheme } from "../../../assets/material-ui";
 
 const useStyles = makeStyles({
   loginForm: {
@@ -69,11 +70,11 @@ const ResetPassword: FC = () => {
               }}
             />
             <div className="h-module-spacer--sm" />
-            <PrimaryButton text="再設定のメールを送信" color="#fff" background="#8bd5da" fullWidth />
+            <PrimaryButton text="再設定のメールを送信" color="#fff" background="#673ab7" fullWidth />
           </form>
           <div className="h-module-spacer--md" />
           <StyledNavWrap>
-            <MuiLink variant="button" href="./login" underline="none">
+            <MuiLink variant="button" href="./login" underline="none" color={[MuiTheme.palette.primary.dark]}>
               ログイン画面に戻る
             </MuiLink>
           </StyledNavWrap>
@@ -109,11 +110,11 @@ const ResetPassword: FC = () => {
               }}
             />
             <div className="h-module-spacer--sm" />
-            <PrimaryButton text="再設定のメールを送信" color="#fff" background="#8bd5da" fullWidth />
+            <PrimaryButton text="再設定のメールを送信" color="#fff" background="#673ab7" fullWidth />
           </form>
           <div className="h-module-spacer--md" />
           <StyledNavWrap>
-            <MuiLink variant="button" href="./login" underline="none">
+            <MuiLink variant="button" href="./login" underline="none" color={[MuiTheme.palette.primary.dark]}>
               ログイン画面に戻る
             </MuiLink>
           </StyledNavWrap>

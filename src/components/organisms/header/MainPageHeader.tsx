@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React from "react";
 import styled from "styled-components";
 
 import AccountCircle from "@mui/icons-material/AccountCircle";
@@ -8,14 +8,12 @@ import { Container } from "../../molecules/container";
 import { Flexbox } from "../../molecules/layout";
 import { HamburgerMenu } from "../hamburgerMenu";
 
-const MainPageHeader: FC = () => {
+const MainPageHeader: React.FC = React.memo(() => {
   return (
     <StyledHeader>
       <Container>
         <Flexbox justify="space-between" align="center">
-          <StyledLogo>
-            <a href="/">compass</a>
-          </StyledLogo>
+          <StyledLogo>compass</StyledLogo>
 
           {/* pc */}
           <StyledPCButtonWrap>
@@ -30,7 +28,7 @@ const MainPageHeader: FC = () => {
       </Container>
     </StyledHeader>
   );
-};
+});
 
 export default MainPageHeader;
 
@@ -49,7 +47,7 @@ const StyledLogo = styled.h1`
     margin-left: 0;
   }
   &::first-letter {
-    color: #8bd5da;
+    color: #673ab7;
   }
 `;
 const StyledPCButtonWrap = styled.div`

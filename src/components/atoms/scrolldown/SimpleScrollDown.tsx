@@ -1,8 +1,13 @@
-import React from "react";
+import React, { FC } from "react";
 import styled, { keyframes } from "styled-components";
 
-const SimpleScrollDown = () => {
-  return <StyledScrollDown>scroll</StyledScrollDown>;
+type Props = {
+  delay: string;
+};
+
+const SimpleScrollDown: FC<Props> = (props) => {
+  const { delay } = props;
+  return <StyledScrollDown delay={delay}>scroll</StyledScrollDown>;
 };
 
 export default SimpleScrollDown;
@@ -10,20 +15,20 @@ export default SimpleScrollDown;
 // animation
 const arrowMoveAnimation = keyframes`
 0% {
-  bottom: 32px;
+  bottom: 0;
   opacity: 1;
 }
 50% {
-  bottom: 40px;
+  bottom: 8px;
 }
 100% {
-  bottom: 32px;
+  bottom: 0;
   opacity: 1;
 }
 `;
 
 // components
-const StyledScrollDown = styled.div`
+const StyledScrollDown = styled.div<Props>`
   position: absolute;
   font-size: 16px;
   right: 50%;
@@ -32,7 +37,7 @@ const StyledScrollDown = styled.div`
   color: #fff;
   letter-spacing: 4px;
   opacity: 0;
-  animation: ${arrowMoveAnimation} 1.2s ease-in-out infinite 6.5s;
+  animation: ${arrowMoveAnimation} 1.2s ease-in-out infinite ${(props) => props.delay};
 
   @media screen and (max-width: 320px) {
     font-size: 12px;

@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React from "react";
 import { Icon as MuiIcon } from "@mui/material";
 
 import { H1Title } from "../../atoms/typography";
@@ -14,7 +14,7 @@ type Props = {
   spacing?: string;
 };
 
-const H1TitleWithIcon: FC<Props> = (props) => {
+const H1TitleWithIcon: React.FC<Props> = React.memo((props) => {
   const { text, color, fontSize, icon, iconSize, iconColor, spacing } = props;
 
   return (
@@ -26,6 +26,6 @@ const H1TitleWithIcon: FC<Props> = (props) => {
       </H1Title>
     </Flexbox>
   );
-};
+});
 
 export default H1TitleWithIcon;

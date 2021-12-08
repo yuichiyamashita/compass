@@ -22,6 +22,7 @@ import { OnlyLogoHeader } from "../../organisms/header";
 import { login } from "../../../operation/userAuth";
 import { validateEmailFormat, validateInputPassWord } from "../../../functions/validations";
 import { AppDispatch } from "../../../app/store";
+import { MuiTheme } from "../../../assets/material-ui";
 
 const useStyles = makeStyles({
   loginForm: {
@@ -141,14 +142,19 @@ const Login: FC = () => {
               }}
             />
             <div className="h-module-spacer--sm" />
-            <PrimaryButton text="ログイン" color="#fff" background="#8bd5da" fullWidth />
+            <PrimaryButton text="ログイン" color="#fff" background="#673ab7" fullWidth />
           </form>
           <div className="h-module-spacer--md" />
           <StyledNavWrap>
-            <MuiLink variant="button" href="./email-authentication" underline="none">
+            <MuiLink
+              variant="button"
+              href="./email-authentication"
+              underline="none"
+              color={[MuiTheme.palette.primary.dark]}
+            >
               初めての登録ですか？新規登録
             </MuiLink>
-            <MuiLink variant="button" href="./reset-password" underline="none">
+            <MuiLink variant="button" href="./reset-password" underline="none" color={[MuiTheme.palette.primary.dark]}>
               パスワードを忘れた場合
             </MuiLink>
           </StyledNavWrap>
@@ -206,14 +212,19 @@ const Login: FC = () => {
               }}
             />
             <div className="h-module-spacer--sm" />
-            <PrimaryButton text="ログイン" color="#fff" background="#8bd5da" fullWidth />
+            <PrimaryButton text="ログイン" color="#fff" background="#673ab7" fullWidth />
           </form>
           <div className="h-module-spacer--sm" />
           <StyledNavWrap>
-            <MuiLink variant="button" href="./email-authentication" underline="none">
+            <MuiLink
+              variant="button"
+              href="./email-authentication"
+              underline="none"
+              color={[MuiTheme.palette.primary.dark]}
+            >
               初めての登録ですか？新規登録
             </MuiLink>
-            <MuiLink variant="button" href="./reset-password" underline="none">
+            <MuiLink variant="button" href="./reset-password" underline="none" color={[MuiTheme.palette.primary.dark]}>
               パスワードを忘れた場合
             </MuiLink>
           </StyledNavWrap>

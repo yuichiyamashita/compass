@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React from "react";
 import styled from "styled-components";
 
 type Props = {
@@ -8,14 +8,14 @@ type Props = {
   margin?: string;
 };
 
-const Flexbox: FC<Props> = (props) => {
+const Flexbox: React.FC<Props> = React.memo((props) => {
   const { children, justify, align, direction, margin } = props;
   return (
     <StyledFlexbox justify={justify} align={align} direction={direction} margin={margin}>
       {children}
     </StyledFlexbox>
   );
-};
+});
 
 export default Flexbox;
 

@@ -76,7 +76,7 @@ const CompleteSendEmailAuth: FC = () => {
               <PrimaryButton
                 text="認証メール送信画面へ"
                 color="#fff"
-                background="#8bd5da"
+                background="#673ab7"
                 fullWidth
                 href="./email-authentication"
               />
@@ -92,17 +92,17 @@ const CompleteSendEmailAuth: FC = () => {
                 iconSize="36px"
               />
               <StyledText>{email} に認証メールを送信しました。</StyledText>
-              <StyledText>お手数ですが、メール記載のリンクよりアカウントの作成をお願い致します。</StyledText>
+              <StyledText>メール記載のリンクよりアカウントの作成をお願い致します。</StyledText>
               <StyledText>
                 メールが届いていない場合は、迷惑メールなどをご確認の上、以下のボタンより再送信をお試しください。
               </StyledText>
               <div className="h-module-spacer--md" />
               <form onSubmit={handleSubmit}>
-                <PrimaryButton text="認証メールを再送信" color="#fff" background="#8bd5da" fullWidth />
+                <PrimaryButton text="認証メールを再送信" color="#fff" background="#673ab7" fullWidth />
               </form>
               <div className="h-module-spacer--md" />
               <StyledNavWrap>
-                <MuiLink variant="button" href="./login" underline="none">
+                <MuiLink variant="button" href="./login" underline="none" color={[MuiTheme.palette.primary.dark]}>
                   ログイン画面へ
                 </MuiLink>
               </StyledNavWrap>
@@ -128,7 +128,7 @@ const CompleteSendEmailAuth: FC = () => {
               <PrimaryButton
                 text="認証メール送信画面へ"
                 color="#fff"
-                background="#8bd5da"
+                background="#673ab7"
                 fullWidth
                 href="./email-authentication"
               />
@@ -145,17 +145,17 @@ const CompleteSendEmailAuth: FC = () => {
                 spacing="3px"
               />
               <StyledText>{email} に認証メールを送信しました。</StyledText>
-              <StyledText>お手数ですが、メール記載のリンクよりアカウントの作成をお願い致します。</StyledText>
+              <StyledText>メール記載のリンクよりアカウントの作成をお願い致します。</StyledText>
               <StyledText>
                 メールが届いていない場合は、迷惑メールなどをご確認の上、以下のボタンより再送信をお試しください。
               </StyledText>
               <div className="h-module-spacer--md" />
               <form onSubmit={handleSubmit}>
-                <PrimaryButton text="認証メールを再送信" color="#fff" background="#8bd5da" fullWidth />
+                <PrimaryButton text="認証メールを再送信" color="#fff" background="#673ab7" fullWidth />
               </form>
               <div className="h-module-spacer--md" />
               <StyledNavWrap>
-                <MuiLink variant="button" href="./login" underline="none">
+                <MuiLink variant="button" href="./login" underline="none" color={[MuiTheme.palette.primary.dark]}>
                   ログイン画面へ
                 </MuiLink>
               </StyledNavWrap>
