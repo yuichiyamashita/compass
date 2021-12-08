@@ -59,7 +59,7 @@ const StyledButton = styled.a<Props>`
   position: relative;
   padding: 8px 18px;
   background: ${(props) => props.background};
-  border: ${(props) => props.border};
+  // border: ${(props) => props.border};
   color: ${(props) => props.color};
   cursor: pointer;
   font-size: ${(props) => props.fontSize};
@@ -87,8 +87,8 @@ const StyledButton = styled.a<Props>`
     content: "";
     position: absolute;
     display: block;
-    width: 36px;
-    height: 36px;
+    width: 30px;
+    height: 30px;
     transition: 0.5s;
     transform: translate(0, -50%) rotate(45deg);
   }

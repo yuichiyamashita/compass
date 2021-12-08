@@ -5,7 +5,6 @@ import { Grid as MuiGrid } from "@mui/material";
 
 import { SimpleScrollDown } from "../../atoms/scrolldown";
 import { Container } from "../../molecules/container";
-import { ParallaxLayer } from "@react-spring/parallax";
 
 const useStyles = makeStyles(() => ({
   gridContainer: {
@@ -25,8 +24,6 @@ const FirstView: FC = () => {
   const classes = useStyles();
   return (
     <StyledFirstView>
-      {/* <ParallaxLayer offset={0} speed={2} style={{ backgroundColor: "rgba(0,0,0,0.9)" }} /> */}
-      {/* <ParallaxLayer offset={0} speed={1.2} style={{ display: "flex", justifyContent: "center", alignItems: "center" }}> */}
       <Container position="relative">
         <MuiGrid container className={classes.gridContainer}>
           <MuiGrid item xs={12} className={classes.gridItem}>
@@ -45,9 +42,8 @@ const FirstView: FC = () => {
             </StyledText>
           </MuiGrid>
         </MuiGrid>
-        <SimpleScrollDown />
+        <SimpleScrollDown delay="5.4s" />
       </Container>
-      {/* </ParallaxLayer> */}
     </StyledFirstView>
   );
 };
@@ -85,7 +81,7 @@ const StyledFirstView = styled.div`
   overflow: hidden;
   text-align: left;
   height: calc(100vh - 72px);
-  background: #333;
+  background: #000;
 
   &:after {
     content: "";
@@ -96,14 +92,14 @@ const StyledFirstView = styled.div`
     height: 100%;
     background: #fff;
     display: block;
-    animation: ${slideAnimation} 2s ease-in-out forwards;
+    animation: ${slideAnimation} 1s ease-in-out forwards;
   }
 `;
 const StyledTitle = styled.h1`
   font-size: 32px;
   letter-spacing: 1.5px;
   opacity: 0;
-  animation: ${slideUpAnimation} 1.2s ease-in-out 2s forwards;
+  animation: ${slideUpAnimation} 1.2s ease-in-out 1s forwards;
 
   @media screen and (min-width: 600px) {
     font-size: 48px;
@@ -136,20 +132,20 @@ const StyledList = styled.ul`
     opacity: 0;
   }
   li:first-child {
-    animation: ${slideUpAnimation} 1.2s ease-in-out 2.8s forwards;
+    animation: ${slideUpAnimation} 1.2s ease-in-out 1.8s forwards;
   }
   li:nth-child(2) {
-    animation: ${slideUpAnimation} 1.2s ease-in-out 3.6s forwards;
+    animation: ${slideUpAnimation} 1.2s ease-in-out 2.6s forwards;
   }
   li:last-child {
-    animation: ${slideUpAnimation} 1.2s ease-in-out 4.4s forwards;
+    animation: ${slideUpAnimation} 1.2s ease-in-out 3.4s forwards;
   }
 `;
 const StyledText = styled.p`
   font-size: 24px;
   letter-spacing: 1.5px;
   opacity: 0;
-  animation: ${slideUpAnimation} 1.2s ease-in-out 5.2s forwards;
+  animation: ${slideUpAnimation} 1.2s ease-in-out 4.2s forwards;
 
   @media screen and (min-width: 600px) {
     font-size: 32px;

@@ -116,11 +116,11 @@ const SendAuthEmail: FC = () => {
               onChange={handleChangeEmail}
             />
             <div className="h-module-spacer--sm" />
-            <PrimaryButton text="認証メールを送信" color="#fff" background="#8bd5da" fullWidth onClick={handleSubmit} />
+            <PrimaryButton text="認証メールを送信" color="#fff" background="#673ab7" fullWidth />
           </form>
           <div className="h-module-spacer--md" />
           <StyledNavWrap>
-            <MuiLink variant="button" href="./login" underline="none">
+            <MuiLink variant="button" href="./login" underline="none" color={[MuiTheme.palette.primary.dark]}>
               既にアカウントをお持ちの場合はこちら
             </MuiLink>
           </StyledNavWrap>
@@ -172,11 +172,11 @@ const SendAuthEmail: FC = () => {
               onChange={handleChangeEmail}
             />
             <div className="h-module-spacer--sm" />
-            <PrimaryButton text="認証メールを送信" color="#fff" background="#8bd5da" fullWidth />
+            <PrimaryButton text="認証メールを送信" color="#fff" background="#673ab7" fullWidth />
           </form>
           <div className="h-module-spacer--md" />
           <StyledNavWrap>
-            <MuiLink variant="button" href="./login" underline="none">
+            <MuiLink variant="button" href="./login" underline="none" color={[MuiTheme.palette.primary.dark]}>
               既にアカウントを持ちの場合はこちら
             </MuiLink>
           </StyledNavWrap>

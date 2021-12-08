@@ -1,9 +1,9 @@
-import React, { FC } from "react";
+import React from "react";
 import styled from "styled-components";
 import { Container } from "../../molecules/container";
 import { Flexbox } from "../../molecules/layout";
 
-const OnlyLogoHeader: FC = () => {
+const OnlyLogoHeader: React.FC = React.memo(() => {
   return (
     <StyledHeader>
       <Container>
@@ -15,7 +15,7 @@ const OnlyLogoHeader: FC = () => {
       </Container>
     </StyledHeader>
   );
-};
+});
 
 export default OnlyLogoHeader;
 
@@ -34,6 +34,6 @@ const StyledLogo = styled.h1`
     margin-left: 0;
   }
   &::first-letter {
-    color: #8bd5da;
+    color: #673ab7;
   }
 `;

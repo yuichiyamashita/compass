@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React from "react";
 import styled from "styled-components";
 
 type Props = {
@@ -8,14 +8,14 @@ type Props = {
   height?: string;
 };
 
-const Container: FC<Props> = (props) => {
+const Container: React.FC<Props> = React.memo((props) => {
   const { children, padding, align, position, height } = props;
   return (
     <StyledContainer padding={padding} align={align} position={position} height={height}>
       {children}
     </StyledContainer>
   );
-};
+});
 
 export default Container;
 

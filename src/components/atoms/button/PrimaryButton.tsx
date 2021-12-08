@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React from "react";
 import styled from "styled-components";
 
 type Props = {
@@ -7,6 +7,7 @@ type Props = {
   // スタイルの型定義
   background?: string;
   border?: string;
+  radius?: string;
   boxShadowColor?: string;
   color: string;
   fontSize?: string;
@@ -17,8 +18,9 @@ type Props = {
   onClick?: any;
 };
 
-const PrimaryButton: FC<Props> = React.memo((props) => {
-  const { href, text, background, border, boxShadowColor, color, fontSize, fontWeight, margin, fullWidth } = props;
+const PrimaryButton: React.FC<Props> = React.memo((props) => {
+  const { href, text, background, border, radius, boxShadowColor, color, fontSize, fontWeight, margin, fullWidth } =
+    props;
 
   const handleClick = () => {
     if (href) {
@@ -30,6 +32,7 @@ const PrimaryButton: FC<Props> = React.memo((props) => {
     <StyledPrimaryButton
       background={background}
       border={border}
+      radius={radius}
       boxShadowColor={boxShadowColor}
       color={color}
       fontSize={fontSize}
@@ -48,12 +51,12 @@ export default PrimaryButton;
 const StyledPrimaryButton = styled.button<Props>`
   background: ${(props) => props.background};
   border: ${(props) => props.border};
-  border-radius: 9px;
+  border-radius: ${(props) => props.radius};
   box-shadow: ${(props) => props.boxShadowColor && `1px 1px 2px ${props.boxShadowColor}`};
   color: ${(props) => props.color};
   cursor: pointer;
   font-size: ${(props) => props.fontSize};
-  padding: 8px 18px;
+  padding: 10px 18px;
   margin: ${(props) => props.margin};
   width: ${(props) => props.fullWidth && "100%"};
   text-align: center;

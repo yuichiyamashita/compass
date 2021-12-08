@@ -18,7 +18,7 @@ const Features: FC = () => {
           </StyledLeftImageBox>
           <StyledLeftTextBox>
             <StyledFeatureTitle>1. Self debate</StyledFeatureTitle>
-            <StyledFeatureSubTitle>ー 説得力のある意見を主張する ー</StyledFeatureSubTitle>
+            <StyledFeatureSubTitle>自分の意見に説得力を持たせる</StyledFeatureSubTitle>
             <StyledFeatureText>
               ・セルフディベートとは？
               <br />
@@ -30,7 +30,7 @@ const Features: FC = () => {
               セルフディベートの作成機能に加えて、ディベート内容を投稿(シェア)したり、他ユーザーの投稿内容を閲覧することができます。
             </StyledFeatureText>
             <StyledButton>
-              <PrimaryButton color="#fff" text="さっそく始める >" background="#8bd5da" href="./email-authentication" />
+              <PrimaryButton color="#fff" text="さっそく始める >" background="#673ab7" href="./email-authentication" />
             </StyledButton>
           </StyledLeftTextBox>
         </StyledFeatureBox>
@@ -42,9 +42,9 @@ const Features: FC = () => {
           </StyledRightImageBox>
           <StyledRightTextBox>
             <StyledFeatureTitle>2. Fast thinking</StyledFeatureTitle>
-            <StyledFeatureSubTitle>ー 瞬時に最適解にたどりつく ー</StyledFeatureSubTitle>
+            <StyledFeatureSubTitle>瞬時に最適解にたどりつく</StyledFeatureSubTitle>
             <StyledFeatureText>
-              ・セルフディベートとは？
+              ・ファストシンキングとは？
               <br />
               自分自身で肯定と否定の両方を考え討論し、結論を出すことで、偏見や飛躍した考えを修正することができる方法です。
               <br />
@@ -54,7 +54,7 @@ const Features: FC = () => {
               セルフディベートの作成機能に加えて、ディベート内容を投稿(シェア)したり、他ユーザーの投稿内容を閲覧することができます。
             </StyledFeatureText>
             <StyledRightButton>
-              <PrimaryButton color="#fff" text="さっそく始める >" background="#8bd5da" href="./email-authentication" />
+              <PrimaryButton color="#fff" text="さっそく始める >" background="#673ab7" href="./email-authentication" />
             </StyledRightButton>
           </StyledRightTextBox>
         </StyledFeatureBox>
@@ -66,12 +66,25 @@ const Features: FC = () => {
 export default Features;
 
 // アニメーションの設定
-const moveImageAnimation = keyframes`
+const moveLeftImageAnimation = keyframes`
 0% {
   transform: translateY(0%);
 }
 50% {
   transform: translateY(4px);
+  box-shadow: -32px 76px 32px rgba(0, 0, 0, 0.7);
+}
+100% {
+  transform: translateY(0%);
+}
+`;
+const moveRightImageAnimation = keyframes`
+0% {
+  transform: translateY(0%);
+}
+50% {
+  transform: translateY(4px);
+  box-shadow: 32px 76px 32px rgba(0, 0, 0, 0.7);
 }
 100% {
   transform: translateY(0%);
@@ -80,14 +93,25 @@ const moveImageAnimation = keyframes`
 
 // コンポーネントのスタイルの設定
 const StyledContainer = styled.div`
-  padding-top: 160px;
+  padding-top: calc(8vw + 160px);
+  position: relative;
+
+  &:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-top: 8vw solid #23133e;
+    border-right: 100vw solid transparent;
+  }
 `;
+
 const StyledTitle = styled.h2`
   border-bottom: 1px solid #333;
   font-family: "Sriracha";
   font-size: 64px;
   letter-spacing: 6px;
-  margin-bottom: 128px;
+  margin-bottom: 160px;
   display: inline-block;
 `;
 
@@ -108,9 +132,9 @@ const StyledFeatureBox = styled.div`
 `;
 
 export const StyledFeatureBoxBg = css`
-  z-index: -1;
   position: absolute;
-  background: #ececec;
+  background: #efefef;
+  box-shadow: 2px 2px 12px #ccc;
 
   // iPad mini, iPad(9.7)
   @media screen and (min-width: 768px) {
@@ -135,7 +159,8 @@ const StyledRightFeatureBoxBg = styled.div`
 
 export const StyledImageBox = css`
   position: absolute;
-  animation: ${moveImageAnimation} 1s ease-in-out infinite;
+  overflow: hidden;
+  background: #000;
 
   img {
     width: 100%;
@@ -156,15 +181,16 @@ export const StyledImageBox = css`
 const StyledLeftImageBox = styled.div`
   ${StyledImageBox};
   left: 0;
-  img {
-    box-shadow: -32px 80px 32px rgba(0, 0, 0, 0.6);
-  }
+  animation: ${moveLeftImageAnimation} 2s ease-in-out infinite;
+  box-shadow: -32px 80px 32px rgba(0, 0, 0, 0.6);
 `;
 const StyledRightImageBox = styled.div`
   ${StyledImageBox};
   right: 0;
+  animation: ${moveRightImageAnimation} 2s ease-in-out infinite;
+  box-shadow: 32px 80px 32px rgba(0, 0, 0, 0.6);
   img {
-    box-shadow: 32px 80px 32px rgba(0, 0, 0, 0.6);
+    transform: rotateZ(11deg);
   }
 `;
 
@@ -222,7 +248,7 @@ const StyledFeatureText = styled.dd`
   font-size: 18px;
   letter-spacing: 3px;
   line-height: 1.5;
-  margin-bottom: 32px;
+  margin-bottom: 48px;
   color: #555;
 `;
 

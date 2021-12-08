@@ -20,7 +20,7 @@ type ButtonWrap = {
   color?: string;
 };
 
-const ButtonWithIcon: FC<Props> = (props) => {
+const ButtonWithIcon: FC<Props> = React.memo((props) => {
   const { children, href, background, border, color, icon, iconSize } = props;
 
   return (
@@ -30,7 +30,7 @@ const ButtonWithIcon: FC<Props> = (props) => {
       <a href={href}>{children}</a>
     </StyledWrap>
   );
-};
+});
 
 export default ButtonWithIcon;
 
