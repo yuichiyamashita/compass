@@ -15,8 +15,6 @@ const Top: FC = () => {
       <FirstView />
       <Introduction />
       <Features />
-      <Introduction />
-      <Features />
       <Footer />
     </>
   );

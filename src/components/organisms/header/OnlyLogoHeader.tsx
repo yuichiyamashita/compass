@@ -1,5 +1,7 @@
 import React from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
+
 import { Container } from "../../molecules/container";
 import { Flexbox } from "../../molecules/layout";
 
@@ -9,7 +11,7 @@ const OnlyLogoHeader: React.FC = React.memo(() => {
       <Container>
         <Flexbox justify="flex-start" align="center">
           <StyledLogo>
-            <a href="/">compass</a>
+            <Link to="/">compass</Link>
           </StyledLogo>
         </Flexbox>
       </Container>

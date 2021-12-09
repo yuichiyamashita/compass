@@ -1,12 +1,13 @@
 import React, { FC } from "react";
-import { Bar } from "react-chartjs-2";
+import { Pie } from "react-chartjs-2";
 
 type Props = {
   graphData: { label: string; data: number }[];
+  title: string;
 };
 
 const PieGraph: FC<Props> = (props) => {
-  const { graphData } = props;
+  const { graphData, title } = props;
   const labels = graphData.map((obj) => obj.label);
   const dataset = graphData.map((obj) => obj.data);
 
@@ -15,7 +16,7 @@ const PieGraph: FC<Props> = (props) => {
     plugins: {
       title: {
         display: true,
-        text: "作成したテーマ数",
+        text: title,
       },
     },
   };
@@ -24,7 +25,7 @@ const PieGraph: FC<Props> = (props) => {
     labels: labels,
     datasets: [
       {
-        label: "タグ別",
+        label: "作成数",
         // データの値
         data: dataset,
         // グラフの背景色
@@ -40,7 +41,7 @@ const PieGraph: FC<Props> = (props) => {
       },
     ],
   };
-  return <Bar data={data} options={options} height={320} />;
+  return <Pie data={data} options={options} height={320} />;
 };
 
 export default PieGraph;

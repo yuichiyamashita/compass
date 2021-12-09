@@ -1,13 +1,9 @@
 import React, { FC } from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 // Material-UI
-import {
-  TextField as MuiTextField,
-  Paper as MuiPaper,
-  Link as MuiLink,
-  InputAdornment as MuiInputAdornment,
-} from "@mui/material";
+import { TextField as MuiTextField, Paper as MuiPaper, InputAdornment as MuiInputAdornment } from "@mui/material";
 import MuiEmailIcon from "@mui/icons-material/Email";
 import MuiAccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { makeStyles } from "@mui/styles";
@@ -74,9 +70,7 @@ const ResetPassword: FC = () => {
           </form>
           <div className="h-module-spacer--md" />
           <StyledNavWrap>
-            <MuiLink variant="button" href="./login" underline="none" color={[MuiTheme.palette.primary.dark]}>
-              ログイン画面に戻る
-            </MuiLink>
+            <Link to="./login">ログイン画面に戻る</Link>
           </StyledNavWrap>
         </MuiPaper>
 
@@ -114,9 +108,7 @@ const ResetPassword: FC = () => {
           </form>
           <div className="h-module-spacer--md" />
           <StyledNavWrap>
-            <MuiLink variant="button" href="./login" underline="none" color={[MuiTheme.palette.primary.dark]}>
-              ログイン画面に戻る
-            </MuiLink>
+            <Link to="./login">ログイン画面に戻る</Link>
           </StyledNavWrap>
         </div>
       </Container>
@@ -129,6 +121,8 @@ export default ResetPassword;
 const StyledNavWrap = styled.div`
   display: flex;
   justify-content: flex-end;
+  font-size: 14px;
+  color: #666;
 `;
 const StyledText = styled.p`
   text-align: center;

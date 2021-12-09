@@ -2,8 +2,9 @@ import React, { FC, useState, useEffect } from "react";
 import styled from "styled-components";
 import { AppDispatch } from "../../../app/store";
 import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 
-import { Paper as MuiPaper, Link as MuiLink } from "@mui/material";
+import { Paper as MuiPaper } from "@mui/material";
 import MuiEmailIcon from "@mui/icons-material/Email";
 import { makeStyles } from "@mui/styles";
 
@@ -78,7 +79,7 @@ const CompleteSendEmailAuth: FC = () => {
                 color="#fff"
                 background="#673ab7"
                 fullWidth
-                href="./email-authentication"
+                path="./email-authentication"
               />
             </>
           ) : (
@@ -102,9 +103,7 @@ const CompleteSendEmailAuth: FC = () => {
               </form>
               <div className="h-module-spacer--md" />
               <StyledNavWrap>
-                <MuiLink variant="button" href="./login" underline="none" color={[MuiTheme.palette.primary.dark]}>
-                  ログイン画面へ
-                </MuiLink>
+                <Link to="./login">ログイン画面に戻る</Link>
               </StyledNavWrap>
             </>
           )}
@@ -130,7 +129,7 @@ const CompleteSendEmailAuth: FC = () => {
                 color="#fff"
                 background="#673ab7"
                 fullWidth
-                href="./email-authentication"
+                path="./email-authentication"
               />
             </>
           ) : (
@@ -155,9 +154,7 @@ const CompleteSendEmailAuth: FC = () => {
               </form>
               <div className="h-module-spacer--md" />
               <StyledNavWrap>
-                <MuiLink variant="button" href="./login" underline="none" color={[MuiTheme.palette.primary.dark]}>
-                  ログイン画面へ
-                </MuiLink>
+                <Link to="./login">ログイン画面に戻る</Link>
               </StyledNavWrap>
             </>
           )}
@@ -176,8 +173,9 @@ const StyledSpContainer = styled.div`
 `;
 const StyledNavWrap = styled.div`
   display: flex;
-  align-items: flex-end;
-  flex-direction: column;
+  justify-content: flex-end;
+  font-size: 14px;
+  color: #666;
 `;
 const StyledText = styled.p`
   color: #555;

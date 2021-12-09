@@ -1,8 +1,9 @@
 import React from "react";
 import styled from "styled-components";
+import { useHistory } from "react-router";
 
 type Props = {
-  href?: string;
+  path?: string;
   text?: string;
   // スタイルの型定義
   background?: string;
@@ -15,16 +16,17 @@ type Props = {
   margin?: string;
   width?: string;
   fullWidth?: boolean;
-  onClick?: any;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
 };
 
 const PrimaryButton: React.FC<Props> = React.memo((props) => {
-  const { href, text, background, border, radius, boxShadowColor, color, fontSize, fontWeight, margin, fullWidth } =
+  const { path, text, background, border, radius, boxShadowColor, color, fontSize, fontWeight, margin, fullWidth } =
     props;
+  const history = useHistory();
 
   const handleClick = () => {
-    if (href) {
-      window.location.href = href;
+    if (path) {
+      history.push(path);
     }
   };
 

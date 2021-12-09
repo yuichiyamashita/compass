@@ -1,12 +1,23 @@
 import React from "react";
 import styled from "styled-components";
-
 import AccountCircle from "@mui/icons-material/AccountCircle";
 
 import { ButtonWithIcon } from "../../molecules/button-with-icon";
 import { Container } from "../../molecules/container";
 import { Flexbox } from "../../molecules/layout";
+import { SimpleNavigation } from "../../molecules/navigation";
 import { HamburgerMenu } from "../hamburgerMenu";
+
+const naviContents = [
+  {
+    to: "./selfdebate",
+    text: "self debate",
+  },
+  {
+    to: "./fastthinking",
+    text: "fast thinking",
+  },
+];
 
 const MainPageHeader: React.FC = React.memo(() => {
   return (
@@ -14,6 +25,10 @@ const MainPageHeader: React.FC = React.memo(() => {
       <Container>
         <Flexbox justify="space-between" align="center">
           <StyledLogo>compass</StyledLogo>
+
+          <StyledNavigation>
+            <SimpleNavigation contents={naviContents} />
+          </StyledNavigation>
 
           {/* pc */}
           <StyledPCButtonWrap>
@@ -32,6 +47,12 @@ const MainPageHeader: React.FC = React.memo(() => {
 
 export default MainPageHeader;
 
+const StyledNavigation = styled.nav`
+  display: none;
+  @media screen and (min-width: 1024px) {
+    display: block;
+  }
+`;
 const StyledHeader = styled.header`
   height: 90px;
   box-shadow: 0 1px 2px #555;

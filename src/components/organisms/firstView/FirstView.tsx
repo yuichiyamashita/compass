@@ -99,13 +99,13 @@ const StyledTitle = styled.h1`
   font-size: 32px;
   letter-spacing: 1.5px;
   opacity: 0;
+  margin: 0 auto 48px;
   animation: ${slideUpAnimation} 1.2s ease-in-out 1s forwards;
 
   @media screen and (min-width: 600px) {
     font-size: 48px;
     letter-spacing: 3px;
     width: calc(100% - 224px);
-    margin: 0 auto 48px;
   }
   @media screen and (min-width: 1024px) {
     width: calc(100% - 388px);
