@@ -1,6 +1,7 @@
 import React, { FC, useState, useEffect } from "react";
 import styled from "styled-components";
 import { useHistory } from "react-router";
+import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../../app/store";
 import { Paper as MuiPaper, Link as MuiLink } from "@mui/material";
@@ -155,9 +156,7 @@ const Signup: FC = () => {
 
           <div className="h-module-spacer--md" />
           <StyledNavWrap>
-            <MuiLink variant="button" href="./login" underline="none" color={[MuiTheme.palette.primary.dark]}>
-              既にアカウントをお持ちの場合はこちら
-            </MuiLink>
+            <Link to="./login">既にアカウントをお持ちの場合はこちら</Link>
           </StyledNavWrap>
         </MuiPaper>
 
@@ -235,6 +234,8 @@ export default Signup;
 const StyledNavWrap = styled.div`
   display: flex;
   justify-content: flex-end;
+  font-size: 14px;
+  color: #666;
 `;
 const StyledText = styled.p`
   text-align: center;

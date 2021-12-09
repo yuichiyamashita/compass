@@ -13,9 +13,6 @@ const Features: FC = () => {
 
         <StyledFeatureBox>
           <StyledLeftFeatureBoxBg />
-          <StyledLeftImageBox>
-            <img src={mobileImage} alt="self-debate" />
-          </StyledLeftImageBox>
           <StyledLeftTextBox>
             <StyledFeatureTitle>1. Self debate</StyledFeatureTitle>
             <StyledFeatureSubTitle>自分の意見に説得力を持たせる</StyledFeatureSubTitle>
@@ -30,16 +27,16 @@ const Features: FC = () => {
               セルフディベートの作成機能に加えて、ディベート内容を投稿(シェア)したり、他ユーザーの投稿内容を閲覧することができます。
             </StyledFeatureText>
             <StyledButton>
-              <PrimaryButton color="#fff" text="さっそく始める >" background="#673ab7" href="./email-authentication" />
+              <PrimaryButton color="#fff" text="さっそく始める >" background="#673ab7" path="./email-authentication" />
             </StyledButton>
           </StyledLeftTextBox>
+          <StyledLeftImageBox>
+            <img src={mobileImage} alt="self-debate" />
+          </StyledLeftImageBox>
         </StyledFeatureBox>
 
         <StyledFeatureBox>
           <StyledRightFeatureBoxBg />
-          <StyledRightImageBox>
-            <img src={mobileImage} alt="self-debate" />
-          </StyledRightImageBox>
           <StyledRightTextBox>
             <StyledFeatureTitle>2. Fast thinking</StyledFeatureTitle>
             <StyledFeatureSubTitle>瞬時に最適解にたどりつく</StyledFeatureSubTitle>
@@ -54,9 +51,12 @@ const Features: FC = () => {
               セルフディベートの作成機能に加えて、ディベート内容を投稿(シェア)したり、他ユーザーの投稿内容を閲覧することができます。
             </StyledFeatureText>
             <StyledRightButton>
-              <PrimaryButton color="#fff" text="さっそく始める >" background="#673ab7" href="./email-authentication" />
+              <PrimaryButton color="#fff" text="さっそく始める >" background="#673ab7" path="./email-authentication" />
             </StyledRightButton>
           </StyledRightTextBox>
+          <StyledRightImageBox>
+            <img src={mobileImage} alt="self-debate" />
+          </StyledRightImageBox>
         </StyledFeatureBox>
       </Container>
     </StyledContainer>
@@ -113,10 +113,23 @@ const StyledTitle = styled.h2`
   letter-spacing: 6px;
   margin-bottom: 160px;
   display: inline-block;
+
+  @media screen and (max-width: 414px) {
+    font-size: 48px;
+  }
 `;
 
 const StyledFeatureBox = styled.div`
   position: relative;
+
+  @media screen and (max-width: 320px) {
+    height: calc(568px * 2);
+    margin-bottom: 160px;
+  }
+  @media screen and (min-width: 375px) {
+    height: calc(667px * 2);
+    margin-bottom: 128px;
+  }
   @media screen and (min-width: 768px) {
     height: 768px;
   }
@@ -136,6 +149,9 @@ export const StyledFeatureBoxBg = css`
   background: #efefef;
   box-shadow: 2px 2px 12px #ccc;
 
+  @media screen and (max-width: 414px) {
+    display: none;
+  }
   // iPad mini, iPad(9.7)
   @media screen and (min-width: 768px) {
     top: 64px;
@@ -158,15 +174,19 @@ const StyledRightFeatureBoxBg = styled.div`
 `;
 
 export const StyledImageBox = css`
-  position: absolute;
   overflow: hidden;
   background: #000;
+  width: 100%;
 
   img {
     width: 100%;
   }
+  @media screen and (min-width: 375px) {
+    margin-bottom: 80px;
+  }
   // iPad mini, iPad(9.7)
   @media screen and (min-width: 768px) {
+    position: absolute;
     width: 45%;
   }
   // macbook13インチ
@@ -195,11 +215,20 @@ const StyledRightImageBox = styled.div`
 `;
 
 export const StyledTextBox = css`
-  position: absolute;
   text-align: left;
 
+  @media screen and (min-width: 320px) {
+    background: #ececec;
+    padding: 32px 8px;
+    margin-bottom: 16px;
+  }
+
+  @media screen and (min-width: 375px) {
+    padding: 32px 16px;
+  }
   // iPad mini, iPad(9.7)
   @media screen and (min-width: 768px) {
+    position: absolute;
     top: 64px;
     height: 560px;
     width: 55%;
@@ -225,6 +254,13 @@ const StyledFeatureTitle = styled.dt`
   letter-spacing: 3px;
   margin-bottom: 8px;
   border-bottom: 1px solid #333;
+
+  @media screen and (min-width: 320px) {
+    font-size: 32px;
+  }
+  @media screen and (min-width: 375px) {
+    font-size: 40px;
+  }
 
   // iPad mini, iPad(9.7)
   @media screen and (min-width: 768px) {

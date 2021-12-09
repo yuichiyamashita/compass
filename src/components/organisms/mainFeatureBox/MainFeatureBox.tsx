@@ -47,7 +47,7 @@ const MainFeaturesBox: FC<Props> = (props) => {
         </MuiGrid>
         <MuiGrid xs={12} sm={6} item>
           <StyledItemBox>
-            <BarGraph graphData={graphData} />
+            <BarGraph graphData={graphData} title="タグ別の作成数" />
           </StyledItemBox>
         </MuiGrid>
         <MuiGrid xs={12} sm={6} item>
@@ -63,6 +63,7 @@ export default MainFeaturesBox;
 const StyledTitle = styled.h2`
   font-size: 32px;
   font-weight: 600;
+  font-family: "Sriracha", cursive;
   text-align: center;
   color: #555;
   letter-spacing: 2px;

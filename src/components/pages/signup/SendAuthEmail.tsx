@@ -3,12 +3,8 @@ import styled from "styled-components";
 import { AppDispatch } from "../../../app/store";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
-import {
-  TextField as MuiTextField,
-  Paper as MuiPaper,
-  Link as MuiLink,
-  InputAdornment as MuiInputAdornment,
-} from "@mui/material";
+import { Link } from "react-router-dom";
+import { TextField as MuiTextField, Paper as MuiPaper, InputAdornment as MuiInputAdornment } from "@mui/material";
 import MuiEmailIcon from "@mui/icons-material/Email";
 import MuiAccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { makeStyles } from "@mui/styles";
@@ -120,9 +116,7 @@ const SendAuthEmail: FC = () => {
           </form>
           <div className="h-module-spacer--md" />
           <StyledNavWrap>
-            <MuiLink variant="button" href="./login" underline="none" color={[MuiTheme.palette.primary.dark]}>
-              既にアカウントをお持ちの場合はこちら
-            </MuiLink>
+            <Link to="./login">既にアカウントをお持ちの場合はこちら</Link>
           </StyledNavWrap>
         </MuiPaper>
 
@@ -176,9 +170,7 @@ const SendAuthEmail: FC = () => {
           </form>
           <div className="h-module-spacer--md" />
           <StyledNavWrap>
-            <MuiLink variant="button" href="./login" underline="none" color={[MuiTheme.palette.primary.dark]}>
-              既にアカウントを持ちの場合はこちら
-            </MuiLink>
+            <Link to="./login">既にアカウントをお持ちの場合はこちら</Link>
           </StyledNavWrap>
         </StyledSpContainer>
       </Container>
@@ -196,6 +188,8 @@ const StyledSpContainer = styled.div`
 const StyledNavWrap = styled.div`
   display: flex;
   justify-content: flex-end;
+  font-size: 14px;
+  color: #666;
 `;
 const StyledText = styled.p`
   text-align: center;

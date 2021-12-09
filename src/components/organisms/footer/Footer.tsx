@@ -19,11 +19,6 @@ const Footer: FC = () => {
               <a href="./terms">利用規約</a>
               <a href="./privacy">プライバシーポリシー</a>
             </StyledNav>
-            <div className="w-module-spacer--xl" />
-            <StyledNav>
-              <a href="./contact">Twitter</a>
-              <a href="./terms">YouTube</a>
-            </StyledNav>
           </div>
         </Flexbox>
       </Container>

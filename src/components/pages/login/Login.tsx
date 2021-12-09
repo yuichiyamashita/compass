@@ -2,13 +2,9 @@ import React, { FC, useState } from "react";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
+import { Link } from "react-router-dom";
 // Material-UI
-import {
-  TextField as MuiTextField,
-  Paper as MuiPaper,
-  Link as MuiLink,
-  InputAdornment as MuiInputAdornment,
-} from "@mui/material";
+import { TextField as MuiTextField, Paper as MuiPaper, InputAdornment as MuiInputAdornment } from "@mui/material";
 import { LockOpenOutlined as MuiLockOpenOutlined } from "@mui/icons-material";
 import MuiEmailIcon from "@mui/icons-material/Email";
 import MuiLockIcon from "@mui/icons-material/Lock";
@@ -22,7 +18,6 @@ import { OnlyLogoHeader } from "../../organisms/header";
 import { login } from "../../../operation/userAuth";
 import { validateEmailFormat, validateInputPassWord } from "../../../functions/validations";
 import { AppDispatch } from "../../../app/store";
-import { MuiTheme } from "../../../assets/material-ui";
 
 const useStyles = makeStyles({
   loginForm: {
@@ -146,17 +141,9 @@ const Login: FC = () => {
           </form>
           <div className="h-module-spacer--md" />
           <StyledNavWrap>
-            <MuiLink
-              variant="button"
-              href="./email-authentication"
-              underline="none"
-              color={[MuiTheme.palette.primary.dark]}
-            >
-              初めての登録ですか？新規登録
-            </MuiLink>
-            <MuiLink variant="button" href="./reset-password" underline="none" color={[MuiTheme.palette.primary.dark]}>
-              パスワードを忘れた場合
-            </MuiLink>
+            <Link to="./email-authentication">初めての登録ですか？新規登録</Link>
+            <div className="h-module-spacer--xs" />
+            <Link to="./reset-password">パスワードを忘れた場合</Link>
           </StyledNavWrap>
         </MuiPaper>
 
@@ -216,17 +203,9 @@ const Login: FC = () => {
           </form>
           <div className="h-module-spacer--sm" />
           <StyledNavWrap>
-            <MuiLink
-              variant="button"
-              href="./email-authentication"
-              underline="none"
-              color={[MuiTheme.palette.primary.dark]}
-            >
-              初めての登録ですか？新規登録
-            </MuiLink>
-            <MuiLink variant="button" href="./reset-password" underline="none" color={[MuiTheme.palette.primary.dark]}>
-              パスワードを忘れた場合
-            </MuiLink>
+            <Link to="./email-authentication">初めての登録ですか？新規登録</Link>
+            <div className="h-module-spacer--xs" />
+            <Link to="./reset-password">パスワードを忘れた場合</Link>
           </StyledNavWrap>
         </div>
       </Container>
@@ -240,6 +219,8 @@ const StyledNavWrap = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+  font-size: 14px;
+  color: #666;
 `;
 const StyledErrorMessage = styled.p`
   color: #b2102f;

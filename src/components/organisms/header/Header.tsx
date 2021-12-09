@@ -1,9 +1,35 @@
 import React from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
+
 import { PrimaryButton } from "../../atoms/button";
 import { Container } from "../../molecules/container";
 import { Flexbox } from "../../molecules/layout";
+import { SimpleNavigation } from "../../molecules/navigation";
 import { HamburgerMenu } from "../hamburgerMenu";
+
+const naviContents = [
+  {
+    to: "./features",
+    text: "features",
+  },
+  {
+    to: "./tutorial",
+    text: "tutorial",
+  },
+  {
+    to: "./about",
+    text: "about",
+  },
+  {
+    to: "./news",
+    text: "news",
+  },
+  {
+    to: "./contact",
+    text: "contact",
+  },
+];
 
 const Header: React.FC = React.memo(() => {
   return (
@@ -11,24 +37,20 @@ const Header: React.FC = React.memo(() => {
       <Container>
         <Flexbox justify="space-between" align="center">
           <StyledLogo>
-            <a href="/">compass</a>
+            <Link to="/">compass</Link>
           </StyledLogo>
 
           <StyledNavigation>
-            <a href="./features">Features</a>
-            <a href="./tutorial">About</a>
-            <a href="./tutorial">Tutorial</a>
-            <a href="./news">News</a>
-            <a href="./contact">Contact</a>
+            <SimpleNavigation contents={naviContents} />
           </StyledNavigation>
 
           {/* pc */}
           <StyledPCButtonWrap>
-            <PrimaryButton text="ログイン" href="./login" border="1px solid #673ab7" radius="6px" color="#673ab7" />
+            <PrimaryButton text="ログイン" path="./login" border="1px solid #673ab7" radius="6px" color="#673ab7" />
             <div className="w-module-spacer--sm" />
             <PrimaryButton
               text="会員登録"
-              href="./email-authentication"
+              path="./email-authentication"
               background="#673ab7"
               radius="6px"
               color="#fff"
@@ -55,6 +77,7 @@ const StyledHeader = styled.header`
   text-transform: uppercase;
   width: 100%;
 `;
+
 const StyledLogo = styled.h1`
   font-size: 24px;
   font-weight: 600;
@@ -67,33 +90,26 @@ const StyledLogo = styled.h1`
     color: #673ab7;
   }
 `;
+
 const StyledNavigation = styled.nav`
   display: none;
-  font-weight: 600;
-  @media screen and (min-width: 900px) {
-    display: flex;
-    a {
-      margin-right: 24px;
-      transition: all 0.3s;
 
-      &:hover {
-        opacity: 0.7;
-      }
-
-      &:last-child {
-        margin-right: 0;
-      }
-    }
+  @media screen and (min-width: 1024px) {
+    display: block;
   }
 `;
+
 const StyledPCButtonWrap = styled.div`
   display: none;
+
   @media screen and (min-width: 900px) {
     display: flex;
   }
 `;
+
 const StyledButtonWrap = styled.div`
   margin-right: 8px;
+
   @media screen and (min-width: 900px) {
     display: none;
   }

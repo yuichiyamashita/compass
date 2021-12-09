@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React from "react";
 import styled from "styled-components";
 
 import { Grid as MuiGrid } from "@mui/material";
@@ -52,25 +52,25 @@ const data = [
   },
 ];
 
-const Main: FC = () => {
+const Main: React.FC = () => {
   return (
     <>
       <MainPageHeader />
-      <Container>
+      {/* <Container>
         <div className="h-module-spacer--xl" />
         {data ? (
-          data.map((d) => (
+          data.map((data) => (
             <>
-              <MainFeatureBox key={d.id} title={d.title} graphData={d.graphData} contents={d.contents} />
+              <MainFeatureBox key={data.id} title={data.title} graphData={data.graphData} contents={data.contents} />
               <div className="h-module-spacer--xl" />
             </>
           ))
         ) : (
           <StyledH3>まだデータがありません</StyledH3>
         )}
-      </Container>
+      </Container> */}
 
-      <StyledPopularTheme>
+      {/* <StyledPopularTheme>
         <Container>
           <div className="h-module-spacer--xl" />
           <MuiGrid container spacing={8}>
@@ -97,7 +97,7 @@ const Main: FC = () => {
             </MuiGrid>
           </MuiGrid>
         </Container>
-      </StyledPopularTheme>
+      </StyledPopularTheme> */}
     </>
   );
 };
