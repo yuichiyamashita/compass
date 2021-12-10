@@ -1,21 +1,23 @@
 import React from "react";
 import styled from "styled-components";
-import AccountCircle from "@mui/icons-material/AccountCircle";
+import ForumIcon from "@mui/icons-material/Forum";
+import QuickreplyIcon from "@mui/icons-material/Quickreply";
 
-import { ButtonWithIcon } from "../../molecules/button-with-icon";
 import { Container } from "../../molecules/container";
 import { Flexbox } from "../../molecules/layout";
 import { SimpleNavigation } from "../../molecules/navigation";
-import { HamburgerMenu } from "../hamburgerMenu";
+import { HamburgerMenu, AccountMenu } from "../menu";
 
-const naviContents = [
+const menus = [
   {
     to: "./selfdebate",
-    text: "self debate",
+    text: "SELF DEBATE",
+    icon: <ForumIcon />,
   },
   {
     to: "./fastthinking",
-    text: "fast thinking",
+    text: "FAST THINKING",
+    icon: <QuickreplyIcon />,
   },
 ];
 
@@ -27,17 +29,17 @@ const MainPageHeader: React.FC = React.memo(() => {
           <StyledLogo>compass</StyledLogo>
 
           <StyledNavigation>
-            <SimpleNavigation contents={naviContents} />
+            <SimpleNavigation contents={menus} spacing={64} />
           </StyledNavigation>
 
           {/* pc */}
           <StyledPCButtonWrap>
-            <ButtonWithIcon icon={AccountCircle} iconSize="large" />
+            <AccountMenu />
           </StyledPCButtonWrap>
 
           {/* tab & sp */}
           <StyledButtonWrap>
-            <HamburgerMenu />
+            <HamburgerMenu contents={menus} />
           </StyledButtonWrap>
         </Flexbox>
       </Container>
@@ -74,7 +76,7 @@ const StyledLogo = styled.h1`
 const StyledPCButtonWrap = styled.div`
   display: none;
   @media screen and (min-width: 900px) {
-    display: flex;
+    display: block;
   }
 `;
 const StyledButtonWrap = styled.div`

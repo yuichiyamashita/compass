@@ -1,11 +1,11 @@
-import React, { FC } from "react";
+import React from "react";
 import styled, { css, keyframes } from "styled-components";
 
 import mobileImage from "../../../assets/images/mobile.jpg";
 import { Container } from "../../molecules/container";
 import { PrimaryButton } from "../../atoms/button";
 
-const Features: FC = () => {
+const Features: React.FC = () => {
   return (
     <StyledContainer>
       <Container align="center">
@@ -27,7 +27,7 @@ const Features: FC = () => {
               セルフディベートの作成機能に加えて、ディベート内容を投稿(シェア)したり、他ユーザーの投稿内容を閲覧することができます。
             </StyledFeatureText>
             <StyledButton>
-              <PrimaryButton color="#fff" text="さっそく始める >" background="#673ab7" path="./email-authentication" />
+              <PrimaryButton color="#fff" text="さっそく始める →" background="#673ab7" path="./email-authentication" />
             </StyledButton>
           </StyledLeftTextBox>
           <StyledLeftImageBox>
@@ -51,7 +51,7 @@ const Features: FC = () => {
               セルフディベートの作成機能に加えて、ディベート内容を投稿(シェア)したり、他ユーザーの投稿内容を閲覧することができます。
             </StyledFeatureText>
             <StyledRightButton>
-              <PrimaryButton color="#fff" text="さっそく始める >" background="#673ab7" path="./email-authentication" />
+              <PrimaryButton color="#fff" text="さっそく始める →" background="#673ab7" path="./email-authentication" />
             </StyledRightButton>
           </StyledRightTextBox>
           <StyledRightImageBox>

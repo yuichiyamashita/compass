@@ -1,33 +1,39 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import MailIcon from "@mui/icons-material/Mail";
 
 import { PrimaryButton } from "../../atoms/button";
 import { Container } from "../../molecules/container";
 import { Flexbox } from "../../molecules/layout";
 import { SimpleNavigation } from "../../molecules/navigation";
-import { HamburgerMenu } from "../hamburgerMenu";
+import { HamburgerMenu } from "../menu";
 
 const naviContents = [
   {
     to: "./features",
-    text: "features",
+    text: "FEATURES",
+    icon: <MailIcon />,
   },
   {
     to: "./tutorial",
-    text: "tutorial",
+    text: "TUTORIAL",
+    icon: <MailIcon />,
   },
   {
     to: "./about",
-    text: "about",
+    text: "ABOUT",
+    icon: <MailIcon />,
   },
   {
     to: "./news",
-    text: "news",
+    text: "NEWS",
+    icon: <MailIcon />,
   },
   {
     to: "./contact",
-    text: "contact",
+    text: "CONTACT",
+    icon: <MailIcon />,
   },
 ];
 
@@ -41,7 +47,7 @@ const Header: React.FC = React.memo(() => {
           </StyledLogo>
 
           <StyledNavigation>
-            <SimpleNavigation contents={naviContents} />
+            <SimpleNavigation contents={naviContents} spacing={24} />
           </StyledNavigation>
 
           {/* pc */}
@@ -59,7 +65,7 @@ const Header: React.FC = React.memo(() => {
 
           {/* tab & sp */}
           <StyledButtonWrap>
-            <HamburgerMenu />
+            <HamburgerMenu contents={naviContents} />
           </StyledButtonWrap>
         </Flexbox>
       </Container>
