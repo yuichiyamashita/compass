@@ -16,11 +16,6 @@ const naviContents = [
     icon: <MailIcon />,
   },
   {
-    to: "./tutorial",
-    text: "TUTORIAL",
-    icon: <MailIcon />,
-  },
-  {
     to: "./about",
     text: "ABOUT",
     icon: <MailIcon />,
@@ -37,7 +32,7 @@ const naviContents = [
   },
 ];
 
-const Header: React.FC = React.memo(() => {
+const TopPageHeader: React.FC = React.memo(() => {
   return (
     <StyledHeader>
       <Container>
@@ -52,12 +47,12 @@ const Header: React.FC = React.memo(() => {
 
           {/* pc */}
           <StyledPCButtonWrap>
-            <PrimaryButton text="ログイン" path="./login" border="1px solid #673ab7" radius="6px" color="#673ab7" />
+            <PrimaryButton text="ログイン" path="./login" border="1px solid #8bd5da" radius="6px" color="#8bd5da" />
             <div className="w-module-spacer--sm" />
             <PrimaryButton
               text="会員登録"
               path="./email-authentication"
-              background="#673ab7"
+              background="#8bd5da"
               radius="6px"
               color="#fff"
             />
@@ -73,10 +68,13 @@ const Header: React.FC = React.memo(() => {
   );
 });
 
-export default Header;
+export default TopPageHeader;
 
 const StyledHeader = styled.header`
+  z-index: 999;
+  position: fixed;
   height: 72px;
+  width: 100%;
   background: #fff;
   box-shadow: 0px 2px 8px #999;
   color: #555;
@@ -93,7 +91,7 @@ const StyledLogo = styled.h1`
     margin-left: 0;
   }
   &::first-letter {
-    color: #673ab7;
+    color: #8bd5da;
   }
 `;
 

@@ -137,7 +137,7 @@ const Login: FC = () => {
               }}
             />
             <div className="h-module-spacer--sm" />
-            <PrimaryButton text="ログイン" color="#fff" background="#673ab7" fullWidth />
+            <PrimaryButton text="ログイン" color="#fff" background="#8bd5da" fullWidth />
           </form>
           <div className="h-module-spacer--md" />
           <StyledNavWrap>
@@ -199,7 +199,7 @@ const Login: FC = () => {
               }}
             />
             <div className="h-module-spacer--sm" />
-            <PrimaryButton text="ログイン" color="#fff" background="#673ab7" fullWidth />
+            <PrimaryButton text="ログイン" color="#fff" background="#8bd5da" fullWidth />
           </form>
           <div className="h-module-spacer--sm" />
           <StyledNavWrap>

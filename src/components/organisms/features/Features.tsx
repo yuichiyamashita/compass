@@ -27,7 +27,7 @@ const Features: React.FC = () => {
               セルフディベートの作成機能に加えて、ディベート内容を投稿(シェア)したり、他ユーザーの投稿内容を閲覧することができます。
             </StyledFeatureText>
             <StyledButton>
-              <PrimaryButton color="#fff" text="さっそく始める →" background="#673ab7" path="./email-authentication" />
+              <PrimaryButton color="#fff" text="さっそく始める →" background="#8bd5da" path="./email-authentication" />
             </StyledButton>
           </StyledLeftTextBox>
           <StyledLeftImageBox>
@@ -51,7 +51,7 @@ const Features: React.FC = () => {
               セルフディベートの作成機能に加えて、ディベート内容を投稿(シェア)したり、他ユーザーの投稿内容を閲覧することができます。
             </StyledFeatureText>
             <StyledRightButton>
-              <PrimaryButton color="#fff" text="さっそく始める →" background="#673ab7" path="./email-authentication" />
+              <PrimaryButton color="#fff" text="さっそく始める →" background="#8bd5da" path="./email-authentication" />
             </StyledRightButton>
           </StyledRightTextBox>
           <StyledRightImageBox>
@@ -101,14 +101,14 @@ const StyledContainer = styled.div`
     position: absolute;
     top: 0;
     left: 0;
-    border-top: 8vw solid #23133e;
+    border-top: 8vw solid #8bd5da;
     border-right: 100vw solid transparent;
   }
 `;
 
 const StyledTitle = styled.h2`
   border-bottom: 1px solid #333;
-  font-family: "Sriracha";
+  font-family: "Sriracha", cursive;
   font-size: 64px;
   letter-spacing: 6px;
   margin-bottom: 160px;
@@ -146,8 +146,8 @@ const StyledFeatureBox = styled.div`
 
 export const StyledFeatureBoxBg = css`
   position: absolute;
-  background: #efefef;
-  box-shadow: 2px 2px 12px #ccc;
+  background: #fff;
+  box-shadow: 0px 0px 12px #999;
 
   @media screen and (max-width: 414px) {
     display: none;
@@ -218,7 +218,6 @@ export const StyledTextBox = css`
   text-align: left;
 
   @media screen and (min-width: 320px) {
-    background: #ececec;
     padding: 32px 8px;
     margin-bottom: 16px;
   }

@@ -36,6 +36,6 @@ const StyledLogo = styled.h1`
     margin-left: 0;
   }
   &::first-letter {
-    color: #673ab7;
+    color: #8bd5da;
   }
 `;

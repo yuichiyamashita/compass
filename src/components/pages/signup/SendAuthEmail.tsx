@@ -112,7 +112,7 @@ const SendAuthEmail: FC = () => {
               onChange={handleChangeEmail}
             />
             <div className="h-module-spacer--sm" />
-            <PrimaryButton text="認証メールを送信" color="#fff" background="#673ab7" fullWidth />
+            <PrimaryButton text="認証メールを送信" color="#fff" background="#8bd5da" fullWidth />
           </form>
           <div className="h-module-spacer--md" />
           <StyledNavWrap>
@@ -166,7 +166,7 @@ const SendAuthEmail: FC = () => {
               onChange={handleChangeEmail}
             />
             <div className="h-module-spacer--sm" />
-            <PrimaryButton text="認証メールを送信" color="#fff" background="#673ab7" fullWidth />
+            <PrimaryButton text="認証メールを送信" color="#fff" background="#8bd5da" fullWidth />
           </form>
           <div className="h-module-spacer--md" />
           <StyledNavWrap>

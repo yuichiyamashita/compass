@@ -12,6 +12,8 @@ import MenuIcon from "@mui/icons-material/Menu";
 import LoginIcon from "@mui/icons-material/Login";
 import LogoutIcon from "@mui/icons-material/Logout";
 import PersonAddAlt1Icon from "@mui/icons-material/PersonAddAlt1";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import Settings from "@mui/icons-material/Settings";
 
 import { userAuthSelector } from "../../../../Selectors";
 
@@ -24,14 +26,31 @@ type Props = {
 };
 
 const signedIn = () => (
-  <List>
-    <ListItem>
-      <ListItemIcon>
-        <LogoutIcon />
-      </ListItemIcon>
-      <Link to="./logout">ログアウト</Link>
-    </ListItem>
-  </List>
+  <>
+    <List>
+      <ListItem>
+        <ListItemIcon>
+          <AccountCircleIcon />
+        </ListItemIcon>
+        <Link to="./logout">プロフィール</Link>
+      </ListItem>
+      <ListItem>
+        <ListItemIcon>
+          <Settings />
+        </ListItemIcon>
+        <Link to="./logout">設定・変更</Link>
+      </ListItem>
+    </List>
+    <Divider />
+    <List>
+      <ListItem>
+        <ListItemIcon>
+          <LogoutIcon />
+        </ListItemIcon>
+        <Link to="./logout">ログアウト</Link>
+      </ListItem>
+    </List>
+  </>
 );
 const nonLogin = () => (
   <List>

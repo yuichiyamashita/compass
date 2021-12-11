@@ -10,13 +10,15 @@ type DataProps = {
 };
 type StyledProps = {
   spacing?: number;
+  fontSize?: number;
+  fontWeight?: number;
 };
 type Props = DataProps & StyledProps;
 
 const SimpleNavigation: React.FC<Props> = React.memo((props) => {
-  const { contents, spacing } = props;
+  const { contents, spacing, fontSize, fontWeight } = props;
   return (
-    <StyledNavigation spacing={spacing}>
+    <StyledNavigation spacing={spacing} fontSize={fontSize} fontWeight={fontWeight}>
       {contents.map((content, index) => (
         <Link key={index} to={content.to}>
           {content.text}
@@ -32,7 +34,8 @@ const StyledNavigation = styled.nav<StyledProps>`
   display: flex;
   justify-content: center;
   align-items: center;
-  font-weight: 600;
+  font-size: ${(props) => props.fontSize}px;
+  font-weight: ${(props) => (props.fontWeight ? props.fontWeight : "600")};
 
   a {
     transition: 0.5s;

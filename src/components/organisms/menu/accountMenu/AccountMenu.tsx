@@ -1,15 +1,16 @@
 import React from "react";
+import styled from "styled-components";
 import Box from "@mui/material/Box";
-import Avatar from "@mui/material/Avatar";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
-import Settings from "@mui/icons-material/Settings";
 import Logout from "@mui/icons-material/Logout";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import Settings from "@mui/icons-material/Settings";
+import { Link } from "react-router-dom";
 
 const SimpleMenu: React.FC = React.memo(() => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -25,7 +26,7 @@ const SimpleMenu: React.FC = React.memo(() => {
       <Box sx={{ display: "flex", alignItems: "center", textAlign: "center" }}>
         <Tooltip title="Account settings">
           <IconButton onClick={handleClick} size="small" sx={{ ml: 2 }}>
-            <AccountCircleIcon fontSize="large" />
+            <AccountCircleIcon fontSize="large" sx={{ color: "#8bd5da" }} />
           </IconButton>
         </Tooltip>
       </Box>
@@ -64,21 +65,38 @@ const SimpleMenu: React.FC = React.memo(() => {
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
         <MenuItem>
-          <Avatar />
-          アカウント
+          <Link to="./account">
+            <StyledMenuItemBox>
+              <ListItemIcon>
+                <AccountCircleIcon />
+              </ListItemIcon>
+              <span>プロフィール</span>
+            </StyledMenuItemBox>
+          </Link>
         </MenuItem>
+
         <MenuItem>
-          <ListItemIcon>
-            <Settings fontSize="small" />
-          </ListItemIcon>
-          設定・変更
+          <Link to="./settings">
+            <StyledMenuItemBox>
+              <ListItemIcon>
+                <Settings />
+              </ListItemIcon>
+              <span>設定・変更</span>
+            </StyledMenuItemBox>
+          </Link>
         </MenuItem>
+
         <Divider />
+
         <MenuItem>
-          <ListItemIcon>
-            <Logout fontSize="small" />
-          </ListItemIcon>
-          ログアウト
+          <Link to="./logout">
+            <StyledMenuItemBox>
+              <ListItemIcon>
+                <Logout />
+              </ListItemIcon>
+              <span>ログアウト</span>
+            </StyledMenuItemBox>
+          </Link>
         </MenuItem>
       </Menu>
     </>
@@ -86,3 +104,9 @@ const SimpleMenu: React.FC = React.memo(() => {
 });
 
 export default SimpleMenu;
+
+const StyledMenuItemBox = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;

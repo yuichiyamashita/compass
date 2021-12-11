@@ -149,7 +149,7 @@ const Signup: FC = () => {
                   />
                 </FormControl>
                 <div className="h-module-spacer--lg" />
-                <PrimaryButton text="アカウント作成" color="#fff" background="#673ab7" fullWidth />
+                <PrimaryButton text="アカウント作成" color="#fff" background="#8bd5da" fullWidth />
               </>
             )}
           </form>
@@ -212,7 +212,7 @@ const Signup: FC = () => {
                   />
                 </FormControl>
                 <div className="h-module-spacer--lg" />
-                <PrimaryButton text="アカウント作成" color="#fff" background="#673ab7" fullWidth />
+                <PrimaryButton text="アカウント作成" color="#fff" background="#8bd5da" fullWidth />
               </>
             )}
           </form>

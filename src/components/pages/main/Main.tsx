@@ -1,10 +1,15 @@
 import React from "react";
 import styled from "styled-components";
+import { Grid as MuiGrid, Paper as MuiPaper } from "@mui/material";
+import MenuBookTwoToneIcon from "@mui/icons-material/MenuBookTwoTone";
+import HistoryIcon from "@mui/icons-material/History";
+import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
+import CheckCircleOutlineSharpIcon from "@mui/icons-material/CheckCircleOutlineSharp";
 
-import { Grid as MuiGrid } from "@mui/material";
-
+import { PrimaryButton } from "../../atoms/button";
+import { ButtonWithIcon } from "../../molecules/button-with-icon";
 import { Container } from "../../molecules/container";
-import { MainPageHeader } from "../../organisms/header";
+import { AppHeader } from "../../organisms/header";
 import { MainFeatureBox } from "../../organisms/mainFeatureBox";
 
 // テストデータ
@@ -54,73 +59,179 @@ const data = [
 
 const Main: React.FC = () => {
   return (
-    <>
-      <MainPageHeader />
-      {/* <Container>
-        <div className="h-module-spacer--xl" />
-        {data ? (
-          data.map((data) => (
-            <>
-              <MainFeatureBox key={data.id} title={data.title} graphData={data.graphData} contents={data.contents} />
-              <div className="h-module-spacer--xl" />
-            </>
-          ))
-        ) : (
-          <StyledH3>まだデータがありません</StyledH3>
-        )}
-      </Container> */}
-
-      {/* <StyledPopularTheme>
-        <Container>
-          <div className="h-module-spacer--xl" />
-          <MuiGrid container spacing={8}>
-            <MuiGrid item xs={12}>
-              <StyledH2>コミュニティー</StyledH2>
-            </MuiGrid>
-            <MuiGrid xs={12} sm={6} item>
-              <StyledItemBox>
-                <StyledH3>人気のテーマ</StyledH3>
-                <ul>
-                  <li>裁判員制度は廃止されるべきか</li>
-                  <li>定年退職制度は廃止されるべきか</li>
-                  <li>高等教育を義務教育化するべきか</li>
-                  <li>日本は核兵器を持つべきか</li>
-                  <li>コロナが終息してもマスクはつけ続けるべきか</li>
-                  <li>日本は外国人労働者をもっと受け入れるべきか</li>
-                </ul>
-              </StyledItemBox>
-            </MuiGrid>
-            <MuiGrid xs={12} sm={6} item>
-              <StyledItemBox>
-                <StyledH3>閲覧数が多い</StyledH3>
-              </StyledItemBox>
-            </MuiGrid>
+    <StyledMain>
+      <AppHeader />
+      <Container padding={"124px 0 64px"}>
+        <MuiGrid container spacing={4}>
+          <MuiGrid item xs={12}>
+            <StyledSectionTitleWrap>
+              <MenuBookTwoToneIcon fontSize="medium" />
+              <StyledSectionTitle>トレーニングメニュー</StyledSectionTitle>
+            </StyledSectionTitleWrap>
           </MuiGrid>
-        </Container>
-      </StyledPopularTheme> */}
-    </>
+
+          <MuiGrid item xs={12} md={6}>
+            <MuiPaper elevation={4} sx={{ color: "#555", padding: "32px 16px" }}>
+              <StyledFeatureTitle>Self debate</StyledFeatureTitle>
+              <StyledFeatureTextBox>
+                <StyledFeatureText>
+                  <div>
+                    <CheckCircleOutlineSharpIcon />
+                    <div className="w-module-spacer--xxs" />
+                    <span>人に自分の意見を主張するためのトレーニング</span>
+                  </div>
+                  <br />
+                  <br />
+                  設定したテーマについて、自分自身で肯定派と否定派の両方を考え討論することで、偏見や飛躍した考えを修正することができ、相手に「なるほど！」と思ってもらえる意見が言えるようになります。
+                </StyledFeatureText>
+                <StyledFeatureLinkWrap>
+                  <ButtonWithIcon
+                    icon={InfoOutlinedIcon}
+                    text="使い方を確認する →"
+                    path="./tutorial/selfdebate"
+                    background="#fff"
+                    border="1px solid #33B6B1"
+                    color="#33b6b1"
+                    fontSize="12px"
+                    iconSize="small"
+                    padding="2px 4px"
+                    radius="4px"
+                    spacing="xxs"
+                  />
+                </StyledFeatureLinkWrap>
+              </StyledFeatureTextBox>
+              <PrimaryButton
+                text="セルフディベートを始める →"
+                color="#fff"
+                background="#33b6b1"
+                radius="4px"
+                fullWidth
+              />
+            </MuiPaper>
+          </MuiGrid>
+
+          <MuiGrid item xs={12} md={6}>
+            <MuiPaper elevation={4} sx={{ color: "#555", padding: "32px 16px" }}>
+              <StyledFeatureTitle>Fast thinking</StyledFeatureTitle>
+              <StyledFeatureTextBox>
+                <StyledFeatureText>
+                  <div>
+                    <CheckCircleOutlineSharpIcon />
+                    <div className="w-module-spacer--xxs" />
+                    <span>瞬時に最適解を導くためのトレーニング</span>
+                  </div>
+                  <br />
+                  <br />
+                  設定したテーマについて、瞬発的に思い浮かんだ原因や解決策を書き出し、思考スピードの向上を図ります。
+                  <br />
+                  また、悩みや不安などをテーマに設定することで頭の中をクリアにし、実行力を身につけることができます。
+                  <br />
+                </StyledFeatureText>
+                <StyledFeatureLinkWrap>
+                  <ButtonWithIcon
+                    icon={InfoOutlinedIcon}
+                    text="使い方を確認する →"
+                    path="./tutorial/fastthinking"
+                    background="#fff"
+                    border="1px solid #71a5f3"
+                    color="#71a5f3"
+                    fontSize="12px"
+                    iconSize="small"
+                    padding="2px 4px"
+                    radius="4px"
+                    spacing="xxs"
+                  />
+                </StyledFeatureLinkWrap>
+              </StyledFeatureTextBox>
+              <PrimaryButton
+                text="ファストシンキングを始める →"
+                color="#fff"
+                background="#71a5f3"
+                radius="4px"
+                fullWidth
+              />
+            </MuiPaper>
+          </MuiGrid>
+        </MuiGrid>
+        <div className="h-module-spacer--xxl" />
+
+        <MuiGrid container spacing={4}>
+          <MuiGrid item xs={12}>
+            <StyledSectionTitleWrap>
+              <HistoryIcon fontSize="medium" />
+              <StyledSectionTitle>トレーニング記録</StyledSectionTitle>
+            </StyledSectionTitleWrap>
+          </MuiGrid>
+          <MuiGrid item xs={12}>
+            {/* {data ? (
+              data.map((data) => (
+                <>
+                  <MainFeatureBox
+                    key={data.id}
+                    title={data.title}
+                    graphData={data.graphData}
+                    contents={data.contents}
+                  />
+                  <div className="h-module-spacer--xl" />
+                </>
+              ))
+            ) : (
+              <h3>まだデータが登録されていません</h3>
+            )} */}
+          </MuiGrid>
+        </MuiGrid>
+      </Container>
+    </StyledMain>
   );
 };
 
 export default Main;
 
-const StyledH2 = styled.h2`
-  font-size: 32px;
-  font-weight: 600;
-  text-align: center;
+const StyledMain = styled.div`
+  color: #555;
+  background: #f8fbfe;
 `;
-const StyledH3 = styled.h3`
-  font-size: 20px;
-  font-weight: 600;
-  text-align: center;
-`;
-const StyledItemBox = styled.div`
+
+const StyledSectionTitleWrap = styled.div`
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
 `;
-const StyledPopularTheme = styled.div`
-  background: #f9f9f9;
-  color: #666;
+const StyledSectionTitle = styled.h2`
+  font-size: 20px;
+  display: inline-block;
+`;
+
+const StyledFeatureTitle = styled.h3`
+  font-family: "Sriracha", cursive;
+  font-size: 32px;
+  margin-bottom: 32px;
+  text-align: center;
+`;
+
+const StyledFeatureTextBox = styled.div`
+  font-size: 14px;
+  line-height: 1.5;
+  letter-spacing: 1.5px;
+  margin-bottom: 32px;
+  padding: 0 8px;
+`;
+
+const StyledFeatureText = styled.h4`
+  margin-bottom: 16px;
+
+  div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    span {
+      font-weight: 600;
+    }
+  }
+`;
+
+const StyledFeatureLinkWrap = styled.div`
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: right;
 `;

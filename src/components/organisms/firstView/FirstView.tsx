@@ -80,8 +80,9 @@ const StyledFirstView = styled.div`
   font-weight: 600;
   overflow: hidden;
   text-align: left;
-  height: calc(100vh - 72px);
+  height: 100vh;
   background: #000;
+  padding-top: 72px;
 
   &:after {
     content: "";
