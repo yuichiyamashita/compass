@@ -18,6 +18,9 @@
   height: 128px;
 }
 
+.w-module-spacer--xxs {
+  width: 4px;
+}
 .w-module-spacer--xs {
   width: 8px;
 }
@@ -34,5 +37,5 @@
   width: 64px;
 }
 .w-module-spacer--xxl {
-  height: 128px;
+  width: 128px;
 }

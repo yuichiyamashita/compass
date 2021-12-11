@@ -14,14 +14,27 @@ type Props = {
   fontSize?: string;
   fontWeight?: 400 | 600;
   margin?: string;
+  padding?: string;
   width?: string;
   fullWidth?: boolean;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
 };
 
 const PrimaryButton: React.FC<Props> = React.memo((props) => {
-  const { path, text, background, border, radius, boxShadowColor, color, fontSize, fontWeight, margin, fullWidth } =
-    props;
+  const {
+    path,
+    text,
+    background,
+    border,
+    radius,
+    boxShadowColor,
+    color,
+    fontSize,
+    fontWeight,
+    margin,
+    padding,
+    fullWidth,
+  } = props;
   const history = useHistory();
 
   const handleClick = () => {
@@ -40,6 +53,7 @@ const PrimaryButton: React.FC<Props> = React.memo((props) => {
       fontSize={fontSize}
       fontWeight={fontWeight}
       margin={margin}
+      padding={padding}
       fullWidth={fullWidth}
       onClick={handleClick}
     >
@@ -58,7 +72,7 @@ const StyledPrimaryButton = styled.button<Props>`
   color: ${(props) => props.color};
   cursor: pointer;
   font-size: ${(props) => props.fontSize};
-  padding: 10px 18px;
+  padding: ${(props) => (props.padding ? props.padding : "10px 18px")};
   margin: ${(props) => props.margin};
   width: ${(props) => props.fullWidth && "100%"};
   text-align: center;

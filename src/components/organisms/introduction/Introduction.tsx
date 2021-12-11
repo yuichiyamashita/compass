@@ -19,7 +19,7 @@ const StyledContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #23133e;
+  background: #8bd5da;
   color: #fff;
   height: 58vh;
   overflow: hidden;

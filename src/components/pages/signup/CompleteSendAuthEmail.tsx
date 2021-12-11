@@ -77,7 +77,7 @@ const CompleteSendEmailAuth: FC = () => {
               <PrimaryButton
                 text="認証メール送信画面へ"
                 color="#fff"
-                background="#673ab7"
+                background="#8bd5da"
                 fullWidth
                 path="./email-authentication"
               />
@@ -99,7 +99,7 @@ const CompleteSendEmailAuth: FC = () => {
               </StyledText>
               <div className="h-module-spacer--md" />
               <form onSubmit={handleSubmit}>
-                <PrimaryButton text="認証メールを再送信" color="#fff" background="#673ab7" fullWidth />
+                <PrimaryButton text="認証メールを再送信" color="#fff" background="#8bd5da" fullWidth />
               </form>
               <div className="h-module-spacer--md" />
               <StyledNavWrap>
@@ -127,7 +127,7 @@ const CompleteSendEmailAuth: FC = () => {
               <PrimaryButton
                 text="認証メール送信画面へ"
                 color="#fff"
-                background="#673ab7"
+                background="#8bd5da"
                 fullWidth
                 path="./email-authentication"
               />
@@ -150,7 +150,7 @@ const CompleteSendEmailAuth: FC = () => {
               </StyledText>
               <div className="h-module-spacer--md" />
               <form onSubmit={handleSubmit}>
-                <PrimaryButton text="認証メールを再送信" color="#fff" background="#673ab7" fullWidth />
+                <PrimaryButton text="認証メールを再送信" color="#fff" background="#8bd5da" fullWidth />
               </form>
               <div className="h-module-spacer--md" />
               <StyledNavWrap>

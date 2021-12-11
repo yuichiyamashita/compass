@@ -1,47 +1,58 @@
 import React, { FC } from "react";
 import styled from "styled-components";
 import { Icon as MuiIcon } from "@mui/material";
+import { Link } from "react-router-dom";
 
-type Props = {
-  href?: string;
+type DataProps = {
+  path: string;
+  text: string;
   icon: React.ElementType;
+};
+type StyleProps = {
   background?: string;
   border?: string;
-  boxShadowColor?: string;
+  radius?: string;
   color?: string;
   fontSize?: string;
-  fontWeight?: 400 | 600;
+  fontWeight?: string;
   iconSize?: "small" | "medium" | "large";
+  padding?: string;
+  spacing?: "xxs" | "xs" | "sm" | "md" | "lg" | "xl" | "xxl";
 };
-
-type ButtonWrap = {
-  background?: string;
-  border?: string;
-  color?: string;
-};
+type Props = DataProps & StyleProps;
 
 const ButtonWithIcon: FC<Props> = React.memo((props) => {
-  const { children, href, background, border, color, icon, iconSize } = props;
+  const { path, text, icon, background, border, radius, color, fontSize, fontWeight, iconSize, padding, spacing } =
+    props;
 
   return (
-    <StyledWrap color={color} background={background} border={border}>
+    <StyledButtonWithIconWrap
+      background={background}
+      border={border}
+      color={color}
+      fontSize={fontSize}
+      fontWeight={fontWeight}
+      padding={padding}
+      radius={radius}
+    >
       <MuiIcon component={icon} fontSize={iconSize} />
-      <div className="w-module-spacer--xs" />
-      <a href={href}>{children}</a>
-    </StyledWrap>
+      {spacing && <div className={`w-module-spacer--${spacing}`} />}
+      <Link to={path}>{text}</Link>
+    </StyledButtonWithIconWrap>
   );
 });
 
 export default ButtonWithIcon;
 
-const StyledWrap = styled.div<ButtonWrap>`
+const StyledButtonWithIconWrap = styled.div<StyleProps>`
   display: flex;
   align-items: center;
   justify-content: center;
   background: ${(props) => props.background};
   border: ${(props) => props.border};
-  border-radius: 9px;
+  border-radius: ${(props) => props.radius};
   color: ${(props) => props.color};
-  cursor: pointer;
-  padding: 8px 18px;
+  font-size: ${(props) => props.fontSize};
+  font-weight: ${(props) => props.fontWeight};
+  padding: ${(props) => (props.padding ? props.padding : "10px 18px")};
 `;
