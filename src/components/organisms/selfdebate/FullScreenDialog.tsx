@@ -1,6 +1,7 @@
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState, useCallback } from "react";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
+
 import {
   Dialog as MuiDialog,
   ListItemText as MuiListItemText,
@@ -10,26 +11,22 @@ import {
   Divider as MuiDivider,
   AppBar as MuiAppBar,
   Toolbar as MuiToolbar,
-  IconButton as MuiIconButton,
   Typography as MuiTypography,
   Slide as MuiSlide,
   InputAdornment as MuiInputAdornment,
+  IconButton as MuiIconButton,
 } from "@mui/material";
 import { TransitionProps } from "@mui/material/transitions";
 import CloseIcon from "@mui/icons-material/Close";
 import TextFieldsIcon from "@mui/icons-material/TextFields";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
+import TimelineIcon from "@mui/icons-material/Timeline";
 
-import { AppDispatch } from "../../../store";
+import { AppDispatch, useSelector } from "../../../store";
 import { selfDebateSelector } from "../../../Selectors";
-import { saveThemeAction } from "../../../slice/selfdebateSlice";
+import { openDialogAction, saveThemeAction } from "../../../slice/selfdebateSlice";
 import { PrimaryButton } from "../../atoms/button";
-
-type Props = {
-  title: string;
-  open: boolean;
-  onClose: React.MouseEventHandler<HTMLButtonElement>;
-};
+import { BasicTypographyWithIcon } from "../../molecules/typography-with-icon";
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
@@ -40,17 +37,16 @@ const Transition = React.forwardRef(function Transition(
   return <MuiSlide direction="up" ref={ref} {...props} />;
 });
 
-const FullScreenDialog: React.FC<Props> = React.memo((props) => {
-  const { title, open, onClose } = props;
+const FullScreenDialog: React.FC = React.memo(() => {
+  const dispatch: AppDispatch = useDispatch();
+  const state = useSelector(selfDebateSelector);
+  const dialog = state.dialog;
+
   const [inputTheme, setInputTheme] = useState("");
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputTheme(e.target.value);
   };
-
-  // =============================================
-  const state = useSelector(selfDebateSelector);
-  const dispatch: AppDispatch = useDispatch();
-  const theme = state.theme;
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -61,27 +57,68 @@ const FullScreenDialog: React.FC<Props> = React.memo((props) => {
     dispatch(saveThemeAction(newTheme));
   };
 
+  const handleClose = useCallback(() => {
+    dispatch(openDialogAction(false));
+  }, [dispatch]);
+
   return (
-    <MuiDialog fullScreen open={open} onClose={onClose} TransitionComponent={Transition}>
+    <MuiDialog fullScreen open={dialog} onClose={handleClose} TransitionComponent={Transition}>
       <MuiAppBar sx={{ position: "relative" }}>
         <MuiToolbar>
-          <PrimaryButton color="#fff" onClick={onClose}>
+          <MuiIconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">
             <CloseIcon />
-          </PrimaryButton>
+          </MuiIconButton>
           <MuiTypography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
-            {title}
+            テーマを決めよう
           </MuiTypography>
         </MuiToolbar>
       </MuiAppBar>
       <StyledContainer>
-        <p>テーマは自分で入力するか、テンプレートやトレンドから選ぶことができます。</p>
-        <br />
-        <StyledSectionTitle>
-          <BorderColorIcon />
-          自分でテーマを決める
-          <br />
+        <BasicTypographyWithIcon
+          text="テンプレートやトレンドから選ぶ"
+          fontSize="22px"
+          fontWeight={600}
+          icon={TimelineIcon}
+          iconSize="32px"
+          iconColor="primary"
+          spacing="xs"
+          margin="0 0 8px 0"
+        />
+        <MuiList>
+          <MuiListItem button>
+            <MuiListItemText primary="バスや電車の優先席の使用をやめるべきか" />
+          </MuiListItem>
+          <MuiDivider />
+          <MuiListItem button>
+            <MuiListItemText primary="高等教育の費用は政府が負担するべきか" />
+          </MuiListItem>
+          <MuiDivider />
+          <MuiListItem button>
+            <MuiListItemText primary="日本は再生可能エネルギーをいっそう推進するべきか" />
+          </MuiListItem>
+          <MuiDivider />
+          <MuiListItem button>
+            <MuiListItemText primary="社会人は毎日3食ご飯を食べるべきか" />
+          </MuiListItem>
+          <MuiDivider />
+          <MuiListItem button>
+            <MuiListItemText primary="社会人は毎日3食ご飯を食べるべきか" />
+          </MuiListItem>
+        </MuiList>
+        <div className="h-module-spacer--xl" />
+        <StyledSectionTitleWrap>
+          <BasicTypographyWithIcon
+            text="自分でテーマを決める"
+            fontSize="22px"
+            fontWeight={600}
+            icon={BorderColorIcon}
+            iconSize="32px"
+            iconColor="primary"
+            spacing="xs"
+            margin="0 0 8px 0"
+          />
           <span>※肯定派と否定派に分けられるテーマを設定しましょう</span>
-        </StyledSectionTitle>
+        </StyledSectionTitleWrap>
         <StyledThemeInputForm onSubmit={handleSubmit}>
           <StyledTextField>
             <MuiTextField
@@ -102,16 +139,6 @@ const FullScreenDialog: React.FC<Props> = React.memo((props) => {
           </StyledTextField>
           <PrimaryButton text="決定" color="#fff" background="#33b6b1" />
         </StyledThemeInputForm>
-        <StyledSectionTitle>テンプレートやトレンドから選ぶ</StyledSectionTitle>
-        <MuiList>
-          <MuiListItem button>
-            <MuiListItemText primary="Phone ringtone" secondary="Titania" />
-          </MuiListItem>
-          <MuiDivider />
-          <MuiListItem button>
-            <MuiListItemText primary="Default notification ringtone" secondary="Tethys" />
-          </MuiListItem>
-        </MuiList>
       </StyledContainer>
     </MuiDialog>
   );
@@ -120,12 +147,12 @@ const FullScreenDialog: React.FC<Props> = React.memo((props) => {
 export default FullScreenDialog;
 
 const StyledContainer = styled.div`
-  min-height: 100vh;
   background: #f8fbfe;
   color: #555;
+  height: 100vh;
   padding: 32px 8px;
   @media screen and (min-width: 768px) {
-    padding: 64px;
+    padding: 32px;
   }
 `;
 const StyledThemeInputForm = styled.form`
@@ -138,16 +165,13 @@ const StyledThemeInputForm = styled.form`
     flex-direction: row;
   }
 `;
-const StyledSectionTitle = styled.h2`
-  font-size: 20px;
-  font-weight: 600;
-  margin-bottom: 8px;
+const StyledSectionTitleWrap = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16px;
+
   span {
-    font-weight: 400;
     font-size: 12px;
-    @media screen and (min-width: 768px) {
-      font-size: 14px;
-    }
   }
 `;
 const StyledTextField = styled.div`

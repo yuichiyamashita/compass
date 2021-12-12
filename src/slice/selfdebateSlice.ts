@@ -23,6 +23,7 @@ type ConclusionState = {
   judgement: "" | "agree" | "disagree";
   reason: string[];
 };
+type activeStepState = 0 | 1 | 2 | 3 | 4;
 
 type InitialState = {
   selfDebateId: string;
@@ -32,6 +33,7 @@ type InitialState = {
   opinion: OpinionState;
   conclusion: ConclusionState;
   dialog: boolean;
+  activeStep: activeStepState;
 };
 
 // 初期値
@@ -63,6 +65,7 @@ const initialState: InitialState = {
     reason: [],
   },
   dialog: false,
+  activeStep: 0,
 };
 
 // Slice本体
@@ -72,6 +75,9 @@ export const selfDebateSlice = createSlice({
   reducers: {
     openDialogAction: (state, action: PayloadAction<boolean>) => {
       state.dialog = action.payload;
+    },
+    handleNextAction: (state, action: PayloadAction<activeStepState>) => {
+      state.activeStep = action.payload;
     },
     saveThemeAction: (state, action: PayloadAction<ThemeState>) => {
       state.theme = action.payload;
@@ -86,5 +92,5 @@ export const selfDebateSlice = createSlice({
   },
 });
 
-export const { openDialogAction, saveThemeAction, saveDebateAction } = selfDebateSlice.actions;
+export const { openDialogAction, handleNextAction, saveThemeAction, saveDebateAction } = selfDebateSlice.actions;
 export default selfDebateSlice.reducer;

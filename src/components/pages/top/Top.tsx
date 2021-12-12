@@ -3,11 +3,7 @@ import styled from "styled-components";
 
 import { Footer } from "../../organisms/footer";
 import { TopPageHeader } from "../../organisms/header";
-import { FirstView } from "../../organisms/firstView";
-import { Introduction } from "../../organisms/introduction";
-import { Features } from "../../organisms/features";
-
-// import bg from "../../../assets/images/topbg.jpg";
+import { FirstView, Features, Introduction } from "../../organisms/top";
 
 const Top: React.FC = () => {
   return (
