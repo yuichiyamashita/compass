@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import MailIcon from "@mui/icons-material/Mail";
 
-import { PrimaryButton } from "../../atoms/button";
+import { BasicLink } from "../../atoms/link";
 import { Container } from "../../molecules/container";
 import { Flexbox } from "../../molecules/layout";
 import { SimpleNavigation } from "../../molecules/navigation";
@@ -47,15 +47,9 @@ const TopPageHeader: React.FC = React.memo(() => {
 
           {/* pc */}
           <StyledPCButtonWrap>
-            <PrimaryButton text="ログイン" path="./login" border="1px solid #8bd5da" radius="6px" color="#8bd5da" />
+            <BasicLink text="ログイン" path="./login" border="1px solid #8bd5da" radius="6px" color="#8bd5da" />
             <div className="w-module-spacer--sm" />
-            <PrimaryButton
-              text="会員登録"
-              path="./email-authentication"
-              background="#8bd5da"
-              radius="6px"
-              color="#fff"
-            />
+            <BasicLink text="会員登録" path="./email-authentication" background="#8bd5da" radius="6px" color="#fff" />
           </StyledPCButtonWrap>
 
           {/* tab & sp */}

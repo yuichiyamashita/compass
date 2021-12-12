@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { AppDispatch } from "../../../app/store";
+import { AppDispatch } from "../../../store";
 import { Paper as MuiPaper, Link as MuiLink } from "@mui/material";
 import MuiAccountCircleIcon from "@mui/icons-material/AccountCircle";
 import IconButton from "@mui/material/IconButton";

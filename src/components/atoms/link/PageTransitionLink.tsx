@@ -6,7 +6,7 @@ type StyleProps = {
   border?: string;
   radius?: string;
   boxShadowColor?: string;
-  color: string;
+  color?: string;
   fontSize?: string;
   fontWeight?: 400 | 600;
   margin?: string;
@@ -14,12 +14,12 @@ type StyleProps = {
   width?: string;
   fullWidth?: boolean;
 };
-type ButtonProps = JSX.IntrinsicElements["button"];
 
-type Props = StyleProps & ButtonProps & { text?: string };
+type Props = StyleProps & { text: string; path: string };
 
-const PrimaryButton: React.FC<Props> = React.memo((props) => {
+const PageTransitionLink: React.FC<Props> = React.memo((props) => {
   const {
+    path,
     text,
     background,
     border,
@@ -31,11 +31,11 @@ const PrimaryButton: React.FC<Props> = React.memo((props) => {
     margin,
     padding,
     fullWidth,
-    onClick,
   } = props;
 
   return (
-    <StyledPrimaryButton
+    <StyledPageTransitionLink
+      href={path}
       background={background}
       border={border}
       radius={radius}
@@ -46,16 +46,16 @@ const PrimaryButton: React.FC<Props> = React.memo((props) => {
       margin={margin}
       padding={padding}
       fullWidth={fullWidth}
-      onClick={onClick}
     >
       {text}
-    </StyledPrimaryButton>
+    </StyledPageTransitionLink>
   );
 });
 
-export default PrimaryButton;
+export default PageTransitionLink;
 
-const StyledPrimaryButton = styled.button<StyleProps>`
+const StyledPageTransitionLink = styled.a<StyleProps>`
+  display: inline-block;
   background: ${(props) => props.background};
   border: ${(props) => props.border};
   border-radius: ${(props) => props.radius};

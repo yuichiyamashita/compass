@@ -1,6 +1,6 @@
 import React, { FC, useState } from "react";
 import styled from "styled-components";
-import { AppDispatch } from "../../../app/store";
+import { AppDispatch } from "../../../store";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 import { Link } from "react-router-dom";

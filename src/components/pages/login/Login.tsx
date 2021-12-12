@@ -17,7 +17,7 @@ import { OnlyLogoHeader } from "../../organisms/header";
 
 import { login } from "../../../operation/userAuth";
 import { validateEmailFormat, validateInputPassWord } from "../../../functions/validations";
-import { AppDispatch } from "../../../app/store";
+import { AppDispatch } from "../../../store";
 
 const useStyles = makeStyles({
   loginForm: {

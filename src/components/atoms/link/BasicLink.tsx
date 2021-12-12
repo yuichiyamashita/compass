@@ -1,12 +1,13 @@
 import React from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 type StyleProps = {
   background?: string;
   border?: string;
   radius?: string;
   boxShadowColor?: string;
-  color: string;
+  color?: string;
   fontSize?: string;
   fontWeight?: 400 | 600;
   margin?: string;
@@ -14,12 +15,12 @@ type StyleProps = {
   width?: string;
   fullWidth?: boolean;
 };
-type ButtonProps = JSX.IntrinsicElements["button"];
 
-type Props = StyleProps & ButtonProps & { text?: string };
+type Props = StyleProps & { text: string; path: string };
 
-const PrimaryButton: React.FC<Props> = React.memo((props) => {
+const BasicLink: React.FC<Props> = React.memo((props) => {
   const {
+    path,
     text,
     background,
     border,
@@ -31,31 +32,31 @@ const PrimaryButton: React.FC<Props> = React.memo((props) => {
     margin,
     padding,
     fullWidth,
-    onClick,
   } = props;
 
   return (
-    <StyledPrimaryButton
-      background={background}
-      border={border}
-      radius={radius}
-      boxShadowColor={boxShadowColor}
-      color={color}
-      fontSize={fontSize}
-      fontWeight={fontWeight}
-      margin={margin}
-      padding={padding}
-      fullWidth={fullWidth}
-      onClick={onClick}
-    >
-      {text}
-    </StyledPrimaryButton>
+    <Link to={path}>
+      <StyledPrimaryButton
+        background={background}
+        border={border}
+        radius={radius}
+        boxShadowColor={boxShadowColor}
+        color={color}
+        fontSize={fontSize}
+        fontWeight={fontWeight}
+        margin={margin}
+        padding={padding}
+        fullWidth={fullWidth}
+      >
+        {text}
+      </StyledPrimaryButton>
+    </Link>
   );
 });
 
-export default PrimaryButton;
+export default BasicLink;
 
-const StyledPrimaryButton = styled.button<StyleProps>`
+const StyledPrimaryButton = styled.div<StyleProps>`
   background: ${(props) => props.background};
   border: ${(props) => props.border};
   border-radius: ${(props) => props.radius};
