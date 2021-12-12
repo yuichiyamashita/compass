@@ -1,6 +1,6 @@
 import React, { FC, useState, useEffect } from "react";
 import styled from "styled-components";
-import { AppDispatch } from "../../../app/store";
+import { AppDispatch } from "../../../store";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 
@@ -9,9 +9,10 @@ import MuiEmailIcon from "@mui/icons-material/Email";
 import { makeStyles } from "@mui/styles";
 
 import { firebaseSendSignInLinkToEmail } from "../../../operation/userAuth";
+import { PrimaryButton } from "../../atoms/button";
+import { BasicLink } from "../../atoms/link";
 import { OnlyLogoHeader } from "../../organisms/header";
 import { Container } from "../../molecules/container";
-import { PrimaryButton } from "../../atoms/button";
 import { H1TitleWithIcon } from "../../molecules/title-with-icon";
 import { MuiTheme } from "../../../assets/material-ui";
 
@@ -74,7 +75,7 @@ const CompleteSendEmailAuth: FC = () => {
               <StyledText>認証メールの再送信に失敗しました。</StyledText>
               <StyledText>お手数ですが、以下のリンクより再度メール認証からお願い致します。</StyledText>
               <div className="h-module-spacer--md" />
-              <PrimaryButton
+              <BasicLink
                 text="認証メール送信画面へ"
                 color="#fff"
                 background="#8bd5da"
@@ -124,7 +125,7 @@ const CompleteSendEmailAuth: FC = () => {
               <StyledText>認証メールの再送信に失敗しました。</StyledText>
               <StyledText>お手数ですが、以下のリンクより再度メール認証からお願い致します。</StyledText>
               <div className="h-module-spacer--md" />
-              <PrimaryButton
+              <BasicLink
                 text="認証メール送信画面へ"
                 color="#fff"
                 background="#8bd5da"

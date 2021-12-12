@@ -9,6 +9,7 @@ import { Login } from "./components/pages/login";
 import { Signup, SendAuthEmail, CompleteSendAuthEmail } from "./components/pages/signup";
 import { ResetPassword } from "./components/pages/reset-password";
 import { Main } from "./components/pages/main";
+import { Selfdebate } from "./components/pages/selfdebate";
 
 const App: FC = () => {
   return (
@@ -24,7 +25,8 @@ const App: FC = () => {
         <Route exact path="/complete-send-auth-email" component={CompleteSendAuthEmail} />
         <Route exact path="/reset-password" component={ResetPassword} />
         <Auth>
-          <Route path="/main" component={Main} />
+          <Route exact path="/main" component={Main} />
+          <Route exact path="/selfdebate" component={Selfdebate} />
         </Auth>
       </Switch>
     </BrowserRouter>

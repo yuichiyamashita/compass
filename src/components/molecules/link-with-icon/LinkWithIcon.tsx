@@ -21,28 +21,30 @@ type StyleProps = {
 };
 type Props = DataProps & StyleProps;
 
-const ButtonWithIcon: FC<Props> = React.memo((props) => {
+const LinkWithIcon: FC<Props> = React.memo((props) => {
   const { path, text, icon, background, border, radius, color, fontSize, fontWeight, iconSize, padding, spacing } =
     props;
 
   return (
-    <StyledButtonWithIconWrap
-      background={background}
-      border={border}
-      color={color}
-      fontSize={fontSize}
-      fontWeight={fontWeight}
-      padding={padding}
-      radius={radius}
-    >
-      <MuiIcon component={icon} fontSize={iconSize} />
-      {spacing && <div className={`w-module-spacer--${spacing}`} />}
-      <Link to={path}>{text}</Link>
-    </StyledButtonWithIconWrap>
+    <Link to={path}>
+      <StyledButtonWithIconWrap
+        background={background}
+        border={border}
+        color={color}
+        fontSize={fontSize}
+        fontWeight={fontWeight}
+        padding={padding}
+        radius={radius}
+      >
+        <MuiIcon component={icon} fontSize={iconSize} />
+        {spacing && <div className={`w-module-spacer--${spacing}`} />}
+        {text}
+      </StyledButtonWithIconWrap>
+    </Link>
   );
 });
 
-export default ButtonWithIcon;
+export default LinkWithIcon;
 
 const StyledButtonWithIconWrap = styled.div<StyleProps>`
   display: flex;

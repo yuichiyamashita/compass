@@ -7,55 +7,56 @@ import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import CheckCircleOutlineSharpIcon from "@mui/icons-material/CheckCircleOutlineSharp";
 
 import { PrimaryButton } from "../../atoms/button";
-import { ButtonWithIcon } from "../../molecules/button-with-icon";
+import { PageTransitionLink } from "../../atoms/link";
+import { LinkWithIcon } from "../../molecules/link-with-icon";
 import { Container } from "../../molecules/container";
 import { AppHeader } from "../../organisms/header";
-import { MainFeatureBox } from "../../organisms/mainFeatureBox";
+// import { MainFeatureBox } from "../../organisms/mainFeatureBox";
 
 // テストデータ
 // labelはmax8文字と6個までの登録の制限をかける
 // ラベルの付いていないデータはその他にまとめる
-const data = [
-  {
-    id: "1",
-    title: "Self Debate",
-    graphData: [
-      { label: "ビジネス", data: 25 },
-      { label: "プログラミング", data: 10 },
-      { label: "英語", data: 15 },
-      { label: "健康", data: 35 },
-      { label: "お金", data: 40 },
-      { label: "その他", data: 53 },
-    ],
-    contents: [
-      { id: "123", text: "リモートワークは生産性を向上するか" },
-      { id: "456", text: "人工知能は人類を超えるか" },
-      { id: "789", text: "救急車を利用するのにお金を支払うべきか" },
-      { id: "987", text: "バスや電車の優先席の使用をやめるべきか" },
-      { id: "654", text: "高等教育の費用は政府が負担するべきか" },
-      { id: "321", text: "日本は再生可能エネルギーをいっそう推進するべきか" },
-    ],
-  },
-  {
-    id: "2",
-    title: "Fast Thinking",
-    graphData: [
-      { label: "メイドラゴン", data: 25 },
-      { label: "異世界食堂", data: 10 },
-      { label: "ホロライブ", data: 15 },
-      { label: "月が導く異世界道中", data: 35 },
-      { label: "魔女の旅々", data: 40 },
-      { label: "オーバーロード", data: 53 },
-      { label: "その他", data: 81 },
-    ],
-    contents: [
-      { id: "123", text: "abcdefg" },
-      { id: "456", text: "hijklmn" },
-      { id: "789", text: "opqrstu" },
-      { id: "987", text: "vwxyz" },
-    ],
-  },
-];
+// const data = [
+//   {
+//     id: "1",
+//     title: "Self Debate",
+//     graphData: [
+//       { label: "ビジネス", data: 25 },
+//       { label: "プログラミング", data: 10 },
+//       { label: "英語", data: 15 },
+//       { label: "健康", data: 35 },
+//       { label: "お金", data: 40 },
+//       { label: "その他", data: 53 },
+//     ],
+//     contents: [
+//       { id: "123", text: "リモートワークは生産性を向上するか" },
+//       { id: "456", text: "人工知能は人類を超えるか" },
+//       { id: "789", text: "救急車を利用するのにお金を支払うべきか" },
+//       { id: "987", text: "バスや電車の優先席の使用をやめるべきか" },
+//       { id: "654", text: "高等教育の費用は政府が負担するべきか" },
+//       { id: "321", text: "日本は再生可能エネルギーをいっそう推進するべきか" },
+//     ],
+//   },
+//   {
+//     id: "2",
+//     title: "Fast Thinking",
+//     graphData: [
+//       { label: "メイドラゴン", data: 25 },
+//       { label: "異世界食堂", data: 10 },
+//       { label: "ホロライブ", data: 15 },
+//       { label: "月が導く異世界道中", data: 35 },
+//       { label: "魔女の旅々", data: 40 },
+//       { label: "オーバーロード", data: 53 },
+//       { label: "その他", data: 81 },
+//     ],
+//     contents: [
+//       { id: "123", text: "abcdefg" },
+//       { id: "456", text: "hijklmn" },
+//       { id: "789", text: "opqrstu" },
+//       { id: "987", text: "vwxyz" },
+//     ],
+//   },
+// ];
 
 const Main: React.FC = () => {
   return (
@@ -72,9 +73,9 @@ const Main: React.FC = () => {
 
           <MuiGrid item xs={12} md={6}>
             <MuiPaper elevation={4} sx={{ color: "#555", padding: "32px 16px" }}>
-              <StyledFeatureTitle>Self debate</StyledFeatureTitle>
-              <StyledFeatureTextBox>
-                <StyledFeatureText>
+              <StyledTrainingTitle>Self debate</StyledTrainingTitle>
+              <StyledTrainingTextBox>
+                <StyledTrainingText>
                   <div>
                     <CheckCircleOutlineSharpIcon />
                     <div className="w-module-spacer--xxs" />
@@ -83,9 +84,9 @@ const Main: React.FC = () => {
                   <br />
                   <br />
                   設定したテーマについて、自分自身で肯定派と否定派の両方を考え討論することで、偏見や飛躍した考えを修正することができ、相手に「なるほど！」と思ってもらえる意見が言えるようになります。
-                </StyledFeatureText>
+                </StyledTrainingText>
                 <StyledFeatureLinkWrap>
-                  <ButtonWithIcon
+                  <LinkWithIcon
                     icon={InfoOutlinedIcon}
                     text="使い方を確認する →"
                     path="./tutorial/selfdebate"
@@ -99,22 +100,23 @@ const Main: React.FC = () => {
                     spacing="xxs"
                   />
                 </StyledFeatureLinkWrap>
-              </StyledFeatureTextBox>
-              <PrimaryButton
+              </StyledTrainingTextBox>
+              <PageTransitionLink
                 text="セルフディベートを始める →"
                 color="#fff"
                 background="#33b6b1"
                 radius="4px"
                 fullWidth
+                path="/selfdebate"
               />
             </MuiPaper>
           </MuiGrid>
 
           <MuiGrid item xs={12} md={6}>
             <MuiPaper elevation={4} sx={{ color: "#555", padding: "32px 16px" }}>
-              <StyledFeatureTitle>Fast thinking</StyledFeatureTitle>
-              <StyledFeatureTextBox>
-                <StyledFeatureText>
+              <StyledTrainingTitle>Fast thinking</StyledTrainingTitle>
+              <StyledTrainingTextBox>
+                <StyledTrainingText>
                   <div>
                     <CheckCircleOutlineSharpIcon />
                     <div className="w-module-spacer--xxs" />
@@ -126,9 +128,9 @@ const Main: React.FC = () => {
                   <br />
                   また、悩みや不安などをテーマに設定することで頭の中をクリアにし、実行力を身につけることができます。
                   <br />
-                </StyledFeatureText>
+                </StyledTrainingText>
                 <StyledFeatureLinkWrap>
-                  <ButtonWithIcon
+                  <LinkWithIcon
                     icon={InfoOutlinedIcon}
                     text="使い方を確認する →"
                     path="./tutorial/fastthinking"
@@ -142,7 +144,7 @@ const Main: React.FC = () => {
                     spacing="xxs"
                   />
                 </StyledFeatureLinkWrap>
-              </StyledFeatureTextBox>
+              </StyledTrainingTextBox>
               <PrimaryButton
                 text="ファストシンキングを始める →"
                 color="#fff"
@@ -159,7 +161,7 @@ const Main: React.FC = () => {
           <MuiGrid item xs={12}>
             <StyledSectionTitleWrap>
               <HistoryIcon fontSize="medium" />
-              <StyledSectionTitle>トレーニング記録</StyledSectionTitle>
+              <StyledSectionTitle>トレーニング状況</StyledSectionTitle>
             </StyledSectionTitleWrap>
           </MuiGrid>
           <MuiGrid item xs={12}>
@@ -201,14 +203,14 @@ const StyledSectionTitle = styled.h2`
   display: inline-block;
 `;
 
-const StyledFeatureTitle = styled.h3`
+const StyledTrainingTitle = styled.h3`
   font-family: "Sriracha", cursive;
   font-size: 32px;
   margin-bottom: 32px;
   text-align: center;
 `;
 
-const StyledFeatureTextBox = styled.div`
+const StyledTrainingTextBox = styled.div`
   font-size: 14px;
   line-height: 1.5;
   letter-spacing: 1.5px;
@@ -216,7 +218,7 @@ const StyledFeatureTextBox = styled.div`
   padding: 0 8px;
 `;
 
-const StyledFeatureText = styled.h4`
+const StyledTrainingText = styled.h4`
   margin-bottom: 16px;
 
   div {

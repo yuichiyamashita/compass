@@ -3,7 +3,7 @@ import styled, { css, keyframes } from "styled-components";
 
 import mobileImage from "../../../assets/images/mobile.jpg";
 import { Container } from "../../molecules/container";
-import { PrimaryButton } from "../../atoms/button";
+import { BasicLink } from "../../atoms/link";
 
 const Features: React.FC = () => {
   return (
@@ -27,7 +27,7 @@ const Features: React.FC = () => {
               セルフディベートの作成機能に加えて、ディベート内容を投稿(シェア)したり、他ユーザーの投稿内容を閲覧することができます。
             </StyledFeatureText>
             <StyledButton>
-              <PrimaryButton color="#fff" text="さっそく始める →" background="#8bd5da" path="./email-authentication" />
+              <BasicLink color="#fff" text="さっそく始める →" background="#8bd5da" path="./email-authentication" />
             </StyledButton>
           </StyledLeftTextBox>
           <StyledLeftImageBox>
@@ -51,7 +51,7 @@ const Features: React.FC = () => {
               セルフディベートの作成機能に加えて、ディベート内容を投稿(シェア)したり、他ユーザーの投稿内容を閲覧することができます。
             </StyledFeatureText>
             <StyledRightButton>
-              <PrimaryButton color="#fff" text="さっそく始める →" background="#8bd5da" path="./email-authentication" />
+              <BasicLink color="#fff" text="さっそく始める →" background="#8bd5da" path="./email-authentication" />
             </StyledRightButton>
           </StyledRightTextBox>
           <StyledRightImageBox>

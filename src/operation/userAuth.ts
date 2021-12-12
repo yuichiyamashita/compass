@@ -8,10 +8,9 @@ import { Timestamp, updateDoc, getDoc, doc, setDoc } from "firebase/firestore";
 import { firebaseGetAuth, firebaseGetDb } from "../firebase/firebase";
 import { toast } from "react-toastify";
 
-import { loginAction } from "../features/user/userSlice";
-import { showLoadingAction, hideLoadingAction } from "../features/notification/notificationSlice";
-import { AppDispatch } from "../app/store";
-import { UserState } from "../types/userState";
+import { loginAction } from "../slice/userSlice";
+import { showLoadingAction, hideLoadingAction } from "../slice/notificationSlice";
+import { AppDispatch } from "../store";
 
 const auth = firebaseGetAuth();
 const db = firebaseGetDb();
@@ -33,7 +32,7 @@ export const fetchAuthState = () => {
           const userData = docSnap.data();
           if (userData) {
             const { email, role, created_at, latest_login_time } = userData;
-            const loginActionState: UserState = {
+            const loginActionState = {
               isSignedIn: true,
               uid: uid,
               email: email,

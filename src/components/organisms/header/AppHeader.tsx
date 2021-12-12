@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import TrendingUpIcon from "@mui/icons-material/TrendingUp";
+import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
+import HistoryIcon from "@mui/icons-material/History";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 
 import { Container } from "../../molecules/container";
@@ -17,7 +19,12 @@ const menus = [
   {
     to: "./tutorial",
     text: "チュートリアル",
-    icon: <TrendingUpIcon />,
+    icon: <HelpOutlineIcon />,
+  },
+  {
+    to: "./history",
+    text: "ヒストリー",
+    icon: <HistoryIcon />,
   },
 ];
 
@@ -26,14 +33,9 @@ const AppHeader: React.FC = React.memo(() => {
     <StyledHeader>
       <Container>
         <Flexbox align="center">
-          <StyledHomeWrap>
-            <a
-              href="./main"
-              style={{ height: "100%", width: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}
-            >
-              <HomeOutlinedIcon fontSize="large" />
-            </a>
-          </StyledHomeWrap>
+          <StyledLink href="./main">
+            <HomeOutlinedIcon fontSize="large" />
+          </StyledLink>
 
           <StyledNavigationWrap>
             <SimpleNavigation contents={menus} spacing={32} fontSize={14} />
@@ -65,13 +67,23 @@ const StyledHeader = styled.header`
   box-shadow: 0 1px 2px #555;
   color: #555;
 `;
-const StyledHomeWrap = styled.div`
-  height: 100%;
-  width: 60px;
+
+const StyledLink = styled.a`
+  position: absolute;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background: #8bd5da;
   color: #fff;
   cursor: pointer;
-  margin-right: 32px;
+  height: 100%;
+  width: 60px;
+
+  @media screen and (min-width: 1024px) {
+    position: static;
+    margin-right: 32px;
+  }
 `;
 
 const StyledNavigationWrap = styled.div`
@@ -80,6 +92,7 @@ const StyledNavigationWrap = styled.div`
     display: block;
   }
 `;
+
 const StyledPCButtonWrap = styled.div`
   display: none;
   @media screen and (min-width: 900px) {
@@ -87,6 +100,7 @@ const StyledPCButtonWrap = styled.div`
     margin-left: auto;
   }
 `;
+
 const StyledButtonWrap = styled.div`
   display: block;
   margin-left: auto;
