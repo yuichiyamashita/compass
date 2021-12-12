@@ -65,8 +65,8 @@ const BasicTabs: FC<Props> = (props) => {
     >
       <Box sx={{ borderBottom: "1px solid #8bd5da" }}>
         <Tabs value={value} onChange={handleChange} aria-label="basic tabs example" centered>
-          <Tab icon={<NoteIcon />} label="最近作成したテーマ" {...a11yProps(0)} />
-          <Tab icon={<BookmarkIcon />} label="お気に入り" {...a11yProps(1)} />
+          <Tab icon={<NoteIcon />} label="テンプレート" {...a11yProps(0)} />
+          <Tab icon={<BookmarkIcon />} label="トレンド" {...a11yProps(1)} />
         </Tabs>
       </Box>
       <Box sx={{ height: "280px", overflow: "scroll" }}>

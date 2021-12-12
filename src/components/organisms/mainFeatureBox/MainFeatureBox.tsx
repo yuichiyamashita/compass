@@ -50,9 +50,9 @@ const MainFeaturesBox: FC<Props> = (props) => {
             <BarGraph graphData={graphData} title="タグ別の作成数" />
           </StyledItemBox>
         </MuiGrid>
-        <MuiGrid xs={12} sm={6} item>
+        {/* <MuiGrid xs={12} sm={6} item>
           <BasicTabs contents={contents} />
-        </MuiGrid>
+        </MuiGrid> */}
       </MuiGrid>
     </MuiPaper>
   );

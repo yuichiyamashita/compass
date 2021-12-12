@@ -1,1 +1,1 @@
-export { default as LinkWithIcon } from "./LinkWithIcon";
+export { default as HistoryBackLinkWithIcon } from "./HistoryBackLinkWithIcon";
