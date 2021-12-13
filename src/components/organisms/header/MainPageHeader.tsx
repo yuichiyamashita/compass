@@ -28,38 +28,36 @@ const menus = [
   },
 ];
 
-const AppHeader: React.FC = React.memo(() => {
+const MainPageHeader: React.FC = React.memo(() => {
   return (
     <StyledHeader>
-      <Container>
-        <Flexbox align="center">
-          <StyledLink href="./main">
-            <HomeOutlinedIcon fontSize="large" />
-          </StyledLink>
+      <Flexbox align="center">
+        <StyledLink href="./main">
+          <HomeOutlinedIcon fontSize="large" />
+        </StyledLink>
 
-          <StyledNavigationWrap>
-            <SimpleNavigation contents={menus} spacing={32} fontSize={14} />
-          </StyledNavigationWrap>
+        <StyledNavigationWrap>
+          <SimpleNavigation contents={menus} spacing={32} fontSize={14} />
+        </StyledNavigationWrap>
 
-          {/* pc */}
-          <StyledPCButtonWrap>
-            <AccountMenu />
-          </StyledPCButtonWrap>
+        {/* pc */}
+        <StyledPCButtonWrap>
+          <AccountMenu />
+        </StyledPCButtonWrap>
 
-          {/* tab & sp */}
-          <StyledButtonWrap>
-            <HamburgerMenu contents={menus} />
-          </StyledButtonWrap>
-        </Flexbox>
-      </Container>
+        {/* tab & sp */}
+        <StyledButtonWrap>
+          <HamburgerMenu contents={menus} />
+        </StyledButtonWrap>
+      </Flexbox>
     </StyledHeader>
   );
 });
 
-export default AppHeader;
+export default MainPageHeader;
 
 const StyledHeader = styled.header`
-  z-index: 999;
+  z-index: 1;
   position: fixed;
   width: 100%;
   height: 60px;
@@ -98,12 +96,14 @@ const StyledPCButtonWrap = styled.div`
   @media screen and (min-width: 900px) {
     display: block;
     margin-left: auto;
+    margin-right: 16px;
   }
 `;
 
 const StyledButtonWrap = styled.div`
   display: block;
   margin-left: auto;
+  margin-right: 8px;
   @media screen and (min-width: 900px) {
     display: none;
   }

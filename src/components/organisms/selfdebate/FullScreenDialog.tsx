@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from "react";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
-
+import { toast } from "react-toastify";
 import {
   Dialog as MuiDialog,
   ListItemText as MuiListItemText,
@@ -25,6 +25,7 @@ import TimelineIcon from "@mui/icons-material/Timeline";
 import { AppDispatch, useSelector } from "../../../store";
 import { selfDebateSelector } from "../../../Selectors";
 import { openDialogAction, saveThemeAction } from "../../../slice/selfdebateSlice";
+import { validateEmptyString } from "../../../functions/validations";
 import { PrimaryButton } from "../../atoms/button";
 import { BasicTypographyWithIcon } from "../../molecules/typography-with-icon";
 
@@ -50,11 +51,21 @@ const FullScreenDialog: React.FC = React.memo(() => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (!validateEmptyString(inputTheme)) {
+      toast.error("テーマが未入力です。", {
+        position: "top-center",
+        autoClose: 3000,
+        closeOnClick: true,
+        theme: "colored",
+      });
+      return;
+    }
     const newTheme = {
       theme: inputTheme,
       isInputed: true,
     };
     dispatch(saveThemeAction(newTheme));
+    handleClose();
   };
 
   const handleClose = useCallback(() => {
@@ -63,7 +74,7 @@ const FullScreenDialog: React.FC = React.memo(() => {
 
   return (
     <MuiDialog fullScreen open={dialog} onClose={handleClose} TransitionComponent={Transition}>
-      <MuiAppBar sx={{ position: "relative" }}>
+      <MuiAppBar sx={{ position: "relative", background: "#71a5f3" }}>
         <MuiToolbar>
           <MuiIconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">
             <CloseIcon />
@@ -80,7 +91,7 @@ const FullScreenDialog: React.FC = React.memo(() => {
           fontWeight={600}
           icon={TimelineIcon}
           iconSize="32px"
-          iconColor="primary"
+          iconColor="secondary"
           spacing="xs"
           margin="0 0 8px 0"
         />
@@ -113,7 +124,7 @@ const FullScreenDialog: React.FC = React.memo(() => {
             fontWeight={600}
             icon={BorderColorIcon}
             iconSize="32px"
-            iconColor="primary"
+            iconColor="secondary"
             spacing="xs"
             margin="0 0 8px 0"
           />
@@ -137,7 +148,7 @@ const FullScreenDialog: React.FC = React.memo(() => {
               }}
             />
           </StyledTextField>
-          <PrimaryButton text="決定" color="#fff" background="#33b6b1" />
+          <PrimaryButton text="決定" color="#fff" background="#71a5f3" />
         </StyledThemeInputForm>
       </StyledContainer>
     </MuiDialog>

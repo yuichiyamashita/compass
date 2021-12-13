@@ -8,3 +8,6 @@ export const notificationSelector = (state: RootState) => state.notification;
 
 // Self debate
 export const selfDebateSelector = (state: RootState) => state.selfdebate;
+
+// countDownTimer
+export const countDownTimerSelector = (state: RootState) => state.countDownTimer;
