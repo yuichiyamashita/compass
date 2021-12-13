@@ -1,10 +1,10 @@
 import React, { useCallback } from "react";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { useDispatch } from "react-redux";
 
 import { useSelector, AppDispatch } from "../../../store";
 import { selfDebateSelector } from "../../../Selectors";
-import { openDialogAction, handleNextAction } from "../../../slice/selfdebateSlice";
+import { openDialogAction, handleNextAction, saveThemeAction } from "../../../slice/selfdebateSlice";
 import { PrimaryButton } from "../../atoms/button";
 
 const SelectTheme: React.FC = React.memo(() => {
@@ -17,6 +17,15 @@ const SelectTheme: React.FC = React.memo(() => {
     dispatch(openDialogAction(true));
   }, [dispatch]);
 
+  const handleChangeTheme = useCallback(() => {
+    dispatch(openDialogAction(true));
+    const newTheme = {
+      theme: "",
+      isInputed: false,
+    };
+    dispatch(saveThemeAction(newTheme));
+  }, [dispatch]);
+
   const handleNext = useCallback(() => {
     dispatch(handleNextAction(1));
   }, [dispatch]);
@@ -24,58 +33,84 @@ const SelectTheme: React.FC = React.memo(() => {
   return (
     <>
       {isInputedTheme ? (
-        <StyledThemeWrap>
-          <span>テーマ：</span>
-          <div className="h-module-spacer--xs" />
-          <StyledTheme>{theme}</StyledTheme>
+        <>
+          <StyledThemeWrap>
+            <StyledTheme>
+              <span>テーマ:</span>
+              <p>{theme}</p>
+            </StyledTheme>
+            <PrimaryButton
+              text="テーマを変更する"
+              color="#71a5f3"
+              border="1px solid #71a5f3"
+              radius="4px"
+              onClick={handleChangeTheme}
+            />
+          </StyledThemeWrap>
           <PrimaryButton
-            text="テーマを変更する"
-            color="#33b6b1"
-            border="1px solid #33b6b1"
+            text="次は肯定意見を述べましょう →"
+            color="#fff"
+            background="#71a5f3"
             radius="4px"
-            onClick={handleClick}
+            fullWidth
+            onClick={handleNext}
           />
-        </StyledThemeWrap>
+        </>
       ) : (
         <StyledThemeWrap>
-          <StyledSelectTheme>討論するテーマを選んでください。</StyledSelectTheme>
-          <PrimaryButton
-            text="テーマを選ぶ →"
-            color="#33b6b1"
-            border="1px solid #33b6b1"
-            radius="4px"
-            onClick={handleClick}
-          />
+          <StyledSelectTheme>最初に討論するテーマを選んでください。</StyledSelectTheme>
+          <PrimaryButton text="テーマを選ぶ ↓" color="#fff" background="#71a5f3" radius="4px" onClick={handleClick} />
         </StyledThemeWrap>
       )}
-      <PrimaryButton text="開始 →" color="#fff" background="#33b6b1" radius="4px" fullWidth onClick={handleNext} />
     </>
   );
 });
 
 export default SelectTheme;
 
+const scaleAnimation = keyframes`
+0% {
+  opacity: 0;
+  transform: translateX(-100%);
+},
+100% {
+}
+`;
+
 const StyledThemeWrap = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-  text-align: center;
-  margin: 48px 0;
+  margin-bottom: 32px;
 `;
 
 const StyledTheme = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
   color: #555;
   font-size: 18px;
+  font-weight: 600;
   letter-spacing: 1.5px;
-  margin-bottom: 24px;
+  margin-bottom: 32px;
 
   @media screen and (min-width: 768px) {
     font-size: 24px;
   }
+
+  p {
+    animation: ${scaleAnimation} 1s ease-in-out forwards;
+  }
+
+  span {
+    font-size: 18px;
+    font-weight: 400;
+    margin-bottom: 8px;
+  }
 `;
 
 const StyledSelectTheme = styled.div`
+  font-size: 18px;
   font-weight: 600;
-  line-height: 1.5;
-  margin-bottom: 16px;
+  margin-bottom: 32px;
 `;

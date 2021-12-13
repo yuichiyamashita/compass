@@ -104,7 +104,7 @@ const TemporaryDrawer: React.FC<Props> = React.memo((props) => {
 
   return (
     <>
-      <MenuIcon fontSize="large" style={{ color: "#673ab7" }} onClick={toggleDrawer()} />
+      <MenuIcon fontSize="large" style={{ color: "#8bd5da" }} onClick={toggleDrawer()} />
       <Drawer anchor="right" open={isOpenMenu} onClose={toggleDrawer()}>
         {list()}
       </Drawer>

@@ -5,28 +5,29 @@ import { useSelector } from "../../../store";
 import { selfDebateSelector } from "../../../Selectors";
 import { BasicStepper } from "../../molecules/stepper";
 import { Container } from "../../molecules/container";
-import { AppHeader } from "../../organisms/header";
 import { generateNowDateString } from "../../../functions/generateString";
-import { FullScreenDialog } from "../../organisms/selfdebate";
-import SelectTheme from "../../organisms/selfdebate/SelectTheme";
+import { FullScreenDialog, SelectTheme, Affirmative } from "../../organisms/selfdebate";
+import { AppPageHeader } from "../../organisms/header";
 
 // Stepperのコンテンツ
-const steps = ["テーマ選択", "肯定派", "否定派", "結論"];
+const steps = ["テーマ", "賛成", "反対", "結論"];
 
 const Selfdebate: React.FC = () => {
   const state = useSelector(selfDebateSelector);
   const activeStep = state.activeStep;
+  const dialog = state.dialog;
 
   return (
     <StyledContainer>
-      <AppHeader />
-      <Container padding={" 96px 0 64px"}>
-        <StyledTitle>Self debate</StyledTitle>
-        <StyledDate>{generateNowDateString()}</StyledDate>
+      <AppPageHeader />
+      <Container padding={"92px 0 32px"}>
         <StyledStepper>
           <BasicStepper steps={steps} activeStep={activeStep} />
         </StyledStepper>
-        {activeStep === 0 ? <SelectTheme /> : activeStep === 1 ? <div>aaa</div> : null}
+        <StyledStep>
+          <StyledDate>{generateNowDateString()}</StyledDate>
+          {activeStep === 0 ? <SelectTheme /> : activeStep === 1 ? <Affirmative /> : null}
+        </StyledStep>
       </Container>
       <FullScreenDialog />
     </StyledContainer>
@@ -36,21 +37,26 @@ const Selfdebate: React.FC = () => {
 export default Selfdebate;
 
 const StyledContainer = styled.div`
+  position: relative;
   background: #f8fbfe;
   color: #555;
   height: 100vh;
 `;
 
-const StyledTitle = styled.h2`
-  font-family: "Sriracha", cursive;
-  font-size: 24px;
+const StyledDate = styled.div`
   margin-bottom: 32px;
 `;
 
-const StyledDate = styled.div`
-  margin-bottom: 24px;
+const StyledStepper = styled.div`
+  margin-bottom: 32px;
 `;
 
-const StyledStepper = styled.div`
-  margin-bottom: 48px;
+const StyledStep = styled.div`
+  background: #fff;
+  box-shadow: 0 0 8px #ececec;
+  padding: 16px;
+
+  @media screen and (min-width: 768px) {
+    padding: 32px;
+  }
 `;

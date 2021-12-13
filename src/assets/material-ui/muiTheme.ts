@@ -2,11 +2,26 @@ import { createTheme } from "@mui/material/styles";
 
 const MuiTheme = createTheme({
   palette: {
+    common: {
+      black: "#333",
+      white: "#fff",
+    },
     primary: {
       main: "#8bd5da",
       dark: "#333",
-      light: "#8561c5",
       contrastText: "#fff",
+    },
+    secondary: {
+      main: "#71a5f3",
+      dark: "#333",
+      contrastText: "#fff",
+    },
+    background: {
+      paper: "#f8fbfe",
+    },
+    text: {
+      primary: "#333",
+      secondary: "#555",
     },
   },
 });

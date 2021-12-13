@@ -3,12 +3,14 @@ import { useSelector as rawUseSelector, TypedUseSelectorHook } from "react-redux
 import userReducer from "./slice/userSlice";
 import notificationReducer from "./slice/notificationSlice";
 import selfDebateReducer from "./slice/selfdebateSlice";
+import countDownTimerReducer from "./slice/countDownTimerSlice";
 
 export const store = configureStore({
   reducer: {
     user: userReducer,
     notification: notificationReducer,
     selfdebate: selfDebateReducer,
+    countDownTimer: countDownTimerReducer,
   },
 });
 

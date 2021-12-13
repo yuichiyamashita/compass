@@ -15,26 +15,31 @@ type DataProps = {
   subTitle: string;
   label: string;
   path: string;
+  image: string;
 };
 type Props = StyleProps & DataProps;
 
 const TrainingMenuCard: React.FC<Props> = React.memo(({ children, ...props }) => {
-  const { color, title, subTitle, label, path } = props;
+  const { color, title, subTitle, label, path, image } = props;
   return (
     <StyledCard>
-      <StyledTrainingTitle>{title}</StyledTrainingTitle>
+      <StyledTitle>{title}</StyledTitle>
       <BasicTypographyWithIcon
-        color="#333"
+        color="#555"
         fontSize="14px"
         fontWeight={600}
         icon={CheckCircleOutlineSharpIcon}
         iconSize="18px"
+        iconColor="action"
         justify="center"
         margin="0 0 32px 0"
         spacing="xxs"
         text={subTitle}
       />
-      <StyledTrainingText>{children}</StyledTrainingText>
+      <StyledImageBox>
+        <StyledImage src={image} alt="training image" />
+      </StyledImageBox>
+      <StyledText>{children}</StyledText>
       <StyledTutorialLink>
         <HistoryBackLinkWithIcon
           icon={InfoOutlinedIcon}
@@ -60,20 +65,38 @@ export default TrainingMenuCard;
 const StyledCard = styled.div`
   box-shadow: 0 0 8px #cbcbcb;
   background: #fff;
-  padding: 32px;
+  padding: 32px 16px;
+  @media screen and (min-width: 768px) {
+    padding: 32px;
+  }
 `;
 
-const StyledTrainingTitle = styled.h3`
+const StyledTitle = styled.h3`
   color: #333;
   font-family: "Sriracha", cursive;
-  font-size: 48px;
+  font-size: 40px;
   letter-spacing: 1.5px;
   margin-bottom: 4px;
   text-align: center;
+  @media screen and (min-width: 768px) {
+    font-size: 48px;
+  }
 `;
 
-const StyledTrainingText = styled.div`
-  color: #555;
+const StyledImageBox = styled.div`
+  width: 180px;
+  height: 180px;
+  overflow: hidden;
+  margin: 0 auto 32px;
+`;
+
+const StyledImage = styled.img`
+  width: 100%;
+  height: 100%;
+`;
+
+const StyledText = styled.div`
+  color: #666;
   font-size: 14px;
   line-height: 1.5;
   margin-bottom: 8px;
