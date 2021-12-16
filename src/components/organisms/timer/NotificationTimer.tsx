@@ -5,7 +5,11 @@ import "react-circular-progressbar/dist/styles.css";
 
 import { useSelector, AppDispatch } from "../../../store";
 import { countDownTimerSelector } from "../../../Selectors";
-import { setCountDownTimerAction, decrementCountAction } from "../../../slice/countDownTimerSlice";
+import {
+  setCountDownTimerSettingsAction,
+  decrementCountAction,
+  startCountDownTimerAction,
+} from "../../../slice/countDownTimerSlice";
 import { toast } from "react-toastify";
 
 // 別のコンポーネントで呼び出すタイマー発火の関数を定義
@@ -19,7 +23,8 @@ export const startTimer = (seconds: number) => {
     let secondsLeft = seconds;
 
     // 初期値をstoreにセット
-    dispatch(setCountDownTimerAction(setTimerSettings));
+    dispatch(startCountDownTimerAction(true));
+    dispatch(setCountDownTimerSettingsAction(setTimerSettings));
     dispatch(decrementCountAction(secondsLeft));
 
     // カウントダウン処理
@@ -33,6 +38,8 @@ export const startTimer = (seconds: number) => {
         toast.success("終了です", {
           position: "top-center",
         });
+
+        dispatch(startCountDownTimerAction(false));
       }
     }, 1000);
   };
@@ -60,12 +67,13 @@ const NotificationTimer: React.FC = React.memo(() => {
           <CircularProgressbar
             value={percentage}
             text={minutes + " : " + second()}
-            strokeWidth={1}
             styles={buildStyles({
+              trailColor: "#eee",
               textColor: "#8bd5da",
               pathColor: "#8bd5da",
-              trailColor: "#ececec",
+              backgroundColor: "#fff",
             })}
+            background
           />
         </StyledNotificationTimer>
       )}
@@ -80,19 +88,22 @@ const animation = keyframes`
     right: -200px;
     opacity: 0;
 }
+50% {
+  right: 32px;
+}
 100% {
-    right: 16px;
+    right: 8px;
     opacity: 1;
 }
 `;
 
 const StyledNotificationTimer = styled.div`
   z-index: 999;
-  position: absolute;
-  top: 16px;
-  width: 100px;
-  background: #fff;
+  position: fixed;
+  top: 8px;
+  width: 120px;
   border-radius: 100%;
+  box-shadow: 0 0 8px #333;
   animation: ${animation} 0.5s ease-in-out forwards;
   @media screen and (min-width: 768px) {
     width: 200px;

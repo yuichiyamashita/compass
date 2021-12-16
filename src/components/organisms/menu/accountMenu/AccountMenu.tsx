@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { useDispatch } from "react-redux";
 import Box from "@mui/material/Box";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
@@ -12,7 +13,11 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import Settings from "@mui/icons-material/Settings";
 import { Link } from "react-router-dom";
 
+import { AppDispatch } from "../../../../store";
+import { logout } from "../../../../operation/userAuth";
+
 const SimpleMenu: React.FC = React.memo(() => {
+  const dispatch: AppDispatch = useDispatch();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -21,6 +26,11 @@ const SimpleMenu: React.FC = React.memo(() => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const handleClickLogout = async (): Promise<void> => {
+    dispatch(logout());
+  };
+
   return (
     <>
       <Box sx={{ display: "flex", alignItems: "center", textAlign: "center" }}>
@@ -88,15 +98,13 @@ const SimpleMenu: React.FC = React.memo(() => {
 
         <Divider />
 
-        <MenuItem>
-          <Link to="./logout">
-            <StyledMenuItemBox>
-              <ListItemIcon>
-                <Logout />
-              </ListItemIcon>
-              <span>ログアウト</span>
-            </StyledMenuItemBox>
-          </Link>
+        <MenuItem onClick={handleClickLogout}>
+          <StyledMenuItemBox>
+            <ListItemIcon>
+              <Logout />
+            </ListItemIcon>
+            <span>ログアウト</span>
+          </StyledMenuItemBox>
         </MenuItem>
       </Menu>
     </>

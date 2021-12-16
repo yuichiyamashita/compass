@@ -7,19 +7,17 @@ import { TrainingMenuCard } from "./index";
 
 const TrainingMenus: React.FC = React.memo(() => {
   return (
-    <MuiGrid container spacing={4}>
+    <MuiGrid container spacing={8}>
       <MuiGrid item xs={12} md={6}>
         <TrainingMenuCard
           color="#71a5f3"
           title="Self debate"
-          subTitle="相手に自分の意見を主張するためのトレーニング"
+          subTitle="説得力のある意見を主張するためのトレーニング"
           label="セルフディベートを始める →"
           path="./selfdebate"
           image={selfDebateImage}
         >
-          選んだテーマについて、自分自身で肯定と否定の両方を考え討論することで、偏見や飛躍した考えを修正することができます。
-          <br />
-          また、相手に「なるほど！」と思ってもらえる意見が言えるようになります。
+          設定したテーマについて、自分自身で肯定と否定の両方を考え討論し、偏見や飛躍した考えを修正します。
         </TrainingMenuCard>
       </MuiGrid>
 
@@ -32,9 +30,7 @@ const TrainingMenus: React.FC = React.memo(() => {
           path="./fastthinking"
           image={fastThinkingImage}
         >
-          選んだテーマについて、瞬発的に思い浮かんだ原因や解決策を書き出し、思考スピードの向上を図ります。
-          <br />
-          また、悩みや不安などをテーマにすることで頭の中をクリアにし、実行力を身につけることができます。
+          設定したテーマについて、瞬発的に思い浮かんだ原因や解決策を書き出し、思考スピードの向上を図ります。
         </TrainingMenuCard>
       </MuiGrid>
     </MuiGrid>

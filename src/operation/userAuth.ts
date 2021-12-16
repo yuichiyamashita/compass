@@ -3,12 +3,13 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   onAuthStateChanged,
+  signOut,
 } from "@firebase/auth";
 import { Timestamp, updateDoc, getDoc, doc, setDoc } from "firebase/firestore";
 import { firebaseGetAuth, firebaseGetDb } from "../firebase/firebase";
 import { toast } from "react-toastify";
 
-import { loginAction } from "../slice/userSlice";
+import { loginAction, logoutAction } from "../slice/userSlice";
 import { showLoadingAction, hideLoadingAction } from "../slice/notificationSlice";
 import { AppDispatch } from "../store";
 
@@ -172,16 +173,43 @@ export const login = (email: string, password: string) => {
             });
             dispatch(hideLoadingAction());
             return true;
-          } else {
-            dispatch(hideLoadingAction());
-            return false;
           }
         }
       })
       .catch(() => {
         dispatch(hideLoadingAction());
-        return false;
+        return;
       });
     return result;
+  };
+};
+
+// ========================================
+// ログアウト
+// ========================================
+export const logout = () => {
+  return async (dispatch: AppDispatch): Promise<void> => {
+    dispatch(showLoadingAction("ログアウト中..."));
+
+    // ログアウト処理
+    signOut(auth)
+      .then(() => {
+        dispatch(logoutAction());
+        dispatch(hideLoadingAction());
+        return true;
+      })
+      .catch(() => {
+        dispatch(hideLoadingAction());
+        toast.error("ログアウトに失敗しました", {
+          position: "top-center",
+          autoClose: 1500,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: false,
+          progress: undefined,
+          theme: "colored",
+        });
+      });
   };
 };

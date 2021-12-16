@@ -38,10 +38,11 @@ const StyledNavigation = styled.nav<StyledProps>`
   font-weight: ${(props) => (props.fontWeight ? props.fontWeight : "600")};
 
   a {
+    display: block;
     transition: 0.5s;
     margin-right: ${(props) => props.spacing}px;
     &:hover {
-      opacity: 0.8;
+      opacity: 0.7;
     }
     &:last-child {
       margin-right: 0;

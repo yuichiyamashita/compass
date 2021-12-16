@@ -5,7 +5,6 @@ import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 import HistoryIcon from "@mui/icons-material/History";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 
-import { Container } from "../../molecules/container";
 import { Flexbox } from "../../molecules/layout";
 import { HamburgerMenu, AccountMenu } from "../menu";
 import { SimpleNavigation } from "../../molecules/navigation";

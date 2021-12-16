@@ -3,15 +3,16 @@ import styled from "styled-components";
 
 type Props = {
   padding?: string;
+  margin?: string;
   align?: "left" | "center" | "right";
   position?: "relative";
   height?: string;
 };
 
 const Container: React.FC<Props> = React.memo((props) => {
-  const { children, padding, align, position, height } = props;
+  const { children, padding, margin, align, position, height } = props;
   return (
-    <StyledContainer padding={padding} align={align} position={position} height={height}>
+    <StyledContainer padding={padding} margin={margin} align={align} position={position} height={height}>
       {children}
     </StyledContainer>
   );
@@ -24,7 +25,7 @@ const StyledContainer = styled.div<Props>`
   width: calc(100vw - 16px);
   height: ${(props) => props.height};
   height: 100%;
-  margin: 0 auto;
+  margin: ${(props) => (props.margin ? props.margin : "0 auto")};
   padding: ${(props) => props.padding};
   text-align: ${(props) => props.align};
   @media screen and (min-width: 600px) {

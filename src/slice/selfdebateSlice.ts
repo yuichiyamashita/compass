@@ -6,15 +6,10 @@ type ThemeState = {
   isInputed: boolean;
 };
 type OpinionState = {
-  affirmative: {
-    opinions: string[];
-    isInputed: boolean;
-  };
-  denial: {
-    opinions: string[];
-    isInputed: boolean;
-  };
-};
+  id: string;
+  opinion: string;
+  editing: boolean;
+}[];
 type TagsState = {
   id: string;
   name: string;
@@ -30,7 +25,8 @@ type InitialState = {
   created_at: string;
   theme: ThemeState;
   tags: TagsState;
-  opinion: OpinionState;
+  agree: OpinionState;
+  disagree: OpinionState;
   conclusion: ConclusionState;
   dialog: boolean;
   activeStep: activeStepState;
@@ -44,22 +40,14 @@ const initialState: InitialState = {
     theme: "",
     isInputed: false,
   },
+  agree: [],
+  disagree: [],
   tags: [
     {
       id: "",
       name: "",
     },
   ],
-  opinion: {
-    affirmative: {
-      opinions: [],
-      isInputed: false,
-    },
-    denial: {
-      opinions: [],
-      isInputed: false,
-    },
-  },
   conclusion: {
     judgement: "",
     reason: [],
@@ -76,21 +64,15 @@ export const selfDebateSlice = createSlice({
     openDialogAction: (state, action: PayloadAction<boolean>) => {
       state.dialog = action.payload;
     },
-    handleNextAction: (state, action: PayloadAction<activeStepState>) => {
+    handleNextStepAction: (state, action: PayloadAction<activeStepState>) => {
       state.activeStep = action.payload;
     },
     saveThemeAction: (state, action: PayloadAction<ThemeState>) => {
       state.theme = action.payload;
     },
-    saveDebateAction: (state, action) => {
-      state.created_at = action.payload.created_at;
-      state.selfDebateId = action.payload.selfDebateId;
-      state.tags = action.payload.tags;
-      state.opinion = action.payload.opinion;
-      state.conclusion = action.payload.conclusion;
-    },
+    saveOpinionsAction: (state, action) => {},
   },
 });
 
-export const { openDialogAction, handleNextAction, saveThemeAction, saveDebateAction } = selfDebateSlice.actions;
+export const { openDialogAction, handleNextStepAction, saveThemeAction, saveOpinionsAction } = selfDebateSlice.actions;
 export default selfDebateSlice.reducer;

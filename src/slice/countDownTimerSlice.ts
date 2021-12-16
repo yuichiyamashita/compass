@@ -8,9 +8,10 @@ type SettingsState = {
   display: boolean;
   seconds: number;
 };
-type InitialState = SettingsState & { secondsLeft: number };
+type InitialState = SettingsState & { secondsLeft: number; isStart: boolean };
 
 const initialState: InitialState = {
+  isStart: false,
   display: false,
   seconds: 0,
   secondsLeft: 0,
@@ -20,9 +21,12 @@ export const countDownTimerSlice = createSlice({
   name: "countDownTimer",
   initialState,
   reducers: {
-    setCountDownTimerAction: (state, action: PayloadAction<SettingsState>) => {
+    setCountDownTimerSettingsAction: (state, action: PayloadAction<SettingsState>) => {
       state.display = action.payload.display;
       state.seconds = action.payload.seconds;
+    },
+    startCountDownTimerAction: (state, action: PayloadAction<boolean>) => {
+      state.isStart = action.payload;
     },
     decrementCountAction: (state, action: PayloadAction<number>) => {
       state.secondsLeft = action.payload;
@@ -30,5 +34,6 @@ export const countDownTimerSlice = createSlice({
   },
 });
 
-export const { setCountDownTimerAction, decrementCountAction } = countDownTimerSlice.actions;
+export const { startCountDownTimerAction, setCountDownTimerSettingsAction, decrementCountAction } =
+  countDownTimerSlice.actions;
 export default countDownTimerSlice.reducer;

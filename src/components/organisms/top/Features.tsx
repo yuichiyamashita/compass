@@ -27,7 +27,13 @@ const Features: React.FC = () => {
               セルフディベートの作成機能に加えて、ディベート内容を投稿(シェア)したり、他ユーザーの投稿内容を閲覧することができます。
             </StyledFeatureText>
             <StyledButton>
-              <BasicLink color="#fff" text="さっそく始める →" background="#8bd5da" path="./email-authentication" />
+              <BasicLink
+                color="#fff"
+                text="さっそく始める →"
+                background="#8bd5da"
+                radius="8px"
+                path="./email-authentication"
+              />
             </StyledButton>
           </StyledLeftTextBox>
           <StyledLeftImageBox>
@@ -51,7 +57,13 @@ const Features: React.FC = () => {
               セルフディベートの作成機能に加えて、ディベート内容を投稿(シェア)したり、他ユーザーの投稿内容を閲覧することができます。
             </StyledFeatureText>
             <StyledRightButton>
-              <BasicLink color="#fff" text="さっそく始める →" background="#8bd5da" path="./email-authentication" />
+              <BasicLink
+                color="#fff"
+                text="さっそく始める →"
+                background="#8bd5da"
+                radius="8px"
+                path="./email-authentication"
+              />
             </StyledRightButton>
           </StyledRightTextBox>
           <StyledRightImageBox>
@@ -147,7 +159,8 @@ const StyledFeatureBox = styled.div`
 export const StyledFeatureBoxBg = css`
   position: absolute;
   background: #fff;
-  box-shadow: 0px 0px 12px #999;
+  box-shadow: 0px 16px 24px rgba(0, 0, 0, 0.6);
+  border-radius: 8px;
 
   @media screen and (max-width: 414px) {
     display: none;
@@ -176,6 +189,7 @@ const StyledRightFeatureBoxBg = styled.div`
 export const StyledImageBox = css`
   overflow: hidden;
   background: #000;
+  border-radius: 8px;
   width: 100%;
 
   img {

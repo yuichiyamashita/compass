@@ -10,12 +10,11 @@ import { FullScreenDialog, SelectTheme, Affirmative } from "../../organisms/self
 import { AppPageHeader } from "../../organisms/header";
 
 // Stepperのコンテンツ
-const steps = ["テーマ", "賛成", "反対", "結論"];
+const steps = ["テーマ", "肯定", "否定", "結論"];
 
 const Selfdebate: React.FC = () => {
   const state = useSelector(selfDebateSelector);
   const activeStep = state.activeStep;
-  const dialog = state.dialog;
 
   return (
     <StyledContainer>
@@ -26,7 +25,14 @@ const Selfdebate: React.FC = () => {
         </StyledStepper>
         <StyledStep>
           <StyledDate>{generateNowDateString()}</StyledDate>
-          {activeStep === 0 ? <SelectTheme /> : activeStep === 1 ? <Affirmative /> : null}
+          <div className="h-module-spacer--sm" />
+          {activeStep === 0 ? (
+            <SelectTheme />
+          ) : activeStep === 1 ? (
+            <Affirmative />
+          ) : (
+            activeStep === 2 && <div>反対派</div>
+          )}
         </StyledStep>
       </Container>
       <FullScreenDialog />
@@ -40,23 +46,23 @@ const StyledContainer = styled.div`
   position: relative;
   background: #f8fbfe;
   color: #555;
-  height: 100vh;
-`;
-
-const StyledDate = styled.div`
-  margin-bottom: 32px;
+  min-height: 100vh;
 `;
 
 const StyledStepper = styled.div`
   margin-bottom: 32px;
 `;
 
+const StyledDate = styled.div`
+  font-family: "Klee One", cursive;
+`;
+
 const StyledStep = styled.div`
   background: #fff;
-  box-shadow: 0 0 8px #ececec;
-  padding: 16px;
+  box-shadow: 0 0 16px #ccc;
+  padding: 16px 8px;
 
   @media screen and (min-width: 768px) {
-    padding: 32px;
+    padding: 32px 16px;
   }
 `;
