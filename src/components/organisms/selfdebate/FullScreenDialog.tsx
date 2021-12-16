@@ -24,7 +24,7 @@ import TimelineIcon from "@mui/icons-material/Timeline";
 
 import { AppDispatch, useSelector } from "../../../store";
 import { selfDebateSelector } from "../../../Selectors";
-import { openDialogAction, saveThemeAction } from "../../../slice/selfdebateSlice";
+import { openDialogAction, saveThemeAction, handleNextStepAction } from "../../../slice/selfdebateSlice";
 import { validateEmptyString } from "../../../functions/validations";
 import { PrimaryButton } from "../../atoms/button";
 import { BasicTypographyWithIcon } from "../../molecules/typography-with-icon";
@@ -38,11 +38,18 @@ const Transition = React.forwardRef(function Transition(
   return <MuiSlide direction="up" ref={ref} {...props} />;
 });
 
+const templates = [
+  "コロナワクチンは打たなくても良いか、否か",
+  "男女の友情は成立するか、しないか",
+  "売れないミュージシャンはYoutubeを始めるべきか",
+  "Lineの既読スルーはありか、なしか",
+  "年収を上げるために会社をすぐ辞めるのはありか、なしか",
+];
+
 const FullScreenDialog: React.FC = React.memo(() => {
   const dispatch: AppDispatch = useDispatch();
   const state = useSelector(selfDebateSelector);
   const dialog = state.dialog;
-
   const [inputTheme, setInputTheme] = useState("");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -60,11 +67,21 @@ const FullScreenDialog: React.FC = React.memo(() => {
       });
       return;
     }
+    if (inputTheme.length >= 50) {
+      toast.error("テーマは50文字以内で入力してください。", {
+        position: "top-center",
+        autoClose: 3000,
+        closeOnClick: true,
+        theme: "colored",
+      });
+      return;
+    }
     const newTheme = {
       theme: inputTheme,
       isInputed: true,
     };
     dispatch(saveThemeAction(newTheme));
+    dispatch(handleNextStepAction(1));
     handleClose();
   };
 
@@ -95,26 +112,15 @@ const FullScreenDialog: React.FC = React.memo(() => {
           spacing="xs"
           margin="0 0 8px 0"
         />
-        <MuiList>
-          <MuiListItem button>
-            <MuiListItemText primary="バスや電車の優先席の使用をやめるべきか" />
-          </MuiListItem>
-          <MuiDivider />
-          <MuiListItem button>
-            <MuiListItemText primary="高等教育の費用は政府が負担するべきか" />
-          </MuiListItem>
-          <MuiDivider />
-          <MuiListItem button>
-            <MuiListItemText primary="日本は再生可能エネルギーをいっそう推進するべきか" />
-          </MuiListItem>
-          <MuiDivider />
-          <MuiListItem button>
-            <MuiListItemText primary="社会人は毎日3食ご飯を食べるべきか" />
-          </MuiListItem>
-          <MuiDivider />
-          <MuiListItem button>
-            <MuiListItemText primary="社会人は毎日3食ご飯を食べるべきか" />
-          </MuiListItem>
+        <MuiList sx={{ height: "250px", overflow: "scroll" }}>
+          {templates.map((template, index) => (
+            <li key={index}>
+              <MuiListItem button>
+                ・ <MuiListItemText primary={template} />
+              </MuiListItem>
+              <MuiDivider />
+            </li>
+          ))}
         </MuiList>
         <div className="h-module-spacer--xl" />
         <StyledSectionTitleWrap>
@@ -126,15 +132,15 @@ const FullScreenDialog: React.FC = React.memo(() => {
             iconSize="32px"
             iconColor="secondary"
             spacing="xs"
-            margin="0 0 8px 0"
+            margin="0 0 16px 0"
           />
-          <span>※肯定派と否定派に分けられるテーマを設定しましょう</span>
+          <span>賛成派と反対派に分けられるテーマを設定しましょう</span>
         </StyledSectionTitleWrap>
         <StyledThemeInputForm onSubmit={handleSubmit}>
           <StyledTextField>
             <MuiTextField
               value={inputTheme}
-              placeholder="（例）ご飯は毎日3食食べるべきか？"
+              placeholder="例）義理チョコにお返しは必要か？"
               margin="none"
               size="small"
               fullWidth
@@ -148,7 +154,9 @@ const FullScreenDialog: React.FC = React.memo(() => {
               }}
             />
           </StyledTextField>
-          <PrimaryButton text="決定" color="#fff" background="#71a5f3" />
+          <StyledButton>
+            <PrimaryButton text="決定" color="#fff" background="#71a5f3" fullWidth />
+          </StyledButton>
         </StyledThemeInputForm>
       </StyledContainer>
     </MuiDialog>
@@ -179,17 +187,29 @@ const StyledThemeInputForm = styled.form`
 const StyledSectionTitleWrap = styled.div`
   display: flex;
   flex-direction: column;
-  margin-bottom: 16px;
+  margin-bottom: 8px;
 
   span {
-    font-size: 12px;
+    font-size: 14px;
   }
 `;
 const StyledTextField = styled.div`
   width: 100%;
   margin-bottom: 8px;
+
   @media screen and (min-width: 768px) {
     width: 80%;
+    margin-right: 8px;
+    margin-bottom: 0;
+  }
+`;
+
+const StyledButton = styled.div`
+  width: 100%;
+  margin-bottom: 8px;
+
+  @media screen and (min-width: 768px) {
+    width: 20%;
     margin-right: 8px;
     margin-bottom: 0;
   }

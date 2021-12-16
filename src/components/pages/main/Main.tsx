@@ -32,5 +32,6 @@ export default Main;
 
 const StyledMain = styled.div`
   background: #f8fbfe;
+  min-height: 100vh;
   color: #555;
 `;

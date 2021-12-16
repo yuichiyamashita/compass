@@ -13,6 +13,7 @@ type StyleProps = {
   padding?: string;
   width?: string;
   fullWidth?: boolean;
+  onClick?: React.MouseEventHandler<HTMLAnchorElement>;
 };
 
 type Props = StyleProps & { text: string; path: string };
@@ -31,6 +32,7 @@ const PageTransitionLink: React.FC<Props> = React.memo((props) => {
     margin,
     padding,
     fullWidth,
+    onClick,
   } = props;
 
   return (
@@ -46,6 +48,7 @@ const PageTransitionLink: React.FC<Props> = React.memo((props) => {
       margin={margin}
       padding={padding}
       fullWidth={fullWidth}
+      onClick={onClick}
     >
       {text}
     </StyledPageTransitionLink>

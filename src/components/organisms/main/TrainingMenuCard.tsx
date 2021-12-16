@@ -21,6 +21,7 @@ type Props = StyleProps & DataProps;
 
 const TrainingMenuCard: React.FC<Props> = React.memo(({ children, ...props }) => {
   const { color, title, subTitle, label, path, image } = props;
+
   return (
     <StyledCard>
       <StyledTitle>{title}</StyledTitle>
@@ -66,6 +67,7 @@ const StyledCard = styled.div`
   box-shadow: 0 0 8px #cbcbcb;
   background: #fff;
   padding: 32px 16px;
+
   @media screen and (min-width: 768px) {
     padding: 32px;
   }
@@ -78,16 +80,17 @@ const StyledTitle = styled.h3`
   letter-spacing: 1.5px;
   margin-bottom: 4px;
   text-align: center;
+
   @media screen and (min-width: 768px) {
     font-size: 48px;
   }
 `;
 
 const StyledImageBox = styled.div`
-  width: 180px;
-  height: 180px;
+  width: 160px;
+  height: 160px;
   overflow: hidden;
-  margin: 0 auto 32px;
+  margin: 0 auto 16px;
 `;
 
 const StyledImage = styled.img`
@@ -99,7 +102,8 @@ const StyledText = styled.div`
   color: #666;
   font-size: 14px;
   line-height: 1.5;
-  margin-bottom: 8px;
+  margin: 0 auto 16px;
+  text-align: center;
 `;
 
 const StyledTutorialLink = styled.div`

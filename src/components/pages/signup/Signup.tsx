@@ -71,15 +71,18 @@ const Signup: FC = () => {
     const validator = validateInputPassWord(password);
     if (!validator) {
       setErrorMessages({ ...errorMessages, status: true, validate: true, alreadyUse: false });
+      return;
+    }
+    // emailチェック
+    if (!email) return;
+
+    // Firebaseアカウント作成の成功・失敗判定の処理
+    const result = await dispatch(firebaseCreateUser(email, password));
+    if (result) {
+      setErrorMessages({ ...errorMessages });
+      history.push("/login");
     } else {
-      if (!email) return;
-      const result = await dispatch(firebaseCreateUser(email, password));
-      if (!result) {
-        setErrorMessages({ ...errorMessages, status: true, validate: false, alreadyUse: true });
-      } else {
-        setErrorMessages({ ...errorMessages });
-        history.push("/login");
-      }
+      setErrorMessages({ ...errorMessages, status: true, validate: false, alreadyUse: true });
     }
   };
 

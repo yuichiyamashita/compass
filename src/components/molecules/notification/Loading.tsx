@@ -15,7 +15,7 @@ const Loading: FC = ({ children }) => {
     <>
       {isLoading && (
         <StyledLoadingContainer>
-          <Loader type="Puff" color="#8bd5da" />
+          <Loader type="Watch" color="#8bd5da" />
           <StyledLoadingText>{loadingText}</StyledLoadingText>
         </StyledLoadingContainer>
       )}
