@@ -24,7 +24,7 @@ import TimelineIcon from "@mui/icons-material/Timeline";
 
 import { AppDispatch, useSelector } from "../../../store";
 import { selfDebateSelector } from "../../../Selectors";
-import { openDialogAction, saveThemeAction, handleNextStepAction } from "../../../slice/selfdebateSlice";
+import { openDialogAction, saveThemeAction, handleClickNextStepAction } from "../../../slice/selfdebateSlice";
 import { validateEmptyString } from "../../../functions/validations";
 import { PrimaryButton } from "../../atoms/button";
 import { BasicTypographyWithIcon } from "../../molecules/typography-with-icon";
@@ -81,7 +81,7 @@ const FullScreenDialog: React.FC = React.memo(() => {
       isInputed: true,
     };
     dispatch(saveThemeAction(newTheme));
-    dispatch(handleNextStepAction(1));
+    dispatch(handleClickNextStepAction(1));
     handleClose();
   };
 

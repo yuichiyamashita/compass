@@ -5,11 +5,18 @@ type ThemeState = {
   theme: string;
   isInputed: boolean;
 };
-type OpinionState = {
-  id: string;
-  opinion: string;
-  editing: boolean;
-}[];
+type FactionState = {
+  agree: {
+    id: string;
+    opinions: string[];
+    isInputed: boolean;
+  };
+  disagree: {
+    id: string;
+    opinions: string[];
+    isInputed: boolean;
+  };
+};
 type TagsState = {
   id: string;
   name: string;
@@ -25,8 +32,7 @@ type InitialState = {
   created_at: string;
   theme: ThemeState;
   tags: TagsState;
-  agree: OpinionState;
-  disagree: OpinionState;
+  faction: FactionState;
   conclusion: ConclusionState;
   dialog: boolean;
   activeStep: activeStepState;
@@ -40,8 +46,18 @@ const initialState: InitialState = {
     theme: "",
     isInputed: false,
   },
-  agree: [],
-  disagree: [],
+  faction: {
+    agree: {
+      id: "",
+      opinions: [],
+      isInputed: false,
+    },
+    disagree: {
+      id: "",
+      opinions: [],
+      isInputed: false,
+    },
+  },
   tags: [
     {
       id: "",
@@ -64,7 +80,7 @@ export const selfDebateSlice = createSlice({
     openDialogAction: (state, action: PayloadAction<boolean>) => {
       state.dialog = action.payload;
     },
-    handleNextStepAction: (state, action: PayloadAction<activeStepState>) => {
+    handleClickNextStepAction: (state, action: PayloadAction<activeStepState>) => {
       state.activeStep = action.payload;
     },
     saveThemeAction: (state, action: PayloadAction<ThemeState>) => {
@@ -74,5 +90,6 @@ export const selfDebateSlice = createSlice({
   },
 });
 
-export const { openDialogAction, handleNextStepAction, saveThemeAction, saveOpinionsAction } = selfDebateSlice.actions;
+export const { openDialogAction, handleClickNextStepAction, saveThemeAction, saveOpinionsAction } =
+  selfDebateSlice.actions;
 export default selfDebateSlice.reducer;

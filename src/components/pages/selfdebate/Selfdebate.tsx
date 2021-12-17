@@ -6,7 +6,7 @@ import { selfDebateSelector } from "../../../Selectors";
 import { BasicStepper } from "../../molecules/stepper";
 import { Container } from "../../molecules/container";
 import { generateNowDateString } from "../../../functions/generateString";
-import { FullScreenDialog, SelectTheme, Affirmative } from "../../organisms/selfdebate";
+import { FullScreenDialog, SelectTheme, Agree } from "../../organisms/selfdebate";
 import { AppPageHeader } from "../../organisms/header";
 
 // Stepperのコンテンツ
@@ -26,13 +26,7 @@ const Selfdebate: React.FC = () => {
         <StyledStep>
           <StyledDate>{generateNowDateString()}</StyledDate>
           <div className="h-module-spacer--sm" />
-          {activeStep === 0 ? (
-            <SelectTheme />
-          ) : activeStep === 1 ? (
-            <Affirmative />
-          ) : (
-            activeStep === 2 && <div>反対派</div>
-          )}
+          {activeStep === 0 ? <SelectTheme /> : activeStep === 1 ? <Agree /> : activeStep === 2 && <div>反対派</div>}
         </StyledStep>
       </Container>
       <FullScreenDialog />
