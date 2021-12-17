@@ -6,50 +6,53 @@ import "react-circular-progressbar/dist/styles.css";
 import { useSelector, AppDispatch } from "../../../store";
 import { countDownTimerSelector } from "../../../Selectors";
 import {
-  setCountDownTimerSettingsAction,
-  decrementCountAction,
-  startCountDownTimerAction,
+  startCircularCountDownTimerAction,
+  stopCircularCountDownTimerAction,
+  decrementCircularCountDownTimerAction,
 } from "../../../slice/countDownTimerSlice";
 import { toast } from "react-toastify";
 
-// 別のコンポーネントで呼び出すタイマー発火の関数を定義
-export const startTimer = (seconds: number) => {
+// 他コンポーネントからの呼び出し用の関数を定義
+export const startCircularCountDownTimer = (seconds: number) => {
   return (dispatch: AppDispatch) => {
     // 初期値を作成 ======
-    const setTimerSettings = {
-      display: true,
-      seconds: seconds,
+    const settings = {
+      circularContDownTimer: {
+        isDisplay: true,
+        isStart: true,
+        seconds: seconds,
+        secondsLeft: seconds,
+      },
     };
     let secondsLeft = seconds;
 
     // 初期値をstoreにセット
-    dispatch(startCountDownTimerAction(true));
-    dispatch(setCountDownTimerSettingsAction(setTimerSettings));
-    dispatch(decrementCountAction(secondsLeft));
+    dispatch(startCircularCountDownTimerAction(settings));
+    dispatch(decrementCircularCountDownTimerAction(secondsLeft));
 
     // カウントダウン処理
     const interval = setInterval(() => {
       secondsLeft--;
-      dispatch(decrementCountAction(secondsLeft));
+      dispatch(decrementCircularCountDownTimerAction(secondsLeft));
+
+      // 終了処理
       if (secondsLeft === 0) {
         clearInterval(interval);
-
-        // 終了の処理
         toast.success("終了です", {
           position: "top-center",
+          autoClose: 1500,
+          theme: "colored",
         });
-
-        dispatch(startCountDownTimerAction(false));
+        dispatch(stopCircularCountDownTimerAction());
       }
     }, 1000);
   };
 };
 
-const NotificationTimer: React.FC = React.memo(() => {
+const CircularProgressbarCountDonwTimer: React.FC = React.memo(() => {
   const state = useSelector(countDownTimerSelector);
-  const display = state.display;
-  const seconds = state.seconds;
-  const secondsLeft = state.secondsLeft;
+  const seconds = state.circularContDownTimer.seconds;
+  const secondsLeft = state.circularContDownTimer.secondsLeft;
 
   const percentage = Math.round((secondsLeft / seconds) * 100);
   const minutes = Math.floor(secondsLeft / 60);
@@ -61,27 +64,23 @@ const NotificationTimer: React.FC = React.memo(() => {
   };
 
   return (
-    <>
-      {display && (
-        <StyledNotificationTimer>
-          <CircularProgressbar
-            value={percentage}
-            text={minutes + " : " + second()}
-            styles={buildStyles({
-              trailColor: "#eee",
-              textColor: "#8bd5da",
-              pathColor: "#8bd5da",
-              backgroundColor: "#fff",
-            })}
-            background
-          />
-        </StyledNotificationTimer>
-      )}
-    </>
+    <StyledCircularProgressbarCountDonwTimer>
+      <CircularProgressbar
+        value={percentage}
+        text={minutes + " : " + second()}
+        styles={buildStyles({
+          trailColor: "#eee",
+          textColor: "#8bd5da",
+          pathColor: "#8bd5da",
+          backgroundColor: "#fff",
+        })}
+        background
+      />
+    </StyledCircularProgressbarCountDonwTimer>
   );
 });
 
-export default NotificationTimer;
+export default CircularProgressbarCountDonwTimer;
 
 const animation = keyframes`
 0% {
@@ -97,7 +96,7 @@ const animation = keyframes`
 }
 `;
 
-const StyledNotificationTimer = styled.div`
+const StyledCircularProgressbarCountDonwTimer = styled.div`
   z-index: 999;
   position: fixed;
   top: 8px;

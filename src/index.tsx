@@ -8,7 +8,6 @@ import { ThemeProvider } from "@mui/material/styles";
 import { MuiTheme } from "./assets/material-ui";
 
 import { Notification, Loading } from "./components/molecules/notification";
-import { NotificationTimer } from "./components/organisms/timer";
 import "./assets/styles/destyle.css";
 import "./assets/styles/style.css";
 
@@ -18,7 +17,6 @@ ReactDOM.render(
       <Notification />
       <ThemeProvider theme={MuiTheme}>
         <Loading>
-          <NotificationTimer />
           <App />
         </Loading>
       </ThemeProvider>

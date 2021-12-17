@@ -1,12 +1,20 @@
-import React, { FC } from "react";
+import React from "react";
 import styled from "styled-components";
+import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 
-const Introduction: FC = () => {
+const Introduction: React.FC = () => {
   return (
     <StyledContainer>
       <StyledTextBox>
         <dt>COMPASSとは？</dt>
-        <dd>=「論理的思考力」を強化するためのアプリです。</dd>
+        <StyledEqual>
+          <ArrowDownwardIcon sx={{ fontSize: "32px", transform: "rotateZ(-90deg)" }} />
+        </StyledEqual>
+        <dd>
+          <span>「論理的思考力」</span>
+          <br />
+          を強化するためのトレーニングアプリです。
+        </dd>
       </StyledTextBox>
     </StyledContainer>
   );
@@ -49,6 +57,7 @@ const StyledTextBox = styled.dl`
     }
   }
   dd {
+    text-align: center;
     @media screen and (min-width: 320px) {
       font-size: 20px;
     }
@@ -58,5 +67,16 @@ const StyledTextBox = styled.dl`
     @media screen and (min-width: 768px) {
       font-size: 24px;
     }
+
+    span {
+      display: inline-block;
+      font-size: 32px;
+      margin-bottom: 8px;
+    }
   }
+`;
+
+const StyledEqual = styled.dd`
+  transform: rotateZ(90deg);
+  margin-bottom: 32px;
 `;
