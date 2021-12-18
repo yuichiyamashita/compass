@@ -10,7 +10,7 @@ const TrainingMenus: React.FC = React.memo(() => {
     <MuiGrid container spacing={8}>
       <MuiGrid item xs={12} md={6}>
         <TrainingMenuCard
-          color="#71a5f3"
+          color="#33b6b1"
           title="Self debate"
           subTitle="説得力のある意見を主張するためのトレーニング"
           label="セルフディベートを始める →"

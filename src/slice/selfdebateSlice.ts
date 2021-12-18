@@ -6,16 +6,13 @@ type ThemeState = {
   isInputed: boolean;
 };
 type FactionState = {
-  agree: {
+  faction: string;
+  id: string;
+  opinions: {
     id: string;
-    opinions: string[];
-    isInputed: boolean;
-  };
-  disagree: {
-    id: string;
-    opinions: string[];
-    isInputed: boolean;
-  };
+    opinion: string;
+  }[];
+  isInputed: boolean;
 };
 type TagsState = {
   id: string;
@@ -32,7 +29,8 @@ type InitialState = {
   created_at: string;
   theme: ThemeState;
   tags: TagsState;
-  faction: FactionState;
+  agree: FactionState;
+  disagree: FactionState;
   conclusion: ConclusionState;
   dialog: boolean;
   activeStep: activeStepState;
@@ -46,17 +44,17 @@ const initialState: InitialState = {
     theme: "",
     isInputed: false,
   },
-  faction: {
-    agree: {
-      id: "",
-      opinions: [],
-      isInputed: false,
-    },
-    disagree: {
-      id: "",
-      opinions: [],
-      isInputed: false,
-    },
+  agree: {
+    faction: "agree",
+    id: "",
+    opinions: [],
+    isInputed: false,
+  },
+  disagree: {
+    faction: "disagree",
+    id: "",
+    opinions: [],
+    isInputed: false,
   },
   tags: [
     {
@@ -86,7 +84,18 @@ export const selfDebateSlice = createSlice({
     saveThemeAction: (state, action: PayloadAction<ThemeState>) => {
       state.theme = action.payload;
     },
-    saveOpinionsAction: (state, action) => {},
+    saveOpinionsAction: (state, action: PayloadAction<FactionState>) => {
+      switch (action.payload.faction) {
+        case "agree":
+          state.agree = action.payload;
+          break;
+        case "disagree":
+          state.disagree = action.payload;
+          break;
+        default:
+          break;
+      }
+    },
   },
 });
 

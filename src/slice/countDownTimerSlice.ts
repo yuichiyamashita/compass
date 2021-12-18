@@ -48,6 +48,9 @@ export const countDownTimerSlice = createSlice({
     decrementCircularCountDownTimerAction: (state, action: PayloadAction<number>) => {
       state.circularContDownTimer.secondsLeft = action.payload;
     },
+    invisibleCircularCountDownTimerAction: (state) => {
+      state.circularContDownTimer.isDisplay = false;
+    },
 
     startPreparingCountDownTimerAction: (state, action: PayloadAction<PreparingCountDownTimer>) => {
       state.preparingCountDownTimer = action.payload.preparingCountDownTimer;
@@ -68,6 +71,7 @@ export const {
   startCircularCountDownTimerAction,
   stopCircularCountDownTimerAction,
   decrementCircularCountDownTimerAction,
+  invisibleCircularCountDownTimerAction,
   startPreparingCountDownTimerAction,
   stopPreparingCountDownTimerAction,
   decrementPreparingCountDownTimerAction,

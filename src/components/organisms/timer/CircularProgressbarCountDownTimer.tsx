@@ -13,7 +13,7 @@ import {
 import { toast } from "react-toastify";
 
 // 他コンポーネントからの呼び出し用の関数を定義
-export const startCircularCountDownTimer = (seconds: number) => {
+export const startCircularCountDownTimer = (seconds: number, color: string) => {
   return (dispatch: AppDispatch) => {
     // 初期値を作成 ======
     const settings = {
@@ -38,10 +38,13 @@ export const startCircularCountDownTimer = (seconds: number) => {
       // 終了処理
       if (secondsLeft === 0) {
         clearInterval(interval);
-        toast.success("終了です", {
+        toast.success("終了！", {
           position: "top-center",
-          autoClose: 1500,
+          autoClose: 3000,
           theme: "colored",
+          style: {
+            background: color,
+          },
         });
         dispatch(stopCircularCountDownTimerAction());
       }
@@ -49,7 +52,10 @@ export const startCircularCountDownTimer = (seconds: number) => {
   };
 };
 
-const CircularProgressbarCountDonwTimer: React.FC = React.memo(() => {
+type Props = { color: string };
+
+const CircularProgressbarCountDonwTimer: React.FC<Props> = React.memo((props) => {
+  const { color } = props;
   const state = useSelector(countDownTimerSelector);
   const seconds = state.circularContDownTimer.seconds;
   const secondsLeft = state.circularContDownTimer.secondsLeft;
@@ -70,8 +76,8 @@ const CircularProgressbarCountDonwTimer: React.FC = React.memo(() => {
         text={minutes + " : " + second()}
         styles={buildStyles({
           trailColor: "#eee",
-          textColor: "#8bd5da",
-          pathColor: "#8bd5da",
+          textColor: color,
+          pathColor: color,
           backgroundColor: "#fff",
         })}
         background

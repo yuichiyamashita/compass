@@ -29,6 +29,12 @@ import { validateEmptyString } from "../../../functions/validations";
 import { PrimaryButton } from "../../atoms/button";
 import { BasicTypographyWithIcon } from "../../molecules/typography-with-icon";
 
+type StyledProps = {
+  color: string;
+};
+
+type Props = StyledProps;
+
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
     children: React.ReactElement;
@@ -46,7 +52,8 @@ const templates = [
   "年収を上げるために会社をすぐ辞めるのはありか、なしか",
 ];
 
-const FullScreenDialog: React.FC = React.memo(() => {
+const FullScreenDialog: React.FC<Props> = React.memo((props) => {
+  const { color } = props;
   const dispatch: AppDispatch = useDispatch();
   const state = useSelector(selfDebateSelector);
   const dialog = state.dialog;
@@ -91,7 +98,7 @@ const FullScreenDialog: React.FC = React.memo(() => {
 
   return (
     <MuiDialog fullScreen open={dialog} onClose={handleClose} TransitionComponent={Transition}>
-      <MuiAppBar sx={{ position: "relative", background: "#71a5f3" }}>
+      <MuiAppBar sx={{ position: "relative", background: color }}>
         <MuiToolbar>
           <MuiIconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">
             <CloseIcon />
@@ -108,7 +115,7 @@ const FullScreenDialog: React.FC = React.memo(() => {
           fontWeight={600}
           icon={TimelineIcon}
           iconSize="32px"
-          iconColor="secondary"
+          iconColor="#33b6b1"
           spacing="xs"
           margin="0 0 8px 0"
         />
@@ -130,7 +137,7 @@ const FullScreenDialog: React.FC = React.memo(() => {
             fontWeight={600}
             icon={BorderColorIcon}
             iconSize="32px"
-            iconColor="secondary"
+            iconColor="#33b6b1"
             spacing="xs"
             margin="0 0 16px 0"
           />
@@ -155,7 +162,7 @@ const FullScreenDialog: React.FC = React.memo(() => {
             />
           </StyledTextField>
           <StyledButton>
-            <PrimaryButton text="決定" color="#fff" background="#71a5f3" fullWidth />
+            <PrimaryButton text="決定" color="#fff" background={color} fullWidth />
           </StyledButton>
         </StyledThemeInputForm>
       </StyledContainer>

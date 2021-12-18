@@ -10,15 +10,21 @@ import { TextAnimation } from "../../molecules/animation";
 import { startCircularCountDownTimer } from "../timer/CircularProgressbarCountDownTimer";
 import { startPreparingCountDownTimer } from "../timer/PreparingCountDownTimer";
 import { PrepaeringCountDownTimer } from "../timer";
-import { TextArea } from "../selfdebate";
 
-const PreparingDisplay: React.FC = React.memo(() => {
+type StyledProps = {
+  color: string;
+};
+
+type Props = StyledProps & { factionText: string };
+
+const PreparingDisplay: React.FC<Props> = React.memo((props) => {
+  const { factionText, color } = props;
   const dispatch: AppDispatch = useDispatch();
   const selfDebate = useSelector(selfDebateSelector);
   const countDownTimer = useSelector(countDownTimerSelector);
   const theme = selfDebate.theme.theme;
-  const isDisplayCircularCountDownTimer = countDownTimer.circularContDownTimer.isDisplay;
   const isDisplayPreparingCountDownTimer = countDownTimer.preparingCountDownTimer.isDisplay;
+  const isInputedAgree = selfDebate.agree.isInputed;
 
   // タイマーの発火処理 ===============================
   const handleClickStartTimer = useCallback(
@@ -31,7 +37,7 @@ const PreparingDisplay: React.FC = React.memo(() => {
         fourSeconds--;
         if (fourSeconds === 0) {
           // 2つ目のタイマー発火
-          dispatch(startCircularCountDownTimer(seconds));
+          dispatch(startCircularCountDownTimer(seconds, "#33b6b1"));
           clearInterval(interval);
         }
       }, 1000);
@@ -47,52 +53,50 @@ const PreparingDisplay: React.FC = React.memo(() => {
 
   return (
     <>
-      {/* タイマーの表示・非表示によってコンポーネントを切り替える */}
-      {isDisplayCircularCountDownTimer ? (
-        <TextArea />
+      {/* 1つ目のタイマーの表示・非表示によってコンポーネントを切り替える */}
+      {isDisplayPreparingCountDownTimer ? (
+        <PrepaeringCountDownTimer />
       ) : (
         <>
-          {/* 1つ目のタイマーの表示・非表示によってコンポーネントを切り替える */}
-          {isDisplayPreparingCountDownTimer ? (
-            <PrepaeringCountDownTimer />
-          ) : (
-            <>
-              <StyledThemeWrap>
-                <span>テーマ:</span>
-                <StyledTheme>
-                  <section id="theme">
-                    <TextAnimation section="theme" duration={0.02} delay={0.4}>
-                      {theme}
-                    </TextAnimation>
-                  </section>
-                </StyledTheme>
-              </StyledThemeWrap>
-              <StyledText>
-                制限時間は3分間です。
-                <br />「 <span>肯定派</span> 」の意見を述べてください。
-              </StyledText>
-              <StyledButtonWrap>
-                <PrimaryButton
-                  text="スタート →"
-                  background="#71a5f3"
-                  color="#fff"
-                  radius="4px"
-                  fullWidth
-                  onClick={() => handleClickStartTimer(10)}
-                  autoFocus
-                />
+          <StyledThemeWrap>
+            <span>テーマ:</span>
+            <StyledTheme>
+              <section id="theme">
+                <TextAnimation section="theme" duration={0.02} delay={0.4}>
+                  {theme}
+                </TextAnimation>
+              </section>
+            </StyledTheme>
+          </StyledThemeWrap>
+          <StyledText color={color}>
+            制限時間は3分間です。
+            <br />「 <span>{factionText}</span> 」の意見を述べてください。
+          </StyledText>
+          <StyledButtonWrap>
+            <PrimaryButton
+              text="スタート →"
+              background={color}
+              color="#fff"
+              radius="4px"
+              fullWidth
+              onClick={() => handleClickStartTimer(10)}
+              autoFocus
+            />
+            {/* 賛成派意見が入力済みの場合はテーマ変更ボタンを非表示にする */}
+            {!isInputedAgree && (
+              <>
                 <div className="h-module-spacer--sm" />
                 <PrimaryButton
                   text="テーマを変更する"
-                  color="#71a5f3"
-                  border="1px solid #71a5f3"
+                  color={color}
+                  border={`1px solid ${color}`}
                   radius="4px"
                   fullWidth
                   onClick={handleOpenDialog}
                 />
-              </StyledButtonWrap>
-            </>
-          )}
+              </>
+            )}
+          </StyledButtonWrap>
         </>
       )}
     </>
@@ -134,18 +138,23 @@ const StyledTheme = styled.h2`
   }
 `;
 
-const StyledText = styled.div`
+const StyledText = styled.div<StyledProps>`
   text-align: center;
   margin-bottom: 16px;
 
   span {
+    font-size: 18px;
     font-weight: 600;
-    color: #4285f4;
+    color: ${(props) => props.color};
   }
 
   @media screen and (min-width: 768px) {
     br {
       display: none;
+    }
+
+    span {
+      font-size: 24px;
     }
   }
 `;

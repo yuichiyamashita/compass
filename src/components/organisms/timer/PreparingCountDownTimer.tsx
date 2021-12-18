@@ -65,7 +65,9 @@ export default PreparingTimer;
 const StyledPreparingTimer = styled.div`
   padding: 32px 0;
   text-align: center;
-  font-size: 64px;
-  font-weight: 600;
-  color: #faa50a;
+  font-size: 32px;
+  color: #fbc562;
+  @media screen and (min-width: 768px) {
+    font-size: 64px;
+  }
 `;
