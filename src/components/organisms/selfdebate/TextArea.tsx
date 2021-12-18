@@ -1,24 +1,35 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import styled from "styled-components";
 import { IconButton as MuiIconButton } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { useSelector } from "../../../store";
+import { useDispatch } from "react-redux";
+
+import { useSelector, AppDispatch } from "../../../store";
 import { selfDebateSelector, countDownTimerSelector } from "../../../Selectors";
 import { NoBorderTextField } from "../../atoms/textField";
 import { validateEmptyString } from "../../../functions/validations";
 import { generateRandomString } from "../../../functions/generateString";
 import { CircularProgressbarCountDownTimer } from "../timer";
+import { saveOpinionsAction } from "../../../slice/selfdebateSlice";
 
 type InputOpinion = {
   id: string;
-  editing: boolean;
   opinion: string;
 };
 
-const TextArea: React.FC = React.memo(() => {
+type StyledProps = {
+  color: string;
+};
+
+type Props = StyledProps & { faction: string; factionText: string };
+
+const TextArea: React.FC<Props> = React.memo((props) => {
+  const { faction, factionText, color } = props;
+  const dispatch: AppDispatch = useDispatch();
   const selfDebate = useSelector(selfDebateSelector);
   const countDownTimer = useSelector(countDownTimerSelector);
   const theme = selfDebate.theme.theme;
+  const isDisplayCircularCountDownTimer = countDownTimer.circularContDownTimer.isDisplay;
   const isStartCircularCountDownTimer = countDownTimer.circularContDownTimer.isStart;
   const [inputOpinion, setInputOpinion] = useState("");
   const [inputOpinions, setInputOpinions] = useState<InputOpinion[]>([]);
@@ -41,7 +52,6 @@ const TextArea: React.FC = React.memo(() => {
     const id = generateRandomString();
     const newOpinion: InputOpinion = {
       id: id,
-      editing: false,
       opinion: inputOpinion,
     };
     setInputOpinions([...inputOpinions, newOpinion]);
@@ -58,11 +68,26 @@ const TextArea: React.FC = React.memo(() => {
     [isStartCircularCountDownTimer, inputOpinions]
   );
 
+  // タイマー終了時に入力データをstoreに保存
+  useEffect(() => {
+    if (isDisplayCircularCountDownTimer && !isStartCircularCountDownTimer) {
+      const id = generateRandomString();
+      const newAgreeOpinions = {
+        faction: faction,
+        id: id,
+        opinions: inputOpinions,
+        isInputed: true,
+      };
+
+      dispatch(saveOpinionsAction(newAgreeOpinions));
+    }
+  }, [dispatch, inputOpinions, faction, isDisplayCircularCountDownTimer, isStartCircularCountDownTimer]);
+
   return (
-    <div>
-      <CircularProgressbarCountDownTimer />
+    <>
+      <CircularProgressbarCountDownTimer color={color} />
       <StyledTheme>{theme}</StyledTheme>
-      <StyledFaction>肯定派</StyledFaction>
+      <StyledFaction color={color}>{factionText}</StyledFaction>
       <StyledTextArea>
         {/* 入力されたテキストのリスト */}
         <ul>
@@ -93,7 +118,7 @@ const TextArea: React.FC = React.memo(() => {
           )}
         </form>
       </StyledTextArea>
-    </div>
+    </>
   );
 });
 
@@ -124,8 +149,8 @@ const StyledTextArea = styled.div`
     padding: 16px;
   }
 `;
-const StyledFaction = styled.span`
-  background: #4285f4;
+const StyledFaction = styled.span<StyledProps>`
+  background: ${(props) => props.color};
   border-radius: 4px;
   color: #fff;
   font-size: 14px;

@@ -7,7 +7,7 @@ type StyleProps = {
   fontSize?: string;
   fontWeight?: number;
   iconSize?: string;
-  iconColor?: "inherit" | "disabled" | "action" | "primary" | "secondary" | "error" | "info" | "success" | "warning";
+  iconColor?: string;
   spacing?: "xxs" | "xs" | "sm" | "md" | "lg" | "xl" | "xxl";
   justify?: "flex-start" | "center" | "flex-end";
   margin?: string;
@@ -18,7 +18,7 @@ const BasicTypographyWithIcon: React.FC<Props> = React.memo((props) => {
   const { text, color, fontSize, fontWeight, iconSize, iconColor, spacing, icon, justify, margin } = props;
   return (
     <StyledFlexBox margin={margin} justify={justify}>
-      <MuiIcon component={icon} color={iconColor} sx={{ fontSize: iconSize }} />
+      <MuiIcon component={icon} sx={{ fontSize: iconSize, color: iconColor }} />
       <div className={`w-module-spacer--${spacing}`} />
       <StyledTypography color={color} fontSize={fontSize} fontWeight={fontWeight}>
         {text}

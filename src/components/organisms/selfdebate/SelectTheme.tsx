@@ -17,7 +17,7 @@ const SelectTheme: React.FC = React.memo(() => {
     <>
       <StyledThemeWrap>
         <StyledSelectTheme>最初に討論するテーマを選んでください。</StyledSelectTheme>
-        <PrimaryButton text="テーマを選ぶ ↓" color="#fff" background="#71a5f3" radius="4px" onClick={handleClick} />
+        <PrimaryButton text="テーマを選ぶ ↓" color="#fff" background="#33b6b1" radius="4px" onClick={handleClick} />
       </StyledThemeWrap>
     </>
   );
