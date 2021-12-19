@@ -7,7 +7,7 @@ import { countDownTimerSelector } from "../../../Selectors";
 import { handleClickNextStepAction } from "../../../slice/selfdebateSlice";
 import { invisibleCircularCountDownTimerAction } from "../../../slice/countDownTimerSlice";
 import { PrimaryButton } from "../../atoms/button";
-import { TextArea, PreparingDisplay } from "../selfdebate";
+import { SelfdebatePreparingDisplay, SelfdebateTextArea } from "../selfdebate";
 
 const Agree: React.FC = React.memo(() => {
   const dispatch: AppDispatch = useDispatch();
@@ -24,9 +24,9 @@ const Agree: React.FC = React.memo(() => {
     <>
       {/* タイマーの表示・非表示によってコンポーネントを切り替える */}
       {isDisplayCircularCountDownTimer ? (
-        <TextArea color="#64b5f6" factionText="肯定派" faction="agree" />
+        <SelfdebateTextArea color="#64b5f6" factionText="肯定派" faction="agree" />
       ) : (
-        <PreparingDisplay color="#64b5f6" factionText="肯定派" />
+        <SelfdebatePreparingDisplay color="#64b5f6" factionText="肯定派" />
       )}
       {isDisplayCircularCountDownTimer && !isStartCircularCountDownTimer && (
         <StyledButton>

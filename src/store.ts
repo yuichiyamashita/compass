@@ -4,12 +4,14 @@ import userReducer from "./slice/userSlice";
 import notificationReducer from "./slice/notificationSlice";
 import selfDebateReducer from "./slice/selfdebateSlice";
 import countDownTimerReducer from "./slice/countDownTimerSlice";
+import fastThinkingReducer from "./slice/fastthinkingSlice";
 
 export const store = configureStore({
   reducer: {
     user: userReducer,
     notification: notificationReducer,
     selfdebate: selfDebateReducer,
+    fastThinking: fastThinkingReducer,
     countDownTimer: countDownTimerReducer,
   },
 });

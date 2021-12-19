@@ -21,7 +21,7 @@ type StyledProps = {
   color: string;
 };
 
-type Props = StyledProps & { faction: string; factionText: string };
+type Props = StyledProps & { faction?: string; factionText?: string };
 
 const TextArea: React.FC<Props> = React.memo((props) => {
   const { faction, factionText, color } = props;
@@ -87,7 +87,7 @@ const TextArea: React.FC<Props> = React.memo((props) => {
     <>
       <CircularProgressbarCountDownTimer color={color} />
       <StyledTheme>{theme}</StyledTheme>
-      <StyledFaction color={color}>{factionText}</StyledFaction>
+      {factionText && <StyledFaction color={color}>{factionText}</StyledFaction>}
       <StyledTextArea>
         {/* 入力されたテキストのリスト */}
         <ul>
