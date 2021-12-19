@@ -1,5 +1,5 @@
-export { default as SelectTheme } from "./SelectTheme";
-export { default as Agree } from "./Agree";
-export { default as Disagree } from "./Disagree";
+export { default as SelectSelfDebateTheme } from "./SelectSelfDebateTheme";
+export { default as PositiveOpinion } from "./PositiveOpinion";
+export { default as NegativeOpinion } from "./NegativeOpinion";
 export { default as SelfdebatePreparingDisplay } from "./SelfdebatePreparingDisplay";
 export { default as SelfdebateTextArea } from "./SelfdebateTextArea";

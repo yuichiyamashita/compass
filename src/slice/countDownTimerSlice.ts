@@ -1,27 +1,21 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { RootState } from "../store";
 
-type CircularCountDownTimer = {
-  circularContDownTimer: {
-    isDisplay: boolean;
-    isStart: boolean;
-    seconds: number;
-    secondsLeft: number;
-  };
+// 型定義
+type TimerSettingsState = {
+  isDisplay: boolean;
+  isStart: boolean;
+  seconds: number;
+  secondsLeft: number;
+};
+type InitialState = {
+  circularCountDownTimer: TimerSettingsState;
+  preparingCountDownTimer: TimerSettingsState;
 };
 
-type PreparingCountDownTimer = {
-  preparingCountDownTimer: {
-    isDisplay: boolean;
-    isStart: boolean;
-    seconds: number;
-    secondsLeft: number;
-  };
-};
-
-type InitialState = CircularCountDownTimer & PreparingCountDownTimer;
-
+// 初期値
 const initialState: InitialState = {
-  circularContDownTimer: {
+  circularCountDownTimer: {
     isDisplay: false,
     isStart: false,
     seconds: 0,
@@ -35,25 +29,28 @@ const initialState: InitialState = {
   },
 };
 
+// 本体
 export const countDownTimerSlice = createSlice({
   name: "countDownTimer",
   initialState,
   reducers: {
-    startCircularCountDownTimerAction: (state, action: PayloadAction<CircularCountDownTimer>) => {
-      state.circularContDownTimer = action.payload.circularContDownTimer;
+    // CircularCountDownTimer
+    startCircularCountDownTimerAction: (state, action: PayloadAction<TimerSettingsState>) => {
+      state.circularCountDownTimer = action.payload;
     },
     stopCircularCountDownTimerAction: (state) => {
-      state.circularContDownTimer.isStart = false;
+      state.circularCountDownTimer.isStart = false;
     },
     decrementCircularCountDownTimerAction: (state, action: PayloadAction<number>) => {
-      state.circularContDownTimer.secondsLeft = action.payload;
+      state.circularCountDownTimer.secondsLeft = action.payload;
     },
     invisibleCircularCountDownTimerAction: (state) => {
-      state.circularContDownTimer.isDisplay = false;
+      state.circularCountDownTimer.isDisplay = false;
     },
 
-    startPreparingCountDownTimerAction: (state, action: PayloadAction<PreparingCountDownTimer>) => {
-      state.preparingCountDownTimer = action.payload.preparingCountDownTimer;
+    // PreparingCountDownTimer
+    startPreparingCountDownTimerAction: (state, action: PayloadAction<TimerSettingsState>) => {
+      state.preparingCountDownTimer = action.payload;
     },
     stopPreparingCountDownTimerAction: (state) => {
       state.preparingCountDownTimer.isStart = false;
@@ -67,6 +64,7 @@ export const countDownTimerSlice = createSlice({
   },
 });
 
+// Actions
 export const {
   startCircularCountDownTimerAction,
   stopCircularCountDownTimerAction,
@@ -77,4 +75,12 @@ export const {
   decrementPreparingCountDownTimerAction,
   invisiblePreparingCountDownTimerAction,
 } = countDownTimerSlice.actions;
+
+// Reducer
 export default countDownTimerSlice.reducer;
+
+// Selectors
+export const selectCircularCountDownTimer = (state: RootState): TimerSettingsState =>
+  state.countDownTimer.circularCountDownTimer;
+export const selectPreparingCountDownTimer = (state: RootState): TimerSettingsState =>
+  state.countDownTimer.preparingCountDownTimer;

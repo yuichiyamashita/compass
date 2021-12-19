@@ -10,7 +10,7 @@ import { Signup, SendAuthEmail, CompleteSendAuthEmail } from "./components/pages
 import { ResetPassword } from "./components/pages/reset-password";
 import { Main } from "./components/pages/main";
 import { Selfdebate } from "./components/pages/selfdebate";
-import { FastThinking } from "./components/pages/fastthinking";
+import { FastThinking } from "./components/pages/fastThinking";
 
 const App: FC = () => {
   return (

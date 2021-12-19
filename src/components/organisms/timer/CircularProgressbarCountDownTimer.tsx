@@ -4,11 +4,11 @@ import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 
 import { useSelector, AppDispatch } from "../../../store";
-import { countDownTimerSelector } from "../../../Selectors";
 import {
   startCircularCountDownTimerAction,
   stopCircularCountDownTimerAction,
   decrementCircularCountDownTimerAction,
+  selectCircularCountDownTimer,
 } from "../../../slice/countDownTimerSlice";
 import { toast } from "react-toastify";
 
@@ -17,12 +17,10 @@ export const startCircularCountDownTimer = (seconds: number, color: string) => {
   return (dispatch: AppDispatch) => {
     // 初期値を作成 ======
     const settings = {
-      circularContDownTimer: {
-        isDisplay: true,
-        isStart: true,
-        seconds: seconds,
-        secondsLeft: seconds,
-      },
+      isDisplay: true,
+      isStart: true,
+      seconds: seconds,
+      secondsLeft: seconds,
     };
     let secondsLeft = seconds;
 
@@ -56,9 +54,9 @@ type Props = { color: string };
 
 const CircularProgressbarCountDonwTimer: React.FC<Props> = React.memo((props) => {
   const { color } = props;
-  const state = useSelector(countDownTimerSelector);
-  const seconds = state.circularContDownTimer.seconds;
-  const secondsLeft = state.circularContDownTimer.secondsLeft;
+  const circularContDownTimer = useSelector(selectCircularCountDownTimer);
+  const seconds = circularContDownTimer.seconds;
+  const secondsLeft = circularContDownTimer.secondsLeft;
 
   const percentage = Math.round((secondsLeft / seconds) * 100);
   const minutes = Math.floor(secondsLeft / 60);

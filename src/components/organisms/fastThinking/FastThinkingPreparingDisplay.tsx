@@ -9,30 +9,28 @@ import { TextAnimation } from "../../molecules/animation";
 import { startCircularCountDownTimer } from "../timer/CircularProgressbarCountDownTimer";
 import { startPreparingCountDownTimer } from "../timer/PreparingCountDownTimer";
 import { PrepaeringCountDownTimer } from "../timer";
-import { selectSelfDebatePositiveOpinions, selectSelfDebateTheme } from "../../../slice/selfdebateSlice";
+import { selectFastThinkingTheme } from "../../../slice/fastThinkingSlice";
 import { selectPreparingCountDownTimer } from "../../../slice/countDownTimerSlice";
 
 type StyledProps = {
   color: string;
 };
 
-type Props = StyledProps & { factionText: string };
+type Props = StyledProps;
 
-const PreparingDisplay: React.FC<Props> = React.memo((props) => {
-  const { factionText, color } = props;
+const FastThinkingPreparingDisplay: React.FC<Props> = React.memo((props) => {
+  const { color } = props;
   const dispatch: AppDispatch = useDispatch();
+  const themeState = useSelector(selectFastThinkingTheme);
+  const theme = themeState.text;
   const preparingCountDownTimer = useSelector(selectPreparingCountDownTimer);
   const isTimerDisplayed = preparingCountDownTimer.isDisplay;
-  const themeState = useSelector(selectSelfDebateTheme);
-  const theme = themeState.text;
-  const positiveOpinions = useSelector(selectSelfDebatePositiveOpinions);
-  const isPositiveOpinionInputed = positiveOpinions.isInputed;
 
   // タイマーの発火処理 ===============================
   const handleClickStartTimer = useCallback(
     (seconds: number) => {
       // 1つ目のタイマー発火
-      dispatch(startPreparingCountDownTimer(3));
+      dispatch(startPreparingCountDownTimer(3)); // 待ち時間は3秒に固定
 
       let fourSeconds = 4; // 1つ目のタイマーが表示されてから4秒後に、2つ目のタイマーを表示するための変数
       const interval = setInterval(() => {
@@ -70,8 +68,7 @@ const PreparingDisplay: React.FC<Props> = React.memo((props) => {
             </StyledTheme>
           </StyledThemeWrap>
           <StyledText color={color}>
-            制限時間は3分間です。
-            <br />「 <span>{factionText}</span> 」の意見を述べてください。
+            制限時間は1分です。深く考えずに思い浮かんだ案をそのまま書き込みましょう。
           </StyledText>
           <StyledButtonWrap>
             <PrimaryButton
@@ -82,20 +79,15 @@ const PreparingDisplay: React.FC<Props> = React.memo((props) => {
               fullWidth
               onClick={() => handleClickStartTimer(180)} // TODO：次のステップに移動する処理を追加
             />
-            {/* 賛成派意見が入力済みの場合はテーマ変更ボタンを非表示にする */}
-            {!isPositiveOpinionInputed && (
-              <>
-                <div className="h-module-spacer--sm" />
-                <PrimaryButton
-                  text="テーマを変更する"
-                  color={color}
-                  border={`1px solid ${color}`}
-                  radius="4px"
-                  fullWidth
-                  onClick={handleOpenDialog}
-                />
-              </>
-            )}
+            <div className="h-module-spacer--sm" />
+            <PrimaryButton
+              text="テーマを変更する"
+              color={color}
+              border={`1px solid ${color}`}
+              radius="4px"
+              fullWidth
+              onClick={handleOpenDialog}
+            />
           </StyledButtonWrap>
         </>
       )}
@@ -103,7 +95,7 @@ const PreparingDisplay: React.FC<Props> = React.memo((props) => {
   );
 });
 
-export default PreparingDisplay;
+export default FastThinkingPreparingDisplay;
 
 const StyledThemeWrap = styled.div`
   display: flex;

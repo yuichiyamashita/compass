@@ -1,21 +1,21 @@
-import React from "react";
+import React, { useState, useCallback } from "react";
 import styled from "styled-components";
 
-import { useSelector } from "../../../store";
-import { selfDebateSelector } from "../../../Selectors";
 import { BasicStepper } from "../../molecules/stepper";
 import { Container } from "../../molecules/container";
 import { generateNowDateString } from "../../../functions/generateString";
-import { SelectTheme, Agree, Disagree } from "../../organisms/selfdebate";
-import { FullScreenDialog } from "../../organisms/dialog";
+import { SelectSelfDebateTheme, PositiveOpinion, NegativeOpinion } from "../../organisms/selfdebate";
 import { AppPageHeader } from "../../organisms/header";
 
 // Stepperのコンテンツ
 const steps = ["テーマ", "肯定", "否定", "結論"];
 
-const Selfdebate: React.FC = () => {
-  const state = useSelector(selfDebateSelector);
-  const activeStep = state.activeStep;
+const Selfdebate: React.FC = React.memo(() => {
+  const [activeStep, setActiveStep] = useState(0);
+
+  const handleClickMoveStep = useCallback((step: number) => {
+    setActiveStep(step);
+  }, []);
 
   return (
     <StyledContainer>
@@ -28,24 +28,19 @@ const Selfdebate: React.FC = () => {
           <StyledDate>{generateNowDateString()}</StyledDate>
           <div className="h-module-spacer--sm" />
           {activeStep === 0 ? (
-            <SelectTheme />
+            <SelectSelfDebateTheme />
           ) : activeStep === 1 ? (
-            <Agree />
+            <PositiveOpinion handleClickMoveStep={handleClickMoveStep} />
           ) : activeStep === 2 ? (
-            <Disagree />
+            <NegativeOpinion handleClickMoveStep={handleClickMoveStep} />
           ) : (
             activeStep === 3 && <div>結論</div>
           )}
         </StyledStep>
       </Container>
-      <FullScreenDialog
-        color="#33b6b1"
-        text="賛成派と反対派に分けられるテーマを設定しましょう"
-        placeholder="例）義理チョコにお返しは必要か？"
-      />
     </StyledContainer>
   );
-};
+});
 
 export default Selfdebate;
 
