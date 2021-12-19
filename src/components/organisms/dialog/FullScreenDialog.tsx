@@ -33,7 +33,7 @@ type StyledProps = {
   color: string;
 };
 
-type Props = StyledProps;
+type Props = StyledProps & { text: string; placeholder: string };
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
@@ -53,7 +53,7 @@ const templates = [
 ];
 
 const FullScreenDialog: React.FC<Props> = React.memo((props) => {
-  const { color } = props;
+  const { color, placeholder, text } = props;
   const dispatch: AppDispatch = useDispatch();
   const state = useSelector(selfDebateSelector);
   const dialog = state.dialog;
@@ -115,7 +115,7 @@ const FullScreenDialog: React.FC<Props> = React.memo((props) => {
           fontWeight={600}
           icon={TimelineIcon}
           iconSize="32px"
-          iconColor="#33b6b1"
+          iconColor={color}
           spacing="xs"
           margin="0 0 8px 0"
         />
@@ -137,17 +137,17 @@ const FullScreenDialog: React.FC<Props> = React.memo((props) => {
             fontWeight={600}
             icon={BorderColorIcon}
             iconSize="32px"
-            iconColor="#33b6b1"
+            iconColor={color}
             spacing="xs"
             margin="0 0 16px 0"
           />
-          <span>賛成派と反対派に分けられるテーマを設定しましょう</span>
+          <span>{text}</span>
         </StyledSectionTitleWrap>
         <StyledThemeInputForm onSubmit={handleSubmit}>
           <StyledTextField>
             <MuiTextField
               value={inputTheme}
-              placeholder="例）義理チョコにお返しは必要か？"
+              placeholder={placeholder}
               margin="none"
               size="small"
               fullWidth

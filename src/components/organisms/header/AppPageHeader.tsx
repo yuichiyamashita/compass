@@ -3,13 +3,18 @@ import styled from "styled-components";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import { AccountMenu } from "../menu";
 
-const AppPageHeader: React.FC = React.memo(() => {
+type Props = {
+  title: string;
+};
+
+const AppPageHeader: React.FC<Props> = React.memo((props) => {
+  const { title } = props;
   return (
     <StyledHeader>
       <StyledLink href="./main">
         <HomeOutlinedIcon fontSize="large" />
       </StyledLink>
-      <StyledTitle>Self debate</StyledTitle>
+      <StyledTitle>{title}</StyledTitle>
       <StyledAccountIcon>
         <AccountMenu />
       </StyledAccountIcon>

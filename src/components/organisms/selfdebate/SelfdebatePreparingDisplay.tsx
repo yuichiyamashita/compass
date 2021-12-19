@@ -79,7 +79,7 @@ const PreparingDisplay: React.FC<Props> = React.memo((props) => {
               color="#fff"
               radius="4px"
               fullWidth
-              onClick={() => handleClickStartTimer(10)}
+              onClick={() => handleClickStartTimer(180)}
               autoFocus
             />
             {/* 賛成派意見が入力済みの場合はテーマ変更ボタンを非表示にする */}

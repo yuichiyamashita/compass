@@ -6,7 +6,7 @@ type ThemeState = {
   isInputed: boolean;
 };
 type FactionState = {
-  faction: string;
+  faction?: string;
   id: string;
   opinions: {
     id: string;
@@ -25,7 +25,7 @@ type ConclusionState = {
 type activeStepState = 0 | 1 | 2 | 3 | 4;
 
 type InitialState = {
-  selfDebateId: string;
+  id: string;
   created_at: string;
   theme: ThemeState;
   tags: TagsState;
@@ -38,7 +38,7 @@ type InitialState = {
 
 // 初期値
 const initialState: InitialState = {
-  selfDebateId: "",
+  id: "",
   created_at: "",
   theme: {
     theme: "",

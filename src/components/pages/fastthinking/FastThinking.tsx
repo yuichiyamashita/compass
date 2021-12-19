@@ -2,52 +2,38 @@ import React from "react";
 import styled from "styled-components";
 
 import { useSelector } from "../../../store";
-import { selfDebateSelector } from "../../../Selectors";
 import { BasicStepper } from "../../molecules/stepper";
 import { Container } from "../../molecules/container";
 import { generateNowDateString } from "../../../functions/generateString";
-import { SelectTheme, Agree, Disagree } from "../../organisms/selfdebate";
 import { FullScreenDialog } from "../../organisms/dialog";
 import { AppPageHeader } from "../../organisms/header";
 
-// Stepperのコンテンツ
-const steps = ["テーマ", "肯定", "否定", "結論"];
+const steps = ["テーマ選択", "主張"];
 
-const Selfdebate: React.FC = () => {
-  const state = useSelector(selfDebateSelector);
-  const activeStep = state.activeStep;
-
+const FastThinking: React.FC = React.memo(() => {
+  //   const state = useSelector(selfDebateSelector);
+  //   const activeStep = state.activeStep;
   return (
     <StyledContainer>
-      <AppPageHeader title="Self debate" />
+      <AppPageHeader title="Fast thinking" />
       <Container padding={"92px 0 32px"}>
-        <StyledStepper>
-          <BasicStepper steps={steps} activeStep={activeStep} />
-        </StyledStepper>
+        <StyledStepper>{/* <BasicStepper steps={steps} activeStep={activeStep} /> */}</StyledStepper>
         <StyledStep>
-          <StyledDate>{generateNowDateString()}</StyledDate>
+          {/* <StyledDate>{generateNowDateString()}</StyledDate>
           <div className="h-module-spacer--sm" />
-          {activeStep === 0 ? (
-            <SelectTheme />
-          ) : activeStep === 1 ? (
-            <Agree />
-          ) : activeStep === 2 ? (
-            <Disagree />
-          ) : (
-            activeStep === 3 && <div>結論</div>
-          )}
+          {activeStep === 0 ? <SelectTheme /> : activeStep === 1 && <Agree />} */}
         </StyledStep>
       </Container>
       <FullScreenDialog
-        color="#33b6b1"
-        text="賛成派と反対派に分けられるテーマを設定しましょう"
-        placeholder="例）義理チョコにお返しは必要か？"
+        color="#faa50a"
+        text="解決したい問題や悩みなどを設定しましょう"
+        placeholder="例）勉強に集中できないのはなぜか？"
       />
     </StyledContainer>
   );
-};
+});
 
-export default Selfdebate;
+export default FastThinking;
 
 const StyledContainer = styled.div`
   position: relative;
