@@ -1,34 +1,43 @@
-import React from "react";
+import React, { useState, useCallback } from "react";
 import styled from "styled-components";
 
-import { useSelector } from "../../../store";
 import { BasicStepper } from "../../molecules/stepper";
 import { Container } from "../../molecules/container";
 import { generateNowDateString } from "../../../functions/generateString";
-import { FullScreenDialog } from "../../organisms/dialog";
 import { AppPageHeader } from "../../organisms/header";
+import { SelectFastThikingTheme } from "../../organisms/fastThinking";
 
 const steps = ["テーマ選択", "主張"];
 
 const FastThinking: React.FC = React.memo(() => {
-  //   const state = useSelector(selfDebateSelector);
-  //   const activeStep = state.activeStep;
+  const [activeStep, setActiveStep] = useState(0);
+
+  const handleClickMoveStep = useCallback((step: number) => {
+    setActiveStep(step);
+  }, []);
+
   return (
     <StyledContainer>
       <AppPageHeader title="Fast thinking" />
       <Container padding={"92px 0 32px"}>
-        <StyledStepper>{/* <BasicStepper steps={steps} activeStep={activeStep} /> */}</StyledStepper>
+        <StyledStepper>
+          <BasicStepper steps={steps} activeStep={activeStep} />
+        </StyledStepper>
         <StyledStep>
-          {/* <StyledDate>{generateNowDateString()}</StyledDate>
+          <StyledDate>{generateNowDateString()}</StyledDate>
           <div className="h-module-spacer--sm" />
-          {activeStep === 0 ? <SelectTheme /> : activeStep === 1 && <Agree />} */}
+          {activeStep === 0 ? (
+            <SelectFastThikingTheme />
+          ) : activeStep === 1 ? (
+            <div>
+              <button onClick={() => handleClickMoveStep(0)}>戻る</button>
+              <button onClick={() => handleClickMoveStep(2)}>終了</button>
+            </div>
+          ) : (
+            activeStep === 2 && <div>aaaaaa</div>
+          )}
         </StyledStep>
       </Container>
-      <FullScreenDialog
-        color="#faa50a"
-        text="解決したい問題や悩みなどを設定しましょう"
-        placeholder="例）勉強に集中できないのはなぜか？"
-      />
     </StyledContainer>
   );
 });

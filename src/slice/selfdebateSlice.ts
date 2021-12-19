@@ -1,12 +1,9 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-
+import { RootState } from "../store";
+import { InputThemeType } from "../types/mainFeaturesTypes";
 // 型定義
-type ThemeState = {
-  theme: string;
-  isInputed: boolean;
-};
 type FactionState = {
-  faction?: string;
+  position?: string;
   id: string;
   opinions: {
     id: string;
@@ -18,56 +15,48 @@ type TagsState = {
   id: string;
   name: string;
 }[];
-type ConclusionState = {
-  judgement: "" | "agree" | "disagree";
-  reason: string[];
-};
-type activeStepState = 0 | 1 | 2 | 3 | 4;
-
-type InitialState = {
+type SelfDebateState = {
   id: string;
   created_at: string;
-  theme: ThemeState;
+  theme: InputThemeType;
   tags: TagsState;
-  agree: FactionState;
-  disagree: FactionState;
-  conclusion: ConclusionState;
-  dialog: boolean;
-  activeStep: activeStepState;
+  positive: FactionState;
+  negative: FactionState;
+};
+type InitialState = {
+  list: SelfDebateState[];
+  listItem: SelfDebateState;
 };
 
 // 初期値
 const initialState: InitialState = {
-  id: "",
-  created_at: "",
-  theme: {
-    theme: "",
-    isInputed: false,
-  },
-  agree: {
-    faction: "agree",
+  list: [],
+  listItem: {
     id: "",
-    opinions: [],
-    isInputed: false,
-  },
-  disagree: {
-    faction: "disagree",
-    id: "",
-    opinions: [],
-    isInputed: false,
-  },
-  tags: [
-    {
-      id: "",
-      name: "",
+    created_at: "",
+    theme: {
+      text: "",
+      isInputed: false,
     },
-  ],
-  conclusion: {
-    judgement: "",
-    reason: [],
+    positive: {
+      position: "agree",
+      id: "",
+      opinions: [],
+      isInputed: false,
+    },
+    negative: {
+      position: "disagree",
+      id: "",
+      opinions: [],
+      isInputed: false,
+    },
+    tags: [
+      {
+        id: "",
+        name: "",
+      },
+    ],
   },
-  dialog: false,
-  activeStep: 0,
 };
 
 // Slice本体
@@ -75,22 +64,16 @@ export const selfDebateSlice = createSlice({
   name: "selfdebate",
   initialState,
   reducers: {
-    openDialogAction: (state, action: PayloadAction<boolean>) => {
-      state.dialog = action.payload;
-    },
-    handleClickNextStepAction: (state, action: PayloadAction<activeStepState>) => {
-      state.activeStep = action.payload;
-    },
-    saveThemeAction: (state, action: PayloadAction<ThemeState>) => {
-      state.theme = action.payload;
+    saveSelfDebateThemeAction: (state, action: PayloadAction<InputThemeType>) => {
+      state.listItem.theme = action.payload;
     },
     saveOpinionsAction: (state, action: PayloadAction<FactionState>) => {
-      switch (action.payload.faction) {
+      switch (action.payload.position) {
         case "agree":
-          state.agree = action.payload;
+          state.listItem.positive = action.payload;
           break;
         case "disagree":
-          state.disagree = action.payload;
+          state.listItem.negative = action.payload;
           break;
         default:
           break;
@@ -99,6 +82,12 @@ export const selfDebateSlice = createSlice({
   },
 });
 
-export const { openDialogAction, handleClickNextStepAction, saveThemeAction, saveOpinionsAction } =
-  selfDebateSlice.actions;
+// Actions
+export const { saveSelfDebateThemeAction, saveOpinionsAction } = selfDebateSlice.actions;
+
+// Reducer
 export default selfDebateSlice.reducer;
+
+// Selectors
+export const selectSelfDebateTheme = (state: RootState): InputThemeType => state.selfdebate.listItem.theme;
+export const selectSelfDebatePositiveOpinions = (state: RootState): FactionState => state.selfdebate.listItem.positive;

@@ -22,18 +22,32 @@ import TextFieldsIcon from "@mui/icons-material/TextFields";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 import TimelineIcon from "@mui/icons-material/Timeline";
 
+import { InputThemeType } from "../../../types/mainFeaturesTypes";
 import { AppDispatch, useSelector } from "../../../store";
-import { selfDebateSelector } from "../../../Selectors";
-import { openDialogAction, saveThemeAction, handleClickNextStepAction } from "../../../slice/selfdebateSlice";
+import { openFullScreenDialogAction, selectFullScreenDialog } from "../../../slice/dialogSlice";
 import { validateEmptyString } from "../../../functions/validations";
 import { PrimaryButton } from "../../atoms/button";
 import { BasicTypographyWithIcon } from "../../molecules/typography-with-icon";
+
+// テストデータ ===================================
+const templates = [
+  "コロナワクチンは打たなくても良いか、否か",
+  "男女の友情は成立するか、しないか",
+  "売れないミュージシャンはYoutubeを始めるべきか",
+  "Lineの既読スルーはありか、なしか",
+  "年収を上げるために会社をすぐ辞めるのはありか、なしか",
+];
+// ===============================================
 
 type StyledProps = {
   color: string;
 };
 
-type Props = StyledProps & { text: string; placeholder: string };
+type Props = StyledProps & {
+  text: string;
+  placeholder: string;
+  saveThemeAction: (theme: InputThemeType) => void;
+};
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
@@ -44,19 +58,11 @@ const Transition = React.forwardRef(function Transition(
   return <MuiSlide direction="up" ref={ref} {...props} />;
 });
 
-const templates = [
-  "コロナワクチンは打たなくても良いか、否か",
-  "男女の友情は成立するか、しないか",
-  "売れないミュージシャンはYoutubeを始めるべきか",
-  "Lineの既読スルーはありか、なしか",
-  "年収を上げるために会社をすぐ辞めるのはありか、なしか",
-];
-
 const FullScreenDialog: React.FC<Props> = React.memo((props) => {
-  const { color, placeholder, text } = props;
+  const { color, placeholder, text, saveThemeAction } = props;
   const dispatch: AppDispatch = useDispatch();
-  const state = useSelector(selfDebateSelector);
-  const dialog = state.dialog;
+  const state = useSelector(selectFullScreenDialog);
+  const isOpen = state.open;
   const [inputTheme, setInputTheme] = useState("");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -83,21 +89,20 @@ const FullScreenDialog: React.FC<Props> = React.memo((props) => {
       });
       return;
     }
-    const newTheme = {
-      theme: inputTheme,
+    const newTheme: InputThemeType = {
+      text: inputTheme,
       isInputed: true,
     };
-    dispatch(saveThemeAction(newTheme));
-    dispatch(handleClickNextStepAction(1));
+    saveThemeAction(newTheme);
     handleClose();
   };
 
   const handleClose = useCallback(() => {
-    dispatch(openDialogAction(false));
+    dispatch(openFullScreenDialogAction(false));
   }, [dispatch]);
 
   return (
-    <MuiDialog fullScreen open={dialog} onClose={handleClose} TransitionComponent={Transition}>
+    <MuiDialog fullScreen open={isOpen} onClose={handleClose} TransitionComponent={Transition}>
       <MuiAppBar sx={{ position: "relative", background: color }}>
         <MuiToolbar>
           <MuiIconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">

@@ -1,10 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../store";
+import { InputThemeType } from "../types/mainFeaturesTypes";
 // 型定義
-type ThemeState = {
-  text: string;
-  isInputed: boolean;
-};
 type TagState = {
   id: string;
   name: string;
@@ -16,15 +13,13 @@ type SolutionState = {
     text: string;
   }[];
 };
-
 type FastThinkingState = {
   id: string;
   created_at: string;
-  theme: ThemeState;
+  theme: InputThemeType;
   tag: TagState;
   solutions: SolutionState;
 };
-
 type InitialState = {
   list: FastThinkingState[];
   listItem: FastThinkingState;
@@ -61,21 +56,21 @@ export const fastThinkingSlice = createSlice({
   name: "fastThinking",
   initialState,
   reducers: {
-    saveFtTheme: (state, action: PayloadAction<ThemeState>) => {
+    saveFastThinkingThemeAction: (state, action: PayloadAction<InputThemeType>) => {
       state.listItem.theme = action.payload;
     },
-    saveFtSolution: (state, action: PayloadAction<SolutionState>) => {
+    saveFastThinkingSolutionsAction: (state, action: PayloadAction<SolutionState>) => {
       state.listItem.solutions = action.payload;
     },
   },
 });
 
 // Actions
-export const { saveFtTheme, saveFtSolution } = fastThinkingSlice.actions;
+export const { saveFastThinkingThemeAction, saveFastThinkingSolutionsAction } = fastThinkingSlice.actions;
 
 // Reducer
 export default fastThinkingSlice.reducer;
 
 // Selectors
-export const selectFtTheme = (state: RootState): ThemeState => state.fastThinking.listItem.theme;
-export const selectFtSolutions = (state: RootState): SolutionState => state.fastThinking.listItem.solutions;
+export const selectFastThinkingTheme = (state: RootState): InputThemeType => state.fastThinking.listItem.theme;
+export const selectFastThinkingSolutions = (state: RootState): SolutionState => state.fastThinking.listItem.solutions;

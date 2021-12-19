@@ -5,12 +5,12 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { useDispatch } from "react-redux";
 
 import { useSelector, AppDispatch } from "../../../store";
-import { selfDebateSelector, countDownTimerSelector } from "../../../Selectors";
 import { NoBorderTextField } from "../../atoms/textField";
 import { validateEmptyString } from "../../../functions/validations";
 import { generateRandomString } from "../../../functions/generateString";
 import { CircularProgressbarCountDownTimer } from "../timer";
-import { saveOpinionsAction } from "../../../slice/selfdebateSlice";
+import { saveOpinionsAction, selectSelfDebateTheme } from "../../../slice/selfdebateSlice";
+import { selectCircularCountDownTimer } from "../../../slice/countDownTimerSlice";
 
 type InputOpinion = {
   id: string;
@@ -26,11 +26,11 @@ type Props = StyledProps & { faction?: string; factionText?: string };
 const TextArea: React.FC<Props> = React.memo((props) => {
   const { faction, factionText, color } = props;
   const dispatch: AppDispatch = useDispatch();
-  const selfDebate = useSelector(selfDebateSelector);
-  const countDownTimer = useSelector(countDownTimerSelector);
-  const theme = selfDebate.theme.theme;
-  const isDisplayCircularCountDownTimer = countDownTimer.circularContDownTimer.isDisplay;
-  const isStartCircularCountDownTimer = countDownTimer.circularContDownTimer.isStart;
+  const themeState = useSelector(selectSelfDebateTheme);
+  const theme = themeState.text;
+  const circularCountDownTimer = useSelector(selectCircularCountDownTimer);
+  const isTimerDisplayed = circularCountDownTimer.isDisplay;
+  const isTimerStarting = circularCountDownTimer.isDisplay;
   const [inputOpinion, setInputOpinion] = useState("");
   const [inputOpinions, setInputOpinions] = useState<InputOpinion[]>([]);
 
@@ -39,10 +39,10 @@ const TextArea: React.FC<Props> = React.memo((props) => {
   const handleChangeOpinion = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       // タイマーが停止している場合は入力を禁止する
-      if (!isStartCircularCountDownTimer) return;
+      if (!isTimerStarting) return;
       setInputOpinion(e.target.value);
     },
-    [isStartCircularCountDownTimer]
+    [isTimerStarting]
   );
 
   // 入力されたテキストを配列に格納
@@ -61,16 +61,16 @@ const TextArea: React.FC<Props> = React.memo((props) => {
   // 配列からテキストを削除
   const handleClickDelete = useCallback(
     (id: string) => {
-      if (!isStartCircularCountDownTimer) return;
+      if (!isTimerStarting) return;
       const newOpinions = inputOpinions.filter((opinion) => opinion.id !== id);
       setInputOpinions(newOpinions);
     },
-    [isStartCircularCountDownTimer, inputOpinions]
+    [isTimerStarting, inputOpinions]
   );
 
   // タイマー終了時に入力データをstoreに保存
   useEffect(() => {
-    if (isDisplayCircularCountDownTimer && !isStartCircularCountDownTimer) {
+    if (isTimerDisplayed && !isTimerStarting) {
       const id = generateRandomString();
       const newAgreeOpinions = {
         faction: faction,
@@ -81,7 +81,7 @@ const TextArea: React.FC<Props> = React.memo((props) => {
 
       dispatch(saveOpinionsAction(newAgreeOpinions));
     }
-  }, [dispatch, inputOpinions, faction, isDisplayCircularCountDownTimer, isStartCircularCountDownTimer]);
+  }, [dispatch, inputOpinions, faction, isTimerDisplayed, isTimerStarting]);
 
   return (
     <>
@@ -95,7 +95,7 @@ const TextArea: React.FC<Props> = React.memo((props) => {
             // 編集中は入力フォームを表示
             <StyledOpinionListItem key={opinion.id}>
               <p>・{opinion.opinion}</p>
-              {isStartCircularCountDownTimer && (
+              {isTimerStarting && (
                 <MuiIconButton onClick={() => handleClickDelete(opinion.id)}>
                   <DeleteIcon />
                 </MuiIconButton>
@@ -106,7 +106,7 @@ const TextArea: React.FC<Props> = React.memo((props) => {
 
         {/* 入力フォーム（タイマーが動いている場合に表示） */}
         <form onSubmit={handleSubmitOpinion}>
-          {isStartCircularCountDownTimer && (
+          {isTimerStarting && (
             <StyledTextFieldWithButton>
               <NoBorderTextField
                 value={inputOpinion}

@@ -15,12 +15,10 @@ export const startPreparingCountDownTimer = (seconds: number) => {
   return (dispatch: AppDispatch) => {
     // 初期値を作成
     const settings = {
-      preparingCountDownTimer: {
-        isDisplay: true,
-        isStart: true,
-        seconds: seconds,
-        secondsLeft: seconds,
-      },
+      isDisplay: true,
+      isStart: true,
+      seconds: seconds,
+      secondsLeft: seconds,
     };
     let secondsLeft = seconds;
     let oneSecond = 1; // setIntervalで1秒だけ間隔を空けるための変数
