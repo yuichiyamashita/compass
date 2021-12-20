@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from "react";
 import styled from "styled-components";
 
-import { BasicStepper } from "../../molecules/stepper";
+import { BasicStepper } from "../../organisms/stepper";
 import { Container } from "../../molecules/container";
 import { generateNowDateString } from "../../../functions/generateString";
 import { SelectSelfDebateTheme, PositiveOpinion, NegativeOpinion } from "../../organisms/selfdebate";
