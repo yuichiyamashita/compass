@@ -22,7 +22,7 @@ const PreparingDisplay: React.FC<Props> = React.memo((props) => {
   const { factionText, color } = props;
   const dispatch: AppDispatch = useDispatch();
   const preparingCountDownTimer = useSelector(selectPreparingCountDownTimer);
-  const isTimerDisplayed = preparingCountDownTimer.isDisplay;
+  const isTimerDisplayed = preparingCountDownTimer.isDisplayed;
   const themeState = useSelector(selectSelfDebateTheme);
   const theme = themeState.text;
   const positiveOpinions = useSelector(selectSelfDebatePositiveOpinions);
@@ -39,12 +39,12 @@ const PreparingDisplay: React.FC<Props> = React.memo((props) => {
         fourSeconds--;
         if (fourSeconds === 0) {
           // 2つ目のタイマー発火
-          dispatch(startCircularCountDownTimer(seconds, "#33b6b1"));
+          dispatch(startCircularCountDownTimer(seconds, color));
           clearInterval(interval);
         }
       }, 1000);
     },
-    [dispatch]
+    [dispatch, color]
   );
 
   // ダイアログ =======================================

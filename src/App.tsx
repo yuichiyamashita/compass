@@ -9,7 +9,7 @@ import { Login } from "./components/pages/login";
 import { Signup, SendAuthEmail, CompleteSendAuthEmail } from "./components/pages/signup";
 import { ResetPassword } from "./components/pages/reset-password";
 import { Main } from "./components/pages/main";
-import { Selfdebate } from "./components/pages/selfdebate";
+import { SelfDebate } from "./components/pages/selfDebate";
 import { FastThinking } from "./components/pages/fastThinking";
 
 const App: FC = () => {
@@ -27,7 +27,7 @@ const App: FC = () => {
         <Route exact path="/reset-password" component={ResetPassword} />
         <Auth>
           <Route exact path="/main" component={Main} />
-          <Route exact path="/selfdebate" component={Selfdebate} />
+          <Route exact path="/selfdebate" component={SelfDebate} />
           <Route exact path="/fastthinking" component={FastThinking} />
         </Auth>
       </Switch>

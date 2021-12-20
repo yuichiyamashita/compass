@@ -5,34 +5,37 @@ import styled, { keyframes } from "styled-components";
 import { AppDispatch, useSelector } from "../../../store";
 import {
   invisibleCircularCountDownTimerAction,
-  selectCircularCountDownTimer,
+  selectIsDisplayedCircularTimer,
+  selectIsStartingCircularTimer,
 } from "../../../slice/countDownTimerSlice";
 import { PrimaryButton } from "../../atoms/button";
 import { SelfdebatePreparingDisplay, SelfdebateTextArea } from ".";
+import { moveSelfDebateStepAction } from "../../../slice/stepperSlice";
 
-type Props = {
-  handleClickMoveStep: (step: number) => void;
+type StyleProps = {
+  color: string;
 };
 
+type Props = StyleProps;
+
 const Agree: React.FC<Props> = React.memo((props) => {
-  const { handleClickMoveStep } = props;
+  const { color } = props;
   const dispatch: AppDispatch = useDispatch();
-  const circularContDownTimer = useSelector(selectCircularCountDownTimer);
-  const isTimerDisplayed = circularContDownTimer.isDisplay;
-  const isTimerStarting = circularContDownTimer.isStart;
+  const isTimerDisplayed = useSelector(selectIsDisplayedCircularTimer);
+  const isTimerStarting = useSelector(selectIsStartingCircularTimer);
 
   const handleClickNextStep = useCallback(() => {
     dispatch(invisibleCircularCountDownTimerAction()); // メインタイマーを非表示
-    handleClickMoveStep(2); // 次のステップ（否定派）へ切り替える
-  }, [dispatch, handleClickMoveStep]);
+    dispatch(moveSelfDebateStepAction(2)); // 次のステップ（否定派）へ切り替える
+  }, [dispatch]);
 
   return (
     <>
       {/* タイマーの表示・非表示によってコンポーネントを切り替える */}
       {isTimerDisplayed ? (
-        <SelfdebateTextArea color="#64b5f6" factionText="肯定派" faction="agree" />
+        <SelfdebateTextArea color={color} factionText="肯定派" faction="agree" />
       ) : (
-        <SelfdebatePreparingDisplay color="#64b5f6" factionText="肯定派" />
+        <SelfdebatePreparingDisplay color={color} factionText="肯定派" />
       )}
       {isTimerDisplayed && !isTimerStarting && (
         <StyledButton>

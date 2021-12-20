@@ -1,1 +1,1 @@
-export { default as Selfdebate } from "./Selfdebate";
+export { default as SelfDebate } from "./SelfDebate";

@@ -11,6 +11,7 @@ import { startPreparingCountDownTimer } from "../timer/PreparingCountDownTimer";
 import { PrepaeringCountDownTimer } from "../timer";
 import { selectFastThinkingTheme } from "../../../slice/fastThinkingSlice";
 import { selectPreparingCountDownTimer } from "../../../slice/countDownTimerSlice";
+import { moveFastThinkingStepAction } from "../../../slice/stepperSlice";
 
 type StyledProps = {
   color: string;
@@ -24,7 +25,7 @@ const FastThinkingPreparingDisplay: React.FC<Props> = React.memo((props) => {
   const themeState = useSelector(selectFastThinkingTheme);
   const theme = themeState.text;
   const preparingCountDownTimer = useSelector(selectPreparingCountDownTimer);
-  const isTimerDisplayed = preparingCountDownTimer.isDisplay;
+  const isTimerDisplayed = preparingCountDownTimer.isDisplayed;
 
   // タイマーの発火処理 ===============================
   const handleClickStartTimer = useCallback(
@@ -36,8 +37,10 @@ const FastThinkingPreparingDisplay: React.FC<Props> = React.memo((props) => {
       const interval = setInterval(() => {
         fourSeconds--;
         if (fourSeconds === 0) {
+          // 次のステップに進ませる
+          dispatch(moveFastThinkingStepAction(1));
           // 2つ目のタイマー発火
-          dispatch(startCircularCountDownTimer(seconds, "#33b6b1"));
+          dispatch(startCircularCountDownTimer(seconds, "#faa50a"));
           clearInterval(interval);
         }
       }, 1000);
@@ -77,7 +80,7 @@ const FastThinkingPreparingDisplay: React.FC<Props> = React.memo((props) => {
               color="#fff"
               radius="4px"
               fullWidth
-              onClick={() => handleClickStartTimer(180)} // TODO：次のステップに移動する処理を追加
+              onClick={() => handleClickStartTimer(180)}
             />
             <div className="h-module-spacer--sm" />
             <PrimaryButton

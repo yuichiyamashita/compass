@@ -17,7 +17,7 @@ type FastThinkingState = {
   id: string;
   created_at: string;
   theme: InputThemeType;
-  tag: TagState;
+  // tag: TagState;
   solutions: SolutionState;
 };
 type InitialState = {
@@ -35,10 +35,10 @@ const initialState: InitialState = {
       text: "",
       isInputed: false,
     },
-    tag: {
-      id: "",
-      name: "",
-    },
+    // tag: {
+    //   id: "",
+    //   name: "",
+    // },
     solutions: {
       isInputed: false,
       texts: [
@@ -56,17 +56,21 @@ export const fastThinkingSlice = createSlice({
   name: "fastThinking",
   initialState,
   reducers: {
+    saveFastThinkingListAction: (state, action: PayloadAction<FastThinkingState>) => {
+      state.list = [...state.list, action.payload];
+    },
+    saveFastThinkingListItemAction: (state, action: PayloadAction<FastThinkingState>) => {
+      state.listItem = action.payload;
+    },
     saveFastThinkingThemeAction: (state, action: PayloadAction<InputThemeType>) => {
       state.listItem.theme = action.payload;
-    },
-    saveFastThinkingSolutionsAction: (state, action: PayloadAction<SolutionState>) => {
-      state.listItem.solutions = action.payload;
     },
   },
 });
 
 // Actions
-export const { saveFastThinkingThemeAction, saveFastThinkingSolutionsAction } = fastThinkingSlice.actions;
+export const { saveFastThinkingListAction, saveFastThinkingListItemAction, saveFastThinkingThemeAction } =
+  fastThinkingSlice.actions;
 
 // Reducer
 export default fastThinkingSlice.reducer;

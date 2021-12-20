@@ -10,7 +10,7 @@ import { validateEmptyString } from "../../../functions/validations";
 import { generateRandomString } from "../../../functions/generateString";
 import { CircularProgressbarCountDownTimer } from "../timer";
 import { saveOpinionsAction, selectSelfDebateTheme } from "../../../slice/selfdebateSlice";
-import { selectCircularCountDownTimer } from "../../../slice/countDownTimerSlice";
+import { selectIsDisplayedCircularTimer, selectIsStartingCircularTimer } from "../../../slice/countDownTimerSlice";
 
 type InputOpinion = {
   id: string;
@@ -28,13 +28,11 @@ const TextArea: React.FC<Props> = React.memo((props) => {
   const dispatch: AppDispatch = useDispatch();
   const themeState = useSelector(selectSelfDebateTheme);
   const theme = themeState.text;
-  const circularCountDownTimer = useSelector(selectCircularCountDownTimer);
-  const isTimerDisplayed = circularCountDownTimer.isDisplay;
-  const isTimerStarting = circularCountDownTimer.isDisplay;
+  const isTimerDisplayed = useSelector(selectIsDisplayedCircularTimer);
+  const isTimerStarting = useSelector(selectIsStartingCircularTimer);
   const [inputOpinion, setInputOpinion] = useState("");
   const [inputOpinions, setInputOpinions] = useState<InputOpinion[]>([]);
 
-  // ユーザー入力関連 ===================================
   // 入力されたテキストをstateに格納
   const handleChangeOpinion = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
