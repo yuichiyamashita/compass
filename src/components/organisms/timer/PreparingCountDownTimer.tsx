@@ -15,8 +15,8 @@ export const startPreparingCountDownTimer = (seconds: number) => {
   return (dispatch: AppDispatch) => {
     // 初期値を作成
     const settings = {
-      isDisplay: true,
-      isStart: true,
+      isDisplayed: true,
+      isStarting: true,
       seconds: seconds,
       secondsLeft: seconds,
     };
@@ -52,10 +52,10 @@ export const startPreparingCountDownTimer = (seconds: number) => {
 
 const PreparingTimer: React.FC = React.memo(() => {
   const state = useSelector(countDownTimerSelector);
-  const isDisplay = state.preparingCountDownTimer.isDisplay;
+  const isDisplayed = state.preparingCountDownTimer.isDisplayed;
   const secondsLeft = state.preparingCountDownTimer.secondsLeft;
 
-  return <StyledPreparingTimer>{secondsLeft === 0 && isDisplay ? "スタート！" : secondsLeft}</StyledPreparingTimer>;
+  return <StyledPreparingTimer>{secondsLeft === 0 && isDisplayed ? "スタート！" : secondsLeft}</StyledPreparingTimer>;
 });
 
 export default PreparingTimer;

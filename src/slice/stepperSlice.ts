@@ -30,11 +30,11 @@ export const stepperSlice = createSlice({
   name: "stepper",
   initialState,
   reducers: {
-    moveSelfDebateStepAction: (state, action: PayloadAction<StepperState>) => {
-      state.activeStep.selfDebate = action.payload.activeStep.selfDebate;
+    moveSelfDebateStepAction: (state, action: PayloadAction<number>) => {
+      state.activeStep.selfDebate = action.payload;
     },
-    moveFastThinkingStepAction: (state, action: PayloadAction<StepperState>) => {
-      state.activeStep.fastThinking = action.payload.activeStep.fastThinking;
+    moveFastThinkingStepAction: (state, action: PayloadAction<number>) => {
+      state.activeStep.fastThinking = action.payload;
     },
   },
 });

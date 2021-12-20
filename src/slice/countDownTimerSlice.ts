@@ -3,8 +3,8 @@ import { RootState } from "../store";
 
 // 型定義
 type TimerSettingsState = {
-  isDisplay: boolean;
-  isStart: boolean;
+  isDisplayed: boolean;
+  isStarting: boolean;
   seconds: number;
   secondsLeft: number;
 };
@@ -16,14 +16,14 @@ type InitialState = {
 // 初期値
 const initialState: InitialState = {
   circularCountDownTimer: {
-    isDisplay: false,
-    isStart: false,
+    isDisplayed: false,
+    isStarting: false,
     seconds: 0,
     secondsLeft: 0,
   },
   preparingCountDownTimer: {
-    isDisplay: false,
-    isStart: false,
+    isDisplayed: false,
+    isStarting: false,
     seconds: 0,
     secondsLeft: 0,
   },
@@ -39,13 +39,13 @@ export const countDownTimerSlice = createSlice({
       state.circularCountDownTimer = action.payload;
     },
     stopCircularCountDownTimerAction: (state) => {
-      state.circularCountDownTimer.isStart = false;
+      state.circularCountDownTimer.isStarting = false;
     },
     decrementCircularCountDownTimerAction: (state, action: PayloadAction<number>) => {
       state.circularCountDownTimer.secondsLeft = action.payload;
     },
     invisibleCircularCountDownTimerAction: (state) => {
-      state.circularCountDownTimer.isDisplay = false;
+      state.circularCountDownTimer.isDisplayed = false;
     },
 
     // PreparingCountDownTimer
@@ -53,13 +53,13 @@ export const countDownTimerSlice = createSlice({
       state.preparingCountDownTimer = action.payload;
     },
     stopPreparingCountDownTimerAction: (state) => {
-      state.preparingCountDownTimer.isStart = false;
+      state.preparingCountDownTimer.isStarting = false;
     },
     decrementPreparingCountDownTimerAction: (state, action: PayloadAction<number>) => {
       state.preparingCountDownTimer.secondsLeft = action.payload;
     },
     invisiblePreparingCountDownTimerAction: (state) => {
-      state.preparingCountDownTimer.isDisplay = false;
+      state.preparingCountDownTimer.isDisplayed = false;
     },
   },
 });
@@ -80,7 +80,14 @@ export const {
 export default countDownTimerSlice.reducer;
 
 // Selectors
-export const selectCircularCountDownTimer = (state: RootState): TimerSettingsState =>
-  state.countDownTimer.circularCountDownTimer;
+export const selectIsStartingCircularTimer = (state: RootState) =>
+  state.countDownTimer.circularCountDownTimer.isStarting;
+export const selectIsDisplayedCircularTimer = (state: RootState) =>
+  state.countDownTimer.circularCountDownTimer.isDisplayed;
+export const selectSecondsCircularTimer = (state: RootState) => state.countDownTimer.circularCountDownTimer.seconds;
+export const selectSecondsLeftCircularTimer = (state: RootState) =>
+  state.countDownTimer.circularCountDownTimer.secondsLeft;
+//
+//
 export const selectPreparingCountDownTimer = (state: RootState): TimerSettingsState =>
   state.countDownTimer.preparingCountDownTimer;
