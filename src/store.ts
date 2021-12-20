@@ -6,6 +6,7 @@ import selfDebateReducer from "./slice/selfdebateSlice";
 import countDownTimerReducer from "./slice/countDownTimerSlice";
 import fastThinkingReducer from "./slice/fastThinkingSlice";
 import dialogReducer from "./slice/dialogSlice";
+import stepperReducer from "./slice/stepperSlice";
 
 export const store = configureStore({
   reducer: {
@@ -15,6 +16,7 @@ export const store = configureStore({
     fastThinking: fastThinkingReducer,
     countDownTimer: countDownTimerReducer,
     dialog: dialogReducer,
+    stepper: stepperReducer,
   },
 });
 
