@@ -1,0 +1,16 @@
+Organisms/Layout/Pages判断基準
+
+Organisms:
+・ドメインが入ったらOrganisms
+・他に依存するコンポーネントがなかったとしても、ドメインが入った時点でOrganismsにする
+・useContextによるContext接続可
+・Storeと直接やり取りするものはOrganismsにする
+
+Layout:
+・部分導入した範囲内のレイアウトを決める
+・ロジックは持たない
+
+Pages:
+・ラッパー
+
+※ドメイン... 特定のコンテンツやコンテキストのこと

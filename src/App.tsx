@@ -1,16 +1,18 @@
 import React, { FC } from "react";
 import { Route, Switch, BrowserRouter } from "react-router-dom";
 import Auth from "./Auth";
-import { Top } from "./components/pages/top";
-import { Terms } from "./components/pages/terms";
-import { PrivacyPolicy } from "./components/pages/privacy";
-import { About } from "./components/pages/about";
-import { Login } from "./components/pages/login";
-import { Signup, SendAuthEmail, CompleteSendAuthEmail } from "./components/pages/signup";
-import { ResetPassword } from "./components/pages/reset-password";
-import { Main } from "./components/pages/main";
-import { SelfDebate } from "./components/pages/selfDebate";
-import { FastThinking } from "./components/pages/fastThinking";
+import Top from "./components/container/pages/Top";
+import Terms from "./components/container/pages/Terms";
+import PrivacyPolicy from "./components/container/pages/PrivacyPolicy";
+import About from "./components/container/pages/About";
+import Login from "./components/container/pages/Login";
+import Signup from "./components/container/pages/Signup";
+import SendAuthEmail from "./components/container/pages/SendAuthEmail";
+import CompleteSendAuthEmail from "./components/container/pages/CompleteSendAuthEmail";
+import ResetPassword from "./components/container/pages/ResetPassword";
+import Main from "./components/container/pages/Main";
+import SelfDebate from "./components/container/pages/SelfDebate";
+import FastThinking from "./components/container/pages/FastThinking";
 
 const App: FC = () => {
   return (
