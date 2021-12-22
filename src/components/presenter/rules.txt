@@ -1,0 +1,20 @@
+Atoms/Molecules判断基準
+
+Atoms:
+・汎用的な機能を提供する
+・ドメインが入ってはいけない
+・Context, Store, その他外部APIへのアクセスはしない
+・自分自身で状態を持たない
+・別のコンポーネントをimportしていなければAtoms
+・padding, margin, width, height, 色などは固定しない
+
+Molecules:
+・汎用的な機能を提供する
+・ドメインが入ってはいけない
+・Context, Store, その他外部APIへのアクセスはしない
+・自分自身で状態を持たない
+・他のAtomsやMoleculesのコンポーネントに依存している
+・Atomsの色やpadding, margin, width, heightなどを指定する
+・Molecules自体にはwidthやmarginなどは指定しない
+
+※ドメイン... 特定のコンテンツやコンテキストのこと

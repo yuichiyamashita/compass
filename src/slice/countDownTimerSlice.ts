@@ -80,6 +80,7 @@ export const {
 export default countDownTimerSlice.reducer;
 
 // Selectors
+// Circular
 export const selectIsStartingCircularTimer = (state: RootState) =>
   state.countDownTimer.circularCountDownTimer.isStarting;
 export const selectIsDisplayedCircularTimer = (state: RootState) =>
@@ -88,6 +89,11 @@ export const selectSecondsCircularTimer = (state: RootState) => state.countDownT
 export const selectSecondsLeftCircularTimer = (state: RootState) =>
   state.countDownTimer.circularCountDownTimer.secondsLeft;
 //
-//
-export const selectPreparingCountDownTimer = (state: RootState): TimerSettingsState =>
-  state.countDownTimer.preparingCountDownTimer;
+// Preparing
+export const selectIsStartingPreparingTimer = (state: RootState) =>
+  state.countDownTimer.preparingCountDownTimer.isStarting;
+export const selectIsDisplayedPreparingTimer = (state: RootState) =>
+  state.countDownTimer.preparingCountDownTimer.isDisplayed;
+export const selectSecondsPreparingTimer = (state: RootState) => state.countDownTimer.preparingCountDownTimer.seconds;
+export const selectSecondsLeftPreparingTimer = (state: RootState) =>
+  state.countDownTimer.preparingCountDownTimer.secondsLeft;

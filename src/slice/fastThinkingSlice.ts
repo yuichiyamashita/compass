@@ -2,10 +2,10 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../store";
 import { InputThemeType } from "../types/mainFeaturesTypes";
 // 型定義
-type TagState = {
-  id: string;
-  name: string;
-};
+// type TagState = {
+//   id: string;
+//   name: string;
+// };
 type SolutionState = {
   isInputed: boolean;
   texts: {
