@@ -16,8 +16,8 @@ import { makeStyles } from "@mui/styles";
 
 import { LogoOnlyHeader } from "../organisms";
 import { Container } from "../layout";
-import { PrimaryButton } from "../../presenter/atoms";
-import { H1TitleWithIcon } from "../../presenter/molecules";
+import { PrimaryButton } from "../../presentational/atoms";
+import { BasicTypographyWithIcon } from "../../presentational/molecules";
 import { MuiTheme } from "../../../assets/material-ui";
 import { firebaseCreateUser } from "../../../operation/userAuth";
 import { validateInputPassWord } from "../../../modules/validations";
@@ -103,10 +103,11 @@ const Signup: FC = () => {
       <Container padding="64px 8px">
         {/****** PC, タブレット *******/}
         <MuiPaper className={classes.pcLoginForm} elevation={8}>
-          <H1TitleWithIcon
+          <BasicTypographyWithIcon
             text="SIGN UP"
             color="#555"
-            fontSize="32px"
+            component="h1"
+            variant="h3"
             icon={MuiAccountCircleIcon}
             iconColor="primary"
             iconSize="36px"
@@ -165,9 +166,10 @@ const Signup: FC = () => {
 
         {/****** スマホ ******/}
         <div className={classes.loginForm}>
-          <H1TitleWithIcon
+          <BasicTypographyWithIcon
             text="SIGN UP"
-            fontSize="32px"
+            component="h1"
+            variant="h3"
             icon={MuiAccountCircleIcon}
             iconSize="36px"
             color="#555"

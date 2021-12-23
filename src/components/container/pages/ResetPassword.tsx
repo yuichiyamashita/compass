@@ -10,8 +10,8 @@ import { makeStyles } from "@mui/styles";
 
 import { Container } from "../layout";
 import { LogoOnlyHeader } from "../organisms";
-import { H1TitleWithIcon } from "../../presenter/molecules";
-import { PrimaryButton } from "../../presenter/atoms";
+import { H1TitleWithIcon } from "../../presentational/molecules";
+import { PrimaryButton } from "../../presentational/atoms";
 
 const useStyles = makeStyles({
   loginForm: {

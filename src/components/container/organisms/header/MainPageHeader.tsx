@@ -7,7 +7,7 @@ import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 
 import { Flexbox } from "../../layout";
 import { HamburgerMenu, AccountMenu } from "../../organisms";
-import { SimpleNavigation } from "../../../presenter/molecules";
+import { SimpleNavigation } from "../../../presentational/molecules";
 
 const menus = [
   {

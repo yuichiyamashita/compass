@@ -10,8 +10,8 @@ import { validateEmptyString } from "../../../../modules/validations";
 import CircularProgressbarCountDonwTimer from "../timer/CircularProgressbarCountDownTimer";
 import { saveFastThinkingListItemAction, selectFastThinkingTheme } from "../../../../slice/fastThinkingSlice";
 import { selectIsDisplayedCircularTimer, selectIsStartingCircularTimer } from "../../../../slice/countDownTimerSlice";
-import { KleeOneSelectedTheme } from "../../../presenter/atoms";
-import { IconsTextField } from "../../../presenter/molecules";
+import { KleeOneSelectedTheme } from "../../../presentational/atoms";
+import { IconsTextField } from "../../../presentational/molecules";
 
 // Props
 type StyleProps = {

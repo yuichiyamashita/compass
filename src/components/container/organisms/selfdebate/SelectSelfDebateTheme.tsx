@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 
 import { AppDispatch } from "../../../../store";
 import { openFullScreenDialogAction } from "../../../../slice/dialogSlice";
-import { PrimaryButton } from "../../../presenter/atoms";
+import { PrimaryButton } from "../../../presentational/atoms";
 
 type StyleProps = {
   color: string;

@@ -6,7 +6,7 @@ type Props = {
   title: string;
 };
 
-const PieGraph: FC<Props> = (props) => {
+const PieGraph: FC<Props> = React.memo((props) => {
   const { graphData, title } = props;
   const labels = graphData.map((obj) => obj.label);
   const dataset = graphData.map((obj) => obj.data);
@@ -42,6 +42,6 @@ const PieGraph: FC<Props> = (props) => {
     ],
   };
   return <Pie data={data} options={options} height={320} />;
-};
+});
 
 export default PieGraph;

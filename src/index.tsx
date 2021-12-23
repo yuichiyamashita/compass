@@ -7,7 +7,7 @@ import * as serviceWorker from "./serviceWorker";
 import { ThemeProvider } from "@mui/material/styles";
 import { MuiTheme } from "./assets/material-ui";
 
-import { Notification, Loading } from "./components/presenter/molecules";
+import { Notification, Loading } from "./components/presentational/molecules";
 import "./assets/styles/destyle.css";
 import "./assets/styles/style.css";
 

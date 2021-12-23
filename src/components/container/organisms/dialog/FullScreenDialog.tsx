@@ -26,8 +26,8 @@ import { InputThemeType } from "../../../../types/mainFeaturesTypes";
 import { AppDispatch, useSelector } from "../../../../store";
 import { openFullScreenDialogAction, selectFullScreenDialog } from "../../../../slice/dialogSlice";
 import { validateEmptyString } from "../../../../modules/validations";
-import { PrimaryButton } from "../../../presenter/atoms";
-import { BasicTypographyWithIcon } from "../../../presenter/molecules";
+import { PrimaryButton } from "../../../presentational/atoms";
+import { BasicTypographyWithIcon } from "../../../presentational/molecules";
 
 // テストデータ ===================================
 const templates = [

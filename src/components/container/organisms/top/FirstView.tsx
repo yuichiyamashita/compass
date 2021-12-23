@@ -3,7 +3,7 @@ import styled, { keyframes } from "styled-components";
 import { makeStyles } from "@mui/styles";
 import { Grid as MuiGrid } from "@mui/material";
 
-import { SimpleScrollDown } from "../../../presenter/atoms";
+import { SimpleScrollDown } from "../../../presentational/atoms";
 import { Container } from "../../layout";
 const useStyles = makeStyles(() => ({
   gridContainer: {

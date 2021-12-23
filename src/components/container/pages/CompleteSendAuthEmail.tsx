@@ -9,8 +9,8 @@ import { makeStyles } from "@mui/styles";
 
 import { MuiTheme } from "../../../assets/material-ui";
 import { firebaseSendSignInLinkToEmail } from "../../../operation/userAuth";
-import { BasicLink, PrimaryButton } from "../../presenter/atoms";
-import { H1TitleWithIcon } from "../../presenter/molecules";
+import { BasicLink, PrimaryButton } from "../../presentational/atoms";
+import { H1TitleWithIcon } from "../../presentational/molecules";
 import { LogoOnlyHeader } from "../organisms";
 import { Container } from "../layout";
 

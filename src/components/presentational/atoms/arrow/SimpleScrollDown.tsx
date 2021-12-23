@@ -5,10 +5,10 @@ type Props = {
   delay: string;
 };
 
-const SimpleScrollDown: FC<Props> = (props) => {
+const SimpleScrollDown: FC<Props> = React.memo((props) => {
   const { delay } = props;
   return <StyledScrollDown delay={delay}>scroll</StyledScrollDown>;
-};
+});
 
 export default SimpleScrollDown;
 

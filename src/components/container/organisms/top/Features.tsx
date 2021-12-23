@@ -2,7 +2,7 @@ import React from "react";
 import styled, { css, keyframes } from "styled-components";
 
 import mobileImage from "../../../../assets/images/mobile.jpg";
-import { BasicLink } from "../../../presenter/atoms";
+import { BasicLink } from "../../../presentational/atoms";
 import { Container } from "../../layout";
 
 const Features: React.FC = () => {

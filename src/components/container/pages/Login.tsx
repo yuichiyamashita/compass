@@ -10,8 +10,8 @@ import MuiEmailIcon from "@mui/icons-material/Email";
 import MuiLockIcon from "@mui/icons-material/Lock";
 import { makeStyles } from "@mui/styles";
 
-import { PrimaryButton } from "../../presenter/atoms";
-import { H1TitleWithIcon } from "../../presenter/molecules";
+import { PrimaryButton } from "../../presentational/atoms";
+import { BasicTypographyWithIcon } from "../../presentational/molecules";
 import { LogoOnlyHeader } from "../organisms";
 import { Container } from "../layout";
 
@@ -85,10 +85,11 @@ const Login: FC = () => {
       <Container padding="64px 8px">
         {/* pc, tab */}
         <MuiPaper className={classes.pcLoginForm} elevation={8}>
-          <H1TitleWithIcon
+          <BasicTypographyWithIcon
             text="LOGIN"
             color="#555"
-            fontSize="32px"
+            component="h1"
+            variant="h3"
             icon={MuiLockOpenOutlined}
             iconColor="primary"
             iconSize="32px"
@@ -149,10 +150,11 @@ const Login: FC = () => {
 
         {/* sp */}
         <div className={classes.loginForm}>
-          <H1TitleWithIcon
+          <BasicTypographyWithIcon
             text="LOGIN"
             color="#555"
-            fontSize="32px"
+            component="h1"
+            variant="h3"
             icon={MuiLockOpenOutlined}
             iconColor="primary"
             iconSize="32px"

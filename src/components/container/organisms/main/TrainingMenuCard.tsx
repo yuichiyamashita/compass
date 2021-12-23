@@ -3,8 +3,8 @@ import styled from "styled-components";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import CheckCircleOutlineSharpIcon from "@mui/icons-material/CheckCircleOutlineSharp";
 
-import { PageTransitionLink } from "../../../presenter/atoms";
-import { BasicTypographyWithIcon, HistoryBackLinkWithIcon } from "../../../presenter/molecules";
+import { PageTransitionLink } from "../../../presentational/atoms";
+import { BasicTypographyWithIcon, HistoryBackLinkWithIcon } from "../../../presentational/molecules";
 
 type StyleProps = {
   color: string;
