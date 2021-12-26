@@ -10,7 +10,7 @@ import { makeStyles } from "@mui/styles";
 import { MuiTheme } from "../../../assets/material-ui";
 import { firebaseSendSignInLinkToEmail } from "../../../operation/userAuth";
 import { BasicLink, PrimaryButton } from "../../presentational/atoms";
-import { H1TitleWithIcon } from "../../presentational/molecules";
+import { BasicTypographyWithIcon } from "../../presentational/molecules";
 import { LogoOnlyHeader } from "../organisms";
 import { Container } from "../layout";
 
@@ -62,10 +62,11 @@ const CompleteSendEmailAuth: FC = () => {
         <MuiPaper className={classes.pcLoginForm} elevation={8}>
           {errorMessage ? (
             <>
-              <H1TitleWithIcon
+              <BasicTypographyWithIcon
                 text="再送信エラー"
                 color="#555"
-                fontSize="32px"
+                component="h1"
+                variant="h3"
                 icon={MuiEmailIcon}
                 iconColor="primary"
                 iconSize="36px"
@@ -83,10 +84,11 @@ const CompleteSendEmailAuth: FC = () => {
             </>
           ) : (
             <>
-              <H1TitleWithIcon
+              <BasicTypographyWithIcon
                 text="送信完了"
                 color="#555"
-                fontSize="32px"
+                component="h1"
+                variant="h3"
                 icon={MuiEmailIcon}
                 iconColor="primary"
                 iconSize="36px"
@@ -112,10 +114,11 @@ const CompleteSendEmailAuth: FC = () => {
         <StyledSpContainer>
           {errorMessage ? (
             <>
-              <H1TitleWithIcon
+              <BasicTypographyWithIcon
                 text="再送信エラー"
                 color="#555"
-                fontSize="32px"
+                component="h1"
+                variant="h3"
                 icon={MuiEmailIcon}
                 iconColor="primary"
                 iconSize="36px"
@@ -133,14 +136,15 @@ const CompleteSendEmailAuth: FC = () => {
             </>
           ) : (
             <>
-              <H1TitleWithIcon
+              <BasicTypographyWithIcon
                 text="送信完了"
                 color="#555"
-                fontSize="32px"
+                component="h1"
+                variant="h3"
                 icon={MuiEmailIcon}
                 iconColor="primary"
                 iconSize="36px"
-                spacing="3px"
+                spacing="xxs"
               />
               <StyledText>{email} に認証メールを送信しました。</StyledText>
               <StyledText>メール記載のリンクよりアカウントの作成をお願い致します。</StyledText>

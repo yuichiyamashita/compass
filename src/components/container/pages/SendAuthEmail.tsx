@@ -14,7 +14,7 @@ import { validateEmailFormat } from "../../../modules/validations";
 import { MuiTheme } from "../../../assets/material-ui";
 import { PrimaryButton } from "../../presentational/atoms";
 import { Container } from "../layout";
-import { H1TitleWithIcon } from "../../presentational/molecules";
+import { BasicTypographyWithIcon } from "../../presentational/molecules";
 import { LogoOnlyHeader } from "../organisms";
 
 const useStyles = makeStyles({
