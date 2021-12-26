@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 
 import { useSelector, AppDispatch } from "../../../../store";
 import { CircularProgressbarCountDownTimer } from "../../organisms";
-import { IconsTextField } from "../../../presenter/molecules";
+import { IconsTextField } from "../../../presentational/molecules";
 import { validateEmptyString } from "../../../../modules/validations";
 import { generateRandomString } from "../../../../modules/generateString";
 import { saveOpinionsAction, selectSelfDebateTheme } from "../../../../slice/selfdebateSlice";

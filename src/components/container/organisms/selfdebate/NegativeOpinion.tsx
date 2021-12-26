@@ -8,7 +8,7 @@ import {
   selectIsDisplayedCircularTimer,
   selectIsStartingCircularTimer,
 } from "../../../../slice/countDownTimerSlice";
-import { PrimaryButton } from "../../../presenter/atoms";
+import { PrimaryButton } from "../../../presentational/atoms";
 import { SelfdebatePreparingDisplay, SelfdebateTextArea } from "../../organisms";
 import { moveSelfDebateStepAction } from "../../../../slice/stepperSlice";
 

@@ -12,7 +12,7 @@ type Props = {
   fontWeight?: number;
 };
 
-const HoverAnimationButton: FC<Props> = (props) => {
+const HoverAnimationButton: FC<Props> = React.memo((props) => {
   const { href, text, background, border, color, fontSize, fontWeight } = props;
 
   return (
@@ -27,7 +27,7 @@ const HoverAnimationButton: FC<Props> = (props) => {
       {text}
     </StyledButton>
   );
-};
+});
 
 export default HoverAnimationButton;
 

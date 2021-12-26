@@ -1,5 +1,6 @@
 // Dialog
 export { default as FullScreenDialog } from "./dialog/FullScreenDialog";
+export { default as TimeUpDialog } from "./dialog/TimeUpDialog";
 
 // FastThinking
 export { default as SelectFastThikingTheme } from "./fastThinking/SelectFastThinkingTheme";
@@ -21,8 +22,8 @@ export { default as TrainingMenus } from "./main/TrainingMenus";
 export { default as FeatureSection } from "./main/FeatureSection";
 
 // Menu
-export { default as HamburgerMenu } from "./menu/HamburgerMenu";
-export { default as AccountMenu } from "./menu/AccountMenu";
+export { default as HamburgerMenu } from "./menus/HamburgerMenu";
+export { default as AccountMenu } from "./menus/AccountMenu";
 
 // SelfDebate
 export { default as SelectSelfDebateTheme } from "./selfdebate/SelectSelfDebateTheme";

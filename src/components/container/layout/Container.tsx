@@ -23,8 +23,7 @@ export default Container;
 const StyledContainer = styled.div<Props>`
   position: ${(props) => props.position};
   width: calc(100vw - 16px);
-  height: ${(props) => props.height};
-  height: 100%;
+  height: ${(props) => (props.height ? props.height : "100%")};
   margin: ${(props) => (props.margin ? props.margin : "0 auto")};
   padding: ${(props) => props.padding};
   text-align: ${(props) => props.align};

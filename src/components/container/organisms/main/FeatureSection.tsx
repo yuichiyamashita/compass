@@ -5,7 +5,7 @@ import { makeStyles } from "@mui/styles";
 import MuiQuestionAnswerIcon from "@mui/icons-material/QuestionAnswer";
 import MuiQuickreplyIcon from "@mui/icons-material/Quickreply";
 
-import { BarGraph } from "../../../presenter/atoms";
+import { BarGraph } from "../../../presentational/atoms";
 import { MuiTheme } from "../../../../assets/material-ui";
 
 type Props = {

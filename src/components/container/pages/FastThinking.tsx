@@ -14,6 +14,7 @@ import {
   FastThinkingTextArea,
   FullScreenDialog,
   SelectFastThikingTheme,
+  TimeUpDialog,
 } from "../organisms";
 
 // カラーの設定
@@ -58,6 +59,7 @@ const FastThinking: React.FC = React.memo(() => {
         placeholder="例）勉強に集中できないのはなぜか？"
         saveThemeAction={saveThemeAction}
       />
+      <TimeUpDialog />
     </>
   );
 });

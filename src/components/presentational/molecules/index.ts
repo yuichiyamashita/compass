@@ -15,5 +15,4 @@ export { default as Loading } from "./notification/Loading";
 export { default as IconsTextField } from "./textFieldWithIcon/IconsTextField";
 
 // Typography with icon
-export { default as H1TitleWithIcon } from "./typographyWithIcon/H1TitleWithIcon";
 export { default as BasicTypographyWithIcon } from "./typographyWithIcon/BasicTypographyWithIcon";

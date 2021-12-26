@@ -5,8 +5,8 @@ import MailIcon from "@mui/icons-material/Mail";
 
 import { Container, Flexbox } from "../../layout";
 import { HamburgerMenu } from "../../organisms";
-import { SimpleNavigation } from "../../../presenter/molecules";
-import { BasicLink } from "../../../presenter/atoms";
+import { SimpleNavigation } from "../../../presentational/molecules";
+import { BasicLink } from "../../../presentational/atoms";
 
 const naviContents = [
   {

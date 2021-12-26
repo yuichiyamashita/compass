@@ -10,8 +10,8 @@ import { makeStyles } from "@mui/styles";
 
 import { Container } from "../layout";
 import { LogoOnlyHeader } from "../organisms";
-import { H1TitleWithIcon } from "../../presenter/molecules";
-import { PrimaryButton } from "../../presenter/atoms";
+import { BasicTypographyWithIcon } from "../../presentational/molecules";
+import { PrimaryButton } from "../../presentational/atoms";
 
 const useStyles = makeStyles({
   loginForm: {
@@ -39,10 +39,11 @@ const ResetPassword: FC = () => {
       <Container padding="64px 8px">
         {/* pc, tab */}
         <MuiPaper className={classes.pcLoginForm} elevation={8}>
-          <H1TitleWithIcon
+          <BasicTypographyWithIcon
             text="パスワードの再設定"
             color="#555"
-            fontSize="32px"
+            component="h1"
+            variant="h3"
             icon={MuiAccountCircleIcon}
             iconColor="primary"
             iconSize="36px"
@@ -75,9 +76,10 @@ const ResetPassword: FC = () => {
 
         {/* sp */}
         <div className={classes.loginForm}>
-          <H1TitleWithIcon
+          <BasicTypographyWithIcon
             text="パスワードの再設定"
-            fontSize="24px"
+            component="h1"
+            variant="h3"
             icon={MuiAccountCircleIcon}
             iconSize="36px"
             color="#555"

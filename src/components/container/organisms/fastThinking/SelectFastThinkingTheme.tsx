@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import { AppDispatch, useSelector } from "../../../../store";
 import { selectFastThinkingTheme } from "../../../../slice/fastThinkingSlice";
 import { openFullScreenDialogAction } from "../../../../slice/dialogSlice";
-import { PrimaryButton } from "../../../presenter/atoms";
+import { PrimaryButton } from "../../../presentational/atoms";
 import { FastThinkingPreparingDisplay } from "../../organisms";
 
 type StyleProps = {

@@ -12,9 +12,9 @@ import { makeStyles } from "@mui/styles";
 import { firebaseSendSignInLinkToEmail } from "../../../operation/userAuth";
 import { validateEmailFormat } from "../../../modules/validations";
 import { MuiTheme } from "../../../assets/material-ui";
-import { PrimaryButton } from "../../presenter/atoms";
+import { PrimaryButton } from "../../presentational/atoms";
 import { Container } from "../layout";
-import { H1TitleWithIcon } from "../../presenter/molecules";
+import { BasicTypographyWithIcon } from "../../presentational/molecules";
 import { LogoOnlyHeader } from "../organisms";
 
 const useStyles = makeStyles({

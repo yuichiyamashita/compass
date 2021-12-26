@@ -4,7 +4,7 @@ import MenuBookTwoToneIcon from "@mui/icons-material/MenuBookTwoTone";
 
 import { Container } from "../layout";
 import { MainPageHeader, TrainingMenus } from "../organisms";
-import { BasicTypographyWithIcon } from "../../presenter/molecules";
+import { BasicTypographyWithIcon } from "../../presentational/molecules";
 
 const Main: React.FC = () => {
   return (
