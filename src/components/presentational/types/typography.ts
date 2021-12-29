@@ -1,3 +1,5 @@
+import { ReactNode } from "react";
+
 export type BasicTypographyType = {
   align?: "right" | "left" | "center" | "justify";
   component: React.ElementType;
@@ -21,4 +23,6 @@ export type BasicTypographyType = {
     | "button"
     | "overline"
     | "inherit";
+  children?: ReactNode;
+  letterSpacing?: string;
 };

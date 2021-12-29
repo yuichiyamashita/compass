@@ -4,8 +4,8 @@ import { useDispatch } from "react-redux";
 
 import { InputThemeType } from "../../../types/mainFeaturesTypes";
 import { useSelector, AppDispatch } from "../../../store";
-import { saveFastThinkingThemeAction } from "../../../slice/fastThinkingSlice";
-import { selectFastThinkingActiveStep, selectFastThinkingSteps } from "../../../slice/stepperSlice";
+import { saveFastThinkingThemeAction } from "../../../features/fastThinkingSlice";
+import { selectFastThinkingActiveStep, selectFastThinkingSteps } from "../../../features/stepperSlice";
 import { Container } from "../layout";
 import { generateNowDateString } from "../../../modules/generateString";
 import {

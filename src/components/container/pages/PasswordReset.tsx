@@ -10,8 +10,8 @@ import { makeStyles } from "@mui/styles";
 
 import { Container } from "../layout";
 import { LogoOnlyHeader } from "../organisms";
-import { BasicTypographyWithIcon } from "../../presentational/molecules";
-import { PrimaryButton } from "../../presentational/atoms";
+import { BasicTypographyWithIcon, TextFieldWithIcon } from "../../presentational/molecules";
+import { BasicTypography, PrimaryButton } from "../../presentational/atoms";
 
 const useStyles = makeStyles({
   loginForm: {
@@ -43,27 +43,35 @@ const ResetPassword: FC = () => {
             text="パスワードの再設定"
             color="#555"
             component="h1"
-            variant="h3"
+            variant="h4"
+            fontWeight="600"
             icon={MuiAccountCircleIcon}
-            iconColor="primary"
-            iconSize="36px"
+            iconColor="#555"
+            iconSize="32px"
+            letterSpacing="3px"
+            spacing="xs"
+            justify="center"
+            alignItems="center"
+            margin="0 0 32px"
           />
-          <StyledText>ご登録のメールアドレスを入力してください</StyledText>
+          <BasicTypography component="p" variant="body1" align="center">
+            ご登録のメールアドレスを入力してください
+          </BasicTypography>
           <form>
-            <MuiTextField
-              placeholder="メールアドレス"
+            <TextFieldWithIcon
+              label="メールアドレス"
               type="email"
               variant="outlined"
               fullWidth
               margin="normal"
               autoComplete="email"
-              InputProps={{
-                startAdornment: (
-                  <MuiInputAdornment position="start">
-                    <MuiEmailIcon />
-                  </MuiInputAdornment>
-                ),
-              }}
+              onChange={() => console.log("submit!")}
+              value="email"
+              icon={
+                <MuiInputAdornment position="start">
+                  <MuiEmailIcon />
+                </MuiInputAdornment>
+              }
             />
             <div className="h-module-spacer--sm" />
             <PrimaryButton text="再設定のメールを送信" color="#fff" background="#8bd5da" fullWidth />
@@ -78,31 +86,38 @@ const ResetPassword: FC = () => {
         <div className={classes.loginForm}>
           <BasicTypographyWithIcon
             text="パスワードの再設定"
-            component="h1"
-            variant="h3"
-            icon={MuiAccountCircleIcon}
-            iconSize="36px"
             color="#555"
-            iconColor="primary"
+            component="h1"
+            variant="h5"
+            fontWeight="600"
+            icon={MuiAccountCircleIcon}
+            iconColor="#555"
+            iconSize="32px"
+            letterSpacing="3px"
+            spacing="xs"
+            justify="center"
+            alignItems="center"
+            margin="0 0 32px"
           />
-          <StyledText>ご登録のメールアドレスを入力してください</StyledText>
+          <BasicTypography component="p" variant="body1" align="center">
+            ご登録のメールアドレスを入力してください
+          </BasicTypography>
           <div className="h-module-spacer--xs" />
           <form>
-            <MuiTextField
-              placeholder="メールアドレス"
+            <TextFieldWithIcon
+              label="メールアドレス"
               type="email"
               variant="outlined"
               fullWidth
               margin="normal"
-              size="small"
               autoComplete="email"
-              InputProps={{
-                startAdornment: (
-                  <MuiInputAdornment position="start">
-                    <MuiEmailIcon />
-                  </MuiInputAdornment>
-                ),
-              }}
+              onChange={() => console.log("submit!")}
+              value="email"
+              icon={
+                <MuiInputAdornment position="start">
+                  <MuiEmailIcon />
+                </MuiInputAdornment>
+              }
             />
             <div className="h-module-spacer--sm" />
             <PrimaryButton text="再設定のメールを送信" color="#fff" background="#8bd5da" fullWidth />

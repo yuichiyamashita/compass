@@ -12,7 +12,7 @@ import { makeStyles } from "@mui/styles";
 import { firebaseSendSignInLinkToEmail } from "../../../operation/userAuth";
 import { validateEmailFormat } from "../../../modules/validations";
 import { MuiTheme } from "../../../assets/material-ui";
-import { PrimaryButton } from "../../presentational/atoms";
+import { BasicTypography, PrimaryButton, HistoryBackLink } from "../../presentational/atoms";
 import { Container } from "../layout";
 import { BasicTypographyWithIcon } from "../../presentational/molecules";
 import { LogoOnlyHeader } from "../organisms";
@@ -68,16 +68,24 @@ const SendAuthEmail: FC = () => {
       <Container padding="64px 8px">
         {/****** PC, タブレット *******/}
         <MuiPaper className={classes.pcLoginForm} elevation={8}>
-          <H1TitleWithIcon
+          <BasicTypographyWithIcon
             text="SIGN UP"
             color="#555"
-            fontSize="32px"
+            component="h1"
+            variant="h4"
+            fontWeight="600"
+            letterSpacing="3px"
+            margin="0 0 32px"
             icon={MuiAccountCircleIcon}
-            iconColor="primary"
-            iconSize="36px"
+            iconColor="#555"
+            iconSize="32px"
+            justify="center"
+            alignItems="center"
+            spacing="xs"
           />
-          <StyledText>アカウントに使用するメールアドレスを入力してください</StyledText>
-
+          <BasicTypography component="p" variant="body1" align="center">
+            アカウントに使用するメールアドレスを入力してください
+          </BasicTypography>
           {/* エラーメッセージ */}
           {values.errorMessage && (
             <>
@@ -115,22 +123,35 @@ const SendAuthEmail: FC = () => {
             <PrimaryButton text="認証メールを送信" color="#fff" background="#8bd5da" fullWidth />
           </form>
           <div className="h-module-spacer--md" />
-          <StyledNavWrap>
-            <Link to="./login">既にアカウントをお持ちの場合はこちら</Link>
-          </StyledNavWrap>
+          <HistoryBackLink
+            path="./login"
+            text="既にアカウントをお持ちの場合はこちら"
+            color="#666"
+            fontSize="14px"
+            align="right"
+          />
         </MuiPaper>
 
         {/****** スマホ ******/}
         <StyledSpContainer>
-          <H1TitleWithIcon
+          <BasicTypographyWithIcon
             text="SIGN UP"
-            fontSize="32px"
+            component="h1"
+            fontWeight="600"
+            variant="h4"
             icon={MuiAccountCircleIcon}
-            iconSize="36px"
+            iconSize="34px"
             color="#555"
-            iconColor="primary"
+            iconColor="#555"
+            justify="center"
+            alignItems="center"
+            letterSpacing="3px"
+            spacing="xs"
+            margin="0 0 32px"
           />
-          <StyledText>アカウントに使用するメールアドレスを入力してください</StyledText>
+          <BasicTypography component="p" variant="body2" align="center">
+            アカウントに使用するメールアドレスを入力してください
+          </BasicTypography>
           {/* エラーメッセージ */}
           {values.errorMessage && (
             <>
@@ -169,9 +190,13 @@ const SendAuthEmail: FC = () => {
             <PrimaryButton text="認証メールを送信" color="#fff" background="#8bd5da" fullWidth />
           </form>
           <div className="h-module-spacer--md" />
-          <StyledNavWrap>
-            <Link to="./login">既にアカウントをお持ちの場合はこちら</Link>
-          </StyledNavWrap>
+          <HistoryBackLink
+            path="./login"
+            text="既にアカウントをお持ちの場合はこちら"
+            color="#666"
+            fontSize="14px"
+            align="right"
+          />
         </StyledSpContainer>
       </Container>
     </>
@@ -190,10 +215,6 @@ const StyledNavWrap = styled.div`
   justify-content: flex-end;
   font-size: 14px;
   color: #666;
-`;
-const StyledText = styled.p`
-  text-align: center;
-  color: #555;
 `;
 const StyledErrorMessage = styled.p`
   text-align: center;

@@ -9,7 +9,7 @@ export { default as SimpleChip } from "./chip/SimpleChip";
 export { default as BarGraph } from "./graph/BarGraph";
 
 // Links
-export { default as BasicLink } from "./link/HistoryBackLink";
+export { default as HistoryBackLink } from "./link/HistoryBackLink";
 export { default as PageTransitionLink } from "./link/PageTransitionLink";
 
 // ScrollDownArrow

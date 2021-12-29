@@ -4,8 +4,8 @@ import { useDispatch } from "react-redux";
 
 import { InputThemeType } from "../../../types/mainFeaturesTypes";
 import { AppDispatch, useSelector } from "../../../store";
-import { saveSelfDebateThemeAction } from "../../../slice/selfdebateSlice";
-import { selectSelfDebateSteps, selectSelfDebateActiveStep } from "../../../slice/stepperSlice";
+import { saveSelfDebateThemeAction } from "../../../features/selfdebateSlice";
+import { selectSelfDebateSteps, selectSelfDebateActiveStep } from "../../../features/stepperSlice";
 import { Container } from "../layout";
 import { generateNowDateString } from "../../../modules/generateString";
 import {

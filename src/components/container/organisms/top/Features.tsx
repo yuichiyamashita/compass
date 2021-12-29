@@ -2,7 +2,7 @@ import React from "react";
 import styled, { css, keyframes } from "styled-components";
 
 import mobileImage from "../../../../assets/images/mobile.jpg";
-import { BasicLink } from "../../../presentational/atoms";
+import { HistoryBackLink } from "../../../presentational/atoms";
 import { Container } from "../../layout";
 
 const Features: React.FC = () => {
@@ -27,12 +27,14 @@ const Features: React.FC = () => {
               セルフディベートの作成機能に加えて、ディベート内容を投稿(シェア)したり、他ユーザーの投稿内容を閲覧することができます。
             </StyledFeatureText>
             <StyledButton>
-              <BasicLink
+              <HistoryBackLink
                 color="#fff"
                 text="さっそく始める →"
                 background="#8bd5da"
                 radius="8px"
                 path="./email-authentication"
+                padding="8px 16px"
+                align="center"
               />
             </StyledButton>
           </StyledLeftTextBox>
@@ -57,12 +59,14 @@ const Features: React.FC = () => {
               セルフディベートの作成機能に加えて、ディベート内容を投稿(シェア)したり、他ユーザーの投稿内容を閲覧することができます。
             </StyledFeatureText>
             <StyledRightButton>
-              <BasicLink
+              <HistoryBackLink
                 color="#fff"
                 text="さっそく始める →"
                 background="#8bd5da"
                 radius="8px"
                 path="./email-authentication"
+                padding="8px 16px"
+                align="center"
               />
             </StyledRightButton>
           </StyledRightTextBox>

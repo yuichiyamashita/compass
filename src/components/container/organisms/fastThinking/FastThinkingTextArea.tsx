@@ -8,10 +8,13 @@ import { AppDispatch, useSelector } from "../../../../store";
 import { generateNowDateString, generateRandomString } from "../../../../modules/generateString";
 import { validateEmptyString } from "../../../../modules/validations";
 import CircularProgressbarCountDonwTimer from "../timer/CircularProgressbarCountDownTimer";
-import { saveFastThinkingListItemAction, selectFastThinkingTheme } from "../../../../slice/fastThinkingSlice";
-import { selectIsDisplayedCircularTimer, selectIsStartingCircularTimer } from "../../../../slice/countDownTimerSlice";
+import { saveFastThinkingListItemAction, selectFastThinkingTheme } from "../../../../features/fastThinkingSlice";
+import {
+  selectIsDisplayedCircularTimer,
+  selectIsStartingCircularTimer,
+} from "../../../../features/countDownTimerSlice";
 import { KleeOneSelectedTheme } from "../../../presentational/atoms";
-import { IconsTextField } from "../../../presentational/molecules";
+import { TextFieldWithIcon } from "../../../presentational/molecules";
 
 // Props
 type StyleProps = {
@@ -121,7 +124,7 @@ const FastThinkingTextArea: React.FC<Props> = React.memo((props) => {
         {isTimerStarting && (
           <form onSubmit={handleSubmitText}>
             <StyledTextFieldWithButton>
-              <IconsTextField
+              <TextFieldWithIcon
                 value={inputText}
                 onChange={handleChangeText}
                 label="ここに入力（Enterで決定）"

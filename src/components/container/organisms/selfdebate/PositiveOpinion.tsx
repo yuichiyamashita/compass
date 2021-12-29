@@ -7,10 +7,10 @@ import {
   invisibleCircularCountDownTimerAction,
   selectIsDisplayedCircularTimer,
   selectIsStartingCircularTimer,
-} from "../../../../slice/countDownTimerSlice";
+} from "../../../../features/countDownTimerSlice";
 import { PrimaryButton } from "../../../presentational/atoms";
 import { SelfdebatePreparingDisplay, SelfdebateTextArea } from "../../organisms";
-import { moveSelfDebateStepAction } from "../../../../slice/stepperSlice";
+import { moveSelfDebateStepAction } from "../../../../features/stepperSlice";
 
 type StyleProps = {
   color: string;

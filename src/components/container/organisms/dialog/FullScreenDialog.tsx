@@ -24,7 +24,7 @@ import TimelineIcon from "@mui/icons-material/Timeline";
 
 import { InputThemeType } from "../../../../types/mainFeaturesTypes";
 import { AppDispatch, useSelector } from "../../../../store";
-import { openFullScreenDialogAction, selectFullScreenDialog } from "../../../../slice/dialogSlice";
+import { openFullScreenDialogAction, selectFullScreenDialog } from "../../../../features/dialogSlice";
 import { validateEmptyString } from "../../../../modules/validations";
 import { PrimaryButton } from "../../../presentational/atoms";
 import { BasicTypographyWithIcon } from "../../../presentational/molecules";
@@ -116,8 +116,9 @@ const FullScreenDialog: React.FC<Props> = React.memo((props) => {
       <StyledContainer>
         <BasicTypographyWithIcon
           text="テンプレートやトレンドから選ぶ"
-          fontSize="22px"
-          fontWeight={600}
+          component="h4"
+          variant="h4"
+          fontWeight="600"
           icon={TimelineIcon}
           iconSize="32px"
           iconColor={color}
@@ -138,8 +139,9 @@ const FullScreenDialog: React.FC<Props> = React.memo((props) => {
         <StyledSectionTitleWrap>
           <BasicTypographyWithIcon
             text="自分でテーマを決める"
-            fontSize="22px"
-            fontWeight={600}
+            component="h4"
+            variant="h4"
+            fontWeight="600"
             icon={BorderColorIcon}
             iconSize="32px"
             iconColor={color}

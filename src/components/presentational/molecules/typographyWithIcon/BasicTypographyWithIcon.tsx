@@ -9,6 +9,7 @@ type StyleProps = {
   iconColor?: string;
   spacing?: "xxs" | "xs" | "sm" | "md" | "lg" | "xl" | "xxl";
   justify?: "flex-start" | "center" | "flex-end";
+  alignItems?: "center" | "start" | "end" | "flex-start" | "flex-end";
   margin?: string;
   padding?: string;
 };
@@ -22,17 +23,19 @@ const BasicTypographyWithIcon: React.FC<Props> = React.memo((props) => {
     spacing,
     icon,
     justify,
+    alignItems,
     margin,
     variant,
     component,
-    color,
     align,
+    color,
     fontFamily,
     fontWeight,
     padding,
+    letterSpacing,
   } = props;
   return (
-    <StyledFlexBox margin={margin} padding={padding} justify={justify}>
+    <StyledFlexBox margin={margin} padding={padding} justify={justify} alignItems={alignItems}>
       <MuiIcon component={icon} sx={{ fontSize: iconSize, color: iconColor }} />
       <div className={`w-module-spacer--${spacing}`} />
       <BasicTypography
@@ -42,6 +45,7 @@ const BasicTypographyWithIcon: React.FC<Props> = React.memo((props) => {
         fontFamily={fontFamily}
         fontWeight={fontWeight}
         align={align}
+        letterSpacing={letterSpacing}
       >
         {text}
       </BasicTypography>
@@ -53,7 +57,7 @@ export default BasicTypographyWithIcon;
 
 const StyledFlexBox = styled.div<StyleProps>`
   display: flex;
-  align-items: center;
+  align-items: ${(props) => props.alignItems};
   justify-content: ${(props) => props.justify};
   margin: ${(props) => props.margin};
   padding: ${(props) => props.padding};

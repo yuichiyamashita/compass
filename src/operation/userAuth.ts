@@ -9,8 +9,8 @@ import { Timestamp, updateDoc, getDoc, doc, setDoc } from "firebase/firestore";
 import { firebaseGetAuth, firebaseGetDb } from "../firebase/firebase";
 import { toast } from "react-toastify";
 
-import { loginAction, logoutAction } from "../slice/userSlice";
-import { showLoadingAction, hideLoadingAction } from "../slice/notificationSlice";
+import { loginAction, logoutAction } from "../features/userSlice";
+import { showLoadingAction, hideLoadingAction } from "../features/notificationSlice";
 import { AppDispatch } from "../store";
 
 const auth = firebaseGetAuth();

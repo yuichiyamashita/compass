@@ -9,7 +9,7 @@ import { makeStyles } from "@mui/styles";
 
 import { MuiTheme } from "../../../assets/material-ui";
 import { firebaseSendSignInLinkToEmail } from "../../../operation/userAuth";
-import { BasicLink, PrimaryButton } from "../../presentational/atoms";
+import { BasicTypography, HistoryBackLink, PrimaryButton } from "../../presentational/atoms";
 import { BasicTypographyWithIcon } from "../../presentational/molecules";
 import { LogoOnlyHeader } from "../organisms";
 import { Container } from "../layout";
@@ -66,20 +66,32 @@ const CompleteSendEmailAuth: FC = () => {
                 text="再送信エラー"
                 color="#555"
                 component="h1"
-                variant="h3"
+                variant="h4"
                 icon={MuiEmailIcon}
-                iconColor="primary"
-                iconSize="36px"
+                iconColor="#555"
+                iconSize="32px"
+                letterSpacing="3px"
+                spacing="xs"
+                justify="center"
+                alignItems="center"
+                margin="0 0 32px"
               />
-              <StyledText>認証メールの再送信に失敗しました。</StyledText>
-              <StyledText>お手数ですが、以下のリンクより再度メール認証からお願い致します。</StyledText>
+              <BasicTypography align="center" component="p" variant="body1" color="#b2102f">
+                ※認証メールの再送信に失敗しました。
+              </BasicTypography>
+              <BasicTypography align="center" component="p" variant="body1">
+                お手数ですが、以下のリンクより再度メール認証からお願い致します。
+              </BasicTypography>
               <div className="h-module-spacer--md" />
-              <BasicLink
+              <HistoryBackLink
                 text="認証メール送信画面へ"
                 color="#fff"
                 background="#8bd5da"
                 fullWidth
                 path="./email-authentication"
+                align="center"
+                padding="8px 16px"
+                radius="4px"
               />
             </>
           ) : (
@@ -88,24 +100,31 @@ const CompleteSendEmailAuth: FC = () => {
                 text="送信完了"
                 color="#555"
                 component="h1"
-                variant="h3"
+                variant="h4"
                 icon={MuiEmailIcon}
-                iconColor="primary"
-                iconSize="36px"
+                iconColor="#555"
+                iconSize="32px"
+                letterSpacing="3px"
+                spacing="xs"
+                justify="center"
+                alignItems="center"
+                margin="0 0 32px"
               />
-              <StyledText>{email} に認証メールを送信しました。</StyledText>
-              <StyledText>メール記載のリンクよりアカウントの作成をお願い致します。</StyledText>
-              <StyledText>
+              <BasicTypography align="center" component="p" variant="body1">
+                {email} に認証メールを送信しました。
+              </BasicTypography>
+              <BasicTypography align="center" component="p" variant="body1">
+                メール記載のリンクよりアカウントの作成をお願い致します。
+              </BasicTypography>
+              <BasicTypography align="center" component="p" variant="body1">
                 メールが届いていない場合は、迷惑メールなどをご確認の上、以下のボタンより再送信をお試しください。
-              </StyledText>
+              </BasicTypography>
               <div className="h-module-spacer--md" />
               <form onSubmit={handleSubmit}>
                 <PrimaryButton text="認証メールを再送信" color="#fff" background="#8bd5da" fullWidth />
               </form>
               <div className="h-module-spacer--md" />
-              <StyledNavWrap>
-                <Link to="./login">ログイン画面に戻る</Link>
-              </StyledNavWrap>
+              <HistoryBackLink path="./login" text="ログイン画面に戻る" align="right" color="#666" fontSize="14px" />
             </>
           )}
         </MuiPaper>
@@ -118,20 +137,34 @@ const CompleteSendEmailAuth: FC = () => {
                 text="再送信エラー"
                 color="#555"
                 component="h1"
-                variant="h3"
+                variant="h4"
+                fontWeight="600"
                 icon={MuiEmailIcon}
-                iconColor="primary"
-                iconSize="36px"
+                iconColor="#555"
+                iconSize="32px"
+                letterSpacing="3px"
+                spacing="xs"
+                justify="center"
+                alignItems="center"
+                margin="0 0 32px"
               />
-              <StyledText>認証メールの再送信に失敗しました。</StyledText>
-              <StyledText>お手数ですが、以下のリンクより再度メール認証からお願い致します。</StyledText>
+              <BasicTypography align="center" component="p" variant="body1" color="#b2102f">
+                ※認証メールの再送信に失敗しました。
+              </BasicTypography>
+              <div className="h-module-spacer--xs" />
+              <BasicTypography align="center" component="p" variant="body1">
+                お手数ですが、以下のリンクより再度メール認証からお願い致します。
+              </BasicTypography>
               <div className="h-module-spacer--md" />
-              <BasicLink
+              <HistoryBackLink
                 text="認証メール送信画面へ"
                 color="#fff"
                 background="#8bd5da"
                 fullWidth
                 path="./email-authentication"
+                align="center"
+                padding="8px 16px"
+                radius="4px"
               />
             </>
           ) : (
@@ -140,17 +173,26 @@ const CompleteSendEmailAuth: FC = () => {
                 text="送信完了"
                 color="#555"
                 component="h1"
-                variant="h3"
+                variant="h4"
                 icon={MuiEmailIcon}
-                iconColor="primary"
-                iconSize="36px"
-                spacing="xxs"
+                iconColor="#555"
+                iconSize="32px"
+                spacing="xs"
+                letterSpacing="3px"
+                fontWeight="600"
+                justify="center"
+                alignItems="center"
+                margin="0 0 32px"
               />
-              <StyledText>{email} に認証メールを送信しました。</StyledText>
-              <StyledText>メール記載のリンクよりアカウントの作成をお願い致します。</StyledText>
-              <StyledText>
+              <BasicTypography align="center" component="p" variant="body1">
+                {email} に認証メールを送信しました。
+              </BasicTypography>
+              <BasicTypography align="center" component="p" variant="body1">
+                メール記載のリンクよりアカウントの作成をお願い致します。
+              </BasicTypography>
+              <BasicTypography align="center" component="p" variant="body1">
                 メールが届いていない場合は、迷惑メールなどをご確認の上、以下のボタンより再送信をお試しください。
-              </StyledText>
+              </BasicTypography>
               <div className="h-module-spacer--md" />
               <form onSubmit={handleSubmit}>
                 <PrimaryButton text="認証メールを再送信" color="#fff" background="#8bd5da" fullWidth />

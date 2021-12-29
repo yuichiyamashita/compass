@@ -3,15 +3,15 @@ import { useDispatch } from "react-redux";
 import styled from "styled-components";
 
 import { AppDispatch, useSelector } from "../../../../store";
-import { openFullScreenDialogAction } from "../../../../slice/dialogSlice";
+import { openFullScreenDialogAction } from "../../../../features/dialogSlice";
 import { PrepaeringCountDownTimer } from "../../organisms";
 import { TextAnimation } from "../../../presentational/molecules";
 import { PrimaryButton } from "../../../presentational/atoms";
 import { startCircularCountDownTimer } from "../timer/CircularProgressbarCountDownTimer";
 import { startPreparingCountDownTimer } from "../timer/PreparingCountDownTimer";
-import { selectFastThinkingTheme } from "../../../../slice/fastThinkingSlice";
-import { selectIsDisplayedPreparingTimer } from "../../../../slice/countDownTimerSlice";
-import { moveFastThinkingStepAction } from "../../../../slice/stepperSlice";
+import { selectFastThinkingTheme } from "../../../../features/fastThinkingSlice";
+import { selectIsDisplayedPreparingTimer } from "../../../../features/countDownTimerSlice";
+import { moveFastThinkingStepAction } from "../../../../features/stepperSlice";
 
 type StyledProps = {
   color: string;
