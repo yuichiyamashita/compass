@@ -6,7 +6,7 @@ import MailIcon from "@mui/icons-material/Mail";
 import { Container, Flexbox } from "../../layout";
 import { HamburgerMenu } from "../../organisms";
 import { SimpleNavigation } from "../../../presentational/molecules";
-import { BasicLink } from "../../../presentational/atoms";
+import { HistoryBackLink } from "../../../presentational/atoms";
 
 const naviContents = [
   {
@@ -46,9 +46,23 @@ const TopPageHeader: React.FC = React.memo(() => {
 
           {/* pc */}
           <StyledPCButtonWrap>
-            <BasicLink text="ログイン" path="./login" border="1px solid #8bd5da" radius="6px" color="#8bd5da" />
+            <HistoryBackLink
+              text="ログイン"
+              path="./login"
+              border="1px solid #8bd5da"
+              radius="6px"
+              color="#8bd5da"
+              padding="8px 16px"
+            />
             <div className="w-module-spacer--sm" />
-            <BasicLink text="会員登録" path="./email-authentication" background="#8bd5da" radius="6px" color="#fff" />
+            <HistoryBackLink
+              text="会員登録"
+              path="./email-authentication"
+              background="#8bd5da"
+              radius="6px"
+              color="#fff"
+              padding="8px 16px"
+            />
           </StyledPCButtonWrap>
 
           {/* tab & sp */}

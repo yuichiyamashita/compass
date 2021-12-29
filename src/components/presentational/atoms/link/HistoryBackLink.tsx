@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 type StyleProps = {
+  align?: string;
   background?: string;
   border?: string;
   radius?: string;
@@ -18,8 +19,9 @@ type StyleProps = {
 
 type Props = StyleProps & { text: string; path: string };
 
-const BasicLink: React.FC<Props> = React.memo((props) => {
+const HistoryBackLink: React.FC<Props> = React.memo((props) => {
   const {
+    align,
     path,
     text,
     background,
@@ -37,6 +39,7 @@ const BasicLink: React.FC<Props> = React.memo((props) => {
   return (
     <Link to={path}>
       <StyledPrimaryButton
+        align={align}
         background={background}
         border={border}
         radius={radius}
@@ -54,7 +57,7 @@ const BasicLink: React.FC<Props> = React.memo((props) => {
   );
 });
 
-export default BasicLink;
+export default HistoryBackLink;
 
 const StyledPrimaryButton = styled.div<StyleProps>`
   background: ${(props) => props.background};
@@ -64,10 +67,10 @@ const StyledPrimaryButton = styled.div<StyleProps>`
   color: ${(props) => props.color};
   cursor: pointer;
   font-size: ${(props) => props.fontSize};
-  padding: ${(props) => (props.padding ? props.padding : "10px 18px")};
+  padding: ${(props) => props.padding};
   margin: ${(props) => props.margin};
   width: ${(props) => props.fullWidth && "100%"};
-  text-align: center;
+  text-align: ${(props) => props.align};
   transition: all 0.3s;
   &:hover {
     opacity: 0.7;

@@ -1,12 +1,12 @@
 import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
 import { useSelector as rawUseSelector, TypedUseSelectorHook } from "react-redux";
-import userReducer from "./slice/userSlice";
-import notificationReducer from "./slice/notificationSlice";
-import selfDebateReducer from "./slice/selfdebateSlice";
-import countDownTimerReducer from "./slice/countDownTimerSlice";
-import fastThinkingReducer from "./slice/fastThinkingSlice";
-import dialogReducer from "./slice/dialogSlice";
-import stepperReducer from "./slice/stepperSlice";
+import userReducer from "./features/userSlice";
+import notificationReducer from "./features/notificationSlice";
+import selfDebateReducer from "./features/selfdebateSlice";
+import countDownTimerReducer from "./features/countDownTimerSlice";
+import fastThinkingReducer from "./features/fastThinkingSlice";
+import dialogReducer from "./features/dialogSlice";
+import stepperReducer from "./features/stepperSlice";
 
 export const store = configureStore({
   reducer: {

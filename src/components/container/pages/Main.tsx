@@ -12,14 +12,15 @@ const Main: React.FC = () => {
       <MainPageHeader />
       <Container padding={"92px 0 64px"}>
         <BasicTypographyWithIcon
+          component="h2"
+          variant="h3"
+          fontWeight="600"
           icon={MenuBookTwoToneIcon}
-          text="トレーニングメニュー"
           spacing="xxs"
-          fontSize="20px"
-          fontWeight={600}
           iconSize="30px"
           iconColor="primary"
           margin="0 0 24px 0"
+          text="トレーニングメニュー"
         />
         <TrainingMenus />
       </Container>

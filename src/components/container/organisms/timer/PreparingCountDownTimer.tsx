@@ -8,7 +8,7 @@ import {
   stopPreparingCountDownTimerAction,
   decrementPreparingCountDownTimerAction,
   invisiblePreparingCountDownTimerAction,
-} from "../../../../slice/countDownTimerSlice";
+} from "../../../../features/countDownTimerSlice";
 
 // 他コンポーネントからの呼び出し用の関数を定義
 export const startPreparingCountDownTimer = (seconds: number) => {

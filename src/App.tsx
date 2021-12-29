@@ -9,7 +9,7 @@ import Login from "./components/container/pages/Login";
 import Signup from "./components/container/pages/Signup";
 import SendAuthEmail from "./components/container/pages/SendAuthEmail";
 import CompleteSendAuthEmail from "./components/container/pages/CompleteSendAuthEmail";
-import ResetPassword from "./components/container/pages/ResetPassword";
+import PasswordReset from "./components/container/pages/PasswordReset";
 import Main from "./components/container/pages/Main";
 import SelfDebate from "./components/container/pages/SelfDebate";
 import FastThinking from "./components/container/pages/FastThinking";
@@ -26,7 +26,7 @@ const App: FC = () => {
         <Route exact path="/signup" component={Signup} />
         <Route exact path="/email-authentication" component={SendAuthEmail} />
         <Route exact path="/complete-send-auth-email" component={CompleteSendAuthEmail} />
-        <Route exact path="/reset-password" component={ResetPassword} />
+        <Route exact path="/password-reset" component={PasswordReset} />
         <Auth>
           <Route exact path="/main" component={Main} />
           <Route exact path="/selfdebate" component={SelfDebate} />

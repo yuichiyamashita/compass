@@ -3,14 +3,14 @@ import { useDispatch } from "react-redux";
 import styled from "styled-components";
 
 import { AppDispatch, useSelector } from "../../../../store";
-import { openFullScreenDialogAction } from "../../../../slice/dialogSlice";
+import { openFullScreenDialogAction } from "../../../../features/dialogSlice";
 import { PrepaeringCountDownTimer } from "../../organisms";
 import { TextAnimation } from "../../../presentational/molecules";
 import { PrimaryButton } from "../../../presentational/atoms";
 import { startCircularCountDownTimer } from "../timer/CircularProgressbarCountDownTimer";
 import { startPreparingCountDownTimer } from "../timer/PreparingCountDownTimer";
-import { selectSelfDebatePositiveOpinions, selectSelfDebateTheme } from "../../../../slice/selfdebateSlice";
-import { selectIsDisplayedPreparingTimer } from "../../../../slice/countDownTimerSlice";
+import { selectSelfDebatePositiveOpinions, selectSelfDebateTheme } from "../../../../features/selfdebateSlice";
+import { selectIsDisplayedPreparingTimer } from "../../../../features/countDownTimerSlice";
 
 type StyledProps = {
   color: string;

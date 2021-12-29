@@ -3,8 +3,8 @@ import styled from "styled-components";
 import { useDispatch } from "react-redux";
 
 import { AppDispatch, useSelector } from "../../../../store";
-import { selectFastThinkingTheme } from "../../../../slice/fastThinkingSlice";
-import { openFullScreenDialogAction } from "../../../../slice/dialogSlice";
+import { selectFastThinkingTheme } from "../../../../features/fastThinkingSlice";
+import { openFullScreenDialogAction } from "../../../../features/dialogSlice";
 import { PrimaryButton } from "../../../presentational/atoms";
 import { FastThinkingPreparingDisplay } from "../../organisms";
 

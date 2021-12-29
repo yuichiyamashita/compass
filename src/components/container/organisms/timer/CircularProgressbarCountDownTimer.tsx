@@ -10,7 +10,7 @@ import {
   decrementCircularCountDownTimerAction,
   selectSecondsCircularTimer,
   selectSecondsLeftCircularTimer,
-} from "../../../../slice/countDownTimerSlice";
+} from "../../../../features/countDownTimerSlice";
 import { toast } from "react-toastify";
 
 // 他コンポーネントからの呼び出し用の関数を定義

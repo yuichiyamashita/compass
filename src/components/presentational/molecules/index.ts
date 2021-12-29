@@ -12,7 +12,7 @@ export { default as Notification } from "./notification/Notification";
 export { default as Loading } from "./notification/Loading";
 
 // TextField with icon
-export { default as IconsTextField } from "./textFieldWithIcon/IconsTextField";
+export { default as TextFieldWithIcon } from "./textFieldWithIcon/TextFieldWithIcon";
 
 // Typography with icon
 export { default as BasicTypographyWithIcon } from "./typographyWithIcon/BasicTypographyWithIcon";

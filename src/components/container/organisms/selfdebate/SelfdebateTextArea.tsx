@@ -6,11 +6,14 @@ import { useDispatch } from "react-redux";
 
 import { useSelector, AppDispatch } from "../../../../store";
 import { CircularProgressbarCountDownTimer } from "../../organisms";
-import { IconsTextField } from "../../../presentational/molecules";
+import { TextFieldWithIcon } from "../../../presentational/molecules";
 import { validateEmptyString } from "../../../../modules/validations";
 import { generateRandomString } from "../../../../modules/generateString";
-import { saveOpinionsAction, selectSelfDebateTheme } from "../../../../slice/selfdebateSlice";
-import { selectIsDisplayedCircularTimer, selectIsStartingCircularTimer } from "../../../../slice/countDownTimerSlice";
+import { saveOpinionsAction, selectSelfDebateTheme } from "../../../../features/selfdebateSlice";
+import {
+  selectIsDisplayedCircularTimer,
+  selectIsStartingCircularTimer,
+} from "../../../../features/countDownTimerSlice";
 
 type InputOpinion = {
   id: string;
@@ -105,7 +108,7 @@ const TextArea: React.FC<Props> = React.memo((props) => {
         {isTimerStarting && (
           <form onSubmit={handleSubmitOpinion}>
             <StyledTextFieldWithButton>
-              <IconsTextField
+              <TextFieldWithIcon
                 value={inputOpinion}
                 onChange={handleChangeOpinion}
                 label="ここに入力（Enterで決定）"

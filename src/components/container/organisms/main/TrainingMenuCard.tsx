@@ -26,8 +26,9 @@ const TrainingMenuCard: React.FC<Props> = React.memo(({ children, ...props }) =>
       <StyledTitle>{title}</StyledTitle>
       <BasicTypographyWithIcon
         color="#555"
-        fontSize="14px"
-        fontWeight={600}
+        component="span"
+        variant="body1"
+        fontWeight="600"
         icon={CheckCircleOutlineSharpIcon}
         iconSize="18px"
         iconColor="action"

@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useDispatch } from "react-redux";
 
 import { AppDispatch } from "../../../../store";
-import { openFullScreenDialogAction } from "../../../../slice/dialogSlice";
+import { openFullScreenDialogAction } from "../../../../features/dialogSlice";
 import { PrimaryButton } from "../../../presentational/atoms";
 
 type StyleProps = {

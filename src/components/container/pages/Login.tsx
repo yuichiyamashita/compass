@@ -2,7 +2,6 @@ import React, { FC, useState } from "react";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
-import { Link } from "react-router-dom";
 // Material-UI
 import { TextField as MuiTextField, Paper as MuiPaper, InputAdornment as MuiInputAdornment } from "@mui/material";
 import { LockOpenOutlined as MuiLockOpenOutlined } from "@mui/icons-material";
@@ -10,8 +9,8 @@ import MuiEmailIcon from "@mui/icons-material/Email";
 import MuiLockIcon from "@mui/icons-material/Lock";
 import { makeStyles } from "@mui/styles";
 
-import { PrimaryButton } from "../../presentational/atoms";
-import { BasicTypographyWithIcon } from "../../presentational/molecules";
+import { HistoryBackLink, PrimaryButton } from "../../presentational/atoms";
+import { BasicTypographyWithIcon, TextFieldWithIcon } from "../../presentational/molecules";
 import { LogoOnlyHeader } from "../organisms";
 import { Container } from "../layout";
 
@@ -89,10 +88,16 @@ const Login: FC = () => {
             text="LOGIN"
             color="#555"
             component="h1"
-            variant="h3"
+            fontWeight="600"
+            variant="h4"
             icon={MuiLockOpenOutlined}
-            iconColor="primary"
+            iconColor="#555"
             iconSize="32px"
+            letterSpacing="3px"
+            spacing="xs"
+            justify="center"
+            alignItems="center"
+            margin="0 0 32px"
           />
 
           {values.errorMessage && (
@@ -103,8 +108,8 @@ const Login: FC = () => {
           )}
 
           <form onSubmit={handleSubmit}>
-            <MuiTextField
-              placeholder="メールアドレス"
+            <TextFieldWithIcon
+              label="メールアドレス"
               type="email"
               variant="outlined"
               fullWidth
@@ -112,16 +117,14 @@ const Login: FC = () => {
               autoComplete="email"
               onChange={handleChange("email")}
               value={values.email}
-              InputProps={{
-                startAdornment: (
-                  <MuiInputAdornment position="start">
-                    <MuiEmailIcon />
-                  </MuiInputAdornment>
-                ),
-              }}
+              icon={
+                <MuiInputAdornment position="start">
+                  <MuiEmailIcon />
+                </MuiInputAdornment>
+              }
             />
-            <MuiTextField
-              placeholder="パスワード"
+            <TextFieldWithIcon
+              label="パスワード"
               type="password"
               variant="outlined"
               fullWidth
@@ -129,23 +132,31 @@ const Login: FC = () => {
               autoComplete="current-password"
               onChange={handleChange("password")}
               value={values.password}
-              InputProps={{
-                startAdornment: (
-                  <MuiInputAdornment position="start">
-                    <MuiLockIcon />
-                  </MuiInputAdornment>
-                ),
-              }}
+              icon={
+                <MuiInputAdornment position="start">
+                  <MuiLockIcon />
+                </MuiInputAdornment>
+              }
             />
-            <div className="h-module-spacer--sm" />
+            <div className="h-module-spacer--md" />
             <PrimaryButton text="ログイン" color="#fff" background="#8bd5da" fullWidth />
           </form>
           <div className="h-module-spacer--md" />
-          <StyledNavWrap>
-            <Link to="./email-authentication">初めての登録ですか？新規登録</Link>
-            <div className="h-module-spacer--xs" />
-            <Link to="./reset-password">パスワードを忘れた場合</Link>
-          </StyledNavWrap>
+          <HistoryBackLink
+            path="./email-authentication"
+            text="初めての登録ですか？新規登録"
+            fontSize="14px"
+            color="#666"
+            align="right"
+          />
+          <div className="h-module-spacer--xs" />
+          <HistoryBackLink
+            path="./password-reset"
+            text="パスワードを忘れた場合"
+            fontSize="14px"
+            color="#666"
+            align="right"
+          />
         </MuiPaper>
 
         {/* sp */}
@@ -154,10 +165,16 @@ const Login: FC = () => {
             text="LOGIN"
             color="#555"
             component="h1"
-            variant="h3"
+            fontWeight="600"
+            variant="h4"
             icon={MuiLockOpenOutlined}
-            iconColor="primary"
+            iconColor="#555"
             iconSize="32px"
+            letterSpacing="3px"
+            spacing="xs"
+            justify="center"
+            alignItems="center"
+            margin="0 0 32px"
           />
 
           {values.errorMessage && (
@@ -204,11 +221,21 @@ const Login: FC = () => {
             <PrimaryButton text="ログイン" color="#fff" background="#8bd5da" fullWidth />
           </form>
           <div className="h-module-spacer--sm" />
-          <StyledNavWrap>
-            <Link to="./email-authentication">初めての登録ですか？新規登録</Link>
-            <div className="h-module-spacer--xs" />
-            <Link to="./reset-password">パスワードを忘れた場合</Link>
-          </StyledNavWrap>
+          <HistoryBackLink
+            path="./email-authentication"
+            text="初めての登録ですか？新規登録"
+            fontSize="14px"
+            color="#666"
+            align="right"
+          />
+          <div className="h-module-spacer--xs" />
+          <HistoryBackLink
+            path="./password-reset"
+            text="パスワードを忘れた場合"
+            fontSize="14px"
+            color="#666"
+            align="right"
+          />
         </div>
       </Container>
     </>

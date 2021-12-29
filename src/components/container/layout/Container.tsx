@@ -9,8 +9,8 @@ type Props = {
   height?: string;
 };
 
-const Container: React.FC<Props> = React.memo((props) => {
-  const { children, padding, margin, align, position, height } = props;
+const Container: React.FC<Props> = React.memo(({ children, ...props }) => {
+  const { padding, margin, align, position, height } = props;
   return (
     <StyledContainer padding={padding} margin={margin} align={align} position={position} height={height}>
       {children}
